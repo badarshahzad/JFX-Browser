@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+
+<AnchorPane prefHeight="704.0" prefWidth="754.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="listeners">
+   <children>
+      <BorderPane layoutX="56.0" layoutY="28.0" prefHeight="60.0" prefWidth="542.0">
+         <top>
+            <HBox BorderPane.alignment="CENTER">
+               <children>
+                  <TextField fx:id="text" alignment="TOP_LEFT" prefHeight="34.0" prefWidth="412.0" />
+                  <Button lineSpacing="5.0" mnemonicParsing="false" onAction="#ButtonClicked" prefHeight="34.0" prefWidth="82.0" text="Search">
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin></Button>
+               </children>
+            </HBox>
+         </top>
+      </BorderPane>
+      <ScrollPane fx:id="pane" layoutX="56.0" layoutY="88.0" prefHeight="617.0" prefWidth="695.0">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
+        </content>
+      </ScrollPane>
+      
+   </children>
+</AnchorPane>
