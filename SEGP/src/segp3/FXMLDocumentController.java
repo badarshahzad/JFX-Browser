@@ -9,16 +9,23 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.NodeList;
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.ObservableList;
 import javafx.concurrent.Worker;
 import javafx.concurrent.Worker.State;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.image.Image;
@@ -27,7 +34,9 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebHistory;
 import javafx.scene.web.WebView;
+import javafx.scene.web.WebHistory.Entry;
 
 /**
  *
@@ -45,7 +54,7 @@ public class FXMLDocumentController implements Initializable {
 	private BorderPane borderpane;
 
 	@FXML
-	private JFXButton farward;
+	private JFXButton forward;
 
 	@FXML
 	private JFXTextField searchField;
@@ -119,7 +128,56 @@ public class FXMLDocumentController implements Initializable {
 
 			}
 		});
+	/*
+		bookmarks.setOnAction(new EventHandler<ActionEvent>() {
 
+			@Override
+			public void handle(ActionEvent event) {
+				// TODO Auto-generated method stub
+				String url = engine.getLocation();
+				System.out.println(url);
+//				engine.get
+//				write.println(url);
+			}
+			
+		});
+		History.setOnAction(new EventHandler<ActionEvent>(){
+
+			@Override
+			public void handle(ActionEvent event) {
+				// TODO Auto-generated method stub
+				 WebHistory	history = engine.getHistory();
+				 ObservableList<Entry> list = history.getEntries();
+				 for(int i=0 ; i< list.size();i++){
+					 System.out.println(list.get(i));
+				 }
+				 
+			
+			}
+			
+		});
+		
+		*/
+		back.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
+			try {
+				WebHistory history = webEngine.getHistory();
+				history.go(-1);
+			} catch (IndexOutOfBoundsException e1) {
+				System.out.println(e1);
+			}
+		});
+
+		forward.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
+			try {
+				WebHistory history = webEngine.getHistory();
+				history.go(1);
+			} catch (IndexOutOfBoundsException e1) {
+				System.out.println(e1);
+			}
+		});		
+		
+	
+	//end method
 	}
-
+//end class
 }
