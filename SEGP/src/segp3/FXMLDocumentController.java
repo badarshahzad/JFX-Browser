@@ -6,6 +6,7 @@
 package segp3;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.controls.JFXTextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
@@ -64,6 +65,15 @@ public class FXMLDocumentController implements Initializable {
 
 	@FXML
 	private Tab addNewTab;
+	
+	@FXML
+	private JFXHamburger hamburger;
+
+	@FXML
+	void hamBurgerListner(MouseEvent event) {
+		
+		
+	}
 
 	// Webview and browser object is going to start
 	WebView browser = new WebView();

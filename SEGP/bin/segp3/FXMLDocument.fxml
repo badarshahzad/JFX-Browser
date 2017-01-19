@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXHamburger?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
@@ -28,6 +29,7 @@
 										<ColumnConstraints hgrow="SOMETIMES" maxWidth="10.0" minWidth="10.0" percentWidth="3.0" prefWidth="10.0" />
 										<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="200.0" />
 										<ColumnConstraints hgrow="SOMETIMES" maxWidth="20.0" minWidth="10.0" percentWidth="5.0" prefWidth="20.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="20.0" minWidth="10.0" percentWidth="5.0" prefWidth="10.0" />
 									</columnConstraints>
 									<rowConstraints>
 										<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -62,6 +64,7 @@
 												</ImageView>
 											</graphic>
 										</JFXButton>
+                              <JFXHamburger fx:id="hamburger" onMouseClicked="#hamBurgerListner" GridPane.columnIndex="4" />
 									</children>
 								</GridPane>
 							</top>
