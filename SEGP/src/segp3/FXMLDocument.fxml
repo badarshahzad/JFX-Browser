@@ -64,7 +64,7 @@
 												</ImageView>
 											</graphic>
 										</JFXButton>
-                              <JFXHamburger fx:id="hamburger" onMouseClicked="#hamBurgerListner" GridPane.columnIndex="4" />
+                              <JFXHamburger fx:id="hamburger" GridPane.columnIndex="4" />
 									</children>
 								</GridPane>
 							</top>
