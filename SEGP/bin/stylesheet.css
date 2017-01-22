@@ -1,0 +1,16 @@
+
+.animated-option-button {
+	-fx-pref-width:50px;
+	-fx-background-color:#4c4c4c;
+	-fx-background-radius:50px;
+	-fx-pref-height:50px;
+	-fx-text-fill:white;
+	-fx-border-color:WHITE;
+	-fx-border-radius: 50px; 
+	-fx-border-width: 4px;
+}
+//.tab-pane{
+    -fx-background-insets: 0, 0 0 1 0;
+ /* -fx-padding: 0.416667em 0.166667em 0.0em 0.833em; /* 5 2 0 10 */
+    -fx-padding: 0.416667em 0.166667em 0.0em 0.0em; /* overriden as 5 2 0 0 */
+}
