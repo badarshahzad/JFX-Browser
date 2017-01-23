@@ -1,5 +1,7 @@
 package segp3;
 
+import java.util.Properties;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -26,6 +28,9 @@ public class SegpGroup3 extends Application {
 	 *            the command line arguments
 	 */
 	public static void main(String[] args) {
+		Properties systemProperties = System.getProperties();
+    	systemProperties.setProperty("http.proxyHost","172.16.0.2");
+    	systemProperties.setProperty("http.proxyPort","8080");
 		launch(args);
 	}
 
