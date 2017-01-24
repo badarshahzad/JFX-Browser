@@ -1,2 +1,9 @@
+<<<<<<< HEAD
 /segp3/
 /downloader/
+=======
+/.gitignore
+/segp3/
+/UI/
+/ui/
+>>>>>>> test2-master

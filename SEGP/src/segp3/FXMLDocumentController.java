@@ -9,6 +9,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXDrawersStack;
 import com.jfoenix.controls.JFXHamburger;
+import com.jfoenix.controls.JFXTabPane;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXButton.ButtonType;
 import com.jfoenix.controls.JFXDrawer.DrawerDirection;
@@ -21,6 +22,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import javax.swing.ImageIcon;
+import javax.swing.plaf.basic.BasicTreeUI.SelectionModelPropertyChangeHandler;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
@@ -42,7 +44,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -58,6 +59,8 @@ import javafx.scene.web.WebEvent;
 import javafx.scene.web.WebHistory;
 import javafx.scene.web.WebView;
 import javafx.scene.web.WebHistory.Entry;
+import ui.Hamburger;
+import ui.TabPane;
 
 /**
  *
@@ -86,7 +89,7 @@ public class FXMLDocumentController implements Initializable {
 	private JFXButton search;
 
 	@FXML
-	private TabPane tabpane;
+	private JFXTabPane tabpane;
 
 	@FXML
 	private Tab addNewTab;
@@ -107,6 +110,10 @@ public class FXMLDocumentController implements Initializable {
 
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
+		
+		//css attach with Tabpane
+		tabpane.getStyleClass().addAll("tab-pane");
+		
 
 		// ---------------------webView---------------------------webEngine----------------------------------------------
 
@@ -180,7 +187,9 @@ public class FXMLDocumentController implements Initializable {
 		 * 
 		 */
 		
+		
 		// --------------------------------------------------------Backward-------------------------------------------
+		
 		back.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
 			try {
 
@@ -190,7 +199,9 @@ public class FXMLDocumentController implements Initializable {
 				System.out.println(e1);
 			}
 		});
+		
 		// --------------------------------------------------------Forward--------------------------------------------
+
 		forward.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
 			try {
 				WebHistory history = webEngine.getHistory();
@@ -199,118 +210,32 @@ public class FXMLDocumentController implements Initializable {
 				System.out.println(e1);
 			}
 		});
+		
 		//--------------------------------------------Refresh------------------------------------------------
+		
 		refresh.addEventHandler(MouseEvent.MOUSE_CLICKED, (e)->{
 			webEngine.load(webEngine.getLocation());
 			
 		});
-		
 
 		// -------------------------------------------Hamburger----Drawer----Menu-----------------------------------
 
+		Hamburger ham = new Hamburger();
+		ham.getHamburger(hamburger, borderpane,tabpane);
 		
-		
-		//---------------------------------------------Drawer--Menu--Buttons------------------------------------------
-		
-		JFXButton home = new JFXButton();home.setMinWidth(30);home.setMinHeight(36);
-		home.setGraphic(new ImageView(new Image("/home1.png")));
-		//home.setButtonType(ButtonType.RAISED);
-		//home.getStyleClass().addAll("animated-option-button","animated-option-sub-button2");
-	
-		
-		JFXButton history = new JFXButton();history.setMinWidth(30);history.setMinHeight(36);
-		history.setGraphic(new ImageView(new Image("/history.png")));
-		//history.getStyleClass().addAll("animated-option-button","animated-option-sub-button2");
-		
-		JFXButton downloads = new JFXButton();downloads.setMinWidth(30);downloads.setMinHeight(36);
-		downloads.setGraphic(new ImageView(new Image("/downloads.png")));
-		//downloads.getStyleClass().addAll("animated-option-button","animated-option-sub-button2");
-		
-		JFXButton bookmarks = new JFXButton();bookmarks.setMinWidth(30);bookmarks.setMinHeight(36);
-		bookmarks.setGraphic(new ImageView(new Image("/bookMarks.png")));
-		//bookmarks.getStyleClass().addAll("animated-option-button","animated-option-sub-button2");
-		
-		JFXButton saveAsPdf = new JFXButton();saveAsPdf.setMinWidth(30);saveAsPdf.setMinHeight(36);
-		saveAsPdf.setGraphic(new ImageView(new Image("/pdf.png")));
-		//saveAsPdf.getStyleClass().addAll("animated-option-button","animated-option-sub-button2");
-		
-		JFXButton setting = new JFXButton();setting.setMinWidth(30);setting.setMinHeight(36);
-		setting.setGraphic(new ImageView(new Image("/setting.png")));
-		//setting.getStyleClass().addAll("animated-option-button","animated-option-sub-button2");
-		
-		GridPane  gridPane = new GridPane();
-		gridPane.add(home,0,0);
-		gridPane.add(history,0,1);
-		gridPane.add(downloads,0,2);
-		gridPane.add(bookmarks,0,3);
-		gridPane.add(saveAsPdf,0,4);
-		gridPane.add(setting,0,5);
-		
-		 //------------------------------------------------------Right----DrawerStack-------------------------------- 
-		
-		JFXDrawersStack drawersStack = new JFXDrawersStack();
-		JFXDrawer rightDrawer = new JFXDrawer();
-		rightDrawer.setDirection(DrawerDirection.RIGHT);		
-		rightDrawer.setDefaultDrawerSize(40);
-		rightDrawer.setSidePane(gridPane);
-		rightDrawer.setOverLayVisible(false);
-		rightDrawer.setResizableOnDrag(true);
-		
-		 
-		 //--------------------------------------------------------Hamburger------------------------------------------
-		 
-		// Hamburger listner setRate 1 is active state and -1 is normal state in hamburger
-		
-		hamburger.setMinWidth(10);
-		HamburgerSlideCloseTransition transition = new HamburgerSlideCloseTransition(hamburger);
-		transition.setRate(-1);
-		hamburger.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
-			transition.setRate(transition.getRate() * -1);
-			transition.play();
-			borderpane.setRight(drawersStack);
-			drawersStack.toggle(rightDrawer);
-		});
-
 		// --------------------------------------------------------TabPane---------------------------------------------
 
+		TabPane tabpan_view = new TabPane();
+		tabpan_view.getTabPane(tabpane, addNewTab, navigationBar);
+		/**
+		 * There is well know error in Tabpane while you will be working with scenebuilder then comment the 
+		 * below tabpane! We gone through we severly face this #bug of tabpane many time so becareful! 
+		 */
 		
 		//----------------------just put tabpane in vbox as to add new tab button on click new tab pop up
 	
-		tabpane.getSelectionModel().selectedItemProperty().addListener(
-			    new ChangeListener<Tab>() {
-			        @Override
-			        public void changed(ObservableValue<? extends Tab> ov, Tab t, Tab newSelectedTab) {
-			        	if(newSelectedTab==addNewTab){
-			           
-			        		/*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@--Problem---@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-			        		 * Problem is when If I will put previous navigation bar in new pane then
-			        		 * it works for previous listeners? Here his a debate start how we will do it?
-			        		*/
-			        		//New Tab new rowser pane
-			        		WebView browser = new WebView();
-			        		WebEngine webEngine1 = browser.getEngine();
-			        		webEngine1.load("http://www.google.com");
-			        		BorderPane pane = new BorderPane();
-			        		pane.setTop(navigationBar);
-			        		//pane.setCenter(browser);
-			        		
-			        		
-			            	Tab tab = new Tab();
-			    			tab.setText("1 Tab");
-			    			tab.setContent(new Label("Message "));
-			    			tab.setContent(pane);
-			    			
-			    			tab.getStyleClass().addAll("tab-pane");
-			    			final ObservableList<Tab> tabs = tabpane.getTabs();
-			    			tabs.add(tabs.size()-1,tab);
-			    			tabpane.getSelectionModel().select(tab);
-			    			//System.out.println("Now Size"+tabs.size());
-			    			
-			        	}
-			        }
-			    }
-			);
 		
+			
 		// end method
 	}
 	// end class
