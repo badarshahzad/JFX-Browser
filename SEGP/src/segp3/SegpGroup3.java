@@ -28,6 +28,7 @@ public class SegpGroup3 extends Application {
 	 *            the command line arguments
 	 */
 	public static void main(String[] args) {
+		// following three lines are for proxy settings
 		Properties systemProperties = System.getProperties();
     	systemProperties.setProperty("http.proxyHost","172.16.0.2");
     	systemProperties.setProperty("http.proxyPort","8080");
