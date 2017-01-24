@@ -9,6 +9,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXDrawersStack;
 import com.jfoenix.controls.JFXHamburger;
+import com.jfoenix.controls.JFXTabPane;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXButton.ButtonType;
 import com.jfoenix.controls.JFXDrawer.DrawerDirection;
@@ -42,7 +43,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -86,7 +86,7 @@ public class FXMLDocumentController implements Initializable {
 	private JFXButton search;
 
 	@FXML
-	private TabPane tabpane;
+	private JFXTabPane tabpane;
 
 	@FXML
 	private Tab addNewTab;
@@ -277,39 +277,54 @@ public class FXMLDocumentController implements Initializable {
 		//----------------------just put tabpane in vbox as to add new tab button on click new tab pop up
 	
 		tabpane.getSelectionModel().selectedItemProperty().addListener(
-			    new ChangeListener<Tab>() {
-			        @Override
-			        public void changed(ObservableValue<? extends Tab> ov, Tab t, Tab newSelectedTab) {
-			        	if(newSelectedTab==addNewTab){
-			           
-			        		/*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@--Problem---@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-			        		 * Problem is when If I will put previous navigation bar in new pane then
-			        		 * it works for previous listeners? Here his a debate start how we will do it?
-			        		*/
-			        		//New Tab new rowser pane
-			        		WebView browser = new WebView();
-			        		WebEngine webEngine1 = browser.getEngine();
-			        		webEngine1.load("http://www.google.com");
-			        		BorderPane pane = new BorderPane();
-			        		pane.setTop(navigationBar);
-			        		//pane.setCenter(browser);
-			        		
-			        		
-			            	Tab tab = new Tab();
-			    			tab.setText("1 Tab");
-			    			tab.setContent(new Label("Message "));
-			    			tab.setContent(pane);
-			    			
-			    			tab.getStyleClass().addAll("tab-pane");
-			    			final ObservableList<Tab> tabs = tabpane.getTabs();
-			    			tabs.add(tabs.size()-1,tab);
-			    			tabpane.getSelectionModel().select(tab);
-			    			//System.out.println("Now Size"+tabs.size());
-			    			
-			        	}
-			        }
-			    }
-			);
+			new ChangeListener<Tab>() {
+		        @Override
+		        public void changed(ObservableValue<? extends Tab> ov, Tab t, Tab newSelectedTab) {
+		        	if(newSelectedTab==addNewTab){
+		           
+		        		/*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@--Problem---@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+		        		 * Problem is when If I will put previous navigation bar in new pane then
+		        		 * it works for previous listeners? Here his a debate start how we will do it?
+		        		*/
+		        		//New Tab new rowser pane
+		        		WebView browser = new WebView();
+		        		WebEngine webEngine1 = browser.getEngine();
+		        		webEngine1.load("http://www.google.com");
+		        		BorderPane pane = new BorderPane();
+		        		pane.setTop(navigationBar);
+		        		//pane.setCenter(browser);
+		        		
+		        		
+		        		
+		        		Tab tab = new Tab();
+		    			tab.setText("Taab");;
+		        		tab.setContent(pane);
+		    			
+		    			
+		    			//tab.getStyleClass().addAll("tab-pane");
+		    			final ObservableList<Tab> tabs = tabpane.getTabs();
+		    			
+		    			System.out.println("Now Size"+tabs.size());
+		    			tabs.add(tabs.size()-1,tab);
+		    			//###That was a bug tabpane.getSelectionModel().select(tab);
+		    			System.out.println("Now Size"+tabs.size());
+		    			
+		        		
+		        		
+		        	}
+		        }
+		        
+			});
+			
+
+			
+		
+				
+			    
+
+					
+			    
+			
 		
 		// end method
 	}
