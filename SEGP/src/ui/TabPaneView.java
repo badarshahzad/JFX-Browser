@@ -1,19 +1,20 @@
 package ui;
 
-import com.jfoenix.controls.JFXTabPane;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
+import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.control.Tab;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
+import javafx.scene.control.TabPane;
 
-public class TabPane {
+public class TabPaneView {
 	
-	public JFXTabPane getTabPane(JFXTabPane tabpane,Tab addNewTab,GridPane navigationBar){
+	public TabPane getTabPane(TabPane tabpane,Tab addNewTab,GridPane navigationBar){
 		tabpane.getSelectionModel().selectedItemProperty().addListener(
 				new ChangeListener<Tab>() {
 			        @Override
@@ -41,11 +42,10 @@ public class TabPane {
 			    			final ObservableList<Tab> tabs = tabpane.getTabs();
 			    			
 			    			//System.out.println("Now Size"+tabs.size());
+			    			
 			    			tabs.add(tabs.size()-1,tab);
-			    			//SingleSelectionModel<Tab> selectedTab = tabpane.getSelectionModel();
-			    			//selectedTab.select(tabs.set(tabs.size(),newSelectedTab ));
-			    			
-			    			
+			    			SingleSelectionModel<Tab> selectedTab = tabpane.getSelectionModel();
+			    			selectedTab.select(tab);
 			    			
 			    			//###That was a bug tabpane.getSelectionModel().select(tab);
 			    			//System.out.println("Now Size"+tabs.size());
