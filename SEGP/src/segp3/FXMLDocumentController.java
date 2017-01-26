@@ -6,61 +6,34 @@
 package segp3;
 
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXDrawer;
-import com.jfoenix.controls.JFXDrawersStack;
 import com.jfoenix.controls.JFXHamburger;
-import com.jfoenix.controls.JFXTabPane;
 import com.jfoenix.controls.JFXTextField;
-import com.jfoenix.controls.JFXButton.ButtonType;
-import com.jfoenix.controls.JFXDrawer.DrawerDirection;
-import com.jfoenix.transitions.hamburger.HamburgerSlideCloseTransition;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.KeyEvent;
-import java.net.MalformedURLException;
+import java.beans.EventHandler;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import javax.swing.ImageIcon;
-import javax.swing.plaf.basic.BasicTreeUI.SelectionModelPropertyChangeHandler;
 
-import org.w3c.dom.Document;
-import org.w3c.dom.NodeList;
 
-import javafx.beans.binding.Binding;
-import javafx.beans.binding.Bindings;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.collections.ObservableList;
 import javafx.concurrent.Worker;
 import javafx.concurrent.Worker.State;
-import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.SelectionMode;
-import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.control.Tab;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.web.WebEngine;
-import javafx.scene.web.WebEvent;
 import javafx.scene.web.WebHistory;
 import javafx.scene.web.WebView;
-import javafx.scene.web.WebHistory.Entry;
 import ui.Hamburger;
-import ui.TabPane;
+import javafx.scene.control.TabPane;
+import javafx.scene.control.TabPane.TabClosingPolicy;
+import ui.TabPaneView;
 
 /**
  *
@@ -88,8 +61,10 @@ public class FXMLDocumentController implements Initializable {
 	@FXML
 	private JFXButton search;
 
+	//@FXML
+	//private JFXTabPane tabpane;
 	@FXML
-	private JFXTabPane tabpane;
+	private TabPane tabpane;
 
 	@FXML
 	private Tab addNewTab;
@@ -111,19 +86,29 @@ public class FXMLDocumentController implements Initializable {
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 		
-		//css attach with Tabpane
-		tabpane.getStyleClass().addAll("tab-pane");
+		//----------------------css attach with Tabpane
+		//tabpane.getStyleClass().addAll("tab-pane");
 		
+		tabpane.setTabClosingPolicy(TabClosingPolicy.ALL_TABS);
 
 		// ---------------------webView---------------------------webEngine----------------------------------------------
 
-		// Default url will be google
+		//--------------------- Default url will be google
 		webEngine.load("http://www.google.com");
 		searchField.setText(webEngine.getLocation());
 		borderpane.setCenter(browser);
 
-		// Listener for search button
-		search.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
+		//--------------------- Listener for search button
+		/*
+		 * Example of below listner search of lamda exprestion
+		  btn.setOnAction(new EventHandler<ActionEvent>() {
+	            @Override
+	            public void handle(ActionEvent e) {
+	                System.out.println("Hello World!");
+	            }
+	        });
+		*/
+		search.addEventHandler(MouseEvent.MOUSE_CLICKED,(e) -> {
 			webEngine.load(searchField.getText());
 			webEngine.getLoadWorker().stateProperty().addListener(new ChangeListener<State>() {
 				@Override
@@ -140,12 +125,13 @@ public class FXMLDocumentController implements Initializable {
 		});
 		// --------------------------------------UrlField--------------------------Url--GetLocation-------------------
 
-		// listner for search textfield of search button
+		//---------------------Listner for search textfield of search button
 		searchField.setOnKeyPressed(event -> {
 			if (event.getCode() == KeyCode.ENTER) {
 				webEngine.load(searchField.getText());
 			}
 		});
+		
 		/*
 		 * We got this idea from this link Doc
 		 * :https://docs.oracle.com/javase/8/javafx/api/index.html?
@@ -214,18 +200,19 @@ public class FXMLDocumentController implements Initializable {
 		//--------------------------------------------Refresh------------------------------------------------
 		
 		refresh.addEventHandler(MouseEvent.MOUSE_CLICKED, (e)->{
-			webEngine.load(webEngine.getLocation());
+			webEngine.reload();
 			
 		});
 
 		// -------------------------------------------Hamburger----Drawer----Menu-----------------------------------
 
+		
 		Hamburger ham = new Hamburger();
 		ham.getHamburger(hamburger, borderpane,tabpane);
 		
 		// --------------------------------------------------------TabPane---------------------------------------------
 
-		TabPane tabpan_view = new TabPane();
+		TabPaneView tabpan_view = new TabPaneView();
 		tabpan_view.getTabPane(tabpane, addNewTab, navigationBar);
 		/**
 		 * There is well know error in Tabpane while you will be working with scenebuilder then comment the 
@@ -237,6 +224,9 @@ public class FXMLDocumentController implements Initializable {
 		
 			
 		// end method
+	}
+	public TabPane getRooTabPane(){
+		return tabpane;
 	}
 	// end class
 }
