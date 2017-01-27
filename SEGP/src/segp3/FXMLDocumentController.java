@@ -13,8 +13,6 @@ import java.beans.EventHandler;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-
-
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.concurrent.Worker;
@@ -41,74 +39,50 @@ import ui.TabPaneView;
  */
 public class FXMLDocumentController implements Initializable {
 
-
-
-    @FXML
-    private BorderPane rootBorderPane;
-
-	@FXML
-	private BorderPane borderpane;
-
-	@FXML
-	private JFXButton back;
-
-	@FXML
-	private JFXButton forward;
-
-	@FXML
-	private JFXTextField searchField;
-
-	@FXML
-	private JFXButton search;
-
-	//@FXML
-	//private JFXTabPane tabpane;
-	@FXML
-	private TabPane tabpane;
-
-	@FXML
-	private Tab addNewTab;
-
-	@FXML
-	private JFXHamburger hamburger;
 	
-	@FXML
-    private JFXButton refresh;
+	/* 1st rootBorderPane that is the actual root for scene and 2nd borderpane is the tabpane #pane
+	 * Below is 4 buttons for navigation backward to go back page,forward to go the previous visited page,refresh will
+	 * reload the page and search button is a specific url search 
+	 * Textfield it to write a url.
+	 * 
+	 **/
+	@FXML private BorderPane rootBorderPane; @FXML private BorderPane borderpane;
 	
-	@FXML
-    private GridPane navigationBar;
+	@FXML private JFXButton back;@FXML private JFXButton forward; @FXML private JFXButton refresh; @FXML private JFXButton search;
 
-	VBox drawerPane = new VBox();
-
-	WebView browser = new WebView();
-	WebEngine webEngine = browser.getEngine();
+	@FXML private JFXTextField searchField; 
+	@FXML private TabPane tabPane; @FXML private Tab addNewTab; 
+	@FXML private JFXHamburger hamburger;
+	@FXML private GridPane navigationBar;
+	
+	public VBox drawerPane = new VBox();
+	public WebView browser = new WebView();
+	public WebEngine webEngine = browser.getEngine();
 
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
-		
-		//----------------------css attach with Tabpane
-		//tabpane.getStyleClass().addAll("tab-pane");
-		
-		tabpane.setTabClosingPolicy(TabClosingPolicy.ALL_TABS);
+
+		// ----------------------css attach with Tabpane
+		// tabpane.getStyleClass().addAll("tab-pane");
+
+		tabPane.setTabClosingPolicy(TabClosingPolicy.ALL_TABS);
 
 		// ---------------------webView---------------------------webEngine----------------------------------------------
 
-		//--------------------- Default url will be google
+		// --------------------- Default url will be google
 		webEngine.load("http://www.google.com");
 		searchField.setText(webEngine.getLocation());
 		borderpane.setCenter(browser);
 
-		//--------------------- Listener for search button
+		// --------------------- Listener for search button
 		/*
 		 * Example of below listner search of lamda exprestion
-		  btn.setOnAction(new EventHandler<ActionEvent>() {
-	            @Override
-	            public void handle(ActionEvent e) {
-	                System.out.println("Hello World!");
-	            }
-	        });
-		*/
-		search.addEventHandler(MouseEvent.MOUSE_CLICKED,(e) -> {
+		 * btn.setOnAction(new EventHandler<ActionEvent>() {
+		 * 
+		 * @Override public void handle(ActionEvent e) { System.out.println(
+		 * "Hello World!"); } });
+		 */
+		search.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
 			webEngine.load(searchField.getText());
 			webEngine.getLoadWorker().stateProperty().addListener(new ChangeListener<State>() {
 				@Override
@@ -125,24 +99,24 @@ public class FXMLDocumentController implements Initializable {
 		});
 		// --------------------------------------UrlField--------------------------Url--GetLocation-------------------
 
-		//---------------------Listner for search textfield of search button
+		// ---------------------Listner for search textfield of search button
 		searchField.setOnKeyPressed(event -> {
 			if (event.getCode() == KeyCode.ENTER) {
 				webEngine.load(searchField.getText());
 			}
 		});
-		
+
 		/*
 		 * We got this idea from this link Doc
 		 * :https://docs.oracle.com/javase/8/javafx/api/index.html?
-		 * javafx/scene/web/WebEngine.html We got the conceptual thought
-		 * from Stack: this
+		 * javafx/scene/web/WebEngine.html We got the conceptual thought from
+		 * Stack: this
 		 * 
 		 * http://stackoverflow.com/questions/32486758/detect-url-
-		 * changes-in-javafx-webview The purpose of this is to show the
-		 * chaning url
+		 * changes-in-javafx-webview The purpose of this is to show the chaning
+		 * url
 		 */
-		
+
 		webEngine.getLoadWorker().stateProperty().addListener(new ChangeListener<State>() {
 			@Override
 			public void changed(ObservableValue ov, State oldState, State newState) {
@@ -155,8 +129,6 @@ public class FXMLDocumentController implements Initializable {
 			}
 		});
 
-		
-		
 		/*
 		 * bookmarks.setOnAction(new EventHandler<ActionEvent>() {
 		 * 
@@ -172,10 +144,9 @@ public class FXMLDocumentController implements Initializable {
 		 * list.size();i++){ System.out.println(list.get(i)); } } });
 		 * 
 		 */
-		
-		
+
 		// --------------------------------------------------------Backward-------------------------------------------
-		
+
 		back.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
 			try {
 
@@ -185,7 +156,7 @@ public class FXMLDocumentController implements Initializable {
 				System.out.println(e1);
 			}
 		});
-		
+
 		// --------------------------------------------------------Forward--------------------------------------------
 
 		forward.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
@@ -196,37 +167,33 @@ public class FXMLDocumentController implements Initializable {
 				System.out.println(e1);
 			}
 		});
-		
-		//--------------------------------------------Refresh------------------------------------------------
-		
-		refresh.addEventHandler(MouseEvent.MOUSE_CLICKED, (e)->{
+
+		// --------------------------------------------Refresh------------------------------------------------
+
+		refresh.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
 			webEngine.reload();
-			
+
 		});
 
 		// -------------------------------------------Hamburger----Drawer----Menu-----------------------------------
 
-		
 		Hamburger ham = new Hamburger();
-		ham.getHamburger(hamburger, borderpane,tabpane);
-		
+		ham.getHamburger(hamburger, borderpane, tabPane);
+
 		// --------------------------------------------------------TabPane---------------------------------------------
 
 		TabPaneView tabpan_view = new TabPaneView();
-		tabpan_view.getTabPane(tabpane, addNewTab, navigationBar);
+		tabpan_view.getTabPane(tabPane, addNewTab, navigationBar);
 		/**
-		 * There is well know error in Tabpane while you will be working with scenebuilder then comment the 
-		 * below tabpane! We gone through we severly face this #bug of tabpane many time so becareful! 
+		 * There is well know error in Tabpane while you will be working with
+		 * scenebuilder then comment the below tabpane! We gone through we
+		 * severly face this #bug of tabpane many time so becareful!
 		 */
-		
-		//----------------------just put tabpane in vbox as to add new tab button on click new tab pop up
-	
-		
-			
+
+		// ----------------------just put tabpane in vbox as to add new tab
+		// button on click new tab pop up
+
 		// end method
-	}
-	public TabPane getRooTabPane(){
-		return tabpane;
 	}
 	// end class
 }
