@@ -42,6 +42,7 @@ public class Hamburger {
 		setting.setTooltip(new Tooltip("Setting"));
 		
 		
+		
 		// -----------------------------------------------------Menview-Class method ----menuView----------------------------------------------
 		/*
 		 * We are just sending all listener to another class as in this way can

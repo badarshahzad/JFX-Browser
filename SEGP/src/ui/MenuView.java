@@ -24,10 +24,12 @@ public class MenuView {
 
 	private Tab tab = new Tab();
 	public BorderPane settingBorderPane = new BorderPane();
+	
 
 	
 	public void setMenuViewListener( 
 			JFXButton home,JFXButton history,JFXButton downloads,JFXButton bookmarks,JFXButton saveAsPdf, JFXButton setting,TabPane tabPane){
+		
 		
 		final ObservableList<Tab> tabs = tabPane.getTabs();
 		SingleSelectionModel<Tab> selectedTab = tabPane.getSelectionModel();
@@ -58,9 +60,6 @@ public class MenuView {
 				
 				History ob = new History();
 				tab = ob.getHistoryView(tab, settingBorderPane);
-				
-				//System.out.println(tabs.get(tabs.size()-2).getId());
-				//This is just selecitng the just now opened tab
 				tabs.add(tabs.size()-1,tab);
 
 				//System.out.println(tab.getId());
