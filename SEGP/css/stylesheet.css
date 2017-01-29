@@ -1,0 +1,49 @@
+
+.animated-option-button {
+	-fx-pref-width:50px;
+	-fx-background-color:#4c4c4c;
+	-fx-background-radius:50px;
+	-fx-pref-height:50px;
+	-fx-text-fill:white;
+	-fx-border-color:WHITE;
+	-fx-border-radius: 50px; 
+	-fx-border-width: 4px;
+}
+.tab-pane{
+	
+	
+}
+.tab-pane .tab-header-area .tab-header-background {
+    -fx-opacity: 0;
+}
+
+.tab-pane
+{
+    -fx-tab-min-width:90px;
+}
+
+.tab{
+    -fx-background-insets: 0 1 0 1,0,0;
+}
+.tab-pane .tab
+{
+    -fx-background-color: #e6e6e6;
+
+}
+
+.tab-pane .tab:selected
+{
+    -fx-background-color: #3c3c3c;
+}
+
+.tab .tab-label { 
+    -fx-alignment: CENTER;
+    -fx-text-fill: #828282;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+}
+
+.tab:selected .tab-label { 
+    -fx-alignment: CENTER;
+    -fx-text-fill: #96b946;
+}
