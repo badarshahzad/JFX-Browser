@@ -7,6 +7,7 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
 	<classpathentry kind="src" path="lib"/>
 	<classpathentry kind="lib" path="lib/jfoenix.jar"/>
+<<<<<<< HEAD
 	<classpathentry kind="lib" path="C:/Users/student/Downloads/Programs/core-renderer-R8pre2.zip"/>
 	<classpathentry kind="lib" path="C:/Users/student/Downloads/Programs/jsoup-1.10.1.jar"/>
 	<classpathentry kind="lib" path="C:/Users/student/Downloads/Programs/jsoup-1.10.1-sources.jar"/>
@@ -48,6 +49,19 @@
 	<classpathentry kind="lib" path="C:/Users/student/Desktop/SEGP/SEGP-Group3/SEGP-Group3/SEGP/lib/xmlworker-5.4.4.jar"/>
 	<classpathentry kind="lib" path="C:/Users/student/Desktop/SEGP/SEGP-Group3/SEGP-Group3/SEGP/lib/xmlworker-5.4.4-javadoc.jar"/>
 	<classpathentry kind="lib" path="C:/Users/student/Desktop/SEGP/SEGP-Group3/SEGP-Group3/SEGP/lib/xmlworker-5.4.4-sources.jar"/>
+=======
+	<classpathentry kind="lib" path="lib/itextpdf-5.5.1-javadoc.jar"/>
+	<classpathentry kind="lib" path="lib/itextpdf-5.5.1.jar"/>
+	<classpathentry kind="lib" path="lib/jsoup-1.10.1.jar"/>
+	<classpathentry kind="lib" path="lib/ui4j-all-2.1.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/student/Desktop/Group/SEGP-Group3/SEGP/lib/xmlworker-5.4.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/student/Desktop/Group/SEGP-Group3/SEGP/lib/xmlworker-5.4.4-javadoc.jar"/>
+	<classpathentry kind="lib" path="C:/Users/student/Desktop/Group/SEGP-Group3/SEGP/lib/xmlworker-5.4.4-sources.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/3"/>
+	<classpathentry kind="lib" path="C:/Users/student/Downloads/Compressed/evohtmltopdf-java-v6.16_2.zip"/>
+	<classpathentry kind="lib" path="C:/Users/student/Downloads/Programs/core-renderer-R8pre2.zip"/>
+	<classpathentry kind="lib" path="C:/Users/student/Desktop/Group/SEGP-Group3/SEGP/lib/javax.servlet-api-3.0.1(1).zip"/>
+>>>>>>> b73f3792dd0569956020ced8cf376ccd18145d2f
 	<classpathentry kind="output" path="bin"/>
 </classpath>
 =======
