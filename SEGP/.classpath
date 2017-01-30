@@ -6,5 +6,46 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
 	<classpathentry kind="src" path="lib"/>
 	<classpathentry kind="lib" path="lib/jfoenix.jar"/>
+	<classpathentry kind="lib" path="C:/Users/student/Downloads/Programs/core-renderer-R8pre2.zip"/>
+	<classpathentry kind="lib" path="C:/Users/student/Downloads/Programs/jsoup-1.10.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/student/Downloads/Programs/jsoup-1.10.1-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Users/student/Downloads/Compressed/apache-logging-log4j.jar"/>
+	<classpathentry kind="lib" path="C:/Users/student/Downloads/Compressed/apache-logging-log4j.jar.zip"/>
+	<classpathentry kind="lib" path="C:/Users/student/Downloads/Compressed/avalon-framework-impl-4.2.0.jar.zip"/>
+	<classpathentry kind="lib" path="C:/Users/student/Downloads/Compressed/avalon-framework-impl-4.2.0.jar_2.zip"/>
+	<classpathentry kind="lib" path="C:/Users/student/Downloads/Compressed/batik-all-1.7.jar.zip"/>
+	<classpathentry kind="lib" path="C:/Users/student/Downloads/Compressed/com.lowagie.text-2.1.7.jar.zip"/>
+	<classpathentry kind="lib" path="C:/Users/student/Downloads/Compressed/commons-io-2.4.jar.zip"/>
+	<classpathentry kind="lib" path="C:/Users/student/Downloads/Compressed/commons-io-2.5-src.zip"/>
+	<classpathentry kind="lib" path="C:/Users/student/Downloads/Compressed/commons-lang3-3.1.jar.zip"/>
+	<classpathentry kind="lib" path="C:/Users/student/Downloads/Compressed/commons-logging-1.0.4.jar.zip"/>
+	<classpathentry kind="lib" path="C:/Users/student/Downloads/Compressed/db-derby-10.13.1.1-bin.zip"/>
+	<classpathentry kind="lib" path="C:/Users/student/Downloads/Compressed/evohtmltopdf-java-v6.16_2.zip"/>
+	<classpathentry kind="lib" path="C:/Users/student/Downloads/Compressed/flyingsaucer-R8.zip"/>
+	<classpathentry kind="lib" path="C:/Users/student/Downloads/Compressed/fop-0.20.5.jar.zip"/>
+	<classpathentry kind="lib" path="C:/Users/student/Downloads/Compressed/httpcomponents-client-4.5.2-src.zip"/>
+	<classpathentry kind="lib" path="C:/Users/student/Downloads/Compressed/jtidy-r938.jar"/>
+	<classpathentry kind="lib" path="C:/Users/student/Downloads/Compressed/jtidy-r938.jar.zip"/>
+	<classpathentry kind="lib" path="C:/Users/student/Downloads/Compressed/jtidy-r938.zip"/>
+	<classpathentry kind="lib" path="C:/Users/student/Downloads/Compressed/org.apache.commons.io.jar.zip"/>
+	<classpathentry kind="lib" path="C:/Users/student/Downloads/Compressed/org.apache.commons.io.jar_2.zip"/>
+	<classpathentry kind="lib" path="C:/Users/student/Downloads/Compressed/pdfcrowd-2.6-java.zip"/>
+	<classpathentry kind="lib" path="C:/Users/student/Downloads/Compressed/pdfcrowd-2.6-java_2.zip"/>
+	<classpathentry kind="lib" path="C:/Users/student/Downloads/Compressed/pdfcrowd-2.6-java_3.zip"/>
+	<classpathentry kind="lib" path="C:/Users/student/Downloads/Compressed/printer.zip"/>
+	<classpathentry kind="lib" path="C:/Users/student/Downloads/Compressed/ui-2.3.0-v200706262000.jar.zip"/>
+	<classpathentry kind="lib" path="C:/Users/student/Downloads/Compressed/w3c.jar.zip"/>
+	<classpathentry kind="lib" path="C:/Users/student/Desktop/SEGP/SEGP-Group3/SEGP-Group3/SEGP/lib/com.lowagie.text-2.1.7.jar"/>
+	<classpathentry kind="lib" path="C:/Users/student/Desktop/SEGP/SEGP-Group3/SEGP-Group3/SEGP/lib/itextpdf-5.5.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/student/Desktop/SEGP/SEGP-Group3/SEGP-Group3/SEGP/lib/itextpdf-5.5.1-javadoc.jar"/>
+	<classpathentry kind="lib" path="C:/Users/student/Desktop/SEGP/SEGP-Group3/SEGP-Group3/SEGP/lib/jfoenix.jar"/>
+	<classpathentry kind="lib" path="C:/Users/student/Desktop/SEGP/SEGP-Group3/SEGP-Group3/SEGP/lib/jsoup-1.10.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/student/Desktop/SEGP/SEGP-Group3/SEGP-Group3/SEGP/lib/jtidy-r938.jar"/>
+	<classpathentry kind="lib" path="C:/Users/student/Desktop/SEGP/SEGP-Group3/SEGP-Group3/SEGP/lib/pdfcrowd.jar"/>
+	<classpathentry kind="lib" path="C:/Users/student/Desktop/SEGP/SEGP-Group3/SEGP-Group3/SEGP/lib/ui4j-all-2.1.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/student/Desktop/SEGP/SEGP-Group3/SEGP-Group3/SEGP/lib/w3c.jar"/>
+	<classpathentry kind="lib" path="C:/Users/student/Desktop/SEGP/SEGP-Group3/SEGP-Group3/SEGP/lib/xmlworker-5.4.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/student/Desktop/SEGP/SEGP-Group3/SEGP-Group3/SEGP/lib/xmlworker-5.4.4-javadoc.jar"/>
+	<classpathentry kind="lib" path="C:/Users/student/Desktop/SEGP/SEGP-Group3/SEGP-Group3/SEGP/lib/xmlworker-5.4.4-sources.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
