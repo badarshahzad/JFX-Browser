@@ -4,6 +4,9 @@ package ui;
 import java.awt.Desktop.Action;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXDrawer;
+import com.jfoenix.controls.JFXDrawersStack;
+import com.jfoenix.transitions.hamburger.HamburgerSlideCloseTransition;
 
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -24,12 +27,18 @@ public class MenuView {
 
 	private Tab tab = new Tab();
 	public BorderPane settingBorderPane = new BorderPane();
-	
-
+	HamburgerSlideCloseTransition transition;
+	JFXDrawersStack drawersStack;
+	JFXDrawer rightDrawer;
 	
 	public void setMenuViewListener( 
-			JFXButton home,JFXButton history,JFXButton downloads,JFXButton bookmarks,JFXButton saveAsPdf, JFXButton setting,TabPane tabPane){
+			JFXButton home,JFXButton history,JFXButton downloads,JFXButton bookmarks,
+			JFXButton saveAsPdf, JFXButton setting,TabPane tabPane,HamburgerSlideCloseTransition transition,
+			JFXDrawersStack drawersStack,JFXDrawer rightDrawer){
 		
+		this.transition = transition;
+		this.drawersStack = drawersStack;
+		this.rightDrawer = rightDrawer;
 		
 		final ObservableList<Tab> tabs = tabPane.getTabs();
 		SingleSelectionModel<Tab> selectedTab = tabPane.getSelectionModel();
@@ -40,16 +49,27 @@ public class MenuView {
 			
 			@Override
 			public void handle(ActionEvent event) {
+				
+				//When the menu click Hamburger and DrawerStack will hide
+				onClickHideHamburger();
+				
+				
 				System.out.println("Home");
 				tab.setText("Home");
 				tab.setId("home");
 				
+				
 			}
+			
 		});
 		
 		
 		//-------------------------------------------------------History listener-------------------------------------------------------
 		history.setOnAction((ActionEvent)->{
+			
+				//When the menu click Hamburger and DrawerStack will hide
+				onClickHideHamburger();
+			
 				System.out.println("History");
 
 				//tab name and id for accessing
@@ -80,6 +100,11 @@ public class MenuView {
 		
 		//-------------------------------------------------------Downloads listener-----------------------------------------------------
 		downloads.setOnAction((e)->{
+			
+			//When the menu click Hamburger and DrawerStack will hide
+			onClickHideHamburger();
+			
+			
 			System.out.println("Downloads");
 			tab.setText("Downloads");
 			tab.setId("downloads");
@@ -91,6 +116,10 @@ public class MenuView {
 
 			@Override
 			public void handle(ActionEvent event) {
+				
+				//When the menu click Hamburger and DrawerStack will hide
+				onClickHideHamburger();
+			
 				System.out.println("Bookmarks");
 				tab.setText("Bookmarks");
 				tab.setId("bookmarks");
@@ -101,6 +130,11 @@ public class MenuView {
 		
 		//-------------------------------------------------------SaveAsPdf listener-----------------------------------------------------
 		saveAsPdf.addEventHandler(MouseEvent.MOUSE_CLICKED, (ActionEvent)->{
+		
+			//When the menu click Hamburger and DrawerStack will hide
+			onClickHideHamburger();
+		
+			
 			System.out.println("Save As PDF");
 			tab.setText("Save As Pdf");
 			tab.setId("saveAsPdf");
@@ -110,6 +144,10 @@ public class MenuView {
 		
 		//-------------------------------------------------------Setting listener-------------------------------------------------------
 		setting.addEventHandler(MouseEvent.MOUSE_CLICKED, (e)->{
+			
+			//When the menu click Hamburger and DrawerStack will hide
+			onClickHideHamburger();
+		
 			System.out.println("Setting");
 			
 				//tab name and id for accessing
@@ -152,6 +190,12 @@ public class MenuView {
 		 
 		});
 		
+	}
+	
+	public void onClickHideHamburger(){
+		transition.setRate(transition.getRate()*-1);
+		transition.play();
+		drawersStack.toggle(rightDrawer);
 	}
 	
 }
