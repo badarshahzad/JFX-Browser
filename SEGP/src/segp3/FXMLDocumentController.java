@@ -76,7 +76,7 @@ public class FXMLDocumentController implements Initializable {
 		webEngine.load("http://www.google.com");
 		searchField.setText(webEngine.getLocation());
 		
-		hs.insertUrl(webEngine.getLocation());
+		hs.insertUrl(webEngine.getLocation());//calling function to maintain history
 		borderpane.setCenter(browser);
 
 		// --------------------- Listener for search button
@@ -91,7 +91,7 @@ public class FXMLDocumentController implements Initializable {
 			webEngine.load(searchField.getText());
 			if(!(searchField.getText().equals("about:blank")))
 			{
-				hs.insertUrl(searchField.getText());
+				hs.insertUrl(searchField.getText()); //calling function to maintain history
 			}
 			webEngine.getLoadWorker().stateProperty().addListener(new ChangeListener<State>() {
 				@Override
@@ -115,7 +115,7 @@ public class FXMLDocumentController implements Initializable {
 				webEngine.load(searchField.getText());
 				if(!(searchField.equals("about:blank")))
 				{
-					hs.insertUrl(searchField.getText());
+					hs.insertUrl(searchField.getText());//calling function to maintain history
 				}
 			}
 		});
