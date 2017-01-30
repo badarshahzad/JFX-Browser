@@ -13,6 +13,7 @@ import DataBase.History;
 
 import java.beans.EventHandler;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.ResourceBundle;
 
 import javafx.beans.value.ChangeListener;
@@ -49,10 +50,9 @@ public class FXMLDocumentController implements Initializable {
 	 * 
 	 **/
 	History hs=new History();
-	@FXML private BorderPane rootBorderPane; @FXML private BorderPane borderpane;
 	
+	@FXML private BorderPane rootBorderPane; @FXML private BorderPane borderpane;
 	@FXML private JFXButton back;@FXML private JFXButton forward; @FXML private JFXButton refresh; @FXML private JFXButton search;
-
 	@FXML private JFXTextField searchField; 
 	@FXML private TabPane tabPane; @FXML private Tab addNewTab; 
 	@FXML private JFXHamburger hamburger;
