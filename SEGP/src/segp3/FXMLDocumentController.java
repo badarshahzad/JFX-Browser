@@ -9,6 +9,8 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.controls.JFXTextField;
 
+import DataBase.History;
+
 import java.beans.EventHandler;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -46,6 +48,7 @@ public class FXMLDocumentController implements Initializable {
 	 * Textfield it to write a url.
 	 * 
 	 **/
+	History hs=new History();
 	@FXML private BorderPane rootBorderPane; @FXML private BorderPane borderpane;
 	
 	@FXML private JFXButton back;@FXML private JFXButton forward; @FXML private JFXButton refresh; @FXML private JFXButton search;
@@ -72,6 +75,8 @@ public class FXMLDocumentController implements Initializable {
 		// --------------------- Default url will be google
 		webEngine.load("http://www.google.com");
 		searchField.setText(webEngine.getLocation());
+		
+		hs.insertUrl(webEngine.getLocation());
 		borderpane.setCenter(browser);
 
 		// --------------------- Listener for search button
@@ -84,14 +89,19 @@ public class FXMLDocumentController implements Initializable {
 		 */
 		search.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
 			webEngine.load(searchField.getText());
+			if(!(searchField.getText().equals("about:blank")))
+			{
+				hs.insertUrl(searchField.getText());
+			}
 			webEngine.getLoadWorker().stateProperty().addListener(new ChangeListener<State>() {
 				@Override
 				public void changed(ObservableValue ov, State oldState, State newState) {
 
 					if (newState == Worker.State.SUCCEEDED) {
-						System.out.println(webEngine.getLocation());
 						searchField.setText(webEngine.getLocation());
+						
 					}
+					
 
 				}
 			});
@@ -103,6 +113,10 @@ public class FXMLDocumentController implements Initializable {
 		searchField.setOnKeyPressed(event -> {
 			if (event.getCode() == KeyCode.ENTER) {
 				webEngine.load(searchField.getText());
+				if(!(searchField.equals("about:blank")))
+				{
+					hs.insertUrl(searchField.getText());
+				}
 			}
 		});
 
@@ -122,7 +136,6 @@ public class FXMLDocumentController implements Initializable {
 			public void changed(ObservableValue ov, State oldState, State newState) {
 
 				if (newState == Worker.State.SUCCEEDED) {
-					System.out.println(webEngine.getLocation());
 					searchField.setText(webEngine.getLocation());
 				}
 

@@ -1,8 +1,8 @@
 package segp3;
 
-
 import java.util.Properties;
 
+import DataBase.History;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -31,10 +31,11 @@ public class SegpGroup3 extends Application {
 	public static void main(String[] args) {
 
 		// following three lines are for proxy settings
-		//Properties systemProperties = System.getProperties();
-    	//systemProperties.setProperty("http.proxyHost","172.16.0.2");
-    	//systemProperties.setProperty("http.proxyPort","8080");
-
+		Properties systemProperties = System.getProperties();
+    	systemProperties.setProperty("http.proxyHost","172.16.0.2");
+    	systemProperties.setProperty("http.proxyPort","8080");
+		History hs=new History();
+		hs.CreateDataBase();
 		launch(args);
 	}
 
