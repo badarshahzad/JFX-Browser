@@ -7,7 +7,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXDrawersStack;
 import com.jfoenix.transitions.hamburger.HamburgerSlideCloseTransition;
-
+import ui.SavePdf;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
@@ -17,6 +17,7 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import ui.Setting;
 
 public class MenuView {
 
