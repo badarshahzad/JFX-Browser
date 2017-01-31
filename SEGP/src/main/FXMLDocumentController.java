@@ -13,6 +13,8 @@ import java.beans.EventHandler;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+//import javax.swing.text.Document;
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.concurrent.Worker;
@@ -46,10 +48,15 @@ public class FXMLDocumentController implements Initializable {
 	 * Textfield it to write a url.
 	 * 
 	 **/
-	@FXML private BorderPane rootBorderPane; @FXML private BorderPane borderpane;
-	@FXML private JFXButton back;@FXML private JFXButton forward; @FXML private JFXButton refresh; @FXML private JFXButton search;
+	@FXML private BorderPane rootBorderPane;
+	@FXML private BorderPane borderpane;
+	@FXML private JFXButton back;
+	@FXML private JFXButton forward;
+	@FXML private JFXButton refresh;
+	@FXML private JFXButton search;
 	@FXML private JFXTextField searchField; 
-	@FXML private TabPane tabPane; @FXML private Tab addNewTab; 
+	@FXML private TabPane tabPane;
+	@FXML private Tab addNewTab; 
 	@FXML private JFXHamburger hamburger;
 	@FXML private GridPane navigationBar;
 	
@@ -70,7 +77,7 @@ public class FXMLDocumentController implements Initializable {
 		// ---------------------webView---------------------------webEngine----------------------------------------------
 
 		// --------------------- Default url will be google
-		System.out.println("Title fo page:"+webEngine.getTitle());
+		System.out.println("Title of page:"+webEngine.getTitle());
 		webEngine.load("http://www.google.com");
 		searchField.setText(webEngine.getLocation());
 		borderpane.setCenter(browser);
@@ -92,6 +99,7 @@ public class FXMLDocumentController implements Initializable {
 					if (newState == Worker.State.SUCCEEDED) {
 						System.out.println(webEngine.getLocation());
 						searchField.setText(webEngine.getLocation());
+						
 					}
 
 				}
@@ -154,7 +162,10 @@ public class FXMLDocumentController implements Initializable {
 				WebHistory history = webEngine.getHistory();
 				history.go(-1);
 			} catch (IndexOutOfBoundsException e1) {
-				System.out.println(e1);
+				back.setDisable(true);      // made changes to disable or enable forward button.
+				if(forward.isDisable()){
+					forward.setDisable(false);
+				}
 			}
 		});
 
@@ -165,7 +176,10 @@ public class FXMLDocumentController implements Initializable {
 				WebHistory history = webEngine.getHistory();
 				history.go(1);
 			} catch (IndexOutOfBoundsException e1) {
-				System.out.println(e1);
+				forward.setDisable(true);    // made changes to disable or enable backward button.
+				if(back.isDisable()){
+					back.setDisable(false);
+				}
 			}
 		});
 
