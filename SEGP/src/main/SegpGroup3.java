@@ -1,4 +1,4 @@
-package segp3;
+package main;
 
 import java.util.Properties;
 
@@ -32,10 +32,19 @@ public class SegpGroup3 extends Application {
 
 		// following three lines are for proxy settings
 		Properties systemProperties = System.getProperties();
+<<<<<<< HEAD:SEGP/src/segp3/SegpGroup3.java
     	systemProperties.setProperty("http.proxyHost","172.16.0.2");
     	systemProperties.setProperty("http.proxyPort","8080");
 		History hs=new History();
 		hs.CreateDataBase();
+=======
+		systemProperties.setProperty("http.proxyHost","172.16.0.2");
+		systemProperties.setProperty("http.proxyPort","8080");
+    	//systemProperties.setProperty("http.proxyHost","");
+    	//systemProperties.setProperty("http.proxyPort","");
+		
+
+>>>>>>> upstream/master:SEGP/src/main/SegpGroup3.java
 		launch(args);
 	}
 

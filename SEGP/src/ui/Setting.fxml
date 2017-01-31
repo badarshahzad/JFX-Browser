@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import com.jfoenix.controls.JFXTreeTableView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<ScrollPane opacity="0.8" pannable="true" style="-fx-background-color: #ffffff;" stylesheets="@../../css/stylesheet.css" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1">
+   <content>
+      <GridPane prefHeight="664.0" prefWidth="1000.0" style="-fx-background-color: #ffffff;">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints maxHeight="150.0" minHeight="150.0" prefHeight="150.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="200.0" minHeight="200.0" prefHeight="200.0" />
+            <RowConstraints maxHeight="130.0" minHeight="130.0" prefHeight="130.0" />
+            <RowConstraints maxHeight="180.0" minHeight="180.0" prefHeight="180.0" />
+         </rowConstraints>
+         <children>
+            <VBox maxHeight="150.0" minHeight="150.0" minWidth="800.0" prefHeight="150.0" prefWidth="1201.0" style="-fx-background-color: #ffffff;">
+               <children>
+                  <Label alignment="CENTER" minHeight="50.0" prefHeight="50.0" prefWidth="142.0" text="Settings" textAlignment="CENTER">
+                     <VBox.margin>
+                        <Insets bottom="20.0" left="10.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Label>
+                  <Line endX="1200.0" />
+                  <HBox minHeight="50.0" prefHeight="50.0" prefWidth="200.0">
+                     <children>
+                        <JFXButton fx:id="signInBtn" buttonType="RAISED" minHeight="32.0" prefHeight="32.0" prefWidth="100.0" style="-fx-background-color: #28323c;" text="Sign In" textFill="#fcf7f7">
+                           <HBox.margin>
+                              <Insets left="50.0" top="10.0" />
+                           </HBox.margin>
+                        </JFXButton>
+                        <JFXButton fx:id="disconnectAccountBtn" alignment="CENTER" buttonType="RAISED" minHeight="32.0" prefHeight="32.0" prefWidth="180.0" style="-fx-background-color: #28323c;" text="Disconnect your account" textFill="#f8f3f3">
+                           <HBox.margin>
+                              <Insets left="30.0" top="10.0" />
+                           </HBox.margin>
+                        </JFXButton>
+                        <Region maxHeight="-Infinity" maxWidth="280.0" minHeight="32.0" minWidth="200.0" prefHeight="46.0" prefWidth="200.0" />
+                        <Label fx:id="userAccountNameLbl" alignment="CENTER" minHeight="50.0" prefHeight="50.0" prefWidth="300.0" text="Sign in as sgpe@gmail.com" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox maxHeight="200.0" minHeight="200.0" minWidth="800.0" prefHeight="200.0" prefWidth="600.0" style="-fx-background-color: #ffffff;" GridPane.rowIndex="1">
+               <children>
+                  <Label alignment="CENTER" minHeight="32.0" prefHeight="32.0" prefWidth="92.0" text="Users">
+                     <VBox.margin>
+                        <Insets left="30.0" top="5.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font name="System Bold Italic" size="16.0" />
+                     </font>
+                  </Label>
+                  <Line endX="1200.0" />
+                  <JFXTreeTableView fx:id="usersTreeTabelView" maxHeight="200.0" maxWidth="-Infinity" minHeight="150.0" minWidth="371.0" prefHeight="150.0" prefWidth="371.0" style="-fx-background-color: #ffffff;">
+                     <VBox.margin>
+                        <Insets left="50.0" right="40.0" top="20.0" />
+                     </VBox.margin>
+                     <HBox.margin>
+                        <Insets left="40.0" top="10.0" />
+                     </HBox.margin>
+                  </JFXTreeTableView>
+               </children>
+            </VBox>
+            <VBox maxWidth="900.0" minHeight="100.0" minWidth="800.0" style="-fx-background-color: #ffffff;" GridPane.rowIndex="2">
+               <children>
+                  <Label alignment="CENTER" minHeight="32.0" prefHeight="32.0" prefWidth="229.0" text="Passwords and forms">
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="30.0" top="20.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font name="System Bold Italic" size="16.0" />
+                     </font>
+                  </Label>
+                  <Line endX="1200.0" />
+                  <HBox prefHeight="50.0">
+                     <children>
+                        <JFXCheckBox fx:id="checkPasswordRemember" checkedColor="#23383c" minHeight="50.0" prefHeight="50.0" prefWidth="460.0" text="Offers to save passowrds with Google Smart Lock for Passowrds.  ">
+                           <HBox.margin>
+                              <Insets bottom="20.0" left="40.0" top="10.0" />
+                           </HBox.margin>
+                           <VBox.margin>
+                              <Insets left="30.0" />
+                           </VBox.margin>
+                        </JFXCheckBox>
+                        <Region minWidth="140.0" />
+                        <JFXButton fx:id="managePasswordBtn" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" minHeight="32.0" prefHeight="32.0" prefWidth="180.0" style="-fx-background-color: #28323c;" text="Manage Passwords" textFill="WHITE">
+                           <HBox.margin>
+                              <Insets left="15.0" top="20.0" />
+                           </HBox.margin></JFXButton>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox minHeight="200.0" minWidth="800.0" style="-fx-background-color: #ffffff;" GridPane.rowIndex="3">
+               <children>
+                  <Label alignment="CENTER" minHeight="32.0" prefHeight="32.0" prefWidth="149.0" text="Network">
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="10.0" top="30.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font name="System Bold Italic" size="16.0" />
+                     </font>
+                  </Label>
+                  <Line endX="1200.0" />
+                  <HBox prefHeight="50.0" prefWidth="200.0">
+                     <children>
+                        <Label maxWidth="500.0" minWidth="580.0" prefHeight="50.0" prefWidth="800.0" text="Chromium is using your computer's system proxy settings to connect to the network.">
+                           <HBox.margin>
+                              <Insets left="50.0" right="10.0" />
+                           </HBox.margin>
+                           <VBox.margin>
+                              <Insets left="40.0" />
+                           </VBox.margin>
+                        </Label>
+                        <JFXButton fx:id="changeProxyBtn" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" minHeight="32.0" prefHeight="32.0" prefWidth="180.0" style="-fx-background-color: #28323c;" text="Change Proxy Setting" textFill="WHITE">
+                           <HBox.margin>
+                              <Insets left="25.0" top="10.0" />
+                           </HBox.margin></JFXButton>
+                     </children>
+                     <VBox.margin>
+                        <Insets top="20.0" />
+                     </VBox.margin>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </GridPane>
+   </content>
+</ScrollPane>

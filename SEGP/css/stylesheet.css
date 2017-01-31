@@ -9,41 +9,77 @@
 	-fx-border-radius: 50px; 
 	-fx-border-width: 4px;
 }
+
+/*******************************************************************************
+ *                                                                             *
+ * ScrollBar 			                                                       *
+ *                                                                             *
+ ******************************************************************************/
+/*
+.scroll-bar:vertical > .track-background,
+.scroll-bar:horizontal > .track-background{
+    	-fx-background-color:#ffffff;
+}
+*/
+
+.scroll-bar:vertical > .thumb,
+.scroll-bar:horizontal > .thumb {
+	    -fx-background-color: derive(#28323c,5.0%);
+	    -fx-background-insets: 0.0;
+	    -fx-background-radius: 0.0;
+}
+
+.scroll-bar:hover > .increment-button, 
+.scroll-bar:hover > .decrement-button {
+     	-fx-background-color: derive(#28323c,30.0%);
+}
+
+
+
 .tab-pane{
-	
+
 	
 }
 .tab-pane .tab-header-area .tab-header-background {
-    -fx-opacity: 0;
+    -fx-opacity: 1;
 }
+
 
 .tab-pane
 {
     -fx-tab-min-width:90px;
+   
 }
 
 .tab{
-    -fx-background-insets: 0 1 0 1,0,0;
+	 -fx-background-radius: 20px 10px 0px 0px;
+    -fx-background-insets: 0 0 0 0,0,0;
 }
-.tab-pane .tab
+/* /////////////////////////////////////////////////////////////////
+//  Below is he new tab add tab width css 						//
+///////////////////////////////////////////////////////////////// */
+
+.tab
 {
-    -fx-background-color: #e6e6e6;
+    -fx-background-color: #28323c;
+    -fx-tab-min-width:45px;
 
 }
 
 .tab-pane .tab:selected
 {
-    -fx-background-color: #3c3c3c;
+ 	
+    -fx-background-color: derive(#3c3c3c,10%);
 }
 
 .tab .tab-label { 
     -fx-alignment: CENTER;
-    -fx-text-fill: #828282;
+    -fx-text-fill: #ffffff;
     -fx-font-size: 12px;
     -fx-font-weight: bold;
 }
 
 .tab:selected .tab-label { 
     -fx-alignment: CENTER;
-    -fx-text-fill: #96b946;
+    -fx-text-fill: #ffffff;
 }

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package segp3;
+package main;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXHamburger;
@@ -50,9 +50,7 @@ public class FXMLDocumentController implements Initializable {
 	 **/
 	History hs=new History();
 	@FXML private BorderPane rootBorderPane; @FXML private BorderPane borderpane;
-	
 	@FXML private JFXButton back;@FXML private JFXButton forward; @FXML private JFXButton refresh; @FXML private JFXButton search;
-
 	@FXML private JFXTextField searchField; 
 	@FXML private TabPane tabPane; @FXML private Tab addNewTab; 
 	@FXML private JFXHamburger hamburger;
@@ -69,10 +67,13 @@ public class FXMLDocumentController implements Initializable {
 		// tabpane.getStyleClass().addAll("tab-pane");
 
 		tabPane.setTabClosingPolicy(TabClosingPolicy.ALL_TABS);
+		
+		//add css in addNewTab
 
 		// ---------------------webView---------------------------webEngine----------------------------------------------
 
 		// --------------------- Default url will be google
+		System.out.println("Title fo page:"+webEngine.getTitle());
 		webEngine.load("http://www.google.com");
 		searchField.setText(webEngine.getLocation());
 		
@@ -196,7 +197,8 @@ public class FXMLDocumentController implements Initializable {
 		// --------------------------------------------------------TabPane---------------------------------------------
 
 		TabPaneView tabpan_view = new TabPaneView();
-		tabpan_view.getTabPane(tabPane, addNewTab, navigationBar);
+		//tabpan_view.getTabPane(tabPane, addNewTab, navigationBar);
+		
 		/**
 		 * There is well know error in Tabpane while you will be working with
 		 * scenebuilder then comment the below tabpane! We gone through we
