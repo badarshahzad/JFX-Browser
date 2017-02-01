@@ -1,4 +1,4 @@
-package ui;
+package userInterface;
 
 public class SavePdf {
 
