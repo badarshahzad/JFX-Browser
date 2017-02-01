@@ -10,8 +10,13 @@ import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.controls.JFXTextField;
 
 import java.beans.EventHandler;
+import java.io.File;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
 //import javax.swing.text.Document;
 
@@ -77,8 +82,38 @@ public class FXMLDocumentController implements Initializable {
 		// ---------------------webView---------------------------webEngine----------------------------------------------
 
 		// --------------------- Default url will be google
+		File html = new File("C:/Users/lenovo/Downloads/Documents/Log In - Upwork.html");
 		System.out.println("Title of page:"+webEngine.getTitle());
+		
+		
+		
+		
 		webEngine.load("http://www.google.com");
+		
+		/*doing testing here for extracting input form field for auto save password feature.
+		 * 
+		 * 
+		 * 
+		 * */
+//		try {
+//			webEngine.load(html.toURI().toURL().toString());
+//		} catch (MalformedURLException e2) {
+//			// TODO Auto-generated catch block
+//			e2.printStackTrace();
+//		}
+//		
+//		Document doc = webEngine.getDocument();
+//		 Element elem = (Element) doc.getElementsByTagName("input");
+//		 String data = elem.getBaseURI();
+//		 System.out.println(data);
+//		
+		/* Testing part end 
+		 * 
+		 * */
+		
+		
+		
+		
 		searchField.setText(webEngine.getLocation());
 		borderpane.setCenter(browser);
 
