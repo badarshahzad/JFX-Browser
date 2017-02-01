@@ -14,6 +14,7 @@ public class downloadThread extends Thread{
 	private String url ;
 	private String fileTitle ;
 	private String filePath ;
+	private static final int BUFFER_SIZE = 4096;
 	
 	public downloadThread(String url ,String path, String title){
 		this.url = url;
@@ -48,15 +49,16 @@ public class downloadThread extends Thread{
 		connection.setRequestMethod("GET");
 		connection.setDoOutput(true);
 		int requestinfo = connection.getResponseCode(); // get the responce code from the server which might be helpful in understanding the server response for the download request.
+		 if (requestinfo == HttpURLConnection.HTTP_OK) {
 		BufferedInputStream in = new BufferedInputStream(connection.getInputStream()); // open the input stream on the established tcp connection.
 		FileOutputStream out = new FileOutputStream(createFile()); // create a file and open the output stream to write on file.
 		int size = connection.getContentLength(); // to get the total size of the file being downloaded it will be helpful making the GUI like progress bar.
 		int len = -1; 
 		int progress = 0 ; // to update the GUI progress bar.
 		
-		byte[] buffer = new byte[1024]; // byte array to get the content from the input stream.
-		while((len = in.read(buffer,0,1024)) != -1){ // getting content from the input stream and saving into the buffer byte array.
-			out.write(buffer,0,1024); // writing the bytes to the file.
+		byte[] buffer = new byte[BUFFER_SIZE]; // byte array to get the content from the input stream.
+		while((len = in.read(buffer,0,BUFFER_SIZE)) != -1){ // getting content from the input stream and saving into the buffer byte array.
+			out.write(buffer,0,BUFFER_SIZE); // writing the bytes to the file.
 //			out.write(buffer);
 			progress+=len; // update progress variable 
 			System.out.println("Downloded bytes "+progress+ " Remaining  bytes  "+(size-progress));
@@ -65,10 +67,14 @@ public class downloadThread extends Thread{
 		in.close(); // close opened streams
 		out.close();
 		System.out.println("Download Complete . ..   tan tan tan :) ");
+		 }else{
+			 System.out.println("Cannot download File:  " +requestinfo);
+		 }
 	}catch(Exception e){
 		System.err.println("Error While Downloading ::");
 		e.printStackTrace();
 	}
+		
 	}
 
 }
