@@ -6,24 +6,27 @@ import java.util.Scanner;
 
 public class maindownload {
 	private String url ;
-	private  String title ;
+//	private  String title ;
 	/* sample URL
 	 * http://sound30.mp3slash.net/320/indian/raees/02%20-%20Zaalima%20[Songspk.GURU].mp3
 	 * */
 	
-	public maindownload(String url , String title){
+	/**
+	 * @param url
+	 */
+	public maindownload(String url){
 		this.url = url;
-		this.title = title;
+//		this.title = title;
 		
 		
 	}
+	/**
+	 * 
+	 */
 	public void startDownload(){
 		downloadThread thread = new downloadThread(url, downloadFolder());
 		thread.start();
 		
-	}
-	public maindownload(){
-		this.url = null;
 	}
 	/*
 	 *  *Method to add proxy configuration in downloader.
@@ -37,6 +40,9 @@ public class maindownload {
 	/*
 	 * Method create the Folder Downloads in the home/ if does not exists .To store the Download Stuff
 	 * */
+	/**
+	 * @return
+	 */
 	private String downloadFolder(){
 		File home = new File(System.getProperty("user.home"));
 		File folder = new File (home,"Downloads");
@@ -51,7 +57,7 @@ public class maindownload {
 		 * document.gettitle() method .*/
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Enter URL for the download ..");
-		maindownload download = new maindownload(sc.nextLine(), "hello");
+		maindownload download = new maindownload(sc.nextLine());
 		download.setProxy();
 		download.startDownload();
 		
