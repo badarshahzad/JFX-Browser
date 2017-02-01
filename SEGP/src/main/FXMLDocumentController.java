@@ -47,25 +47,6 @@ import ui.TabPaneView;
  * @author Segp-Group 3
  */
 public class FXMLDocumentController implements Initializable {
-	 /**
-	 * @param n
-	 * @param depth
-	 * testing for getting element from the document.
-	 */
-	private void showNodeContent(Node n, int depth) {
-	        for (int i=0; i<depth; i++) {
-	            System.out.print(" ");
-	        }
-	        System.out.println(n.getNodeName()+":"+n.getNodeValue());
-	        NodeList children = n.getChildNodes() ;
-	        for (int i=0; i<children.getLength(); i++) {
-	            showNodeContent(children.item(i), depth+1);
-	        }
-	    }
-/**
- * ended testing 
- * 
- * */	
 	
 	/* 1st rootBorderPane that is the actual root for scene and 2nd borderpane is the tabpane #pane
 	 * Below is 4 buttons for navigation backward to go back page,forward to go the previous visited page,refresh will
@@ -102,56 +83,7 @@ public class FXMLDocumentController implements Initializable {
 		// ---------------------webView---------------------------webEngine----------------------------------------------
 
 		// --------------------- Default url will be google
-		File html = new File("E:/Study/SEGP/jdk-docs/jdk-8u60-docs-all/docs/api/index.html");
-		System.out.println("Title of page:"+webEngine.getTitle());
-		
-		
-		
-		
-//		webEngine.load("http://www.google.com");
-		
-					try {
-						webEngine.load(html.toURI().toURL().toString());
-					} catch (MalformedURLException e2) {
-						// TODO Auto-generated catch block
-						e2.printStackTrace();
-					}
-//		webEngine.loadContent("<html>"
-//		        +"<head><script>"
-//		        +"function setText() {"
-//		        +"  document.getElementById(\"target\").appendChild(document.createTextNode(\"Hello World\"));"
-//		        +"}"
-//		        +"</script></head>"
-//		        +"<body onload='setText()'>"
-//		        +"<div id='target'></div></body></html>");
-		
-		
-		webEngine.getLoadWorker()
-        .stateProperty()
-        .addListener((obs, oldState, newState) -> {
-            if (newState == Worker.State.SUCCEEDED) {
-//                Document doc = webView.getEngine().getDocument();
-            	Document doc = webEngine.getDocument();
-            	NodeList list = doc.getElementsByTagName("input");
-            	for (int i=0 ; i<list.getLength();i++){
-            		System.out.println(list.item(i).getNodeName()+"  "+list.item(i).getNodeValue());
-            	}
-//                showNodeContent(doc, 0);
-            }
-        });
-//		 Element elem = (Element) doc.getElementsByTagName("input");
-//		 String data = elem.getBaseURI();
-//		 System.out.println(data);
-		
-		
-		
-		/* Testing part end 
-		 * 
-		 * */
-		
-		
-		
-		
+		webEngine.load("http://www.google.com");
 		searchField.setText(webEngine.getLocation());
 		borderpane.setCenter(browser);
 
