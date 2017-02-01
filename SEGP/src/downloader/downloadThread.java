@@ -22,21 +22,30 @@ public class downloadThread extends Thread{
 		this.filePath = path;
 		
 	}
-	
-	private File createFile(){
-		String ext = url.substring(url.lastIndexOf("."), url.length()); // extension of the file like .zip , .mp3 , .mp4 etc.
-		 //create file with title and extension
-		File downlodedFile = new File(filePath+"/"+fileTitle+ext);
+	private File createFile(String dispose , String fileURL){
+//		String fileTitle = null;
+		 if (dispose != null) {
+             // extracts file name from header field
+             int index = dispose.indexOf("filename=");
+             if (index > 0) {
+            	 fileTitle = dispose.substring(index + 10,
+                         dispose.length() - 1);
+             }
+         } else {
+             // extracts file name from URL
+        	 fileTitle = fileURL.substring(fileURL.lastIndexOf("/") + 1,
+                     fileURL.length());
+         }
+		File downlodedFile = new File(fileTitle);
 		if(!downlodedFile.exists()){
 			try {
 				downlodedFile.createNewFile();
 			} catch (IOException e) {
 				System.err.println("Cannot create File to store.");
 				e.printStackTrace();
+				System.exit(0);
 			}
 		}
-		
-		
 		return downlodedFile;
 	}
 	
@@ -49,9 +58,10 @@ public class downloadThread extends Thread{
 		connection.setRequestMethod("GET");
 		connection.setDoOutput(true);
 		int requestinfo = connection.getResponseCode(); // get the responce code from the server which might be helpful in understanding the server response for the download request.
-		 if (requestinfo == HttpURLConnection.HTTP_OK) {
+		String dispose = connection.getHeaderField("Content-Disposition");
+		if (requestinfo == HttpURLConnection.HTTP_OK) {
 		BufferedInputStream in = new BufferedInputStream(connection.getInputStream()); // open the input stream on the established tcp connection.
-		FileOutputStream out = new FileOutputStream(createFile()); // create a file and open the output stream to write on file.
+		FileOutputStream out = new FileOutputStream(createFile(dispose,url)); // create a file and open the output stream to write on file.
 		int size = connection.getContentLength(); // to get the total size of the file being downloaded it will be helpful making the GUI like progress bar.
 		int len = -1; 
 		int progress = 0 ; // to update the GUI progress bar.
@@ -66,9 +76,9 @@ public class downloadThread extends Thread{
 		out.flush(); // empty the buffer.
 		in.close(); // close opened streams
 		out.close();
-		System.out.println("Download Complete . ..   tan tan tan :) ");
+		System.out.println("Download Complete . ");
 		 }else{
-			 System.out.println("Cannot download File:  " +requestinfo);
+			 System.out.println("Cannot download File response code from server: " +requestinfo);
 		 }
 	}catch(Exception e){
 		System.err.println("Error While Downloading ::");
