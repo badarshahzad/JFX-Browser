@@ -13,11 +13,11 @@ import javafx.stage.Stage;
  *
  * @author Segp-Group 3
  */
-public class SegpGroup3 extends Application {
+public class MainClass extends Application {
 
 	@Override
 	public void start(Stage stage) throws Exception {
-		Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("MainFXML.fxml"));
 		Scene scene = new Scene(root);
 		scene.getStylesheets().add(getClass().getResource("/stylesheet.css").toExternalForm());
 		stage.setScene(scene);
@@ -34,8 +34,6 @@ public class SegpGroup3 extends Application {
 		Properties systemProperties = System.getProperties();
 		systemProperties.setProperty("http.proxyHost","172.16.0.2");
 		systemProperties.setProperty("http.proxyPort","8080");
-    	//systemProperties.setProperty("http.proxyHost","");
-    	//systemProperties.setProperty("http.proxyPort","");
 		
 
 		launch(args);
