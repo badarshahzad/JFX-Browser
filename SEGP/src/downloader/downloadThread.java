@@ -12,18 +12,18 @@ import org.omg.PortableInterceptor.RequestInfo;
 public class downloadThread extends Thread{
 	//http://320net.songspk.onl/singles/Bloody%20Hell%20-%20320Kbps%20-%20Rangoon%20[Songspk.DESI].mp3
 	private String url ;
-	private String fileTitle ;
+//	private String fileTitle ;
 	private String filePath ;
 	private static final int BUFFER_SIZE = 4096;
 	
-	public downloadThread(String url ,String path, String title){
+	public downloadThread(String url ,String path){
 		this.url = url;
-		this.fileTitle = title;
+//		this.fileTitle = title;
 		this.filePath = path;
 		
 	}
 	private File createFile(String dispose , String fileURL){
-//		String fileTitle = null;
+		String fileTitle = null;
 		 if (dispose != null) {
              // extracts file name from header field
              int index = dispose.indexOf("filename=");
@@ -36,7 +36,7 @@ public class downloadThread extends Thread{
         	 fileTitle = fileURL.substring(fileURL.lastIndexOf("/") + 1,
                      fileURL.length());
          }
-		File downlodedFile = new File(fileTitle);
+		File downlodedFile = new File(filePath+"/"+fileTitle);
 		if(!downlodedFile.exists()){
 			try {
 				downlodedFile.createNewFile();

@@ -18,7 +18,7 @@ public class maindownload {
 		
 	}
 	public void startDownload(){
-		downloadThread thread = new downloadThread(url, downloadFolder(), title);
+		downloadThread thread = new downloadThread(url, downloadFolder());
 		thread.start();
 		
 	}
