@@ -20,7 +20,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 
-public class Hamburger {
+class Hamburger {
 
 	public MenuView menuView = new MenuView();
 	public HamburgerSlideCloseTransition transition;

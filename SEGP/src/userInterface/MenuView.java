@@ -1,21 +1,14 @@
 package userInterface;
 
 
-import java.awt.Desktop.Action;
-import java.util.Scanner;
-
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXDrawersStack;
 import com.jfoenix.transitions.hamburger.HamburgerSlideCloseTransition;
-<<<<<<< HEAD
-=======
 
-import downloader.MainDownload;
->>>>>>> upstream/master
+
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.control.Tab;

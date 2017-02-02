@@ -28,7 +28,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.util.Callback;
 
-public class History implements Initializable{
+class History implements Initializable{
 	
 	public Tab getHistoryView(Tab settingTab, BorderPane borderpane) {
 
