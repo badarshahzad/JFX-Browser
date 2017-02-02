@@ -4,25 +4,25 @@ import java.io.File;
 import java.util.Properties;
 import java.util.Scanner;
 
-public class maindownload {
+public class MainDownload {
 	private String url ;
 	private  String title ;
 	/* sample URL
 	 * http://sound30.mp3slash.net/320/indian/raees/02%20-%20Zaalima%20[Songspk.GURU].mp3
 	 * */
 	
-	public maindownload(String url , String title){
+	public MainDownload(String url , String title){
 		this.url = url;
 		this.title = title;
 		
 		
 	}
 	public void startDownload(){
-		downloadThread thread = new downloadThread(url, downloadFolder(), title);
+		DownloadThread thread = new DownloadThread(url, downloadFolder(), title);
 		thread.start();
 		
 	}
-	public maindownload(){
+	public MainDownload(){
 		this.url = null;
 	}
 	/*
@@ -45,14 +45,16 @@ public class maindownload {
 		}
 		return folder.getAbsolutePath();
 	}
-	public static void main(String[] args) {
+	public void DownloaderStart() {
 		/*This is just a demo to get url from the console and file name say "hello" .
 		 * In actual we will be getting URL from our main browser and name of the file from
 		 * document.gettitle() method .*/
+		
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Enter URL for the download ..");
-		maindownload download = new maindownload(sc.nextLine(), "hello");
-		download.setProxy();
+		
+		MainDownload download = new MainDownload(sc.nextLine(), "hello");
+		//download.setProxy();
 		download.startDownload();
 		
 
