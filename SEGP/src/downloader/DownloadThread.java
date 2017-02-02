@@ -11,14 +11,19 @@ import java.nio.charset.MalformedInputException;
 
 import org.omg.PortableInterceptor.RequestInfo;
 
-public class downloadThread extends Thread{
+public class DownloadThread extends Thread{
 	//http://320net.songspk.onl/singles/Bloody%20Hell%20-%20320Kbps%20-%20Rangoon%20[Songspk.DESI].mp3
 	private String url ;
 	//	private String fileTitle ;
 	private String filePath ;
+<<<<<<< HEAD:SEGP/src/downloader/downloadThread.java
 	private static final int BUFFER_SIZE = 4096;
 
 	public downloadThread(String url ,String path){
+=======
+	
+	public DownloadThread(String url ,String path, String title){
+>>>>>>> upstream/master:SEGP/src/downloader/DownloadThread.java
 		this.url = url;
 		//		this.fileTitle = title;
 		this.filePath = path;
@@ -53,6 +58,11 @@ public class downloadThread extends Thread{
 				System.exit(0);
 			}
 		}
+<<<<<<< HEAD:SEGP/src/downloader/downloadThread.java
+=======
+	
+	
+>>>>>>> upstream/master:SEGP/src/downloader/DownloadThread.java
 		return downlodedFile;
 	}
 

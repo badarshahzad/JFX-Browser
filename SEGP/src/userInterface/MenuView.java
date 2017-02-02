@@ -2,11 +2,17 @@ package userInterface;
 
 
 import java.awt.Desktop.Action;
+import java.util.Scanner;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXDrawersStack;
 import com.jfoenix.transitions.hamburger.HamburgerSlideCloseTransition;
+<<<<<<< HEAD
+=======
+
+import downloader.MainDownload;
+>>>>>>> upstream/master
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
@@ -103,8 +109,20 @@ public class MenuView {
 			//When the menu click Hamburger and DrawerStack will hide
 			onClickHideHamburger();
 			
+			Thread th = new Thread(new Runnable() {
+				
+				@Override
+				public void run() {
+					// TODO Auto-generated method stub
+//					download.startDownload();
+					
+				MainDownload object = new MainDownload();
+					object.DownloaderStart();
+				}
+			});
+			th.start();
 			
-			System.out.println("Downloads");
+			//System.out.println("Downloads");
 			tab.setText("Downloads");
 			tab.setId("downloads");
 		});

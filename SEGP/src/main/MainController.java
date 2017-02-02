@@ -76,11 +76,8 @@ public class MainController implements Initializable {
 
 		// ----------------------css attach with Tabpane
 		// tabpane.getStyleClass().addAll("tab-pane");
-
 		tabPane.setTabClosingPolicy(TabClosingPolicy.ALL_TABS);
 		
-		//add css in addNewTab
-
 		// ---------------------webView---------------------------webEngine----------------------------------------------
 
 		// --------------------- Default url will be google
@@ -97,11 +94,11 @@ public class MainController implements Initializable {
 		 * "Hello World!"); } });
 		 */
 		search.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
+			
 			webEngine.load(searchField.getText());
 			webEngine.getLoadWorker().stateProperty().addListener(new ChangeListener<State>() {
 				@Override
 				public void changed(ObservableValue ov, State oldState, State newState) {
-
 					if (newState == Worker.State.SUCCEEDED) {
 						System.out.println(webEngine.getLocation());
 						searchField.setText(webEngine.getLocation());
@@ -117,9 +114,12 @@ public class MainController implements Initializable {
 		// ---------------------Listner for search textfield of search button
 		searchField.setOnKeyPressed(event -> {
 			if (event.getCode() == KeyCode.ENTER) {
+				System.out.println(searchField.getText());
 				webEngine.load(searchField.getText());
 			}
 		});
+		
+		
 
 		/*
 		 * We got this idea from this link Doc
@@ -132,7 +132,7 @@ public class MainController implements Initializable {
 		 * url
 		 */
 
-		webEngine.getLoadWorker().stateProperty().addListener(new ChangeListener<State>() {
+		/*webEngine.getLoadWorker().stateProperty().addListener(new ChangeListener<State>() {
 			@Override
 			public void changed(ObservableValue ov, State oldState, State newState) {
 
@@ -142,7 +142,7 @@ public class MainController implements Initializable {
 				}
 
 			}
-		});
+		});*/
 
 		/*
 		 * bookmarks.setOnAction(new EventHandler<ActionEvent>() {
