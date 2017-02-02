@@ -1,6 +1,9 @@
 package userInterface;
 
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXButton;
@@ -59,10 +62,12 @@ class History implements Initializable{
 		try{
 			
 			borderpane.setCenter(FXMLLoader.load(getClass().getResource("History.fxml")));
+			//borderpane.setCenter(treeTableView);
 			//borderpane.setMinSize(600, 400);
 			//borderpane.setMaxSize(1024, 800);
 		}catch(Exception e1){
 			System.out.println("File is not find for setting! "+ " \n "+e1);
+			e1.printStackTrace();
 		}
 		
 		
@@ -75,6 +80,7 @@ class History implements Initializable{
 	@FXML
     private JFXTreeTableView<HistoryStoreView> treeTableView;
 	
+	//JFXTreeTableView<HistoryStoreView> treeTableView = new JFXTreeTableView<>();
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -89,7 +95,7 @@ class History implements Initializable{
 		//to get value from class constructor 
 		//Furthur detials is hardly to explain please look at API.  
 		JFXTreeTableColumn<HistoryStoreView, String> date =  new JFXTreeTableColumn<>("Date ");
-		date.setMinWidth(30);
+		date.setMinWidth(100);
 		date.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<HistoryStoreView,String>, ObservableValue<String>>() {
 			
 			@Override
@@ -120,13 +126,18 @@ class History implements Initializable{
 			}
 		});
 		
+		/*DateFormat dateFormat = new SimpleDateFormat("dd/MM/yy , HH:mm:ss");
+		Date dateObj = new Date();
+		
+		System.out.println(dateFormat.format(date));*/
+		
 		//Give data to table as an example to checking its working fine
 		ObservableList<HistoryStoreView> historyStoreView =  FXCollections.observableArrayList();
-		historyStoreView.add(new HistoryStoreView("21", "http://www.google.com", "2:00pm"));
-		historyStoreView.add(new HistoryStoreView("01", "http://www.google.com", "1:00pm"));
-		historyStoreView.add(new HistoryStoreView("01", "http://www.google.com", "1:00pm"));
-		historyStoreView.add(new HistoryStoreView("21", "http://www.google.com", "2:00pm"));
-		historyStoreView.add(new HistoryStoreView("01", "http://www.google.com", "1:00pm"));
+		historyStoreView.add(new HistoryStoreView("1", "http://www.google.com", "2:00pm"));
+		historyStoreView.add(new HistoryStoreView("1", "http://www.google.com", "1:00pm"));
+		historyStoreView.add(new HistoryStoreView("1", "http://www.google.com", "1:00pm"));
+		historyStoreView.add(new HistoryStoreView("1", "http://www.google.com", "2:00pm"));
+		historyStoreView.add(new HistoryStoreView("1", "http://www.google.com", "1:00pm"));
 		
 		final TreeItem <HistoryStoreView> root = new RecursiveTreeItem<HistoryStoreView>(historyStoreView,RecursiveTreeObject::getChildren);
 		treeTableView.getColumns().setAll(date,link,time);

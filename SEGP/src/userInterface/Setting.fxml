@@ -17,7 +17,7 @@
 
 <ScrollPane opacity="0.8" pannable="true" style="-fx-background-color: #ffffff;" stylesheets="@../../css/stylesheet.css" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1">
    <content>
-      <GridPane prefHeight="664.0" prefWidth="1000.0" style="-fx-background-color: #ffffff;">
+      <GridPane prefHeight="664.0" prefWidth="1250.0" style="-fx-background-color: #ffffff;">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
          </columnConstraints>

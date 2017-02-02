@@ -77,6 +77,7 @@ public class MenuView {
 				if(tabs.get(tabs.size()-2).getId()!=("history")){
 				
 				History ob = new History();
+				System.out.println("@BorderPane is set@");
 				tab = ob.getHistoryView(tab, settingBorderPane);
 				tabs.add(tabs.size()-1,tab);
 
