@@ -2,12 +2,17 @@ package downloader;
 
 import java.io.BufferedInputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
+import java.net.ProtocolException;
 import java.net.URL;
+import java.net.URLConnection;
 import java.nio.charset.MalformedInputException;
+
+import javax.net.ssl.HttpsURLConnection;
 
 import org.omg.PortableInterceptor.RequestInfo;
 
@@ -16,14 +21,10 @@ public class DownloadThread extends Thread{
 	private String url ;
 	//	private String fileTitle ;
 	private String filePath ;
-<<<<<<< HEAD:SEGP/src/downloader/downloadThread.java
 	private static final int BUFFER_SIZE = 4096;
 
-	public downloadThread(String url ,String path){
-=======
-	
-	public DownloadThread(String url ,String path, String title){
->>>>>>> upstream/master:SEGP/src/downloader/DownloadThread.java
+	public DownloadThread(String url ,String path){
+
 		this.url = url;
 		//		this.fileTitle = title;
 		this.filePath = path;
@@ -58,11 +59,6 @@ public class DownloadThread extends Thread{
 				System.exit(0);
 			}
 		}
-<<<<<<< HEAD:SEGP/src/downloader/downloadThread.java
-=======
-	
-	
->>>>>>> upstream/master:SEGP/src/downloader/DownloadThread.java
 		return downlodedFile;
 	}
 
@@ -73,13 +69,22 @@ public class DownloadThread extends Thread{
 	public void run(){
 		try{
 			URL obj = new URL(url); // create url object for the given string
-			HttpURLConnection connection = (HttpURLConnection) obj.openConnection(); // open http connection on the url 
-			//		connection.connect(); // connect to the server with in the specified url
+			HttpURLConnection connection = (HttpURLConnection) obj.openConnection();
+			if(url.startsWith("https")){
+				System.out.println("Establishing https URL connection. . .");
+				 connection = (HttpsURLConnection) obj.openConnection();
+			}
 			connection.setRequestMethod("GET");
 			connection.setDoOutput(true);
+			connection.setUseCaches(true);
+			connection.setConnectTimeout(60000);
+			connection.setReadTimeout(60000);
+			connection.connect(); // connect to the server with in the specified url
+
+
 			int requestinfo = connection.getResponseCode(); // get the responce code from the server which might be helpful in understanding the server response for the download request.
 			String dispose = connection.getHeaderField("Content-Disposition");
-			if (requestinfo == HttpURLConnection.HTTP_OK) {
+			if (requestinfo == connection.HTTP_OK) {
 				BufferedInputStream in = new BufferedInputStream(connection.getInputStream()); // open the input stream on the established tcp connection.
 				FileOutputStream out = new FileOutputStream(createFile(dispose,url)); // create a file and open the output stream to write on file.
 				int size = connection.getContentLength(); // to get the total size of the file being downloaded it will be helpful making the GUI like progress bar.
@@ -100,16 +105,20 @@ public class DownloadThread extends Thread{
 			}else{
 				System.out.println("Cannot download File response code from server: " +requestinfo);
 			}
+
+		}catch(FileNotFoundException e){
+			System.err.println("Error While Downloading : file not found . ");
+			e.printStackTrace();
+		}catch(ProtocolException e){
+			System.err.println("Error While Downloading : protocol exception . ");
+			e.printStackTrace();
 		}catch(MalformedURLException e){
 			System.err.println("invalid url.");
 
-		}catch(MalformedInputException e){
-			System.err.println("invalid input.");
+		}catch(IOException e){
+			System.err.println("input output exception .");
 		}
-		catch(Exception e){
-			System.err.println("Error While Downloading ::");
-			e.printStackTrace();
-		}
+
 
 	}
 
