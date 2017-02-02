@@ -37,16 +37,21 @@ import javafx.scene.layout.VBox;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebHistory;
 import javafx.scene.web.WebView;
-import ui.Hamburger;
+import userInterface.Hamburger;
+import userInterface.TabPaneView;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TabPane.TabClosingPolicy;
-import ui.TabPaneView;
 
 /**
  *
  * @author Segp-Group 3
  */
+<<<<<<< HEAD:SEGP/src/main/FXMLDocumentController.java
 public class FXMLDocumentController implements Initializable {
+=======
+public class MainController implements Initializable {
+
+>>>>>>> upstream/master:SEGP/src/main/MainController.java
 	
 	/* 1st rootBorderPane that is the actual root for scene and 2nd borderpane is the tabpane #pane
 	 * Below is 4 buttons for navigation backward to go back page,forward to go the previous visited page,refresh will

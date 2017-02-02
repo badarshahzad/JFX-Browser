@@ -1,4 +1,4 @@
-package ui;
+package userInterface;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDrawer;

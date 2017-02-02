@@ -1,4 +1,4 @@
-package ui;
+package userInterface;
 
 import java.awt.Panel;
 import java.net.URL;
@@ -84,12 +84,9 @@ public class Setting implements Initializable{
 	
 	//tab.getStyleClass().addAll("tab-pane");
 	 @FXML private JFXButton signInBtn;
-	 
-	 
-	
-	 
 	 @FXML private JFXButton disconnectAccountBtn;
 	 @FXML private Label userAccountNameLbl;
+	 
 	 @FXML private JFXTreeTableView<?> usersTreeTabelView;
 	 @FXML private JFXCheckBox checkPasswordRemember;
 	 @FXML private JFXButton managePasswordBtn;

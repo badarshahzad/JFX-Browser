@@ -1,4 +1,4 @@
-package ui;
+package userInterface;
 
 
 import java.awt.Desktop.Action;
