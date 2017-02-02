@@ -9,13 +9,13 @@ import java.net.URL;
 
 import org.omg.PortableInterceptor.RequestInfo;
 
-public class downloadThread extends Thread{
+public class DownloadThread extends Thread{
 	//http://320net.songspk.onl/singles/Bloody%20Hell%20-%20320Kbps%20-%20Rangoon%20[Songspk.DESI].mp3
 	private String url ;
 	private String fileTitle ;
 	private String filePath ;
 	
-	public downloadThread(String url ,String path, String title){
+	public DownloadThread(String url ,String path, String title){
 		this.url = url;
 		this.fileTitle = title;
 		this.filePath = path;
@@ -34,8 +34,8 @@ public class downloadThread extends Thread{
 				e.printStackTrace();
 			}
 		}
-		
-		
+	
+	
 		return downlodedFile;
 	}
 	
