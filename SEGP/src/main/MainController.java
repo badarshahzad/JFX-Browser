@@ -46,10 +46,15 @@ public class MainController implements Initializable {
 	 * Textfield it to write a url.
 	 * 
 	 **/
-	@FXML private BorderPane rootBorderPane; @FXML private BorderPane borderpane;
-	@FXML private JFXButton back;@FXML private JFXButton forward; @FXML private JFXButton refresh; @FXML private JFXButton search;
+	@FXML private BorderPane rootBorderPane;
+	@FXML private BorderPane borderpane;
+	@FXML private JFXButton back;
+	@FXML private JFXButton forward; 
+	@FXML private JFXButton refresh; 
+	@FXML private JFXButton search;
 	@FXML private JFXTextField searchField; 
-	@FXML private TabPane tabPane; @FXML private Tab addNewTab; 
+	@FXML private TabPane tabPane;
+	@FXML private Tab addNewTab; 
 	@FXML private JFXHamburger hamburger;
 	@FXML private GridPane navigationBar;
 	

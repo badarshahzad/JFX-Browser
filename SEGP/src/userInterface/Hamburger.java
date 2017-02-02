@@ -113,6 +113,8 @@ public class Hamburger {
 				drawersStack,rightDrawer);
 		// setting.getStyleClass().addAll("animated-option-button","animated-option-sub-button2");
 		return hamburger;
+		
+		
 	}
 
 }
