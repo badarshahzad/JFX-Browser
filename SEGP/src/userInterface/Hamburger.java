@@ -26,23 +26,43 @@ public class Hamburger {
 	public HamburgerSlideCloseTransition transition;
 	public JFXDrawersStack drawersStack = new JFXDrawersStack();
 	public JFXDrawer rightDrawer = new JFXDrawer();
-	public JFXHamburger getHamburger(JFXHamburger hamburger, BorderPane borderpane, TabPane settingTabPane) {
+	
+public JFXHamburger getHamburger(JFXHamburger hamburger, BorderPane borderpane, TabPane settingTabPane) {
 		
-		transition = new HamburgerSlideCloseTransition(hamburger);
-		JFXButton home = new JFXButton();home.setMinSize(30, 40);home.setGraphic(new ImageView(new Image("/home1.png")));// home.setButtonType(ButtonType.RAISED);// home.getStyleClass().addAll("animated-option-button","animated-option-sub-button2");
-		JFXButton history = new JFXButton();history.setMinSize(30, 40);history.setGraphic(new ImageView(new Image("/history.png")));
-		JFXButton downloads = new JFXButton();downloads.setMinSize(30, 40);downloads.setGraphic(new ImageView(new Image("/downloads.png")));
-		JFXButton bookmarks = new JFXButton();bookmarks.setMinSize(30, 40);bookmarks.setGraphic(new ImageView(new Image("/bookMarks.png")));
-		JFXButton saveAsPdf = new JFXButton();saveAsPdf.setMinSize(30, 40);saveAsPdf.setGraphic(new ImageView(new Image("/pdf.png")));
-		JFXButton setting = new JFXButton();setting.setMinSize(30, 40);setting.setGraphic(new ImageView(new Image("/setting.png")));
+	transition = new HamburgerSlideCloseTransition(hamburger);
+	JFXButton home = new JFXButton();
+	home.setMinSize(30, 40);
+	home.setGraphic(new ImageView(new Image("/home1.png")));
+//	home.setButtonType(ButtonType.RAISED);
+//	home.getStyleClass().addAll("animated-option-button","animated-option-sub-button2");
 		
-		//Tooltips Referance: menus https://docs.oracle.com/javase/8/javafx/api/javafx/scene/control/Tooltip.html
-		home.setTooltip(new Tooltip("Home"));
-		history.setTooltip(new Tooltip("History"));
-		downloads.setTooltip(new Tooltip("Downloads"));
-		bookmarks.setTooltip(new Tooltip("Bookmarks"));
-		saveAsPdf.setTooltip(new Tooltip("Save As PDF"));
-		setting.setTooltip(new Tooltip("Setting"));
+	JFXButton history = new JFXButton();
+	history.setMinSize(30, 40);
+	history.setGraphic(new ImageView(new Image("/history.png")));
+		
+	JFXButton downloads = new JFXButton();
+	downloads.setMinSize(30, 40);
+	downloads.setGraphic(new ImageView(new Image("/downloads.png")));
+		
+	JFXButton bookmarks = new JFXButton();
+	bookmarks.setMinSize(30, 40);
+	bookmarks.setGraphic(new ImageView(new Image("/bookMarks.png")));
+		
+	JFXButton saveAsPdf = new JFXButton();
+	saveAsPdf.setMinSize(30, 40);
+	saveAsPdf.setGraphic(new ImageView(new Image("/pdf.png")));
+		
+	JFXButton setting = new JFXButton();
+	setting.setMinSize(30, 40);
+	setting.setGraphic(new ImageView(new Image("/setting.png")));
+		
+	//Tooltips Referance: menus https://docs.oracle.com/javase/8/javafx/api/javafx/scene/control/Tooltip.html
+	home.setTooltip(new Tooltip("Home"));
+	history.setTooltip(new Tooltip("History"));
+	downloads.setTooltip(new Tooltip("Downloads"));
+	bookmarks.setTooltip(new Tooltip("Bookmarks"));
+	saveAsPdf.setTooltip(new Tooltip("Save As PDF"));
+	setting.setTooltip(new Tooltip("Setting"));
 		
 		// ------------------------------------------------------Drawer-Menus----------------------------------------
 		/*
@@ -50,13 +70,13 @@ public class Hamburger {
 		 * clicked the hamburger.
 		 */
 		
-		GridPane gridPane = new GridPane();
-		gridPane.add(home, 0, 0);
-		gridPane.add(history, 0, 1);
-		gridPane.add(downloads, 0, 2);
-		gridPane.add(bookmarks, 0, 3);
-		gridPane.add(saveAsPdf, 0, 4);
-		gridPane.add(setting, 0, 5);
+	GridPane gridPane = new GridPane();
+	gridPane.add(home, 0, 0);
+	gridPane.add(history, 0, 1);
+	gridPane.add(downloads, 0, 2);
+	gridPane.add(bookmarks, 0, 3);
+	gridPane.add(saveAsPdf, 0, 4);
+	gridPane.add(setting, 0, 5);
 		
 		// ----------------------------------------------Right----DrawerStack----Add Drawer pane----------------------------
 				/*
@@ -66,41 +86,41 @@ public class Hamburger {
 				 * drawer.
 				 */
 				
-				rightDrawer.setDirection(DrawerDirection.RIGHT);
-				rightDrawer.setDefaultDrawerSize(40);
-				rightDrawer.setSidePane(gridPane);
-				// rightDrawer.setOverLayVisible(false);
-				// rightDrawer.setResizableOnDrag(true);
+	rightDrawer.setDirection(DrawerDirection.RIGHT);
+	rightDrawer.setDefaultDrawerSize(40);
+	rightDrawer.setSidePane(gridPane);
+//  rightDrawer.setOverLayVisible(false);
+//  rightDrawer.setResizableOnDrag(true);
 				
 		// --------------------------------------------------------Hamburger------------------------------------------------
-						/*
-						 * Hamburger listener setRate 1 is active state when user click its
-						 * become -1 that is normal state in hamburger. Below is the Hmaburger
-						 * slide close transition. Hamburger in jfoenix have 4 transition state
-						 * and we use the slide close trasition and We placed the Hamburger in
-						 * its parameter
-						 */
-						//HamburgerSlideCloseTransition transition = new HamburgerSlideCloseTransition(hamburger);
-						transition.setRate(-1);
-						/*
-						 * Above setRate -1 is detail mention above passage. This is the
-						 * Listener for Hamburger When user clicked the hamburger first its
-						 * change is actual shape and animation will play. Moreover, we set the
-						 * right border pane of Tab pane is drawerstack. (Drawer stack discussed
-						 * above) After that the drawstack method toggle call "A toggle button
-						 * allows the user to change a setting between two states". Like on and
-						 * off
-						 */
+/*
+* Hamburger listener setRate 1 is active state when user click its
+* become -1 that is normal state in hamburger. Below is the Hmaburger
+* slide close transition. Hamburger in jfoenix have 4 transition state
+* and we use the slide close trasition and We placed the Hamburger in
+* its parameter
+*/
+
+//  HamburgerSlideCloseTransition transition = new HamburgerSlideCloseTransition(hamburger);
+	transition.setRate(-1);
+/*
+* Above setRate -1 is detail mention above passage. This is the
+* Listener for Hamburger When user clicked the hamburger first its
+* change is actual shape and animation will play. Moreover, we set the
+* right border pane of Tab pane is drawerstack. (Drawer stack discussed
+* above) After that the drawstack method toggle call "A toggle button
+* allows the user to change a setting between two states". Like on and
+* off
+ */
 						
 						
-						hamburger.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
-							transition.setRate(transition.getRate() * -1);
-							transition.play();
-							borderpane.setRight(drawersStack);
-							// The purposes of toggle is to bring the drawer once it click and
-							// hide when it click again!
-							drawersStack.toggle(rightDrawer);
-						});
+	hamburger.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
+		transition.setRate(transition.getRate() * -1);
+		transition.play();
+		borderpane.setRight(drawersStack);
+//      The purposes of toggle is to bring the drawer once it click and hide when it click again!
+		drawersStack.toggle(rightDrawer);
+	});
 						
 		// -----------------------------------------------------Menview-Class method ----menuView----------------------------------------------
 		/*
@@ -109,12 +129,10 @@ public class Hamburger {
 		 * is clicked then this menView method send action event to MenuView
 		 * Class method menuView.
 		 */
-		menuView.setMenuViewListener(home, history, downloads, bookmarks, saveAsPdf, setting, settingTabPane,transition,
-				drawersStack,rightDrawer);
-		// setting.getStyleClass().addAll("animated-option-button","animated-option-sub-button2");
-		return hamburger;
-		
+	menuView.setMenuViewListener(home, history, downloads, bookmarks, saveAsPdf, setting, settingTabPane,transition,
+			drawersStack,rightDrawer);
+	// setting.getStyleClass().addAll("animated-option-button","animated-option-sub-button2");
+	return hamburger;	
 		
 	}
-
 }
