@@ -25,7 +25,7 @@ public class TabPaneView {
 			        		 * Problem is when If I will put previous navigation bar in new pane then
 			        		 * it works for previous listeners? Here his a debate start how we will do it?
 			        	*/	
-			        		//New Tab new rowser pane
+			        		//New Tab new browser pane
 			        		WebView browser = new WebView();
 			        		WebEngine webEngine1 = browser.getEngine();
 			        		webEngine1.load("http://www.google.com");
