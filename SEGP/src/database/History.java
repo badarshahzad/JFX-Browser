@@ -19,8 +19,7 @@ public class History
 	{
 		CreateDataBase();
 	}
-	
-//-------------------------------------------------------Creating SQLITE DATABASE and TABLE--------------------------------------//
+//------------------------------------------------------Creating SQLITE DATABASE and TABLE--------------------------------------//
 	public static void CreateDataBase()
 	{		
 		try
