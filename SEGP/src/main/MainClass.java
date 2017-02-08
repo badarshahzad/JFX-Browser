@@ -34,12 +34,15 @@ public class MainClass extends Application {
 		systemProperties.setProperty("http.proxyHost","172.16.0.2");
 		systemProperties.setProperty("http.proxyPort","8080");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		
 		systemProperties.setProperty("https.proxyHost","172.16.0.2");
 		systemProperties.setProperty("https.proxyPort","8080");
 		
 =======
 >>>>>>> 0eea15ecadc45b8e0dc5da10eb6aec3e0307d50a
+=======
+>>>>>>> upstream/master
 
 		systemProperties.setProperty("https.proxyHost","172.16.0.2");
 		systemProperties.setProperty("https.proxyPort","8080");
