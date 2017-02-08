@@ -23,7 +23,6 @@ public class MainClass extends Application {
 		stage.setScene(scene);
 		stage.show();
 	}
-
 	/**
 	 * @param args
 	 *            the command line arguments
@@ -34,11 +33,18 @@ public class MainClass extends Application {
 		Properties systemProperties = System.getProperties();
 		systemProperties.setProperty("http.proxyHost","172.16.0.2");
 		systemProperties.setProperty("http.proxyPort","8080");
+<<<<<<< HEAD
 		
 		systemProperties.setProperty("https.proxyHost","172.16.0.2");
 		systemProperties.setProperty("https.proxyPort","8080");
 		
+=======
+>>>>>>> 0eea15ecadc45b8e0dc5da10eb6aec3e0307d50a
 
+		systemProperties.setProperty("https.proxyHost","172.16.0.2");
+		systemProperties.setProperty("https.proxyPort","8080");
+		
+		
 		launch(args);
 	}
 

@@ -74,7 +74,7 @@ public class Setting implements Initializable{
 				System.out.println("File is not find for setting! "+ " \n "+e1);
 			}
 			
-		
+		 
 		//borderpane.setCenter(root);
 		drawersStack.toggle(leftDrawer);
 		settingTab.setContent(borderpane);
@@ -92,10 +92,12 @@ public class Setting implements Initializable{
 	 @FXML private JFXButton managePasswordBtn;
 	 @FXML private JFXButton changeProxyBtn;
 	 
-
+	 
 	 @Override
 	public void initialize(URL location, ResourceBundle resources) {
-		
+		 changeProxyBtn.addEventHandler(MouseEvent.MOUSE_CLICKED, (e)->{
+			 System.out.println("Yes!");
+		 });
 	}
 
 }
