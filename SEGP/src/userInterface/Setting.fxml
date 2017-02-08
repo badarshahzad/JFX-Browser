@@ -15,9 +15,9 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<ScrollPane opacity="0.8" pannable="true" style="-fx-background-color: #ffffff;" stylesheets="@../../css/stylesheet.css" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1">
+<ScrollPane opacity="0.8" pannable="true" style="-fx-background-color: #ffffff;" stylesheets="@../../css/stylesheet.css" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="userInterface.Setting">
    <content>
-      <GridPane prefHeight="664.0" prefWidth="1250.0" style="-fx-background-color: #ffffff;">
+      <GridPane prefHeight="600.0" prefWidth="1280.0" style="-fx-background-color: #ffffff;">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
          </columnConstraints>

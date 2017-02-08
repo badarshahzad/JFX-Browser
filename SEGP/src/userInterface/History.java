@@ -95,7 +95,7 @@ public class History implements Initializable{
 		//to get value from class constructor 
 		//Furthur detials is hardly to explain please look at API.  
 		JFXTreeTableColumn<HistoryStoreView, String> date =  new JFXTreeTableColumn<>("Date ");
-		date.setMinWidth(100);
+		date.setMinWidth(120);
 		date.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<HistoryStoreView,String>, ObservableValue<String>>() {
 			
 			@Override
@@ -106,7 +106,7 @@ public class History implements Initializable{
 		
 		//link column
 		JFXTreeTableColumn<HistoryStoreView, String> link =  new JFXTreeTableColumn<>("Link");
-		link.setMinWidth(30);
+		link.setMinWidth(400);
 		link.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<HistoryStoreView,String>, ObservableValue<String>>() {
 			
 			@Override
@@ -126,18 +126,16 @@ public class History implements Initializable{
 			}
 		});
 		
-		/*DateFormat dateFormat = new SimpleDateFormat("dd/MM/yy , HH:mm:ss");
-		Date dateObj = new Date();
 		
-		System.out.println(dateFormat.format(date));*/
 		
 		//Give data to table as an example to checking its working fine
 		ObservableList<HistoryStoreView> historyStoreView =  FXCollections.observableArrayList();
+		//historyStoreView.add(getHistory());
 		historyStoreView.add(new HistoryStoreView("1", "http://www.google.com", "2:00pm"));
-		historyStoreView.add(new HistoryStoreView("1", "http://www.google.com", "1:00pm"));
-		historyStoreView.add(new HistoryStoreView("1", "http://www.google.com", "1:00pm"));
+		
+		/*historyStoreView.add(new HistoryStoreView("1", "http://www.google.com", "1:00pm"));
 		historyStoreView.add(new HistoryStoreView("1", "http://www.google.com", "2:00pm"));
-		historyStoreView.add(new HistoryStoreView("1", "http://www.google.com", "1:00pm"));
+		historyStoreView.add(new HistoryStoreView("1", "http://www.google.com", "1:00pm"));*/
 		
 		final TreeItem <HistoryStoreView> root = new RecursiveTreeItem<HistoryStoreView>(historyStoreView,RecursiveTreeObject::getChildren);
 		treeTableView.getColumns().setAll(date,link,time);
@@ -145,6 +143,23 @@ public class History implements Initializable{
 		treeTableView.setShowRoot(false);
 		
 	}
+	
+	//Set History method is set by main browser class and can easily set the history 
+	String dateTxt,linkTxt,timeTxt;
+	public void setHistory(String date, String link, String time){
+		this.dateTxt = date ;
+		this.linkTxt = link ;
+		this.timeTxt = time ;
+		System.out.println("Time: "+ this.timeTxt+ "\n"+ "Date :" + this.dateTxt +"\n"+"Link: "+this.linkTxt);
+		
+	}
+	
+	//get History method will return the date, link, time
+	public HistoryStoreView getHistory(){
+		System.out.println("Get date time");
+		return new HistoryStoreView(dateTxt, linkTxt, timeTxt);
+	}
+	
 	
 	//There is class for data entry in table 
 	
