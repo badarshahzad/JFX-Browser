@@ -11,6 +11,12 @@ import com.jfoenix.controls.JFXTextField;
 
 import java.beans.EventHandler;
 import java.net.URL;
+import java.sql.Time;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 import javafx.beans.value.ChangeListener;
@@ -29,6 +35,7 @@ import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebHistory;
 import javafx.scene.web.WebView;
 import userInterface.Hamburger;
+import userInterface.History;
 import userInterface.TabPaneView;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TabPane.TabClosingPolicy;
@@ -106,20 +113,27 @@ public class MainController extends Renderer implements Initializable {
 		// ---------------------Listner for search textfield of search button---------------------------------------
 		searchField.setOnKeyPressed(event -> {
 			if (event.getCode() == KeyCode.ENTER) {
-				webEngine.load(searchField.getText());
+			webEngine.load(searchField.getText());
+			
 			}
 		});
 
 		//System.out.println(webEngine.getLocation());
 		
-		//-----------------------Thread is continously running to check andy change of link in browser to set value in broser addressbar---
+		//-----------------------Thread is continously running to check any change of link in browser to set value in broser addressbar
+		
 		
 		webEngine.getLoadWorker().stateProperty().addListener(new ChangeListener<State>() {
 			@Override
 			public void changed(ObservableValue ov, State oldState, State newState) {
-				//System.out.println("New State: "+newState);
+			
 				if (newState == Worker.State.SUCCEEDED) {
 					searchField.setText(webEngine.getLocation());
+					webEngine.getLocation();
+					//System.out.println("URL changing: "+ webEngine.getLocation());
+					//webEngine.load(webEngine.getLocation());
+					//webEngine.load(searchField.getText());
+					
 				}
 			}
 		});
@@ -164,18 +178,36 @@ public class MainController extends Renderer implements Initializable {
 			}
 		});
 
-		// --------------------------------------------Refresh------------------------------------------------
+		// -------------------------------------------Refresh------------------------------------------------
 
 		refresh.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
 			webEngine.reload();
 
 		});
 
-		// -------------------------------------------Hamburger----Drawer----Menu-----------------------------------
+		// -------------------------------------------Hamburger----Drawer----Menu------------------------------
 
 		Hamburger ham = new Hamburger(); ham.getHamburger(hamburger, borderpane, tabPane);
-
-		// --------------------------------------------------------TabPane---------------------------------------------
+		
+		//--------------------------------------------Hitory---------------------------------------------------
+		
+		/*
+		 * Still there below is just a jugar to get Time but the date is getting is just fine
+		 * We are just using same object of setDate to get time and date both things!
+		 */
+	/*	DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+		DateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
+		Date setDate = new Date();
+		//Calendar cal = Calendar.getInstance();
+		//System.out.println("Time : "+ dateFormat.format(cal.getTime()));
+		
+		String date = dateFormat.format(setDate);
+		String time = timeFormat.format(setDate);
+		String link = webEngine.getLocation();
+		//System.out.println("Time: "+ time+ "\n"+ "Date :" + date +"\n"+"Link: "+link);
+		History object = new History();
+		object.setHistory(date, link, time);*/
+		// -------------------------------------------TabPane-------------------------------------
 		
 		/*
 		*	New tabs will add and but due to some reasome the tabpan_view is
