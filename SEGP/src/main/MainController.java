@@ -64,49 +64,33 @@ public class MainController extends Renderer implements Initializable {
 	 * We Extends this Main controller Class with Renderer to work more
 	 * efficiently and can easily test any renderer
 	 * 
-<<<<<<< HEAD
-	 **/
-	@FXML private BorderPane rootBorderPane;
-	@FXML private BorderPane borderpane;
-	@FXML private JFXButton back;
-	@FXML private JFXButton forward;
-	@FXML private JFXButton refresh;
-	@FXML private JFXButton search;
-=======
+
 	 * 
 	 ***********************************************************************************************************/ 
 	
-	@FXML private BorderPane rootBorderPane; @FXML private BorderPane borderpane;
-	@FXML private JFXButton back;@FXML private JFXButton forward; @FXML private JFXButton refresh; @FXML private JFXButton search;
->>>>>>> upstream/master
+	@FXML private BorderPane rootBorderPane;
+	@FXML private BorderPane borderpane;
+	@FXML private JFXButton back;
+	@FXML private JFXButton forward; @FXML private JFXButton refresh; @FXML private JFXButton search;
 	@FXML private JFXTextField searchField; 
 	@FXML private TabPane tabPane;
 	@FXML private Tab addNewTab; 
 	@FXML private JFXHamburger hamburger;
 	@FXML private GridPane navigationBar;
-	
-<<<<<<< HEAD
 	private VBox drawerPane = new VBox();
 	private WebView browser = new WebView();
 	private WebEngine webEngine = browser.getEngine();
-
-=======
-	public VBox drawerPane = new VBox();
->>>>>>> upstream/master
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 
 		//---------------All opens tabs should be closed so below line is for just closing tabs------------------------
 		tabPane.setTabClosingPolicy(TabClosingPolicy.ALL_TABS);
 		
-<<<<<<< HEAD
 		// ---------------------webView---------------------------webEngine----------------------------------------------
 
 		// --------------------- Default url will be google
 		webEngine.load("http://www.google.com");
-=======
 		// --------------Renderer Class-------webView-----------webEngine----------------------------------------------
->>>>>>> upstream/master
 		searchField.setText(webEngine.getLocation());
 		borderpane.setCenter(browser);
 		
