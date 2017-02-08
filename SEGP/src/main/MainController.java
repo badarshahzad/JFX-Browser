@@ -9,6 +9,8 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.controls.JFXTextField;
 
+import database.History;
+
 import java.beans.EventHandler;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -37,7 +39,7 @@ import javafx.scene.control.TabPane.TabClosingPolicy;
  *
  * @author Segp-Group 3
  */
-public class MainController extends Renderer implements Initializable {
+public class MainController implements Initializable {
 
 	/*
 	 * Reference:
@@ -66,21 +68,19 @@ public class MainController extends Renderer implements Initializable {
 	@FXML private GridPane navigationBar;
 	
 	public VBox drawerPane = new VBox();
+	private Web_engine renderWebEngine=new Web_engine();//object of Web_engine class
 	@Override
-	public void initialize(URL url, ResourceBundle rb) {
+	
+	public void initialize(URL url, ResourceBundle rb){
 
-		//---------------All opens tabs should be closed so below line is for just closing tabs------------------------
+		//---------------All opens tabs should be closed so below line is for just closing tabs--------------------//
 		tabPane.setTabClosingPolicy(TabClosingPolicy.ALL_TABS);
-		
-		// --------------Renderer Class-------webView-----------webEngine----------------------------------------------
-		searchField.setText(webEngine.getLocation());
-		borderpane.setCenter(browser);
+		String url1="https://www.google.com.pk/";
+		renderWebEngine.pageDisplay(url1,searchField,borderpane);
 		
 		//---------------URL of addressbar load if user clicked search button
 		search.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
-			
-			webEngine.load(searchField.getText());
-			System.out.println(searchField.getText());
+		renderWebEngine.pageDisplay(searchField.getText(),searchField,borderpane);	
 		});
 
 		/*
@@ -106,7 +106,7 @@ public class MainController extends Renderer implements Initializable {
 		// ---------------------Listner for search textfield of search button---------------------------------------
 		searchField.setOnKeyPressed(event -> {
 			if (event.getCode() == KeyCode.ENTER) {
-				webEngine.load(searchField.getText());
+				renderWebEngine.pageDisplay(searchField.getText(),searchField,borderpane);
 			}
 		});
 
@@ -114,6 +114,8 @@ public class MainController extends Renderer implements Initializable {
 		
 		//-----------------------Thread is continously running to check andy change of link in browser to set value in broser addressbar---
 		
+		WebView browser = new WebView();
+		WebEngine webEngine = browser.getEngine();
 		webEngine.getLoadWorker().stateProperty().addListener(new ChangeListener<State>() {
 			@Override
 			public void changed(ObservableValue ov, State oldState, State newState) {
@@ -173,7 +175,8 @@ public class MainController extends Renderer implements Initializable {
 
 		// -------------------------------------------Hamburger----Drawer----Menu-----------------------------------
 
-		Hamburger ham = new Hamburger(); ham.getHamburger(hamburger, borderpane, tabPane);
+		Hamburger ham = new Hamburger(); 
+		ham.getHamburger(hamburger, borderpane, tabPane);
 
 		// --------------------------------------------------------TabPane---------------------------------------------
 		

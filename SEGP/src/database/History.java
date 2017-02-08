@@ -18,6 +18,7 @@ public class History
 	public static void main(String [] args)
 	{
 		CreateDataBase();
+		showHistory();
 	}
 //------------------------------------------------------Creating SQLITE DATABASE and TABLE--------------------------------------//
 	public static void CreateDataBase()
