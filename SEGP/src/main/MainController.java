@@ -89,7 +89,7 @@ public class MainController extends Renderer implements Initializable {
 		// ---------------------webView---------------------------webEngine----------------------------------------------
 
 		// --------------------- Default url will be google
-		webEngine.load("http://www.google.com");
+		webEngine.load("http://www.google.com/");
 		// --------------Renderer Class-------webView-----------webEngine----------------------------------------------
 		searchField.setText(webEngine.getLocation());
 		borderpane.setCenter(browser);

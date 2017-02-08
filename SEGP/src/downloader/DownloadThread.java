@@ -80,6 +80,7 @@ public class DownloadThread extends Thread{
 			connection.setConnectTimeout(60000);
 			connection.setReadTimeout(60000);
 			connection.connect(); // connect to the server with in the specified url
+			
 
 
 			int requestinfo = connection.getResponseCode(); // get the responce code from the server which might be helpful in understanding the server response for the download request.
@@ -93,7 +94,7 @@ public class DownloadThread extends Thread{
 
 				byte[] buffer = new byte[BUFFER_SIZE]; // byte array to get the content from the input stream.
 				while((len = in.read(buffer,0,BUFFER_SIZE)) != -1){ // getting content from the input stream and saving into the buffer byte array.
-					out.write(buffer,0,BUFFER_SIZE); // writing the bytes to the file.
+					out.write(buffer,0,len); // writing the bytes to the file.
 					//			out.write(buffer);
 					progress+=len; // update progress variable 
 					System.out.println("Downloded bytes "+progress+ " Remaining  bytes  "+(size-progress));
