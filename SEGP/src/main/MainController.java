@@ -46,14 +46,25 @@ import javafx.scene.control.TabPane.TabClosingPolicy;
  *
  * @author Segp-Group 3
  */
-public class MainController implements Initializable {
+public class MainController extends Renderer implements Initializable {
 
-	
-	/* 1st rootBorderPane that is the actual root for scene and 2nd borderpane is the tabpane #pane
-	 * Below is 4 buttons for navigation backward to go back page,forward to go the previous visited page,refresh will
-	 * reload the page and search button is a specific url search 
-	 * Textfield it to write a url.
+	/*
+	 * Reference:
+	 * 				 We got this idea from this link Doc
+	 * 				Link: https://docs.oracle.com/javase/8/javafx/api/index.html?javafx/scene/web/WebEngine.html
+	 * 				 We got the conceptual thought from Stack:
+	 *				Link: http://stackoverflow.com/questions/32486758/detect-url-changes-in-javafx-webview
+	 * Description:
+	 * 				1st rootBorderPane that is the actual root for scene and 2nd borderpane
+	 * 				is the tabpane #pane Below is 4 buttons for navigation backward to go
+	 * 				back page,forward to go the previous visited page,refresh will reload the
+	 * 				page and search button is a specific url search Textfield it to write a
+	 * 				url.
 	 * 
+	 * We Extends this Main controller Class with Renderer to work more
+	 * efficiently and can easily test any renderer
+	 * 
+<<<<<<< HEAD
 	 **/
 	@FXML private BorderPane rootBorderPane;
 	@FXML private BorderPane borderpane;
@@ -61,89 +72,98 @@ public class MainController implements Initializable {
 	@FXML private JFXButton forward;
 	@FXML private JFXButton refresh;
 	@FXML private JFXButton search;
+=======
+	 * 
+	 ***********************************************************************************************************/ 
+	
+	@FXML private BorderPane rootBorderPane; @FXML private BorderPane borderpane;
+	@FXML private JFXButton back;@FXML private JFXButton forward; @FXML private JFXButton refresh; @FXML private JFXButton search;
+>>>>>>> upstream/master
 	@FXML private JFXTextField searchField; 
 	@FXML private TabPane tabPane;
 	@FXML private Tab addNewTab; 
 	@FXML private JFXHamburger hamburger;
 	@FXML private GridPane navigationBar;
 	
+<<<<<<< HEAD
 	private VBox drawerPane = new VBox();
 	private WebView browser = new WebView();
 	private WebEngine webEngine = browser.getEngine();
 
+=======
+	public VBox drawerPane = new VBox();
+>>>>>>> upstream/master
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 
-		// ----------------------css attach with Tabpane
-		// tabpane.getStyleClass().addAll("tab-pane");
+		//---------------All opens tabs should be closed so below line is for just closing tabs------------------------
 		tabPane.setTabClosingPolicy(TabClosingPolicy.ALL_TABS);
 		
+<<<<<<< HEAD
 		// ---------------------webView---------------------------webEngine----------------------------------------------
 
 		// --------------------- Default url will be google
 		webEngine.load("http://www.google.com");
+=======
+		// --------------Renderer Class-------webView-----------webEngine----------------------------------------------
+>>>>>>> upstream/master
 		searchField.setText(webEngine.getLocation());
 		borderpane.setCenter(browser);
-
-		// --------------------- Listener for search button
-		/*
-		 * Example of below listner search of lamda exprestion
-		 * btn.setOnAction(new EventHandler<ActionEvent>() {
-		 * 
-		 * @Override public void handle(ActionEvent e) { System.out.println(
-		 * "Hello World!"); } });
-		 */
+		
+		//---------------URL of addressbar load if user clicked search button
 		search.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
 			
 			webEngine.load(searchField.getText());
-			webEngine.getLoadWorker().stateProperty().addListener(new ChangeListener<State>() {
+			System.out.println(searchField.getText());
+		});
+
+		/*
+		 * Bug Found: 	Remove comment and almost will remove in future as Below
+		 * 				method run continous with main thread to check the Changing
+		 * 				url or changing properity in browser. So that's why we yet 
+		 * 				remove to abstain the bug that we faced while showing work to mentor
+		 ************************************************************************************/
+			//webEngine.load(searchField.getText());
+			/*webEngine.getLoadWorker().stateProperty().addListener(new ChangeListener<State>() {
 				@Override
 				public void changed(ObservableValue ov, State oldState, State newState) {
 					if (newState == Worker.State.SUCCEEDED) {
+<<<<<<< HEAD
 						System.out.println(webEngine.getLocation());
 						searchField.setText(webEngine.getLocation());
+=======
+						//System.out.println("New Link"+webEngine.getLocation());
+						
+						//searchField.setText(webEngine.getLocation());
+>>>>>>> upstream/master
 						
 					}
 
 				}
-			});
-
-		});
-		// --------------------------------------UrlField--------------------------Url--GetLocation-------------------
-
-		// ---------------------Listner for search textfield of search button
+			});*/
+			
+		// ---------------------Listner for search textfield of search button---------------------------------------
 		searchField.setOnKeyPressed(event -> {
 			if (event.getCode() == KeyCode.ENTER) {
-				System.out.println(searchField.getText());
 				webEngine.load(searchField.getText());
 			}
 		});
-		
-		
 
-		/*
-		 * We got this idea from this link Doc
-		 * :https://docs.oracle.com/javase/8/javafx/api/index.html?
-		 * javafx/scene/web/WebEngine.html We got the conceptual thought from
-		 * Stack: this
-		 * 
-		 * http://stackoverflow.com/questions/32486758/detect-url-
-		 * changes-in-javafx-webview The purpose of this is to show the chaning
-		 * url
-		 */
-
-		/*webEngine.getLoadWorker().stateProperty().addListener(new ChangeListener<State>() {
+		//System.out.println(webEngine.getLocation());
+		
+		//-----------------------Thread is continously running to check andy change of link in browser to set value in broser addressbar---
+		
+		webEngine.getLoadWorker().stateProperty().addListener(new ChangeListener<State>() {
 			@Override
 			public void changed(ObservableValue ov, State oldState, State newState) {
-
+				//System.out.println("New State: "+newState);
 				if (newState == Worker.State.SUCCEEDED) {
-					System.out.println(webEngine.getLocation());
 					searchField.setText(webEngine.getLocation());
 				}
-
 			}
-		});*/
+		});
 
+		//--------------------Bookmarks and History detials didn't start yet !-------------------------
 		/*
 		 * bookmarks.setOnAction(new EventHandler<ActionEvent>() {
 		 * 
@@ -158,7 +178,7 @@ public class MainController implements Initializable {
 		 * ObservableList<Entry> list = history.getEntries(); for(int i=0 ; i<
 		 * list.size();i++){ System.out.println(list.get(i)); } } });
 		 * 
-		 */
+		 ************************************************************************/
 
 		// --------------------------------------------------------Backward-------------------------------------------
 
@@ -200,11 +220,16 @@ public class MainController implements Initializable {
 
 		// -------------------------------------------Hamburger----Drawer----Menu-----------------------------------
 
-		Hamburger ham = new Hamburger();
-		ham.getHamburger(hamburger, borderpane, tabPane);
+		Hamburger ham = new Hamburger(); ham.getHamburger(hamburger, borderpane, tabPane);
 
 		// --------------------------------------------------------TabPane---------------------------------------------
-
+		
+		/*
+		*	New tabs will add and but due to some reasome the tabpan_view is
+		*	comment as We cannont handle yet 
+		*	The Mulit view tabs yet our aim to handle singe tabs
+		***********************************************************/
+		
 		TabPaneView tabpan_view = new TabPaneView();
 		//tabpan_view.getTabPane(tabPane, addNewTab, navigationBar);
 		
@@ -213,10 +238,7 @@ public class MainController implements Initializable {
 		 * scenebuilder then comment the below tabpane! We gone through we
 		 * severly face this #bug of tabpane many time so becareful!
 		 */
-
-		// ----------------------just put tabpane in vbox as to add new tab
-		// button on click new tab pop up
-
+	
 		// end method
 	}
 	// end class
