@@ -67,9 +67,9 @@ public class MainController implements Initializable {
 	@FXML private JFXHamburger hamburger;
 	@FXML private GridPane navigationBar;
 	
-	public VBox drawerPane = new VBox();
-	public WebView browser = new WebView();
-	public WebEngine webEngine = browser.getEngine();
+	private VBox drawerPane = new VBox();
+	private WebView browser = new WebView();
+	private WebEngine webEngine = browser.getEngine();
 
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {

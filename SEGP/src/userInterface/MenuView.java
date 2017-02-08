@@ -75,7 +75,6 @@ public class MenuView {
 				tab.setId("history");
 				
 				if(tabs.get(tabs.size()-2).getId()!=("history")){
-				
 				History ob = new History();
 				System.out.println("@BorderPane is set@");
 				tab = ob.getHistoryView(tab, settingBorderPane);
@@ -111,7 +110,7 @@ public class MenuView {
 //					download.startDownload();
 					
 				MainDownload object = new MainDownload();
-					object.DownloaderStart();
+//					object.DownloaderStart();
 				}
 			});
 			th.start();
