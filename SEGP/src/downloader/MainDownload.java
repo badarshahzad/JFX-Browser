@@ -15,7 +15,9 @@ public class MainDownload {
 		DownloadThread thread = new DownloadThread(url, downloadFolder());
 		System.setProperty("java.net.preferIPv4Stack" , "true");
 		this.setProxy();
+//		thread.start();
 		thread.start();
+		
 		
 	}
 

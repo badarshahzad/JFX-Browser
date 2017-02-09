@@ -106,10 +106,10 @@ public class MenuView {
 				
 				@Override
 				public void run() {
-					// TODO Auto-generated method stub
 //					download.startDownload();
 					
 				MainDownload object = new MainDownload();
+				object.startDownload("hello");
 //					object.DownloaderStart();
 				}
 			});

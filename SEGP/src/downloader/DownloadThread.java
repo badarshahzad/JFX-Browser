@@ -43,6 +43,7 @@ public class DownloadThread extends Thread{
 			if (index > 0) {
 				fileTitle = dispose.substring(index + 10,
 						dispose.length() - 1);
+				System.out.println("filename" + fileTitle);
 			}
 		} else {
 			// extracts file name from URL
