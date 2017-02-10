@@ -2,10 +2,15 @@ package userInterface;
 
 import java.awt.Panel;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
+
+import javax.naming.Context;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
+import com.jfoenix.controls.JFXDialog;
+import com.jfoenix.controls.JFXDialog.DialogTransition;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXDrawersStack;
 import com.jfoenix.controls.JFXTabPane;
@@ -20,6 +25,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
@@ -28,6 +37,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -95,8 +106,56 @@ public class Setting implements Initializable{
 	 
 	 @Override
 	public void initialize(URL location, ResourceBundle resources) {
+		 Stage primaryStage = new Stage();
+		 
 		 changeProxyBtn.addEventHandler(MouseEvent.MOUSE_CLICKED, (e)->{
-			 System.out.println("Yes!");
+		
+			 JFXTextField urlTextField = new JFXTextField();
+			 JFXButton b1 = new JFXButton("Set Proxy");
+			 VBox vbox = new VBox();
+			 vbox.getChildren().addAll(urlTextField,b1);
+			 
+			 Alert alert = new Alert(AlertType.CONFIRMATION);
+			 alert.setGraphic(vbox);
+		
+			 
+			 alert.setTitle("Proxy Setting");
+			 alert.setHeaderText("Proxy Setting Dialog Confirmation?");
+			
+			 //alert.setContentText("Are you ok with this text?");
+			 
+			 Optional<ButtonType> result = alert.showAndWait();
+			 if(result.get()==ButtonType.OK){
+				 System.out.println("Yes! working");
+			 }else{
+				 System.out.println("No! working");
+			 }
+			 
+			 
+			/* JFXDialog dialog = new JFXDialog();
+			 StackPane root = new StackPane();
+			 dialog.setTransitionType(DialogTransition.CENTER);
+			// dialog.show((StackPane) );
+			 
+			  * We are going to work on Dialog to pop-up for proxy setting ... Do it now
+			  * Example:https://github.com/jfoenixadmin/JFoenix/blob/master/demo/demos/gui/uicomponents/DialogController.java
+			  
+			 
+			 JFXButton b1 = new JFXButton();
+			 JFXButton b2 = new JFXButton();
+			 
+			 
+			 
+			 
+			 urlTextField.setMaxSize(60, 30);
+			 //HBox root = new HBox();
+			 root.getChildren().add(urlTextField);
+			 Scene scene = new Scene(root,400,400);
+			 
+			 
+			 primaryStage.setScene(scene);
+			 primaryStage.show();
+*/			 
 		 });
 	}
 
