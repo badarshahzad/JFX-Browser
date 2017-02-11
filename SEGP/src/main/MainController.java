@@ -9,6 +9,8 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.controls.JFXTextField;
 
+import downloader.MainDownload;
+
 import java.beans.EventHandler;
 import java.net.URL;
 import java.sql.Time;
@@ -36,6 +38,7 @@ import javafx.scene.web.WebHistory;
 import javafx.scene.web.WebView;
 import userInterface.Hamburger;
 import userInterface.History;
+import userInterface.MenuView;
 import userInterface.TabPaneView;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TabPane.TabClosingPolicy;
@@ -73,9 +76,13 @@ public class MainController extends Renderer implements Initializable {
 	@FXML private GridPane navigationBar;
 	
 	public VBox drawerPane = new VBox();
+	//make obejc to get the setter method for url
+
+	
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
-
+		
+		
 		//---------------All opens tabs should be closed so below line is for just closing tabs------------------------
 		tabPane.setTabClosingPolicy(TabClosingPolicy.ALL_TABS);
 		
@@ -154,9 +161,9 @@ public class MainController extends Renderer implements Initializable {
 		 * list.size();i++){ System.out.println(list.get(i)); } } });
 		 * 
 		 ************************************************************************/
-
 		// --------------------------------------------------------Backward-------------------------------------------
 
+		
 		back.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
 			try {
 
