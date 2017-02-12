@@ -24,6 +24,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Tab;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.TreeTableColumn.CellDataFeatures;
@@ -60,8 +62,9 @@ public class History implements Initializable{
 
 		borderpane.setLeft(drawersStack);
 		try{
-			
+			//borderpane.setCenter(table);
 			borderpane.setCenter(FXMLLoader.load(getClass().getResource("History.fxml")));
+			
 			//borderpane.setCenter(treeTableView);
 			//borderpane.setMinSize(600, 400);
 			//borderpane.setMaxSize(1024, 800);
@@ -80,7 +83,22 @@ public class History implements Initializable{
 	@FXML
     private JFXTreeTableView<HistoryStoreView> treeTableView;
 	
+	
 	//JFXTreeTableView<HistoryStoreView> treeTableView = new JFXTreeTableView<>();
+	
+	//Set History method is set by main browser class and can easily set the history 
+	String date;
+	String link;
+	String time;
+	public void setHistory(String dat, String lin, String tim){
+
+		//historyStoreView.add(new HistoryStoreView(date,link,time));
+		this.date = dat;
+		this.time = tim;
+		this.link = lin;
+		
+		System.out.println("Time: "+ time+ "\n"+ "Date :" + date +"\n"+"Link: "+link);
+	}
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -127,15 +145,12 @@ public class History implements Initializable{
 		});
 		
 		
-		
-		//Give data to table as an example to checking its working fine
 		ObservableList<HistoryStoreView> historyStoreView =  FXCollections.observableArrayList();
-		//historyStoreView.add(getHistory());
+		//Give data to table as an example to checking its working fine
+		historyStoreView.add(new HistoryStoreView(this.date,this.link,this.time));
+		historyStoreView.add(new HistoryStoreView("1", "http://www.google.com", "1:00pm"));
 		historyStoreView.add(new HistoryStoreView("1", "http://www.google.com", "2:00pm"));
-		
-		/*historyStoreView.add(new HistoryStoreView("1", "http://www.google.com", "1:00pm"));
-		historyStoreView.add(new HistoryStoreView("1", "http://www.google.com", "2:00pm"));
-		historyStoreView.add(new HistoryStoreView("1", "http://www.google.com", "1:00pm"));*/
+		historyStoreView.add(new HistoryStoreView("1", "http://www.google.com", "1:00pm"));
 		
 		final TreeItem <HistoryStoreView> root = new RecursiveTreeItem<HistoryStoreView>(historyStoreView,RecursiveTreeObject::getChildren);
 		treeTableView.getColumns().setAll(date,link,time);
@@ -144,21 +159,7 @@ public class History implements Initializable{
 		
 	}
 	
-	//Set History method is set by main browser class and can easily set the history 
-	String dateTxt,linkTxt,timeTxt;
-	public void setHistory(String date, String link, String time){
-		this.dateTxt = date ;
-		this.linkTxt = link ;
-		this.timeTxt = time ;
-		System.out.println("Time: "+ this.timeTxt+ "\n"+ "Date :" + this.dateTxt +"\n"+"Link: "+this.linkTxt);
-		
-	}
-	
-	//get History method will return the date, link, time
-	public HistoryStoreView getHistory(){
-		System.out.println("Get date time");
-		return new HistoryStoreView(dateTxt, linkTxt, timeTxt);
-	}
+
 	
 	
 	//There is class for data entry in table 

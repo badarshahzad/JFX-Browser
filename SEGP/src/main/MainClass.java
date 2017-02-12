@@ -1,8 +1,5 @@
 package main;
 
-
-import java.util.Properties;
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -23,6 +20,7 @@ public class MainClass extends Application {
 		stage.setScene(scene);
 		stage.show();
 	}
+
 	/**
 	 * @param args
 	 *            the command line arguments
