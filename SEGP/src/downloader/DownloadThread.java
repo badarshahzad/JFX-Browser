@@ -17,7 +17,6 @@ import javax.net.ssl.HttpsURLConnection;
 import org.omg.PortableInterceptor.RequestInfo;
 
 public class DownloadThread extends Thread{
-	//http://320net.songspk.onl/singles/Bloody%20Hell%20-%20320Kbps%20-%20Rangoon%20[Songspk.DESI].mp3
 	private String url ;
 	//	private String fileTitle ;
 	private String filePath ;
@@ -44,6 +43,8 @@ public class DownloadThread extends Thread{
 				fileTitle = dispose.substring(index + 10,
 						dispose.length() - 1);
 				System.out.println("filename" + fileTitle);
+			}else{
+				System.out.println("Hello World ... could not retrieve the filename.");
 			}
 		} else {
 			// extracts file name from URL

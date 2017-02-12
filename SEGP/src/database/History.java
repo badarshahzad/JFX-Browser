@@ -14,10 +14,23 @@ public class History
 	private static PreparedStatement perp=null;
 	private static java.util.Date date = new java.util.Date();
 	private static SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+
+	public static void sleep(int mSec){
+		for (int i =0 ; i<mSec*mSec*1000 ; i++){
+			
+		}
+	}
 	
 	public static void main(String [] args)
 	{
 		CreateDataBase();
+//		insertUrl("https://www.google.com/");
+//		insertUrl("https://www.facebook.com/");
+//		insertUrl("https://www.cnn.com/");
+//		insertUrl("https://www.wikipedia.com/");
+//		insertUrl("https://www.youtube.com/");
+//		insertUrl("https://www.stackOverflow.com/");
+		showHistory();
 	}
 //------------------------------------------------------Creating SQLITE DATABASE and TABLE--------------------------------------//
 	public static void CreateDataBase()
@@ -76,7 +89,7 @@ public static void showHistory()
 	{
 		 Class.forName("org.sqlite.JDBC");
 	     c = DriverManager.getConnection("jdbc:sqlite:History.db");
-		 String str="select * from history";
+		 String str="select * from history order by time DESC ,date DESC";
 	     perp=c.prepareStatement(str);
 	     ResultSet rs=perp.executeQuery();
 	     System.out.println("URL		                                              "+"Time			   "+"Date");

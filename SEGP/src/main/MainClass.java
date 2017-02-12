@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import userInterface.Proxy;
 
 /**
  *
@@ -28,15 +29,12 @@ public class MainClass extends Application {
 	 *            the command line arguments
 	 */
 	public static void main(String[] args) {
+		Proxy proxy = new Proxy();
+		proxy.setHttpProxy("172.16.0.2", "8080");
+		proxy.setHttpsProxy("172.16.0.2", "8080");
+		
 
 		// following three lines are for proxy settings
-		Properties systemProperties = System.getProperties();
-		systemProperties.setProperty("http.proxyHost","172.16.0.2");
-		systemProperties.setProperty("http.proxyPort","8080");
-		systemProperties.setProperty("https.proxyHost","172.16.0.2");
-		systemProperties.setProperty("https.proxyPort","8080");
-		
-		
 		launch(args);
 	}
 
