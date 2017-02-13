@@ -7,7 +7,7 @@ public class Proxy {
 	private String pPort=null;
 	
 	
-	//-----------------------setProxy of the Systtem----------------------------------
+	//-----------------------setProxy of the Systtem-------------------------------
 	private void setProxy(String type){
 		Properties systemProperties = System.getProperties();
 		try{
@@ -18,7 +18,7 @@ public class Proxy {
 			System.err.println("Invalid Proxy");
 		}
 	}
-	//-----------------------http proxy--------------------------------
+	//-----------------------http proxy--------------------------------------------
 	public void setHttpProxy(String pHost ,String pPort){
 		this.pHost = pHost;
 		this.pPort = pPort;
@@ -31,7 +31,7 @@ public class Proxy {
 		setProxy("https");
 		
 	}
-	//----------------------------Socks proxy------------------------------------------------
+	//----------------------------Socks proxy-------------------------------------
 	public void setSocksProxy(String pHost ,String pPort){
 		this.pHost = pHost;
 		this.pPort = pPort;

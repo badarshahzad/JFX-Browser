@@ -97,6 +97,8 @@ public class MainController extends Renderer implements Initializable {
 
 		// --------------------- Default url will be google
 		webEngine.load("http://www.google.com/");
+		back.setDisable(true);
+		forward.setDisable(true);
 		// --------------Renderer Class-------webView-----------webEngine----------------------------------------------
 		searchField.setText(webEngine.getLocation());
 		borderpane.setCenter(browser);
@@ -243,7 +245,7 @@ public class MainController extends Renderer implements Initializable {
 		/*
 		*	New tabs will add and but due to some reasome the tabpan_view is
 		*	comment as We cannont handle yet 
-		*	The Mulit view tabs yet our aim to handle singe tabs
+		*	The Mulit view tabs yet our aim to handle single tab
 		***********************************************************/
 		
 		TabPaneView tabpan_view = new TabPaneView();
