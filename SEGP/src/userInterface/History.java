@@ -73,7 +73,6 @@ public class History implements Initializable{
 			e1.printStackTrace();
 		}
 		
-		
 		drawersStack.toggle(leftDrawer);
 		settingTab.setContent(borderpane);
 		return settingTab;
@@ -158,10 +157,6 @@ public class History implements Initializable{
 		treeTableView.setShowRoot(false);
 		
 	}
-	
-
-	
-	
 	//There is class for data entry in table 
 	
 	class HistoryStoreView extends RecursiveTreeObject<HistoryStoreView>{
