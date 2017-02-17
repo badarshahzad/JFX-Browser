@@ -1,16 +1,13 @@
 package main;
 
-import com.jfoenix.controls.JFXTextField;
-
-import javafx.scene.layout.BorderPane;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 
-public interface  Renderer {
+public class Renderer {
 	
-<<<<<<< HEAD
-	void pageDisplay(String url, JFXTextField searchField,BorderPane borderpane);
-=======
+	public WebView browser = new WebView();
+	public WebEngine webEngine = browser.getEngine();
+	
 	public Renderer(){
 		
 		//--------------------- Default url will be google--------------------------
@@ -18,6 +15,5 @@ public interface  Renderer {
 		webEngine.load("http://www.google.com");
 		//System.out.println("Title fo page:"+webEngine.getTitle());
 	}
->>>>>>> upstream/master
 
 }

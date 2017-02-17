@@ -112,7 +112,15 @@ public class Hamburger {
 		menuView.setMenuViewListener(home, history, downloads, bookmarks, saveAsPdf, setting, settingTabPane,transition,
 				drawersStack,rightDrawer);
 		// setting.getStyleClass().addAll("animated-option-button","animated-option-sub-button2");
+		setHistoryBtn(history);
 		return hamburger;
 	}
 
+	JFXButton historyBtn;
+	public void setHistoryBtn(JFXButton b1){
+		this.historyBtn = b1;
+	}
+	public JFXButton getHistory(){
+		return historyBtn;
+	}
 }

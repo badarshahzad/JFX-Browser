@@ -34,52 +34,27 @@
      	-fx-background-color: derive(#28323c,30.0%);
 }
 
-
-
-.tab-pane{
-
-	
-}
-.tab-pane .tab-header-area .tab-header-background {
-    -fx-opacity: 1;
-}
-
-
-.tab-pane
-{
-    -fx-tab-min-width:90px;
-   
-}
+//---------------------TabPane CSS-----------------------------------------------
 
 .tab{
-	 -fx-background-radius: 20px 10px 0px 0px;
-    -fx-background-insets: 0 0 0 0,0,0;
+	//-fx-background-color: white;
+	-fx-text-fill:#222222;
 }
-/* /////////////////////////////////////////////////////////////////
-//  Below is he new tab add tab width css 						//
-///////////////////////////////////////////////////////////////// */
-
-.tab
-{
-    -fx-background-color: #28323c;
-    -fx-tab-min-width:45px;
-
+.tab:selected .focus-indicator {
+	
+    -fx-border-radius: 10 10 0 0, 10 10 0 0;
+    -fx-border-insets: -6 -9 -8 -8, -5 -8 -7 -7;
 }
-
-.tab-pane .tab:selected
-{
- 	
-    -fx-background-color: derive(#3c3c3c,10%);
+/*
+.tab-pane > .tab-header-area > .headers-region > .tab:selected{
+    -fx-border-insets: 0 1 1 0, 1 2 0 1, 2 3 0 2;
+}
+*/
+.tab-pane > .tab-header-area > .headers-region > .tab > .tab-container > .tab-label {
+    -fx-padding:0 0 0 0;
 }
 
-.tab .tab-label { 
-    -fx-alignment: CENTER;
-    -fx-text-fill: #ffffff;
-    -fx-font-size: 12px;
-    -fx-font-weight: bold;
-}
-
-.tab:selected .tab-label { 
-    -fx-alignment: CENTER;
-    -fx-text-fill: #ffffff;
+.tab-header-area .tab{
+    -fx-padding:4 10 5 10;
+    -fx-background-radius: 10 10 0 0;
 }
