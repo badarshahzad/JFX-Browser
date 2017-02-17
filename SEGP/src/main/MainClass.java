@@ -1,9 +1,6 @@
 package main;
 
-<<<<<<< HEAD
 import database.History_Managment;
-=======
->>>>>>> upstream/master
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -29,10 +26,7 @@ public class MainClass extends Application {
 	 *            the command line arguments
 	 */
 	public static void main(String[] args) {
-<<<<<<< HEAD
 		History_Managment.CreateDataBase(); //if datbase is deleted then create new one
-=======
->>>>>>> upstream/master
 		launch(args);
 	}
 

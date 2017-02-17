@@ -101,11 +101,8 @@ public class Setting implements Initializable {
 	private JFXButton disconnectAccountBtn;
 	@FXML
 	private Label userAccountNameLbl;
-<<<<<<< HEAD
-=======
 	
 	//Users  table list
->>>>>>> upstream/master
 	@FXML
 	private JFXTreeTableView<?> usersTreeTabelView;
 	@FXML
@@ -170,11 +167,7 @@ public class Setting implements Initializable {
 				System.out.println("Cancel Click!");
 			}
 		});
-<<<<<<< HEAD
-=======
-		
 		//Start the userTreeView from herre
->>>>>>> upstream/master
 	}
 
 }
