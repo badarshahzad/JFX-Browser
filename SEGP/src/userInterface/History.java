@@ -83,7 +83,6 @@ public class History implements Initializable{
 			e1.printStackTrace();
 		}
 		
-		
 		drawersStack.toggle(leftDrawer);
 		settingTab.setContent(borderpane);
 		return settingTab;
@@ -106,6 +105,11 @@ public class History implements Initializable{
 		this.date = dat;
 		this.time = tim;
 		this.link = lin;
+<<<<<<< HEAD
+=======
+		
+		System.out.println("Time: "+ time+ "\n"+ "Date :" + date +"\n"+"Link: "+link);
+>>>>>>> upstream/master
 	}
 	
 	@Override
@@ -157,6 +161,7 @@ public class History implements Initializable{
 		
 		ObservableList<HistoryStoreView> historyStoreView =  FXCollections.observableArrayList();
 		//Give data to table as an example to checking its working fine
+<<<<<<< HEAD
 		ResultSet rs=History_Managment.showHistory(); //method call to fetch the data from history table.
 		 
 		try {
@@ -171,17 +176,27 @@ public class History implements Initializable{
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+=======
+		historyStoreView.add(new HistoryStoreView(this.date,this.link,this.time));
+		historyStoreView.add(new HistoryStoreView("1", "http://www.google.com", "1:00pm"));
+		historyStoreView.add(new HistoryStoreView("1", "http://www.google.com", "2:00pm"));
+		historyStoreView.add(new HistoryStoreView("1", "http://www.google.com", "1:00pm"));
+		
+>>>>>>> upstream/master
 		final TreeItem <HistoryStoreView> root = new RecursiveTreeItem<HistoryStoreView>(historyStoreView,RecursiveTreeObject::getChildren);
 		treeTableView.getColumns().setAll(date,link,time);
 		treeTableView.setRoot(root);
 		treeTableView.setShowRoot(false);
 		
 	}
+<<<<<<< HEAD
 	
 	
 
 	
 	
+=======
+>>>>>>> upstream/master
 	//There is class for data entry in table 
 	
 	class HistoryStoreView extends RecursiveTreeObject<HistoryStoreView>{

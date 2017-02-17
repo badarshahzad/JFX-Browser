@@ -71,11 +71,19 @@ public class MenuView {
 		history.setOnAction((ActionEvent) -> {
 			System.out.println("History Start!");
 			Renderer b = new Renderer();
+<<<<<<< HEAD
 			//WebHistory History = b.webEngine.getHistory();
 			//ObservableList<Entry> list = History.getEntries();
 			//for (int i = 0; i < list.size(); i++) {
 				//System.out.println(list.get(i));
 			//}
+=======
+			WebHistory History = b.webEngine.getHistory();
+			ObservableList<Entry> list = History.getEntries();
+			for (int i = 0; i < list.size(); i++) {
+				System.out.println(list.get(i));
+			}
+>>>>>>> upstream/master
 			// When the menu click Hamburger and DrawerStack will hide
 			onClickHideHamburger();
 
@@ -91,10 +99,17 @@ public class MenuView {
 				System.out.println("@BorderPane is set@");
 				tab = ob.getHistoryView(tab, settingBorderPane);
 				tabs.add(tabs.size() - 1, tab);
+<<<<<<< HEAD
 
 				// System.out.println(tab.getId());
 				// System.out.println(tabs.size());
 
+=======
+
+				// System.out.println(tab.getId());
+				// System.out.println(tabs.size());
+
+>>>>>>> upstream/master
 				// The below is just select the current tab
 				selectedTab.select(tab);
 			}

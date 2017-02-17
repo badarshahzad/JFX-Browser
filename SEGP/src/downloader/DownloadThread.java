@@ -82,8 +82,11 @@ public class DownloadThread extends Thread{
 			connection.setReadTimeout(60000);
 			connection.connect(); // connect to the server with in the specified url
 			
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> upstream/master
 			int requestinfo = connection.getResponseCode(); // get the responce code from the server which might be helpful in understanding the server response for the download request.
 			String dispose = connection.getHeaderField("Content-Disposition");
 			if (requestinfo == connection.HTTP_OK) {
@@ -121,8 +124,11 @@ public class DownloadThread extends Thread{
 			System.err.println("input output exception .");
 			e.printStackTrace();
 		}
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> upstream/master
 	}
 
 }
