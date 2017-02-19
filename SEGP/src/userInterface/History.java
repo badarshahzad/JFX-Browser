@@ -1,6 +1,8 @@
 package userInterface;
 
 import java.net.URL;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -13,6 +15,9 @@ import com.jfoenix.controls.JFXTreeTableColumn;
 import com.jfoenix.controls.JFXTreeTableView;
 import com.jfoenix.controls.RecursiveTreeItem;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+
+import database.History_Managment;
+
 import com.jfoenix.controls.JFXDrawer.DrawerDirection;
 
 import javafx.beans.property.SimpleStringProperty;
@@ -29,16 +34,21 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.TreeTableColumn.CellDataFeatures;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.util.Callback;
 
 public class History implements Initializable{
 	
+	private JFXButton setting = new JFXButton("Setting");
+	private JFXButton history = new JFXButton("History");
 	public Tab getHistoryView(Tab settingTab, BorderPane borderpane) {
 
-		JFXButton setting = new JFXButton("Setting");setting.setMinSize(100, 50);
-		JFXButton history = new JFXButton("History");history.setMinSize(100, 50);
+		//JFXButton setting = new JFXButton("Setting");
+		setting.setMinSize(100, 50);
+		//JFXButton history = new JFXButton("History");
+		history.setMinSize(100, 50);
 
 		/*
 		 * Add two buttons in gridpane that will be put in
@@ -95,13 +105,11 @@ public class History implements Initializable{
 		this.date = dat;
 		this.time = tim;
 		this.link = lin;
-		
-		System.out.println("Time: "+ time+ "\n"+ "Date :" + date +"\n"+"Link: "+link);
 	}
 	
 	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-	
+	public void initialize(URL location, ResourceBundle resources) 
+	{
 		//For every column we have to create a new Treetable column as we did below and we are getting the
 		//the value of cloumn from below method that is ObservableValue method declare below
 		
@@ -123,7 +131,7 @@ public class History implements Initializable{
 		
 		//link column
 		JFXTreeTableColumn<HistoryStoreView, String> link =  new JFXTreeTableColumn<>("Link");
-		link.setMinWidth(400);
+		link.setMinWidth(600);
 		link.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<HistoryStoreView,String>, ObservableValue<String>>() {
 			
 			@Override
@@ -146,11 +154,20 @@ public class History implements Initializable{
 		
 		ObservableList<HistoryStoreView> historyStoreView =  FXCollections.observableArrayList();
 		//Give data to table as an example to checking its working fine
-		historyStoreView.add(new HistoryStoreView(this.date,this.link,this.time));
-		historyStoreView.add(new HistoryStoreView("1", "http://www.google.com", "1:00pm"));
-		historyStoreView.add(new HistoryStoreView("1", "http://www.google.com", "2:00pm"));
-		historyStoreView.add(new HistoryStoreView("1", "http://www.google.com", "1:00pm"));
-		
+		ResultSet rs=History_Managment.showHistory(); //method call to fetch the data from history table.
+		 
+		try {
+			while(rs.next()) //loop for data fetching and pass it to GUI table view
+			 {
+				 String link1 =rs.getString(1);
+				 String time1=rs.getString(2);
+				 String date1=rs.getString(3);
+				 historyStoreView.add(new HistoryStoreView(date1,link1,time1));
+				 
+			 }
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		final TreeItem <HistoryStoreView> root = new RecursiveTreeItem<HistoryStoreView>(historyStoreView,RecursiveTreeObject::getChildren);
 		treeTableView.getColumns().setAll(date,link,time);
 		treeTableView.setRoot(root);
@@ -160,15 +177,12 @@ public class History implements Initializable{
 	//There is class for data entry in table 
 	
 	class HistoryStoreView extends RecursiveTreeObject<HistoryStoreView>{
-		
-		// below these are the colums for tables and values can be enter useing the constructor
-		// method o fHistoryStoreView that is mention below!
 		StringProperty date;
 		StringProperty link;
 		StringProperty time;
 		
 		public HistoryStoreView(String date,String link, String time ){
-			this.date = new SimpleStringProperty( date);
+			this.date = new SimpleStringProperty(date);
 			this.link = new SimpleStringProperty(link);
 			this.time = new SimpleStringProperty(time);
 		}

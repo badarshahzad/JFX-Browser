@@ -92,9 +92,6 @@ public class MenuView {
 				tab = ob.getHistoryView(tab, settingBorderPane);
 				tabs.add(tabs.size() - 1, tab);
 
-				// System.out.println(tab.getId());
-				// System.out.println(tabs.size());
-
 				// The below is just select the current tab
 				selectedTab.select(tab);
 			}

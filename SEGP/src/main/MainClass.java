@@ -1,11 +1,11 @@
 package main;
 
+import database.History_Managment;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
 /**
  *
  * @author Segp-Group 3
@@ -26,6 +26,7 @@ public class MainClass extends Application {
 	 *            the command line arguments
 	 */
 	public static void main(String[] args) {
+		History_Managment.CreateDataBase(); //if datbase is deleted then create new one
 		launch(args);
 	}
 

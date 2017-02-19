@@ -167,7 +167,6 @@ public class Setting implements Initializable {
 				System.out.println("Cancel Click!");
 			}
 		});
-		
 		//Start the userTreeView from herre
 	}
 

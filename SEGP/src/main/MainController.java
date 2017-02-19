@@ -8,7 +8,7 @@ package main;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.controls.JFXTextField;
-
+import database.History_Managment;
 import downloader.MainDownload;
 
 import java.beans.EventHandler;
@@ -50,7 +50,7 @@ import javafx.scene.control.TabPane.TabClosingPolicy;
  *
  * @author Segp-Group 3
  */
-public class MainController extends Renderer implements Initializable {
+public class MainController implements Initializable {
 
 	/*
 	 * Reference: We got this idea from this link Doc Link:
@@ -99,6 +99,9 @@ public class MainController extends Renderer implements Initializable {
 	
 	public VBox drawerPane = new VBox();
 	// make obejc to get the setter method for url
+	public WebView browser = new WebView();
+	public WebEngine webEngine = browser.getEngine();
+	
 
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
@@ -106,44 +109,20 @@ public class MainController extends Renderer implements Initializable {
 		// ---------------All opens tabs should be closed so below line is for
 		// just closing tabs------------------------
 		tabPane.setTabClosingPolicy(TabClosingPolicy.ALL_TABS);
+		pageRender("https://www.google.com.pk/webhp?sourceid=chrome-instant&ion=1&espv=2&ie=UTF-8");
+		
+		//Search Button Listener 
+		search.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
+			pageRender(searchField.getText()); //method call 
+		});
+			//Search Field Listener
+			searchField.setOnKeyPressed(event -> {
+			if (event.getCode() == KeyCode.ENTER) {
+				pageRender(searchField.getText()); //method call
+			}
+		});
 
 		// --------------Renderer
-		// Class-------webView-----------webEngine----------------------------------------------
-		searchField.setText(webEngine.getLocation());
-		borderpane.setCenter(browser);
-
-		// ---------------URL of addressbar load if user clicked search button
-		search.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
-
-			webEngine.load(searchField.getText());
-			System.out.println(searchField.getText());
-		});
-
-		// ---------------------Listner for search textfield of
-		// search--------------------------------------
-		searchField.setOnKeyPressed(event -> {
-			if (event.getCode() == KeyCode.ENTER) {
-				webEngine.load(searchField.getText());
-			}
-		});
-
-		/*
-		 * Change of link in browser to set value in broser addressbar.
-		 * Likewise we are storing the history.
-		 */
-		webEngine.getLoadWorker().stateProperty().addListener(new ChangeListener<State>() {
-			@Override
-			public void changed(ObservableValue ov, State oldState, State newState) {
-
-				if (newState == Worker.State.SUCCEEDED) {
-					searchField.setText(webEngine.getLocation());
-					object1.setHistory("ad", "adf", "ADfa");//history
-					webEngine.getLocation();
-				}
-				
-			}
-		});
-
 		// --------------------------------------------------------Backward-------------------------------------------
 
 		back.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
@@ -171,46 +150,39 @@ public class MainController extends Renderer implements Initializable {
 
 		refresh.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
 			webEngine.reload();
-
 		});
-
+		
 		// -------------------------------------------Hamburger----Drawer----Menu------------------------------------
 		
 		ham.getHamburger(hamburger, borderpane, tabPane);
-		// --------------------------------------------Hitory-------------------------------------------------------
-		/*
-		 * DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-		 * DateFormat timeFormat = new SimpleDateFormat("HH:mm:ss"); Date
-		 * setDate = new Date(); //Calendar cal = Calendar.getInstance();
-		 * //System.out.println("Time : "+ dateFormat.format(cal.getTime()));
-		 * 
-		 * String date = dateFormat.format(setDate); String time =
-		 * timeFormat.format(setDate); String link = webEngine.getLocation();
-		 * //System.out.println("Time: "+ time+ "\n"+ "Date :" + date +"\n"+
-		 * "Link: "+link); History object = new History();
-		 * object.setHistory(date, link, time);
-		 */
-		// -------------------------------------------TabPane-----------------------------------------------------
-
-		/*
-		 * New tabs will add and but due to some reasome the tabpan_view is
-		 * comment as We cannont handle yet The Mulit view tabs yet our aim to
-		 * handle singe tabs
-		 ***********************************************************/
-
+		//----------------------------------------TabPane-----------------------------------------------------//
+		//Adding multiple tabs would be done later.
+		
 		TabPaneView tabpan_view = new TabPaneView();
-		/*
-		 * New tab add whenever clicked 
-		 */
-		//tabpan_view.getTabPane(tabPane, addNewTab, navigationBar);
+		//----------------------------------------------------------------------------------------------------//
+		
+		// end intializer method
+		}
 
-		/**
-		 * There is well know error in Tabpane while you will be working with
-		 * scenebuilder then comment the below tabpane! We gone through we
-		 * severly face this #bug of tabpane many time so becareful!
-		 */
+	
+	//mehtod to rendere page
+	public void pageRender(String url)
+	{
+		webEngine.getLoadWorker().stateProperty().addListener(new ChangeListener<State>() {
+			@Override
+			public void changed(ObservableValue ov, State oldState, State newState) {
 
-		// end method
-	}
+				if (newState == Worker.State.SUCCEEDED) {
+					searchField.setText(webEngine.getLocation());
+					if(!(webEngine.getLocation().equals("about:blank")))
+					History_Managment.insertUrl(webEngine.getLocation());
+				}
+				
+			}
+			
+		});
+		webEngine.load(url);
+		borderpane.setCenter(browser);
+		}
 	// end class
 }
