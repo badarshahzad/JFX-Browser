@@ -9,12 +9,9 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
-import java.net.URLConnection;
-import java.nio.charset.MalformedInputException;
 
 import javax.net.ssl.HttpsURLConnection;
 
-import org.omg.PortableInterceptor.RequestInfo;
 
 public class DownloadThread extends Thread{
 	//http://320net.songspk.onl/singles/Bloody%20Hell%20-%20320Kbps%20-%20Rangoon%20[Songspk.DESI].mp3
