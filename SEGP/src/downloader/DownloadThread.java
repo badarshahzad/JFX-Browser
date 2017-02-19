@@ -119,6 +119,6 @@ public class DownloadThread extends Thread{
 			System.err.println("input output exception .");
 			e.printStackTrace();
 		}
-	}
+		}
 
 }
