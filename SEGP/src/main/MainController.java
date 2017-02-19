@@ -21,6 +21,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.ResourceBundle;
 
+import org.w3c.dom.Document;
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
@@ -98,6 +100,13 @@ public class MainController extends Renderer implements Initializable {
 	private Hamburger ham = new Hamburger();
 	
 	public VBox drawerPane = new VBox();
+	
+	public void getDocumentCurrentURL(){
+		System.out.println(webEngine.getDocument());
+		
+	}
+	
+	
 	// make obejc to get the setter method for url
 
 	@Override
@@ -127,18 +136,24 @@ public class MainController extends Renderer implements Initializable {
 			}
 		});
 
+		
 		/*
 		 * Change of link in browser to set value in broser addressbar.
 		 * Likewise we are storing the history.
 		 */
+		//Document a = webEngine.getDocument();
+		//String b = a.getTextContent();
+		//System.out.println(a);
 		webEngine.getLoadWorker().stateProperty().addListener(new ChangeListener<State>() {
 			@Override
 			public void changed(ObservableValue ov, State oldState, State newState) {
 
 				if (newState == Worker.State.SUCCEEDED) {
 					searchField.setText(webEngine.getLocation());
-					object1.setHistory("ad", "adf", "ADfa");//history
+					//object1.setHistory("ad", "adf", "ADfa");//history
 					webEngine.getLocation();
+
+
 				}
 				
 			}
