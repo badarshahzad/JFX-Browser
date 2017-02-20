@@ -49,11 +49,13 @@ import javafx.stage.Stage;
 
 public class Setting implements Initializable {
 
+	private JFXDrawersStack drawersStack = new JFXDrawersStack();
+	private JFXDrawer leftDrawer = new JFXDrawer();
+	private JFXButton setting = new JFXButton("Setting");
+	private JFXButton history = new JFXButton("History");
 	public Tab getSettingView(Tab settingTab, BorderPane borderpane) {
 
-		JFXButton setting = new JFXButton("Setting");
 		setting.setMinSize(100, 50);
-		JFXButton history = new JFXButton("History");
 		history.setMinSize(100, 50);
 
 		/*
@@ -69,8 +71,6 @@ public class Setting implements Initializable {
 
 		// Alredy detialed mention in Hamburger class about JFx DrawerStack and
 		// JFXDrawer
-		JFXDrawersStack drawersStack = new JFXDrawersStack();
-		JFXDrawer leftDrawer = new JFXDrawer();
 		leftDrawer.setDirection(DrawerDirection.LEFT);
 		leftDrawer.setDefaultDrawerSize(80);
 		leftDrawer.setSidePane(gridPane);
@@ -81,7 +81,6 @@ public class Setting implements Initializable {
 
 		try {
 			// ScrollPane scrollPane = new ScrollPane();
-
 			borderpane.setCenter(FXMLLoader.load(getClass().getResource("Setting.fxml")));
 		} catch (Exception e1) {
 			System.out.println("File is not find for setting! " + " \n " + e1);
@@ -90,6 +89,7 @@ public class Setting implements Initializable {
 		// borderpane.setCenter(root);
 		drawersStack.toggle(leftDrawer);
 		settingTab.setContent(borderpane);
+		System.out.println("Success in Setting! ");
 
 		return settingTab;
 	}

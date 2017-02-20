@@ -3,9 +3,6 @@ package userInterface;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXButton;
@@ -29,12 +26,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Tab;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.TreeTableColumn.CellDataFeatures;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.util.Callback;
@@ -43,13 +37,12 @@ public class History implements Initializable{
 	
 	private JFXButton setting = new JFXButton("Setting");
 	private JFXButton history = new JFXButton("History");
+	private JFXDrawersStack drawersStack = new JFXDrawersStack();
+	private JFXDrawer leftDrawer = new JFXDrawer();
 	public Tab getHistoryView(Tab settingTab, BorderPane borderpane) {
 
-		//JFXButton setting = new JFXButton("Setting");
 		setting.setMinSize(100, 50);
-		//JFXButton history = new JFXButton("History");
 		history.setMinSize(100, 50);
-
 		/*
 		 * Add two buttons in gridpane that will be put in
 		 * drawer->drawerstack(container) -> left side of border to come ount
@@ -63,8 +56,7 @@ public class History implements Initializable{
 
 		// Alredy detialed mention in Hamburger class about JFx DrawerStack and
 		// JFXDrawer
-		JFXDrawersStack drawersStack = new JFXDrawersStack();
-		JFXDrawer leftDrawer = new JFXDrawer();
+		
 		leftDrawer.setDirection(DrawerDirection.LEFT);
 		leftDrawer.setDefaultDrawerSize(80);
 		leftDrawer.setSidePane(gridPane);
@@ -93,20 +85,7 @@ public class History implements Initializable{
     private JFXTreeTableView<HistoryStoreView> treeTableView;
 	
 	
-	//JFXTreeTableView<HistoryStoreView> treeTableView = new JFXTreeTableView<>();
-	
-	//Set History method is set by main browser class and can easily set the history 
-	String date;
-	String link;
-	String time;
-	public void setHistory(String dat, String lin, String tim){
-
-		//historyStoreView.add(new HistoryStoreView(date,link,time));
-		this.date = dat;
-		this.time = tim;
-		this.link = lin;
-	}
-	
+	@SuppressWarnings("unchecked")
 	@Override
 	public void initialize(URL location, ResourceBundle resources) 
 	{
