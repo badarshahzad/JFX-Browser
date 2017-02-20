@@ -147,7 +147,7 @@ public class MainController extends Renderer implements Initializable {
 		
 		//-----------------------Thread is continously running to check any change of link in browser to set value in broser addressbar
 		
-		
+//		
 		webEngine.getLoadWorker().stateProperty().addListener(new ChangeListener<State>() {
 			@Override
 			public void changed(ObservableValue ov, State oldState, State newState) {
