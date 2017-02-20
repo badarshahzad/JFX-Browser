@@ -8,17 +8,15 @@ package main;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.controls.JFXTextField;
+import database.History_Managment;
 
+<<<<<<< HEAD
 import java.beans.EventHandler;
 import java.io.File;
 import java.net.MalformedURLException;
+=======
+>>>>>>> 5e52cfb48be6a20f5a9073c870c2fa4f6f4ec81d
 import java.net.URL;
-import java.sql.Time;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.ResourceBundle;
 
 import org.w3c.dom.Document;
@@ -53,28 +51,51 @@ import javafx.scene.control.TabPane.TabClosingPolicy;
  *
  * @author Segp-Group 3
  */
-public class MainController extends Renderer implements Initializable {
+public class MainController implements Initializable {
 
 	/*
-	 * Reference:
-	 * 				 We got this idea from this link Doc
-	 * 				Link: https://docs.oracle.com/javase/8/javafx/api/index.html?javafx/scene/web/WebEngine.html
-	 * 				 We got the conceptual thought from Stack:
-	 *				Link: http://stackoverflow.com/questions/32486758/detect-url-changes-in-javafx-webview
-	 * Description:
-	 * 				1st rootBorderPane that is the actual root for scene and 2nd borderpane
-	 * 				is the tabpane #pane Below is 4 buttons for navigation backward to go
-	 * 				back page,forward to go the previous visited page,refresh will reload the
-	 * 				page and search button is a specific url search Textfield it to write a
-	 * 				url.
+	 * Reference: We got this idea from this link Doc Link:
+	 * https://docs.oracle.com/javase/8/javafx/api/index.html?javafx/scene/web/
+	 * WebEngine.html We got the conceptual thought from Stack: Link:
+	 * http://stackoverflow.com/questions/32486758/detect-url-changes-in-javafx-
+	 * webview Description: 1st rootBorderPane that is the actual root for scene
+	 * and 2nd borderpane is the tabpane #pane Below is 4 buttons for navigation
+	 * backward to go back page,forward to go the previous visited page,refresh
+	 * will reload the page and search button is a specific url search Textfield
+	 * it to write a url.
 	 * 
 	 * We Extends this Main controller Class with Renderer to work more
 	 * efficiently and can easily test any renderer
 	 * 
 
 	 * 
-	 ***********************************************************************************************************/ 
+	 ***********************************************************************************************************/
+
+	@FXML
+	private BorderPane rootBorderPane;
+	@FXML
+	private BorderPane borderpane;
+	@FXML
+	private JFXButton back;
+	@FXML
+	private JFXButton forward;
+	@FXML
+	private JFXButton refresh;
+	@FXML
+	private JFXButton search;
+
+	@FXML
+	private JFXTextField searchField;
+	@FXML
+	private TabPane tabPane;
+	@FXML
+	private Tab addNewTab;
+	@FXML
+	private JFXHamburger hamburger;
+	@FXML
+	private GridPane navigationBar;
 	
+<<<<<<< HEAD
 	@FXML private BorderPane rootBorderPane;
 	@FXML private BorderPane borderpane;
 	@FXML private JFXButton back;
@@ -87,12 +108,27 @@ public class MainController extends Renderer implements Initializable {
 	private VBox drawerPane = new VBox();
 	private WebView browser = new WebView();
 	private WebEngine webEngine = browser.getEngine();
+=======
+	//Classes objects to get methods or set methods access
+	private History object1 = new History();
+	private Hamburger ham = new Hamburger();
+	
+	public VBox drawerPane = new VBox();
+	// make obejc to get the setter method for url
+	public WebView browser = new WebView();
+	public WebEngine webEngine = browser.getEngine();
+	
+
+>>>>>>> 5e52cfb48be6a20f5a9073c870c2fa4f6f4ec81d
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 
-		//---------------All opens tabs should be closed so below line is for just closing tabs------------------------
+		// ---------------All opens tabs should be closed so below line is for
+		// just closing tabs------------------------
 		tabPane.setTabClosingPolicy(TabClosingPolicy.ALL_TABS);
+		pageRender("https://www.google.com.pk/webhp?sourceid=chrome-instant&ion=1&espv=2&ie=UTF-8");
 		
+<<<<<<< HEAD
 		// ---------------------webView---------------------------webEngine----------------------------------------------
 
 		// --------------------- Default url will be google
@@ -104,11 +140,13 @@ public class MainController extends Renderer implements Initializable {
 		borderpane.setCenter(browser);
 		
 		//---------------URL of addressbar load if user clicked search button
+=======
+		//Search Button Listener 
+>>>>>>> 5e52cfb48be6a20f5a9073c870c2fa4f6f4ec81d
 		search.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
-			
-			webEngine.load(searchField.getText());
-			System.out.println(searchField.getText());
+			pageRender(searchField.getText()); //method call 
 		});
+<<<<<<< HEAD
 
 		/*
 		 * Bug Found: 	Remove comment and almost will remove in future as Below
@@ -137,12 +175,16 @@ public class MainController extends Renderer implements Initializable {
 			
 		// ---------------------Listner for search textfield of search button---------------------------------------
 		searchField.setOnKeyPressed(event -> {
+=======
+			//Search Field Listener
+			searchField.setOnKeyPressed(event -> {
+>>>>>>> 5e52cfb48be6a20f5a9073c870c2fa4f6f4ec81d
 			if (event.getCode() == KeyCode.ENTER) {
-			webEngine.load(searchField.getText());
-			
+				pageRender(searchField.getText()); //method call
 			}
 		});
 
+<<<<<<< HEAD
 		//System.out.println(webEngine.getLocation());
 		
 		//-----------------------Thread is continously running to check any change of link in browser to set value in broser addressbar
@@ -180,6 +222,9 @@ public class MainController extends Renderer implements Initializable {
 		 * 
 		 ************************************************************************/
 
+=======
+		// --------------Renderer
+>>>>>>> 5e52cfb48be6a20f5a9073c870c2fa4f6f4ec81d
 		// --------------------------------------------------------Backward-------------------------------------------
 
 		back.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
@@ -211,53 +256,51 @@ public class MainController extends Renderer implements Initializable {
 			}
 		});
 
-		// -------------------------------------------Refresh------------------------------------------------
+		// -------------------------------------------Refresh--------------------------------------------------------
 
 		refresh.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
 			webEngine.reload();
-
 		});
-
-		// -------------------------------------------Hamburger----Drawer----Menu------------------------------
-
-		Hamburger ham = new Hamburger(); ham.getHamburger(hamburger, borderpane, tabPane);
 		
-		//--------------------------------------------Hitory---------------------------------------------------
+		// -------------------------------------------Hamburger----Drawer----Menu------------------------------------
 		
-		/*
-		 * Still there below is just a jugar to get Time but the date is getting is just fine
-		 * We are just using same object of setDate to get time and date both things!
-		 */
-	/*	DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-		DateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
-		Date setDate = new Date();
-		//Calendar cal = Calendar.getInstance();
-		//System.out.println("Time : "+ dateFormat.format(cal.getTime()));
-		
-		String date = dateFormat.format(setDate);
-		String time = timeFormat.format(setDate);
-		String link = webEngine.getLocation();
-		//System.out.println("Time: "+ time+ "\n"+ "Date :" + date +"\n"+"Link: "+link);
-		History object = new History();
-		object.setHistory(date, link, time);*/
-		// -------------------------------------------TabPane-------------------------------------
-		
+<<<<<<< HEAD
 		/*
 		*	New tabs will add and but due to some reasome the tabpan_view is
 		*	comment as We cannont handle yet 
 		*	The Mulit view tabs yet our aim to handle single tab
 		***********************************************************/
+=======
+		ham.getHamburger(hamburger, borderpane, tabPane);
+		//----------------------------------------TabPane-----------------------------------------------------//
+		//Adding multiple tabs would be done later.
+>>>>>>> 5e52cfb48be6a20f5a9073c870c2fa4f6f4ec81d
 		
 		TabPaneView tabpan_view = new TabPaneView();
-		//tabpan_view.getTabPane(tabPane, addNewTab, navigationBar);
+		//----------------------------------------------------------------------------------------------------//
 		
-		/**
-		 * There is well know error in Tabpane while you will be working with
-		 * scenebuilder then comment the below tabpane! We gone through we
-		 * severly face this #bug of tabpane many time so becareful!
-		 */
+		// end intializer method
+		}
+
 	
-		// end method
-	}
+	//mehtod to rendere page
+	public void pageRender(String url)
+	{
+		webEngine.getLoadWorker().stateProperty().addListener(new ChangeListener<State>() {
+			@Override
+			public void changed(ObservableValue ov, State oldState, State newState) {
+
+				if (newState == Worker.State.SUCCEEDED) {
+					searchField.setText(webEngine.getLocation());
+					if(!(webEngine.getLocation().equals("about:blank")))
+					History_Managment.insertUrl(webEngine.getLocation());
+				}
+				
+			}
+			
+		});
+		webEngine.load(url);
+		borderpane.setCenter(browser);
+		}
 	// end class
 }

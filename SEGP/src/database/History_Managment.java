@@ -1,17 +1,14 @@
 package database;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Timestamp;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-
-public class History
+public class History_Managment
 {
 	private static Connection c = null;
 	private static PreparedStatement perp=null;
+<<<<<<< HEAD:SEGP/src/database/History.java
 	private static java.util.Date date = new java.util.Date();
 	private static SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
 
@@ -31,6 +28,15 @@ public class History
 //		insertUrl("https://www.youtube.com/");
 //		insertUrl("https://www.stackOverflow.com/");
 		showHistory();
+=======
+	//private static java.util.Date date = new java.util.Date();
+	//private static SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+	
+	public static void main(String [] args)
+	{
+		showHistory();
+		
+>>>>>>> 5e52cfb48be6a20f5a9073c870c2fa4f6f4ec81d:SEGP/src/database/History_Managment.java
 	}
 //------------------------------------------------------Creating SQLITE DATABASE and TABLE--------------------------------------//
 	public static void CreateDataBase()
@@ -59,6 +65,9 @@ public class History
 		 
 		Connection c = null;
 		PreparedStatement perp=null;
+		java.util.Date date = new java.util.Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+		
 		try
 		{
 			  Class.forName("org.sqlite.JDBC");
@@ -79,33 +88,40 @@ public class History
 	}
 //---------------------------------VIEWING THE HISTORY--------------------------------------------------------------------------//
 
-public static void showHistory()
+public static ResultSet showHistory()
 {
 	
 	
 	Connection c = null;
 	PreparedStatement perp=null;
+	ResultSet rs=null;
 	try
 	{
 		 Class.forName("org.sqlite.JDBC");
 	     c = DriverManager.getConnection("jdbc:sqlite:History.db");
+<<<<<<< HEAD:SEGP/src/database/History.java
 		 String str="select * from history order by time DESC ,date DESC";
+=======
+		 String str="select * from history order by time DESC,date DESC";
+>>>>>>> 5e52cfb48be6a20f5a9073c870c2fa4f6f4ec81d:SEGP/src/database/History_Managment.java
 	     perp=c.prepareStatement(str);
-	     ResultSet rs=perp.executeQuery();
-	     System.out.println("URL		                                              "+"Time			   "+"Date");
-	     while(rs.next())
-	     {
-	    	 System.out.print(rs.getString(1)+"   	                                      ");
-	    	 System.out.print(rs.getString(2)+"		    ");
-	    	 System.out.print(rs.getString(3));
-	    	 System.out.println();
-	     }	
+	     rs=perp.executeQuery();
+	    /* while(rs.next())
+		 {
+			 String link1 =rs.getString(1);
+			 String time1=rs.getString(2);
+			 String date1=rs.getString(3);
+			 System.out.println(link1);
+			 System.out.println(time1);
+			 System.out.println(date1);
+			 
+		 }*/
 	}
 	catch(Exception e)
 	{
 		System.out.println("There are issues while showing the history");
 	}
-	
+	return rs;
 	}
 }
 

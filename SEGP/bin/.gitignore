@@ -1,5 +1,6 @@
 /database/
 /downloader/
+<<<<<<< HEAD
 /itextpdf-5.5.1-javadoc.jar
 /itextpdf-5.5.1.jar
 /jfoenix.jar
@@ -7,4 +8,9 @@
 /main/
 /sqlite-jdbc-3.16.1.jar
 /ui4j-all-2.1.0.jar
+=======
+/htmlToPdf/
+/main/
+/pdfcrowd/
+>>>>>>> 5e52cfb48be6a20f5a9073c870c2fa4f6f4ec81d
 /userInterface/
