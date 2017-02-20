@@ -8,7 +8,7 @@ public class History_Managment
 {
 	private static Connection c = null;
 	private static PreparedStatement perp=null;
-<<<<<<< HEAD:SEGP/src/database/History.java
+
 	private static java.util.Date date = new java.util.Date();
 	private static SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
 
@@ -18,25 +18,11 @@ public class History_Managment
 		}
 	}
 	
-	public static void main(String [] args)
-	{
-		CreateDataBase();
-//		insertUrl("https://www.google.com/");
-//		insertUrl("https://www.facebook.com/");
-//		insertUrl("https://www.cnn.com/");
-//		insertUrl("https://www.wikipedia.com/");
-//		insertUrl("https://www.youtube.com/");
-//		insertUrl("https://www.stackOverflow.com/");
-		showHistory();
-=======
-	//private static java.util.Date date = new java.util.Date();
-	//private static SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+	
 	
 	public static void main(String [] args)
 	{
 		showHistory();
-		
->>>>>>> 5e52cfb48be6a20f5a9073c870c2fa4f6f4ec81d:SEGP/src/database/History_Managment.java
 	}
 //------------------------------------------------------Creating SQLITE DATABASE and TABLE--------------------------------------//
 	public static void CreateDataBase()
@@ -99,11 +85,7 @@ public static ResultSet showHistory()
 	{
 		 Class.forName("org.sqlite.JDBC");
 	     c = DriverManager.getConnection("jdbc:sqlite:History.db");
-<<<<<<< HEAD:SEGP/src/database/History.java
 		 String str="select * from history order by time DESC ,date DESC";
-=======
-		 String str="select * from history order by time DESC,date DESC";
->>>>>>> 5e52cfb48be6a20f5a9073c870c2fa4f6f4ec81d:SEGP/src/database/History_Managment.java
 	     perp=c.prepareStatement(str);
 	     rs=perp.executeQuery();
 	    /* while(rs.next())

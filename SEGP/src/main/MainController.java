@@ -9,13 +9,9 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.controls.JFXTextField;
 import database.History_Managment;
-
-<<<<<<< HEAD
 import java.beans.EventHandler;
 import java.io.File;
 import java.net.MalformedURLException;
-=======
->>>>>>> 5e52cfb48be6a20f5a9073c870c2fa4f6f4ec81d
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -94,8 +90,6 @@ public class MainController implements Initializable {
 	private JFXHamburger hamburger;
 	@FXML
 	private GridPane navigationBar;
-	
-<<<<<<< HEAD
 	@FXML private BorderPane rootBorderPane;
 	@FXML private BorderPane borderpane;
 	@FXML private JFXButton back;
@@ -108,7 +102,6 @@ public class MainController implements Initializable {
 	private VBox drawerPane = new VBox();
 	private WebView browser = new WebView();
 	private WebEngine webEngine = browser.getEngine();
-=======
 	//Classes objects to get methods or set methods access
 	private History object1 = new History();
 	private Hamburger ham = new Hamburger();
@@ -119,7 +112,6 @@ public class MainController implements Initializable {
 	public WebEngine webEngine = browser.getEngine();
 	
 
->>>>>>> 5e52cfb48be6a20f5a9073c870c2fa4f6f4ec81d
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 
@@ -128,7 +120,6 @@ public class MainController implements Initializable {
 		tabPane.setTabClosingPolicy(TabClosingPolicy.ALL_TABS);
 		pageRender("https://www.google.com.pk/webhp?sourceid=chrome-instant&ion=1&espv=2&ie=UTF-8");
 		
-<<<<<<< HEAD
 		// ---------------------webView---------------------------webEngine----------------------------------------------
 
 		// --------------------- Default url will be google
@@ -140,13 +131,11 @@ public class MainController implements Initializable {
 		borderpane.setCenter(browser);
 		
 		//---------------URL of addressbar load if user clicked search button
-=======
-		//Search Button Listener 
->>>>>>> 5e52cfb48be6a20f5a9073c870c2fa4f6f4ec81d
+
 		search.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
 			pageRender(searchField.getText()); //method call 
 		});
-<<<<<<< HEAD
+
 
 		/*
 		 * Bug Found: 	Remove comment and almost will remove in future as Below
@@ -175,16 +164,15 @@ public class MainController implements Initializable {
 			
 		// ---------------------Listner for search textfield of search button---------------------------------------
 		searchField.setOnKeyPressed(event -> {
-=======
+
 			//Search Field Listener
-			searchField.setOnKeyPressed(event -> {
->>>>>>> 5e52cfb48be6a20f5a9073c870c2fa4f6f4ec81d
+			searchField.setOnKeyPressed(e -> {
+
 			if (event.getCode() == KeyCode.ENTER) {
 				pageRender(searchField.getText()); //method call
 			}
 		});
 
-<<<<<<< HEAD
 		//System.out.println(webEngine.getLocation());
 		
 		//-----------------------Thread is continously running to check any change of link in browser to set value in broser addressbar
@@ -222,9 +210,6 @@ public class MainController implements Initializable {
 		 * 
 		 ************************************************************************/
 
-=======
-		// --------------Renderer
->>>>>>> 5e52cfb48be6a20f5a9073c870c2fa4f6f4ec81d
 		// --------------------------------------------------------Backward-------------------------------------------
 
 		back.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
@@ -264,17 +249,14 @@ public class MainController implements Initializable {
 		
 		// -------------------------------------------Hamburger----Drawer----Menu------------------------------------
 		
-<<<<<<< HEAD
 		/*
 		*	New tabs will add and but due to some reasome the tabpan_view is
 		*	comment as We cannont handle yet 
 		*	The Mulit view tabs yet our aim to handle single tab
 		***********************************************************/
-=======
 		ham.getHamburger(hamburger, borderpane, tabPane);
 		//----------------------------------------TabPane-----------------------------------------------------//
 		//Adding multiple tabs would be done later.
->>>>>>> 5e52cfb48be6a20f5a9073c870c2fa4f6f4ec81d
 		
 		TabPaneView tabpan_view = new TabPaneView();
 		//----------------------------------------------------------------------------------------------------//
