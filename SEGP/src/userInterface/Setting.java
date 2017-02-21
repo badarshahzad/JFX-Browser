@@ -67,7 +67,7 @@ public class Setting implements Initializable {
 		gridPane.add(setting, 0, 0);
 		gridPane.add(history, 0, 1);
 
-		// ------------------------------------------------------Right----DrawerStack--------------------------------
+		// ------------------------------------------------------Right----DrawerStack----------------------------------------------
 
 		// Alredy detialed mention in Hamburger class about JFx DrawerStack and
 		// JFXDrawer
@@ -114,7 +114,7 @@ public class Setting implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		
+
 		changeProxyBtn.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
 			ToggleGroup group = new ToggleGroup();
 			JFXRadioButton noProxy = new JFXRadioButton("No Proxy");
@@ -141,7 +141,7 @@ public class Setting implements Initializable {
 			if (result.get() == ButtonType.OK) {
 				if (group.getSelectedToggle().equals(noProxy)) {
 					System.out.println("No Proxy");
-
+					//---------------------------Remove the proxy address from here and give proper look to enter proxy----Remainging!
 					// Remove Proxy for Http
 					systemProperties.setProperty("http.proxyHost", "");
 					systemProperties.setProperty("http.proxyPort", "");

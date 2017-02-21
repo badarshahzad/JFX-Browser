@@ -4,6 +4,7 @@ import java.awt.Desktop.Action;
 import java.util.Scanner;
 
 import javax.swing.text.html.HTML;
+
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXDrawersStack;
@@ -13,6 +14,7 @@ import downloader.MainDownload;
 import htmlToPdf.HTMLtoPDF;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.control.Tab;
@@ -26,9 +28,7 @@ import main.Renderer;
 public class MenuView {
 
 	/*
-	 * Below we are going to use different listener to learn the taste of
-	 * different listners used in java,javafx and for jfoenix librarys.
-	 * 
+	 * Below we are going to use different listener to learn the taste of different listners used in java,javafx and for jfoenix librarys.
 	 */
 
 	private Tab tab = new Tab();
@@ -48,8 +48,7 @@ public class MenuView {
 		final ObservableList<Tab> tabs = tabPane.getTabs();
 		SingleSelectionModel<Tab> selectedTab = tabPane.getSelectionModel();
 
-		// -------------------------------------------------------Home
-		// listener----------------------------------------------------------
+		// -------------------------------------------------------Home listener----------------------------------------------------------
 		home.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
@@ -64,43 +63,8 @@ public class MenuView {
 			}
 		});
 
-		
-		
-		//-------------------------------------------------------History listener-------------------------------------------------------
-		history.setOnAction((ActionEvent)->{
-			
-				//When the menu click Hamburger and DrawerStack will hide
-				onClickHideHamburger();
-			
-				System.out.println("History");
-
-				//tab name and id for accessing
-				tab.setText("History");
-				tab.setId("history");
-				
-				if(tabs.get(tabs.size()-2).getId()!=("history")){
-				History ob = new History();
-				System.out.println("@BorderPane is set@");
-				tab = ob.getHistoryView(tab, settingBorderPane);
-				tabs.add(tabs.size()-1,tab);
-
-				//System.out.println(tab.getId());
-				//System.out.println(tabs.size());
-				
-				//The below is just select the current tab 
-				selectedTab.select(tab);
-				}
-				
-				if(tabs.get(tabs.size()-2).getId()==("history")){
-					System.out.println("Adfa");
-					selectedTab.select(tabs.size()-2);
-					return;
-				}
-				
-
-
 		// -------------------------------------------------------Historylistener-------------------------------------------------------
-		history.setOnAction((e) -> {
+		history.setOnAction((ActionEvent) -> {
 
 			Renderer b = new Renderer();
 			WebHistory History = b.webEngine.getHistory();
@@ -112,6 +76,7 @@ public class MenuView {
 
 			// When the menu click Hamburger and DrawerStack will hide
 			onClickHideHamburger();
+			
 			// tab name and id for accessing
 			tab.setText("History");
 			tab.setId("History");
@@ -129,37 +94,32 @@ public class MenuView {
 				selectedTab.select(tabs.size() - 2);
 				return;
 			}
+
 		});
 
-		// -------------------------------------------------------Downloads
-		// listener-----------------------------------------------------
+		// -------------------------------------------------------Downloads listener-----------------------------------------------------
 		downloads.setOnAction((e) -> {
 
 			// When the menu click Hamburger and DrawerStack will hide
 			onClickHideHamburger();
-
-			
-			Thread th = new Thread(new Runnable() {
-				
-				@Override
-				public void run() {
-//					download.startDownload();
-					
-				MainDownload object = new MainDownload();
-				object.startDownload("hello");
-//					object.DownloaderStart();
-				}
-			});
-			th.start();
-			
-			//System.out.println("Downloads");
-			tab.setText("Downloads");
-			tab.setId("downloads");
-
+			/*
+			 * Thread th = new Thread(new Runnable() {
+			 * 
+			 * @Override public void run() { // TODO Auto-generated method stub
+			 * // download.startDownload();
+			 * 
+			 * MainDownload object = new MainDownload(); //new
+			 * MainDownload().startDownload(""); //object.startDownload(
+			 * "https://mail-attachment.googleusercontent.com/attachment/u/0/?ui=2&ik=4711ea205e&view=att&th=15a183b2c9894079&attid=0.1&disp=safe&realattid=f_iyvezxzz0&zw&saddbat=ANGjdJ-Emx2dda42840wBZtN2MCXLRtPkpvp6kYfURU9_lj9K2-Gzc7qjXQcRo64970VZoMpNAdz46EnyFXMHsk-LmJs-VwJez4UOQ9F-TE2j37tUCYfW6tQNifFzRq7xOc6Q2qAwBXR7sD8DcqWsK8JbN78EXOakdOtH7iAtd2zc4WLeqClmglAc9e9Svf7U38ahOYBdYk8KGveqPSZYEGji5rf0LpVsr_buYmO2ayfk7N2cOK4_PXdAh1MkHg4C4yWJqMsvojpZD18GPr4ClOLtRXvjfGcCzJoD_lFVuMar2YvxpYhXOhwyG746vjH1O8JoMWzW2eQCUawoBaHKiTkGOQuVkD4A1xFcEXxD1S2DHXK8vV4grXMsJoxmzPfQzypIivoQpcuwB9_NsJlTtkspPfdaiIZf_rtJKwbeLGdG2Axk6j7SeEWZy4_pHUsHvtxT9b1gdSfbH-ScFIkI-r0c2g0Zh99Wb4OlE5mloxCPyBj429TMulHL7Ixm79W-lgqmuK05Qb0t6Nizggn53mjzWDboPfQxZWJlb9DukfjEZM-PcavjtlAkI9svgLwUpxb7A7QgN6jHc7fzvk2hXT0HknFRYCqlllVflzhb2FN9pTyc9i5mSYgGcvqUFB0GQUS6vpZfHAXCL3TYwrKYkw8fZi7ZhtZZU0GzGFwdQ"
+			 * );new MainDownload().startDownload(
+			 * "https://mail-attachment.googleusercontent.com/attachment/u/0/?ui=2&ik=4711ea205e&view=att&th=15a183b2c9894079&attid=0.1&disp=safe&realattid=f_iyvezxzz0&zw&saddbat=ANGjdJ-Emx2dda42840wBZtN2MCXLRtPkpvp6kYfURU9_lj9K2-Gzc7qjXQcRo64970VZoMpNAdz46EnyFXMHsk-LmJs-VwJez4UOQ9F-TE2j37tUCYfW6tQNifFzRq7xOc6Q2qAwBXR7sD8DcqWsK8JbN78EXOakdOtH7iAtd2zc4WLeqClmglAc9e9Svf7U38ahOYBdYk8KGveqPSZYEGji5rf0LpVsr_buYmO2ayfk7N2cOK4_PXdAh1MkHg4C4yWJqMsvojpZD18GPr4ClOLtRXvjfGcCzJoD_lFVuMar2YvxpYhXOhwyG746vjH1O8JoMWzW2eQCUawoBaHKiTkGOQuVkD4A1xFcEXxD1S2DHXK8vV4grXMsJoxmzPfQzypIivoQpcuwB9_NsJlTtkspPfdaiIZf_rtJKwbeLGdG2Axk6j7SeEWZy4_pHUsHvtxT9b1gdSfbH-ScFIkI-r0c2g0Zh99Wb4OlE5mloxCPyBj429TMulHL7Ixm79W-lgqmuK05Qb0t6Nizggn53mjzWDboPfQxZWJlb9DukfjEZM-PcavjtlAkI9svgLwUpxb7A7QgN6jHc7fzvk2hXT0HknFRYCqlllVflzhb2FN9pTyc9i5mSYgGcvqUFB0GQUS6vpZfHAXCL3TYwrKYkw8fZi7ZhtZZU0GzGFwdQ"
+			 * ); object.startDownload(getUrl()); } }); th.start();
+			 */
+			// tab.setText("Downloads");
+			// tab.setId("downloads");
 		});
 
-		// -------------------------------------------------------Bookmarks
-		// listener-----------------------------------------------------
+		// -------------------------------------------------------Bookmarks listener-----------------------------------------------------
 		bookmarks.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
@@ -173,9 +133,8 @@ public class MenuView {
 			}
 		});
 
-		// -------------------------------------------------------SaveAsPdf
-		// listener-----------------------------------------------------
-		saveAsPdf.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
+		// -------------------------------------------------------SaveAsPdf listener-----------------------------------------------------
+		saveAsPdf.addEventHandler(MouseEvent.MOUSE_CLICKED, (ActionEvent) -> {
 
 			// When the menu click Hamburger and DrawerStack will hide
 			onClickHideHamburger();
@@ -188,8 +147,7 @@ public class MenuView {
 			th.start();
 		});
 
-		// -------------------------------------------------------Setting
-		// listener-------------------------------------------------------
+		// -------------------------------------------------------Setting listener-------------------------------------------------------
 		setting.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
 
 			// When the menu click Hamburger and DrawerStack will hide
