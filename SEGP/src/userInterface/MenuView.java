@@ -28,9 +28,7 @@ import main.Renderer;
 public class MenuView {
 
 	/*
-	 * Below we are going to use different listener to learn the taste of
-	 * different listners used in java,javafx and for jfoenix librarys.
-	 * 
+	 * Below we are going to use different listener to learn the taste of different listners used in java,javafx and for jfoenix librarys.
 	 */
 
 	private Tab tab = new Tab();
@@ -50,8 +48,7 @@ public class MenuView {
 		final ObservableList<Tab> tabs = tabPane.getTabs();
 		SingleSelectionModel<Tab> selectedTab = tabPane.getSelectionModel();
 
-		// -------------------------------------------------------Home
-		// listener----------------------------------------------------------
+		// -------------------------------------------------------Home listener----------------------------------------------------------
 		home.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
@@ -79,6 +76,7 @@ public class MenuView {
 
 			// When the menu click Hamburger and DrawerStack will hide
 			onClickHideHamburger();
+			
 			// tab name and id for accessing
 			tab.setText("History");
 			tab.setId("History");
@@ -99,8 +97,7 @@ public class MenuView {
 
 		});
 
-		// -------------------------------------------------------Downloads
-		// listener-----------------------------------------------------
+		// -------------------------------------------------------Downloads listener-----------------------------------------------------
 		downloads.setOnAction((e) -> {
 
 			// When the menu click Hamburger and DrawerStack will hide
@@ -122,8 +119,7 @@ public class MenuView {
 			// tab.setId("downloads");
 		});
 
-		// -------------------------------------------------------Bookmarks
-		// listener-----------------------------------------------------
+		// -------------------------------------------------------Bookmarks listener-----------------------------------------------------
 		bookmarks.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
@@ -137,8 +133,7 @@ public class MenuView {
 			}
 		});
 
-		// -------------------------------------------------------SaveAsPdf
-		// listener-----------------------------------------------------
+		// -------------------------------------------------------SaveAsPdf listener-----------------------------------------------------
 		saveAsPdf.addEventHandler(MouseEvent.MOUSE_CLICKED, (ActionEvent) -> {
 
 			// When the menu click Hamburger and DrawerStack will hide
@@ -152,8 +147,7 @@ public class MenuView {
 			th.start();
 		});
 
-		// -------------------------------------------------------Setting
-		// listener-------------------------------------------------------
+		// -------------------------------------------------------Setting listener-------------------------------------------------------
 		setting.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
 
 			// When the menu click Hamburger and DrawerStack will hide

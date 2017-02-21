@@ -13,6 +13,9 @@ import database.History_Managment;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import org.jsoup.Jsoup;
+import org.w3c.dom.Document;
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.concurrent.Worker;
@@ -93,11 +96,13 @@ public class MainController implements Initializable {
 
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
+		
+		//Temporary set or url 
+		searchField.setText("https://www.facebook.com");
 
-		// ---------------All opens tabs should be closed so below line is for
-		// just closing tabs------------------------
+		// ---------------All opens tabs should be closed so below line is for  just closing tabs------------------------
 		tabPane.setTabClosingPolicy(TabClosingPolicy.ALL_TABS);
-		pageRender("https://www.google.com.pk/webhp?sourceid=chrome-instant&ion=1&espv=2&ie=UTF-8");
+		pageRender("https://www.facebook.com");
 		
 		//Search Button Listener 
 		search.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
@@ -150,8 +155,39 @@ public class MainController implements Initializable {
 		//----------------------------------------------------------------------------------------------------//
 		
 		// end intializer method
-		}
+		
+		webEngine.getLoadWorker().stateProperty().addListener(new ChangeListener<State>() {
+			@Override
+			public void changed(ObservableValue ov, State oldState, State newState) {
 
+				if (newState == Worker.State.SUCCEEDED) {
+					try{
+					
+					Document doc1 = (Document) webEngine.getDocument();
+					currentUrlDoc(doc1);
+					//System.out.println(webEngine.executeScript("document.documentElement.outerHTML"));
+					
+					}
+					catch(Exception e){
+						System.out.println(e);
+					}
+					//System.out.println("WebEngine Location: "+ webEngine.getLocation());
+					
+				}
+				
+			}
+			
+		});
+		
+	//end of init method
+	}
+	
+	public Document currentUrlDoc(org.w3c.dom.Document document){
+		return (Document) document;
+	}
+
+	//---------------------------------------------Curent Url Document Getting-----------------------------//
+	
 	
 	//mehtod to rendere page
 	public void pageRender(String url)
@@ -172,5 +208,24 @@ public class MainController implements Initializable {
 		webEngine.load(url);
 		borderpane.setCenter(browser);
 		}
+	
+		
+	
+	
+	
 	// end class
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
