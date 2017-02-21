@@ -1,5 +1,5 @@
 package userInterface;
 
-public class Home {
+class Home {
 
 }

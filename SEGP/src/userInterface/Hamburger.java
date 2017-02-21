@@ -1,4 +1,4 @@
-package userInterface;
+	package userInterface;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDrawer;
@@ -26,6 +26,7 @@ public class Hamburger {
 	public HamburgerSlideCloseTransition transition;
 	public JFXDrawersStack drawersStack = new JFXDrawersStack();
 	public JFXDrawer rightDrawer = new JFXDrawer();
+	
 	public JFXHamburger getHamburger(JFXHamburger hamburger, BorderPane borderpane, TabPane settingTabPane) {
 		
 		transition = new HamburgerSlideCloseTransition(hamburger);

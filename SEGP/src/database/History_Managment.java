@@ -8,13 +8,21 @@ public class History_Managment
 {
 	private static Connection c = null;
 	private static PreparedStatement perp=null;
-	//private static java.util.Date date = new java.util.Date();
-	//private static SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+
+	private static java.util.Date date = new java.util.Date();
+	private static SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+
+	public static void sleep(int mSec){
+		for (int i =0 ; i<mSec*mSec*1000 ; i++){
+			
+		}
+	}
+	
+	
 	
 	public static void main(String [] args)
 	{
 		showHistory();
-		
 	}
 //------------------------------------------------------Creating SQLITE DATABASE and TABLE--------------------------------------//
 	public static void CreateDataBase()
@@ -77,7 +85,7 @@ public static ResultSet showHistory()
 	{
 		 Class.forName("org.sqlite.JDBC");
 	     c = DriverManager.getConnection("jdbc:sqlite:History.db");
-		 String str="select * from history order by time DESC,date DESC";
+		 String str="select * from history order by time DESC ,date DESC";
 	     perp=c.prepareStatement(str);
 	     rs=perp.executeQuery();
 	    /* while(rs.next())
