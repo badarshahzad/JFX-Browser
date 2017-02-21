@@ -67,29 +67,7 @@ public class MainController implements Initializable {
 	 * 
 	 ***********************************************************************************************************/
 
-	@FXML
-	private BorderPane rootBorderPane;
-	@FXML
-	private BorderPane borderpane;
-	@FXML
-	private JFXButton back;
-	@FXML
-	private JFXButton forward;
-	@FXML
-	private JFXButton refresh;
-	@FXML
-	private JFXButton search;
 
-	@FXML
-	private JFXTextField searchField;
-	@FXML
-	private TabPane tabPane;
-	@FXML
-	private Tab addNewTab;
-	@FXML
-	private JFXHamburger hamburger;
-	@FXML
-	private GridPane navigationBar;
 	@FXML private BorderPane rootBorderPane;
 	@FXML private BorderPane borderpane;
 	@FXML private JFXButton back;
@@ -99,18 +77,15 @@ public class MainController implements Initializable {
 	@FXML private Tab addNewTab; 
 	@FXML private JFXHamburger hamburger;
 	@FXML private GridPane navigationBar;
-	private VBox drawerPane = new VBox();
-	private WebView browser = new WebView();
-	private WebEngine webEngine = browser.getEngine();
 	//Classes objects to get methods or set methods access
 	private History object1 = new History();
 	private Hamburger ham = new Hamburger();
-	
+
 	public VBox drawerPane = new VBox();
 	// make obejc to get the setter method for url
 	public WebView browser = new WebView();
 	public WebEngine webEngine = browser.getEngine();
-	
+
 
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
@@ -119,7 +94,7 @@ public class MainController implements Initializable {
 		// just closing tabs------------------------
 		tabPane.setTabClosingPolicy(TabClosingPolicy.ALL_TABS);
 		pageRender("https://www.google.com.pk/webhp?sourceid=chrome-instant&ion=1&espv=2&ie=UTF-8");
-		
+
 		// ---------------------webView---------------------------webEngine----------------------------------------------
 
 		// --------------------- Default url will be google
@@ -129,7 +104,7 @@ public class MainController implements Initializable {
 		// --------------Renderer Class-------webView-----------webEngine----------------------------------------------
 		searchField.setText(webEngine.getLocation());
 		borderpane.setCenter(browser);
-		
+
 		//---------------URL of addressbar load if user clicked search button
 
 		search.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
@@ -143,8 +118,8 @@ public class MainController implements Initializable {
 		 * 				url or changing properity in browser. So that's why we yet 
 		 * 				remove to abstain the bug that we faced while showing work to mentor
 		 ************************************************************************************/
-			//webEngine.load(searchField.getText());
-			/*webEngine.getLoadWorker().stateProperty().addListener(new ChangeListener<State>() {
+		//webEngine.load(searchField.getText());
+		/*webEngine.getLoadWorker().stateProperty().addListener(new ChangeListener<State>() {
 				@Override
 				public void changed(ObservableValue ov, State oldState, State newState) {
 					if (newState == Worker.State.SUCCEEDED) {
@@ -153,136 +128,138 @@ public class MainController implements Initializable {
 						searchField.setText(webEngine.getLocation());
 =======
 						//System.out.println("New Link"+webEngine.getLocation());
-						
+
 						//searchField.setText(webEngine.getLocation());
 >>>>>>> upstream/master
-						
+
 					}
 
 				}
 			});*/
-			
+
 		// ---------------------Listner for search textfield of search button---------------------------------------
 		searchField.setOnKeyPressed(event -> {
 
 			//Search Field Listener
 			searchField.setOnKeyPressed(e -> {
 
-			if (event.getCode() == KeyCode.ENTER) {
-				pageRender(searchField.getText()); //method call
-			}
-		});
-
-		//System.out.println(webEngine.getLocation());
-		
-		//-----------------------Thread is continously running to check any change of link in browser to set value in broser addressbar
-		
-//		
-		webEngine.getLoadWorker().stateProperty().addListener(new ChangeListener<State>() {
-			@Override
-			public void changed(ObservableValue ov, State oldState, State newState) {
-			
-				if (newState == Worker.State.SUCCEEDED) {
-					searchField.setText(webEngine.getLocation());
-					webEngine.getLocation();
-					//System.out.println("URL changing: "+ webEngine.getLocation());
-					//webEngine.load(webEngine.getLocation());
-					//webEngine.load(searchField.getText());
-					
+				if (event.getCode() == KeyCode.ENTER) {
+					pageRender(searchField.getText()); //method call
 				}
-			}
-		});
+			});
 
-		//--------------------Bookmarks and History detials didn't start yet !-------------------------
-		/*
-		 * bookmarks.setOnAction(new EventHandler<ActionEvent>() {
-		 * 
-		 * @Override public void handle(ActionEvent event) { // TODO
-		 * Auto-generated method stub String url = engine.getLocation();
-		 * System.out.println(url); // engine.get // write.println(url); }
-		 * 
-		 * }); History.setOnAction(new EventHandler<ActionEvent>(){
-		 * 
-		 * @Override public void handle(ActionEvent event) { // TODO
-		 * Auto-generated method stub WebHistory history = engine.getHistory();
-		 * ObservableList<Entry> list = history.getEntries(); for(int i=0 ; i<
-		 * list.size();i++){ System.out.println(list.get(i)); } } });
-		 * 
-		 ************************************************************************/
+			//System.out.println(webEngine.getLocation());
 
-		// --------------------------------------------------------Backward-------------------------------------------
+			//-----------------------Thread is continously running to check any change of link in browser to set value in broser addressbar
 
-		back.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
-			try {
+			//		
+			webEngine.getLoadWorker().stateProperty().addListener(new ChangeListener<State>() {
+				@Override
+				public void changed(ObservableValue ov, State oldState, State newState) {
 
-				WebHistory history = webEngine.getHistory();
-				history.go(-1);
-				if(forward.isDisable()){
-					forward.setDisable(false);
+					if (newState == Worker.State.SUCCEEDED) {
+						searchField.setText(webEngine.getLocation());
+						webEngine.getLocation();
+						//System.out.println("URL changing: "+ webEngine.getLocation());
+						//webEngine.load(webEngine.getLocation());
+						//webEngine.load(searchField.getText());
+
+					}
 				}
-			} catch (IndexOutOfBoundsException e1) {
-				back.setDisable(true);      // made changes to disable or enable forward button.
-				
-			}
-		});
+			});
 
-		// --------------------------------------------------------Forward--------------------------------------------
+			//--------------------Bookmarks and History detials didn't start yet !-------------------------
+			/*
+			 * bookmarks.setOnAction(new EventHandler<ActionEvent>() {
+			 * 
+			 * @Override public void handle(ActionEvent event) { // TODO
+			 * Auto-generated method stub String url = engine.getLocation();
+			 * System.out.println(url); // engine.get // write.println(url); }
+			 * 
+			 * }); History.setOnAction(new EventHandler<ActionEvent>(){
+			 * 
+			 * @Override public void handle(ActionEvent event) { // TODO
+			 * Auto-generated method stub WebHistory history = engine.getHistory();
+			 * ObservableList<Entry> list = history.getEntries(); for(int i=0 ; i<
+			 * list.size();i++){ System.out.println(list.get(i)); } } });
+			 * 
+			 ************************************************************************/
 
-		forward.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
-			try {
-				WebHistory history = webEngine.getHistory();
-				history.go(1);
-				if(back.isDisable()){
-					back.setDisable(false);
+			// --------------------------------------------------------Backward-------------------------------------------
+
+			back.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
+				try {
+
+					WebHistory history = webEngine.getHistory();
+					history.go(-1);
+					if(forward.isDisable()){
+						forward.setDisable(false);
+					}
+				} catch (IndexOutOfBoundsException e1) {
+					back.setDisable(true);      // made changes to disable or enable forward button.
+
 				}
-			} catch (IndexOutOfBoundsException e1) {
-				forward.setDisable(true);    // made changes to disable or enable backward button.
-				
-			}
-		});
+			});
 
-		// -------------------------------------------Refresh--------------------------------------------------------
+			// --------------------------------------------------------Forward--------------------------------------------
 
-		refresh.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
-			webEngine.reload();
-		});
-		
-		// -------------------------------------------Hamburger----Drawer----Menu------------------------------------
-		
-		/*
-		*	New tabs will add and but due to some reasome the tabpan_view is
-		*	comment as We cannont handle yet 
-		*	The Mulit view tabs yet our aim to handle single tab
-		***********************************************************/
-		ham.getHamburger(hamburger, borderpane, tabPane);
-		//----------------------------------------TabPane-----------------------------------------------------//
-		//Adding multiple tabs would be done later.
-		
-		TabPaneView tabpan_view = new TabPaneView();
-		//----------------------------------------------------------------------------------------------------//
-		
-		// end intializer method
+			forward.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
+				try {
+					WebHistory history = webEngine.getHistory();
+					history.go(1);
+					if(back.isDisable()){
+						back.setDisable(false);
+					}
+				} catch (IndexOutOfBoundsException e1) {
+					forward.setDisable(true);    // made changes to disable or enable backward button.
+
+				}
+			});
+
+			// -------------------------------------------Refresh--------------------------------------------------------
+
+			refresh.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
+				webEngine.reload();
+			});
+
+			// -------------------------------------------Hamburger----Drawer----Menu------------------------------------
+
+			/*
+			 *	New tabs will add and but due to some reasome the tabpan_view is
+			 *	comment as We cannont handle yet 
+			 *	The Mulit view tabs yet our aim to handle single tab
+			 ***********************************************************/
+			ham.getHamburger(hamburger, borderpane, tabPane);
+			//----------------------------------------TabPane-----------------------------------------------------//
+			//Adding multiple tabs would be done later.
+
+			TabPaneView tabpan_view = new TabPaneView();
+			//----------------------------------------------------------------------------------------------------//
+
+			// end intializer method
+
 		}
 
-	
-	//mehtod to rendere page
-	public void pageRender(String url)
-	{
-		webEngine.getLoadWorker().stateProperty().addListener(new ChangeListener<State>() {
-			@Override
-			public void changed(ObservableValue ov, State oldState, State newState) {
+			//mehtod to rendere page
+			public void pageRender(String url)
+			{
+				webEngine.getLoadWorker().stateProperty().addListener(new ChangeListener<State>() {
+					@Override
+					public void changed(ObservableValue ov, State oldState, State newState) {
 
-				if (newState == Worker.State.SUCCEEDED) {
-					searchField.setText(webEngine.getLocation());
-					if(!(webEngine.getLocation().equals("about:blank")))
-					History_Managment.insertUrl(webEngine.getLocation());
-				}
-				
+						if (newState == Worker.State.SUCCEEDED) {
+							searchField.setText(webEngine.getLocation());
+							if(!(webEngine.getLocation().equals("about:blank")))
+								History_Managment.insertUrl(webEngine.getLocation());
+						}
+
+					}
+
+				});
+				webEngine.load(url);
+				borderpane.setCenter(browser);
 			}
-			
-		});
-		webEngine.load(url);
-		borderpane.setCenter(browser);
+			// end class
 		}
-	// end class
+	}
 }
