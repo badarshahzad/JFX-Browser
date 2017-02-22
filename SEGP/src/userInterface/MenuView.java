@@ -69,18 +69,8 @@ public class MenuView {
 
 		// -------------------------------------------------------Historylistener-------------------------------------------------------
 		history.setOnAction((ActionEvent) -> {
-			System.out.println("History Start!");
-			Renderer b = new Renderer();
-			WebHistory History = b.webEngine.getHistory();
-			ObservableList<Entry> list = History.getEntries();
-			for (int i = 0; i < list.size(); i++) {
-				System.out.println(list.get(i));
-			}
 			// When the menu click Hamburger and DrawerStack will hide
 			onClickHideHamburger();
-
-			System.out.println("History");
-
 			// tab name and id for accessing
 			tab.setText("History");
 			tab.setId("history");

@@ -1,89 +1,133 @@
 package userInterface;
 
-import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.ResourceBundle;
-
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXDrawer;
-import com.jfoenix.controls.JFXDrawersStack;
-import com.jfoenix.controls.JFXTreeTableColumn;
-import com.jfoenix.controls.JFXTreeTableView;
-import com.jfoenix.controls.RecursiveTreeItem;
-import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+import java.util.ArrayList;
 
 import database.History_Managment;
-
-import com.jfoenix.controls.JFXDrawer.DrawerDirection;
-
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Tab;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.TreeCell;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
-import javafx.scene.control.TreeTableColumn.CellDataFeatures;
+import javafx.scene.control.TreeView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
-import javafx.util.Callback;
+import javafx.scene.text.Text;
 
-public class History implements Initializable{
+public class History
+{
+	@FXML
+	private TreeView Tree_View=new TreeView();
+	@FXML
+	private TreeTableColumn Date=new TreeTableColumn();
+	@FXML
+	private TreeTableColumn Links=new TreeTableColumn();
+	@FXML
+	private TreeTableColumn Time=new TreeTableColumn();
 	
-	private JFXButton setting = new JFXButton("Setting");
-	private JFXButton history = new JFXButton("History");
+	HistoryTree hs=new HistoryTree();
+	ArrayList children=hs.getStoreItems();
+	TreeItem rootItem = new TreeItem("History");
+	
+	
+	public Tab getHistoryView(Tab settingTab, BorderPane borderpane)
+	{
+		
+		rootItem.getChildren().addAll(children);
+		Tree_View.setRoot(rootItem);
+		borderpane.setLeft(Tree_View);
+		
+		try{
+		borderpane.setCenter(FXMLLoader.load(getClass().getResource("History.fxml")));
+		}	
+		catch(Exception e1)
+		{
+		System.out.println("History NOT FOUND..!"+ " \n "+e1);
+		e1.printStackTrace();
+		}	
+		settingTab.setContent(borderpane);
+		Tree_View.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEventHandle); 
+		return settingTab;
+	}
+	EventHandler<MouseEvent> mouseEventHandle = (MouseEvent event) -> {
+    handleMouseClicked(event);
+	};
+	
+
+
+	private void handleMouseClicked(MouseEvent event) {
+		Node node = event.getPickResult().getIntersectedNode();
+	    // Accept clicks only on node cells, and not on empty spaces of the TreeView
+	    if (node instanceof Text || (node instanceof TreeCell && ((TreeCell) node).getText() != null)) {
+	        String name = (String) ((TreeItem)Tree_View.getSelectionModel().getSelectedItem()).getValue();
+	        if(name.equals("History"))
+	        {
+	        	ResultSet rs=History_Managment.showHistory();
+	        	showAllHistory(rs);
+	        }
+	    }
+	   
+		
+	}
+	public void showAllHistory(ResultSet rs)
+	{
+		try {
+			while(rs.next()) //loop for data fetching and pass it to GUI table view
+			 {
+				 String link1 =rs.getString(1);
+				 String time1=rs.getString(2);
+				 String date1=rs.getString(3);
+				 System.out.println(link1);
+				 System.out.println(time1);
+				 System.out.println(date1);
+			 } 
+		}
+		catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+	}
+	
+}
+
+	
+	/*@FXML
+	private TreeView Tree_View;
+	HistoryTree hs=new HistoryTree();
+	TreeItem rootItem = new TreeItem("History");
+	ArrayList children=hs.getStoreItems();
+	
+	
+	/*
+	
+	private ObservableList<HistoryStoreView> historyStoreView =  FXCollections.observableArrayList();
+	HistoryTree hs=new HistoryTree();
+	TreeView treeView = new TreeView();
+	TreeItem rootItem = new TreeItem("History");
+	
 	public Tab getHistoryView(Tab settingTab, BorderPane borderpane) {
-
-		//JFXButton setting = new JFXButton("Setting");
-		setting.setMinSize(100, 50);
-		//JFXButton history = new JFXButton("History");
-		history.setMinSize(100, 50);
-
-		/*
-		 * Add two buttons in gridpane that will be put in
-		 * drawer->drawerstack(container) -> left side of border to come ount
-		 * whenever user click the setting button
-		 */
-		GridPane gridPane = new GridPane();
-		gridPane.add(setting, 0, 0);
-		gridPane.add(history, 0, 1);
-
-		// ------------------------------------------------------Right----DrawerStack--------------------------------
-
-		// Alredy detialed mention in Hamburger class about JFx DrawerStack and
-		// JFXDrawer
-		JFXDrawersStack drawersStack = new JFXDrawersStack();
-		JFXDrawer leftDrawer = new JFXDrawer();
-		leftDrawer.setDirection(DrawerDirection.LEFT);
-		leftDrawer.setDefaultDrawerSize(80);
-		leftDrawer.setSidePane(gridPane);
-		leftDrawer.setResizableOnDrag(true);
-
-		borderpane.setLeft(drawersStack);
+		ArrayList children=hs.getStoreItems();
+		rootItem.getChildren().addAll(children);
+		treeView.setRoot(rootItem);
+		treeView.setPrefSize(100,100);
+		treeView.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEventHandle); 
+		borderpane.setLeft(treeView);
+		
 		try{
 			//borderpane.setCenter(table);
 			borderpane.setCenter(FXMLLoader.load(getClass().getResource("History.fxml")));
-			
-			//borderpane.setCenter(treeTableView);
-			//borderpane.setMinSize(600, 400);
-			//borderpane.setMaxSize(1024, 800);
+			borderpane.setCenter(treeTableView);
+			borderpane.setMinSize(600, 400);
+			borderpane.setMaxSize(1024, 800);
 		}catch(Exception e1){
-			System.out.println("File is not find for setting! "+ " \n "+e1);
+			System.out.println("History NOT FOUND..!"+ " \n "+e1);
 			e1.printStackTrace();
 		}
 		
-		drawersStack.toggle(leftDrawer);
 		settingTab.setContent(borderpane);
 		return settingTab;
 	}
@@ -91,34 +135,12 @@ public class History implements Initializable{
 	//This is a Javafx Table view
 	@FXML
     private JFXTreeTableView<HistoryStoreView> treeTableView;
-	
-	
-	//JFXTreeTableView<HistoryStoreView> treeTableView = new JFXTreeTableView<>();
-	
-	//Set History method is set by main browser class and can easily set the history 
-	String date;
-	String link;
-	String time;
-	public void setHistory(String dat, String lin, String tim){
-
-		//historyStoreView.add(new HistoryStoreView(date,link,time));
-		this.date = dat;
-		this.time = tim;
-		this.link = lin;
-	}
-	
+	EventHandler<MouseEvent> mouseEventHandle = (MouseEvent event) -> {
+	    handleMouseClicked(event);
+	};
 	@Override
 	public void initialize(URL location, ResourceBundle resources) 
 	{
-		//For every column we have to create a new Treetable column as we did below and we are getting the
-		//the value of cloumn from below method that is ObservableValue method declare below
-		
-		
-		//Date Colun Header: column Header name is set in parametters, widht of column and we
-		//are getting the values by constructor method as return value from HistoryStorageViewClass
-		//setCellVallueFactory method is to just get the Name of class in Callback method parameters
-		//to get value from class constructor 
-		//Furthur detials is hardly to explain please look at API.  
 		JFXTreeTableColumn<HistoryStoreView, String> date =  new JFXTreeTableColumn<>("Date ");
 		date.setMinWidth(120);
 		date.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<HistoryStoreView,String>, ObservableValue<String>>() {
@@ -128,6 +150,7 @@ public class History implements Initializable{
 				return param.getValue().getValue().date;
 			}
 		});
+		
 		
 		//link column
 		JFXTreeTableColumn<HistoryStoreView, String> link =  new JFXTreeTableColumn<>("Link");
@@ -152,28 +175,15 @@ public class History implements Initializable{
 		});
 		
 		
-		ObservableList<HistoryStoreView> historyStoreView =  FXCollections.observableArrayList();
-		//Give data to table as an example to checking its working fine
-		ResultSet rs=History_Managment.showHistory(); //method call to fetch the data from history table.
-		 
-		try {
-			while(rs.next()) //loop for data fetching and pass it to GUI table view
-			 {
-				 String link1 =rs.getString(1);
-				 String time1=rs.getString(2);
-				 String date1=rs.getString(3);
-				 historyStoreView.add(new HistoryStoreView(date1,link1,time1));
-				 
-			 }
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		//ObservableList<HistoryStoreView> historyStoreView =  FXCollections.observableArrayList();
+		//Give data to table as an example to checking its working fin
 		final TreeItem <HistoryStoreView> root = new RecursiveTreeItem<HistoryStoreView>(historyStoreView,RecursiveTreeObject::getChildren);
 		treeTableView.getColumns().setAll(date,link,time);
 		treeTableView.setRoot(root);
 		treeTableView.setShowRoot(false);
 		
 	}
+	
 	//There is class for data entry in table 
 	
 	class HistoryStoreView extends RecursiveTreeObject<HistoryStoreView>{
@@ -187,5 +197,39 @@ public class History implements Initializable{
 			this.time = new SimpleStringProperty(time);
 		}
 	}
+	
+	
+	
+	
+	private void handleMouseClicked(MouseEvent event) {
+	    Node node = event.getPickResult().getIntersectedNode();
+	    // Accept clicks only on node cells, and not on empty spaces of the TreeView
+	    if (node instanceof Text || (node instanceof TreeCell && ((TreeCell) node).getText() != null)) {
+	        String name = (String) ((TreeItem)treeView.getSelectionModel().getSelectedItem()).getValue();
+	        if(name.equals("History"))
+	        {
+	        	ResultSet rs=History_Managment.showHistory(); //method call to fetch the data from history table.
+	    		try {
+	    			while(rs.next()) //loop for data fetching and pass it to GUI table view
+	    			 {
+	    				 String link1 =rs.getString(1);
+	    				 String time1=rs.getString(2);
+	    				 String date1=rs.getString(3);
+	    				 System.out.println(link1);
+	    				 System.out.println(time1);
+	    				 System.out.println(date1);
+	    				 historyStoreView.add(new HistoryStoreView(date1,link1,time1));
+	    				 
+	    			 }
+	    		} catch (SQLException e) {
+	    			e.printStackTrace();
+	    		}
+	        	
+	        }
+	
+	    }
+	}*/
+	//}
 
-}
+
+

@@ -11,14 +11,6 @@ public class History_Managment
 {
 	private static Connection c = null;
 	private static PreparedStatement perp=null;
-	//private static java.util.Date date = new java.util.Date();
-	//private static SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
-	
-	public static void main(String [] args)
-	{
-		showHistory();
-		
-	}
 //------------------------------------------------------Creating SQLITE DATABASE and TABLE--------------------------------------//
 	public static void CreateDataBase()
 	{		
@@ -43,21 +35,18 @@ public class History_Managment
 	
 	public static void insertUrl(String url)
 	{
-		 
-		Connection c = null;
-		PreparedStatement perp=null;
 		java.util.Date date = new java.util.Date();
-		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+		SimpleDateFormat formate_time = new SimpleDateFormat("HH:mm:ss");
 		
 		try
 		{
 			  Class.forName("org.sqlite.JDBC");
 		      c = DriverManager.getConnection("jdbc:sqlite:History.db");
 			  String insert="insert or replace into history(url,Time)"+"values(?,?)";
-			  String str=sdf.format(date);
+			  String time=formate_time.format(date);
 		      perp=c.prepareStatement(insert);
 		      perp.setString(1, url);
-		      perp.setString(2,str);
+		      perp.setString(2,time);
 		      perp.executeUpdate();
 		      System.out.println("data has been inserted");
 		}
@@ -71,28 +60,14 @@ public class History_Managment
 
 public static ResultSet showHistory()
 {
-	
-	
-	Connection c = null;
-	PreparedStatement perp=null;
 	ResultSet rs=null;
 	try
 	{
 		 Class.forName("org.sqlite.JDBC");
 	     c = DriverManager.getConnection("jdbc:sqlite:History.db");
-		 String str="select * from history order by time DESC,date DESC";
+		 String str="select * from history order by date DESC";
 	     perp=c.prepareStatement(str);
 	     rs=perp.executeQuery();
-	    /* while(rs.next())
-		 {
-			 String link1 =rs.getString(1);
-			 String time1=rs.getString(2);
-			 String date1=rs.getString(3);
-			 System.out.println(link1);
-			 System.out.println(time1);
-			 System.out.println(date1);
-			 
-		 }*/
 	}
 	catch(Exception e)
 	{
