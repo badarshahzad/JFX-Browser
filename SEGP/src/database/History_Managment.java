@@ -1,16 +1,16 @@
 package database;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Timestamp;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 public class History_Managment
 {
 	private static Connection c = null;
 	private static PreparedStatement perp=null;
+	private static java.util.Date date = new java.util.Date();
+	private static SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+
 //------------------------------------------------------Creating SQLITE DATABASE and TABLE--------------------------------------//
 	public static void CreateDataBase()
 	{		

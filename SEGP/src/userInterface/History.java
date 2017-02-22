@@ -1,9 +1,7 @@
 package userInterface;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
 import database.History_Managment;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -230,6 +228,5 @@ public class History
 	    }
 	}*/
 	//}
-
 
 

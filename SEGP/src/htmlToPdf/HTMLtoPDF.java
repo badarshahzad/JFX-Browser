@@ -6,11 +6,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.util.Properties;
 
-import javax.swing.JFileChooser;
-
-import javafx.stage.FileChooser;
-
-
 public class HTMLtoPDF {
 	
 	@SuppressWarnings("deprecation")

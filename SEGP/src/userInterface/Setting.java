@@ -49,11 +49,13 @@ import javafx.stage.Stage;
 
 public class Setting implements Initializable {
 
+	private JFXDrawersStack drawersStack = new JFXDrawersStack();
+	private JFXDrawer leftDrawer = new JFXDrawer();
+	private JFXButton setting = new JFXButton("Setting");
+	private JFXButton history = new JFXButton("History");
 	public Tab getSettingView(Tab settingTab, BorderPane borderpane) {
 
-		JFXButton setting = new JFXButton("Setting");
 		setting.setMinSize(100, 50);
-		JFXButton history = new JFXButton("History");
 		history.setMinSize(100, 50);
 
 		/*
@@ -65,12 +67,10 @@ public class Setting implements Initializable {
 		gridPane.add(setting, 0, 0);
 		gridPane.add(history, 0, 1);
 
-		// ------------------------------------------------------Right----DrawerStack--------------------------------
+		// ------------------------------------------------------Right----DrawerStack----------------------------------------------
 
 		// Alredy detialed mention in Hamburger class about JFx DrawerStack and
 		// JFXDrawer
-		JFXDrawersStack drawersStack = new JFXDrawersStack();
-		JFXDrawer leftDrawer = new JFXDrawer();
 		leftDrawer.setDirection(DrawerDirection.LEFT);
 		leftDrawer.setDefaultDrawerSize(80);
 		leftDrawer.setSidePane(gridPane);
@@ -81,7 +81,6 @@ public class Setting implements Initializable {
 
 		try {
 			// ScrollPane scrollPane = new ScrollPane();
-
 			borderpane.setCenter(FXMLLoader.load(getClass().getResource("Setting.fxml")));
 		} catch (Exception e1) {
 			System.out.println("File is not find for setting! " + " \n " + e1);
@@ -90,6 +89,7 @@ public class Setting implements Initializable {
 		// borderpane.setCenter(root);
 		drawersStack.toggle(leftDrawer);
 		settingTab.setContent(borderpane);
+		System.out.println("Success in Setting! ");
 
 		return settingTab;
 	}
@@ -114,7 +114,7 @@ public class Setting implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		
+
 		changeProxyBtn.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
 			ToggleGroup group = new ToggleGroup();
 			JFXRadioButton noProxy = new JFXRadioButton("No Proxy");
@@ -141,7 +141,7 @@ public class Setting implements Initializable {
 			if (result.get() == ButtonType.OK) {
 				if (group.getSelectedToggle().equals(noProxy)) {
 					System.out.println("No Proxy");
-
+					//---------------------------Remove the proxy address from here and give proper look to enter proxy----Remainging!
 					// Remove Proxy for Http
 					systemProperties.setProperty("http.proxyHost", "");
 					systemProperties.setProperty("http.proxyPort", "");
