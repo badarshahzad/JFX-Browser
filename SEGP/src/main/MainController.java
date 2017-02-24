@@ -66,7 +66,6 @@ public class MainController implements Initializable {
 	private JFXButton refresh;
 	@FXML
 	private JFXButton search;
-
 	@FXML
 	private JFXTextField searchField;
 	@FXML

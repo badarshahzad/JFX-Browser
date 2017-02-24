@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXTreeTableView?>
+<?import javafx.scene.control.TreeTableColumn?>
 
 
-<JFXTreeTableView fx:id="treeTableView" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="userInterface.History" />
+<JFXTreeTableView xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1">
+   <columns>
+      <TreeTableColumn fx:id="Date" prefWidth="135.0" text="Date" />
+      <TreeTableColumn fx:id="Links" minWidth="0.0" prefWidth="398.0" text="Links" />
+      <TreeTableColumn fx:id="Time" prefWidth="148.0" text="Time" />
+   </columns>
+</JFXTreeTableView>

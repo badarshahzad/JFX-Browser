@@ -49,10 +49,6 @@ public class TabPaneView {
 			    			
 			    			//###That was a bug tabpane.getSelectionModel().select(tab);
 			    			//System.out.println("Now Size"+tabs.size());
-			    			
-			    			
-			        		
-			        		
 			        	}
 			        }
 			        
