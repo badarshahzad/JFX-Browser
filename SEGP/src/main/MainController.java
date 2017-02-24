@@ -8,9 +8,8 @@ import database.History_Managment;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import org.jsoup.Jsoup;
-import org.w3c.dom.Document;
 
+import org.w3c.dom.Document;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.concurrent.Worker;
@@ -88,7 +87,7 @@ public class MainController implements Initializable {
 	public WebView browser = new WebView();
 	public WebEngine webEngine = browser.getEngine();
 	
-
+	private Document doc;
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 		
@@ -158,8 +157,9 @@ public class MainController implements Initializable {
 				if (newState == Worker.State.SUCCEEDED) {
 					try{
 					
-					Document doc1 = (Document) webEngine.getDocument();
-					currentUrlDoc(doc1);
+					doc = (Document) webEngine.getDocument();
+					currentUrlDoc(doc);
+					
 					//System.out.println(webEngine.executeScript("document.documentElement.outerHTML"));
 					
 					}
@@ -180,7 +180,9 @@ public class MainController implements Initializable {
 	public Document currentUrlDoc(org.w3c.dom.Document document){
 		return (Document) document;
 	}
-
+	public Document getDoc(){
+		return doc;
+	}
 	//---------------------------------------------Curent Url Document Getting-----------------------------//
 	
 	
@@ -193,8 +195,12 @@ public class MainController implements Initializable {
 
 				if (newState == Worker.State.SUCCEEDED) {
 					searchField.setText(webEngine.getLocation());
-					if(!(webEngine.getLocation().equals("about:blank")))
-					History_Managment.insertUrl(webEngine.getLocation());
+					if(!(webEngine.getLocation().equals("about:blank"))){
+						
+//					History_Managment.insertUrl(webEngine.getLocation());
+						
+						History_Managment.insertUrl(webEngine.getLocation());
+					}
 				}
 				
 			}
