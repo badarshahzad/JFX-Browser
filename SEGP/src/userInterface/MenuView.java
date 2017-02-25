@@ -25,6 +25,10 @@ import javafx.scene.web.WebHistory;
 import javafx.scene.web.WebHistory.Entry;
 import main.Renderer;
 
+/**
+ * @author SEGP-group-3
+ *
+ */
 public class MenuView {
 
 	/*
@@ -39,6 +43,18 @@ public class MenuView {
 	private JFXDrawersStack drawersStack;
 	private JFXDrawer rightDrawer;
 
+	/**
+	 * @param home home button
+	 * @param history history button
+	 * @param downloads download button 
+	 * @param bookmarks bookmarks button 
+	 * @param saveAsPdf save as pdf button
+	 * @param setting setting button
+	 * @param tabPane tabpane object to show content triggered by these buttons.
+	 * @param transition javaFX HamburgerTransition object to switch transition states of Hamburger.
+	 * @param drawersStack javaFx object drawerStack object for Hamburger 
+	 * @param rightDrawer javaFx Drawer to show/hide Hamburger related content e.g buttons.
+	 */
 	public void setMenuViewListener(JFXButton home, JFXButton history, JFXButton downloads, JFXButton bookmarks,
 			JFXButton saveAsPdf, JFXButton setting, TabPane tabPane, HamburgerSlideCloseTransition transition,
 			JFXDrawersStack drawersStack, JFXDrawer rightDrawer) {
@@ -211,6 +227,10 @@ public class MenuView {
 		});
 	}
 
+	/**
+	 * on click within drawser stack area hide HamBurger.
+	 * 
+	 */
 	public void onClickHideHamburger() {
 		transition.setRate(transition.getRate() * -1);
 		transition.play();

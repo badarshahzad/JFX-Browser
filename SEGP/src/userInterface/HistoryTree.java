@@ -6,6 +6,9 @@ public class HistoryTree
 {
 
 	// This method creates an ArrayList of TreeItems (Links)
+	/**
+	 * @return arraylist having javaFx treeItems object added to store history of a visited url.
+	 * 	 */
 	public ArrayList<TreeItem> getStoreItems()
 	{
 		ArrayList<TreeItem> storeItems = new ArrayList<TreeItem>();

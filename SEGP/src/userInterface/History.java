@@ -16,6 +16,10 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 
+/**
+ * @author SEGP-group-3
+ *
+ */
 public class History
 {
 	@FXML
@@ -32,6 +36,11 @@ public class History
 	TreeItem rootItem = new TreeItem("History");
 	
 	
+	/**
+	 * @param settingTab tab object to show settings interface in.
+	 * @param borderpane root pane to set settings interface in it.
+	 * @return javaFx tab object with fxml file loaded as history interface.
+	 */
 	public Tab getHistoryView(Tab settingTab, BorderPane borderpane)
 	{
 		
@@ -57,6 +66,9 @@ public class History
 	
 
 
+	/**
+	 * @param event mouse click event handler.
+	 */
 	private void handleMouseClicked(MouseEvent event) {
 		Node node = event.getPickResult().getIntersectedNode();
 	    // Accept clicks only on node cells, and not on empty spaces of the TreeView
@@ -71,6 +83,9 @@ public class History
 	   
 		
 	}
+	/**
+	 * @param rs sql resultset to get data from the table. 
+	 */
 	public void showAllHistory(ResultSet rs)
 	{
 		try {

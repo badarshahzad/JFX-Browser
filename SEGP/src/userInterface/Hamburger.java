@@ -20,6 +20,10 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 
+/**
+ * @author SEGP-group-3
+ *
+ */
 public class Hamburger {
 
 	public MenuView menuView = new MenuView();
@@ -27,6 +31,12 @@ public class Hamburger {
 	public JFXDrawersStack drawersStack = new JFXDrawersStack();
 	public JFXDrawer rightDrawer = new JFXDrawer();
 	
+	/**
+	 * @param hamburger method requires JFXHamburger object
+	 * @param borderpane to add hamburger at right side of the panel
+	 * @param settingTabPane pane to set browser's settings.
+	 * @return javaFx hamburger object with home,history,downloads,bookmarks,saveAsPdf,settings buttons and auto transitions.
+	 */
 	public JFXHamburger getHamburger(JFXHamburger hamburger, BorderPane borderpane, TabPane settingTabPane) {
 		
 		transition = new HamburgerSlideCloseTransition(hamburger);
@@ -106,7 +116,7 @@ public class Hamburger {
 		// -----------------------------------------------------Menview-Class method ----menuView----------------------------------------------
 		/*
 		 * We are just sending all listener to another class as in this way can
-		 * easily manager the listener Menu view. The purpose whenever one menu
+		 * easily manage the listener Menu view. The purpose whenever one menu
 		 * is clicked then this menView method send action event to MenuView
 		 * Class method menuView.
 		 */
@@ -118,9 +128,15 @@ public class Hamburger {
 	}
 
 	JFXButton historyBtn;
+	/**
+	 * @param b1 setter for history button
+	 */
 	public void setHistoryBtn(JFXButton b1){
 		this.historyBtn = b1;
 	}
+	/**
+	 * @return getter for history button
+	 */
 	public JFXButton getHistory(){
 		return historyBtn;
 	}
