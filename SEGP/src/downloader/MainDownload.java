@@ -7,19 +7,25 @@ import java.util.Scanner;
 
 import userInterface.Proxy;
 
+<<<<<<< HEAD
 /**
  * @author SEGP-Group3
  *
  */
+=======
+>>>>>>> upstream/master
 public class MainDownload {
 //	private  String title ;
 	/* sample URL
 	 * http://sound30.mp3slash.net/320/indian/raees/02%20-%20Zaalima%20[Songspk.GURU].mp3
 	 * */
 
+<<<<<<< HEAD
 	/**
 	 * @param url is a string which refers to the downloadable link of a file
 	 */
+=======
+>>>>>>> upstream/master
 	public void startDownload(String url){
 
 		DownloadThread thread = new DownloadThread(url, downloadFolder());
@@ -38,7 +44,11 @@ public class MainDownload {
 	 * Method create the Folder Downloads in the home/ if does not exists .To store the Download Stuff
 	 * */
 	/**
+<<<<<<< HEAD
 	 * @return the absolute path of the file
+=======
+	 * @return
+>>>>>>> upstream/master
 	 */
 	private String downloadFolder(){
 		File home = new File(System.getProperty("user.home"));
@@ -48,7 +58,10 @@ public class MainDownload {
 		}
 		return folder.getAbsolutePath();
 	}
+<<<<<<< HEAD
 
+=======
+>>>>>>> upstream/master
 	public static void main (String[] args){
 		System.out.println("hello");
 		MainDownload download = new MainDownload();

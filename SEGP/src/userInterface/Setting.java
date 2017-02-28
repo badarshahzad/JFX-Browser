@@ -47,10 +47,13 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+<<<<<<< HEAD
 /**
  * @author SEGP-Group3
  *
  */
+=======
+>>>>>>> upstream/master
 public class Setting implements Initializable {
 
 	private JFXDrawersStack drawersStack = new JFXDrawersStack();
@@ -116,9 +119,12 @@ public class Setting implements Initializable {
 	@FXML
 	private JFXButton changeProxyBtn;
 
+<<<<<<< HEAD
 	/* (non-Javadoc)
 	 * @see javafx.fxml.Initializable#initialize(java.net.URL, java.util.ResourceBundle)
 	 */
+=======
+>>>>>>> upstream/master
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 

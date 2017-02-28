@@ -12,6 +12,7 @@ import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.scene.control.TabPane;
 
+<<<<<<< HEAD
 /**
  * @author SEGP-Group3
  *
@@ -24,6 +25,10 @@ public class TabPaneView {
 	 * @param navigationBar searchBar
 	 * @return tabPane with url content added in a new tab
 	 */
+=======
+public class TabPaneView {
+	
+>>>>>>> upstream/master
 	public TabPane getTabPane(TabPane tabpane,Tab addNewTab,GridPane navigationBar){
 		tabpane.getSelectionModel().selectedItemProperty().addListener(
 				new ChangeListener<Tab>() {
