@@ -29,12 +29,22 @@ public class DownloadThread extends Thread{
 		this.url = url;
 		this.filePath = path;
 	}
+<<<<<<< HEAD
+	
+	/**
+	 * @param contentType  is a string which tells the types of file 
+	 * @param url is a string which refers to the download link of file
+	 * @return downloaded file
+	 * @throws URISyntaxException url syntax not valid
+	 * @throws MalformedURLException not a url
+=======
 	/**
 	 * @param dispose
 	 * @param fileURL
 	 * @return
 	 * @throws URISyntaxException 
 	 * @throws MalformedURLException 
+>>>>>>> upstream/master
 	 */
 	private File createFile(String contentType , String url) throws URISyntaxException, MalformedURLException{
 		String fileTitle = "[UNKNOWN]";
@@ -59,6 +69,13 @@ public class DownloadThread extends Thread{
 		}
 		return downloadFile;
 	}
+<<<<<<< HEAD
+	/**
+	 * @param content is a string which contains the file content
+	 * @return if the file is an application e.g pdf or exe or audio/video etc
+	 */
+=======
+>>>>>>> upstream/master
 	public boolean isDownloadable(String content){
 		System.out.println(content);
 		if(content.contains("application")){
@@ -70,7 +87,11 @@ public class DownloadThread extends Thread{
 		}
 		return false;
 		
+<<<<<<< HEAD
+	}
+=======
 	}//
+>>>>>>> upstream/master
 	/* (non-Javadoc)
 	 * @see java.lang.Thread#run()
 	 */

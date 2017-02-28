@@ -88,6 +88,24 @@ public class MainController implements Initializable {
 	public WebEngine webEngine = browser.getEngine();
 	
 
+<<<<<<< HEAD
+	/* (non-Javadoc)
+	 * @see javafx.fxml.Initializable#initialize(java.net.URL, java.util.ResourceBundle)
+	 */
+	/* (non-Javadoc)
+	 * @see javafx.fxml.Initializable#initialize(java.net.URL, java.util.ResourceBundle)
+	 */
+	/* (non-Javadoc)
+	 * @see javafx.fxml.Initializable#initialize(java.net.URL, java.util.ResourceBundle)
+	 */
+	/* (non-Javadoc)
+	 * @see javafx.fxml.Initializable#initialize(java.net.URL, java.util.ResourceBundle)
+	 */
+	/* (non-Javadoc)
+	 * @see javafx.fxml.Initializable#initialize(java.net.URL, java.util.ResourceBundle)
+	 */
+=======
+>>>>>>> upstream/master
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 		
@@ -176,6 +194,13 @@ public class MainController implements Initializable {
 	//end of init method
 	}
 	
+<<<<<<< HEAD
+	/**
+	 * @param document getter for DOM object of the loaded page
+	 * @return document 
+	 */
+=======
+>>>>>>> upstream/master
 	public Document currentUrlDoc(org.w3c.dom.Document document){
 		return (Document) document;
 	}
@@ -184,6 +209,12 @@ public class MainController implements Initializable {
 	
 	
 	//mehtod to rendere page
+<<<<<<< HEAD
+	/**
+	 * @param url of the page to be loaded
+	 */
+=======
+>>>>>>> upstream/master
 	public void pageRender(String url)
 	{
 		webEngine.getLoadWorker().stateProperty().addListener(new ChangeListener<State>() {

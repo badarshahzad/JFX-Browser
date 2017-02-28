@@ -20,6 +20,13 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 
+<<<<<<< HEAD
+/**
+ * @author SEGP-Group3
+ *
+ */
+=======
+>>>>>>> upstream/master
 public class Hamburger {
 
 	public MenuView menuView = new MenuView();
@@ -27,6 +34,15 @@ public class Hamburger {
 	public JFXDrawersStack drawersStack = new JFXDrawersStack();
 	public JFXDrawer rightDrawer = new JFXDrawer();
 	
+<<<<<<< HEAD
+	/**
+	 * @param hamburger  requires JFXHamburger Object
+	 * @param borderpane to add humburger at the right side of the panel
+	 * @param settingTabPane pane to set browser setting interface
+	 * @return javaFX hamburger object with home,history,download,book marks, settings ,save pdf ,buttons and transitions.
+	 */
+=======
+>>>>>>> upstream/master
 	public JFXHamburger getHamburger(JFXHamburger hamburger, BorderPane borderpane, TabPane settingTabPane) {
 		
 		transition = new HamburgerSlideCloseTransition(hamburger);
@@ -118,9 +134,21 @@ public class Hamburger {
 	}
 
 	JFXButton historyBtn;
+<<<<<<< HEAD
+	/**
+	 * @param b1 setter for history button
+	 */
 	public void setHistoryBtn(JFXButton b1){
 		this.historyBtn = b1;
 	}
+	/**
+	 * @return getter for history button
+	 */
+=======
+	public void setHistoryBtn(JFXButton b1){
+		this.historyBtn = b1;
+	}
+>>>>>>> upstream/master
 	public JFXButton getHistory(){
 		return historyBtn;
 	}
