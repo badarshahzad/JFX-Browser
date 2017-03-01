@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.layout.Pane?>
+
+<Pane minHeight="500.0" prefHeight="500.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.SignUpController">
+   <children>
+      <JFXTextField fx:id="firstname" labelFloat="true" layoutX="50.0" layoutY="55.0" minHeight="50.0" minWidth="300.0" promptText="First Name" />
+      <JFXTextField fx:id="lastname" labelFloat="true" layoutX="48.0" layoutY="144.0" minHeight="50.0" minWidth="300.0" promptText="Last Name" />
+      <JFXTextField fx:id="email" labelFloat="true" layoutX="49.0" layoutY="234.0" minHeight="50.0" minWidth="300.0" promptText="Email Address" />
+      <JFXPasswordField fx:id="pass" labelFloat="true" layoutX="51.0" layoutY="321.0" minHeight="50.0" minWidth="300.0" promptText="Password" />
+      <JFXButton fx:id="createacc" buttonType="RAISED" layoutX="62.0" layoutY="412.0" onAction="#createaccount" prefHeight="50.0" prefWidth="100.0" ripplerFill="WHITE" style="-fx-background-color: #03A9F4;" text="Submit" textFill="WHITE" />
+      <JFXButton fx:id="cancel" buttonType="RAISED" layoutX="243.0" layoutY="414.0" prefHeight="50.0" prefWidth="100.0" style="-fx-background-color: #03A9F4;" text="Cancel" textFill="WHITE" />
+   </children>
+</Pane>
