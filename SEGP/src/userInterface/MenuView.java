@@ -50,7 +50,8 @@ public class MenuView {
 		final ObservableList<Tab> tabs = tabPane.getTabs();
 		SingleSelectionModel<Tab> selectedTab = tabPane.getSelectionModel();
 
-		// -------------------------------------------------------Home listener----------------------------------------------------------
+		// -------------------------------------------------------Home
+		// listener----------------------------------------------------------
 		home.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
@@ -85,16 +86,13 @@ public class MenuView {
 			tab.setText("History");
 			tab.setId("history");
 
-			if (tabs.get(tabs.size() - 2).getId() != ("history")) {
+			History ob = new History();
+			tab = ob.getHistoryView(tab, settingBorderPane);
+			System.out.println("Size before history added"+tabs.size());
+			tabs.add(tabs.size() - 1, tab);
 
-				History ob = new History();
-				System.out.println("@BorderPane is set@");
-				tab = ob.getHistoryView(tab, settingBorderPane);
-				tabs.add(tabs.size() - 1, tab);
-
-				// The below is just select the current tab
-				selectedTab.select(tab);
-			}
+			// The below is just select the current tab
+			selectedTab.select(tab);
 
 			if (tabs.get(tabs.size() - 2).getId() == ("history")) {
 				System.out.println("Adfa");
@@ -104,7 +102,8 @@ public class MenuView {
 
 		});
 
-		// -------------------------------------------------------Downloads listener-----------------------------------------------------
+		// -------------------------------------------------------Downloads
+		// listener-----------------------------------------------------
 		downloads.setOnAction((e) -> {
 
 			// When the menu click Hamburger and DrawerStack will hide
@@ -179,39 +178,28 @@ public class MenuView {
 			// tab name and id for accessing
 			tab.setText("Setting");
 			tab.setId("setting");
+			/*
+			 * Here we developed a tab and its borderpane for setting we made
+			 * setting class that design the layout of setting then a single tab
+			 * for all menus set a Tab and only in one tab all menu can be seen
+			 * Is this cool? or not give me constructive feedback! Setting is
+			 * class that will only desinge the layout of setting tab and we are
+			 * just calling its method getSettingView and give two arguments
+			 * that is tab and setting pane
+			 */
 
-			if (tabs.get(tabs.size() - 2).getId() != ("setting")) {
+			Setting ob = new Setting();
+			tab = ob.getSettingView(tab, settingBorderPane);
 
-				/*
-				 * Here we developed a tab and its borderpane for setting we
-				 * made setting class that design the layout of setting then a
-				 * single tab for all menus set a Tab and only in one tab all
-				 * menu can be seen Is this cool? or not give me constructive
-				 * feedback!
-				 */
-				// ----------Bug of New Tab open then click setting and if index
-				// is not less than -2 then
-				// ----------it will not find setting and again same setting tab
-				// will open ! issue can be resolved but need time!
+			// System.out.println(tabs.get(tabs.size()-2).getId());
+			// This is just selecitng the just now opened tab
+			tabs.add(tabs.size() - 1, tab);
 
-				/*
-				 * Setting is class that will only desinge the layout of setting
-				 * tab and we are just calling its method getSettingView and
-				 * give two arguments that is tab and setting pane
-				 */
-				Setting ob = new Setting();
-				tab = ob.getSettingView(tab, settingBorderPane);
+			// System.out.println(tab.getId());
+			// System.out.println(tabs.size());
 
-				// System.out.println(tabs.get(tabs.size()-2).getId());
-				// This is just selecitng the just now opened tab
-				tabs.add(tabs.size() - 1, tab);
-
-				// System.out.println(tab.getId());
-				// System.out.println(tabs.size());
-
-				// The below is just select the current tab
-				selectedTab.select(tab);
-			}
+			// The below is just select the current tab
+			selectedTab.select(tab);
 
 			if (tabs.get(tabs.size() - 2).getId() == ("setting")) {
 				System.out.println("Adfa");
@@ -222,9 +210,11 @@ public class MenuView {
 	}
 
 	public void onClickHideHamburger() {
-		transition.setRate(transition.getRate() * -1);
-		transition.play();
-		drawersStack.toggle(rightDrawer);
+			
+			// TODO Auto-generated method stub
+			transition.setRate(transition.getRate() * -1);
+			transition.play();
+			drawersStack.toggle(rightDrawer);	
 	}
 
 }

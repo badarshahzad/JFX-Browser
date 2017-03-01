@@ -22,6 +22,7 @@ import com.jfoenix.controls.JFXTreeTableView;
 import com.jfoenix.controls.JFXDrawer.DrawerDirection;
 import com.jfoenix.transitions.hamburger.HamburgerSlideCloseTransition;
 
+import controllers.LoginController;
 import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -78,13 +79,15 @@ public class Setting implements Initializable {
 
 		// Setting the left side of Borderpane drawerstack container
 		borderpane.setLeft(drawersStack);
-
+		System.out.println("Setting fxml is ready ");
 		try {
 			// ScrollPane scrollPane = new ScrollPane();
-
+			System.out.println("Setting fxml is ready to set");
 			borderpane.setCenter(FXMLLoader.load(getClass().getResource("Setting.fxml")));
 		} catch (Exception e1) {
+			System.out.println("Exception: Setting fxml is not set");
 			System.out.println("File is not find for setting! " + " \n " + e1);
+			
 		}
 
 		// borderpane.setCenter(root);
@@ -111,9 +114,36 @@ public class Setting implements Initializable {
 	private JFXButton managePasswordBtn;
 	@FXML
 	private JFXButton changeProxyBtn;
-
+	
+	private Stage settingStage = new Stage();
+	
+	BorderPane loginBorderPane = new BorderPane();
+	public void setLoginFrameScene(BorderPane borderpane){
+		loginBorderPane = borderpane;
+	}
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		
+		signInBtn.addEventHandler(MouseEvent.MOUSE_CLICKED, (e)->{
+			
+			try {
+				System.out.println("Ready for set login");
+				//LoginController object = new LoginController();
+				//loginBorderpane = object.setLoginView(loginBorderpane);
+				
+				//Parent fxmlLoader = FXMLLoader.load(getClass().getResource("Login.fxml"));
+				
+				loginBorderPane.setCenter(FXMLLoader.load(getClass().getResource("Login.fxml")));
+				Scene root = new Scene(loginBorderPane);
+				settingStage.setScene(root);
+				settingStage.show();
+			} catch (Exception e1) {
+				System.out.println("Login Fxml is not loading");
+				e1.printStackTrace();
+			}
+		
+		});
+		
 		
 		changeProxyBtn.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
 			ToggleGroup group = new ToggleGroup();
@@ -141,26 +171,26 @@ public class Setting implements Initializable {
 			if (result.get() == ButtonType.OK) {
 				if (group.getSelectedToggle().equals(noProxy)) {
 					System.out.println("No Proxy");
-
+/*
 					// Remove Proxy for Http
 					systemProperties.setProperty("http.proxyHost", "");
 					systemProperties.setProperty("http.proxyPort", "");
 
 					// Remove Proxy for Https
 					systemProperties.setProperty("https.proxyHost", "");
-					systemProperties.setProperty("https.proxyPort", "");
+					systemProperties.setProperty("https.proxyPort", "");*/
 
 				}
 				if (group.getSelectedToggle().equals(useSystemProxySettings)) {
 					System.out.println("Use system proxy");
-
+/*
 					// Set Proxy for Http
 					systemProperties.setProperty("http.proxyHost", "172.16.0.2");
 					systemProperties.setProperty("http.proxyPort", "8080");
 
 					// Set Proxy for Https
 					systemProperties.setProperty("https.proxyHost", "172.16.0.2");
-					systemProperties.setProperty("https.proxyPort", "8080");
+					systemProperties.setProperty("https.proxyPort", "8080");*/
 				}
 				System.out.println("Ok click!");
 			} else {

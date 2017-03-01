@@ -96,16 +96,6 @@ public class History implements Initializable{
 	//JFXTreeTableView<HistoryStoreView> treeTableView = new JFXTreeTableView<>();
 	
 	//Set History method is set by main browser class and can easily set the history 
-	String date;
-	String link;
-	String time;
-	public void setHistory(String dat, String lin, String tim){
-
-		//historyStoreView.add(new HistoryStoreView(date,link,time));
-		this.date = dat;
-		this.time = tim;
-		this.link = lin;
-	}
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) 

@@ -9,6 +9,9 @@
 	-fx-border-radius: 50px; 
 	-fx-border-width: 4px;
 }
+.button{
+		-fx-backgroud-color:#03A9F4;
+}
 
 /*******************************************************************************
  *                                                                             *

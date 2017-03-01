@@ -8,6 +8,8 @@ package main;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.controls.JFXTextField;
+
+import controllers.TabController;
 import database.History_Managment;
 
 import java.net.URL;
@@ -15,12 +17,15 @@ import java.util.ResourceBundle;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.ObservableList;
 import javafx.concurrent.Worker;
 import javafx.concurrent.Worker.State;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.MouseDragEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -72,32 +77,56 @@ public class MainController implements Initializable {
 
 	@FXML
 	private JFXTextField searchField;
-	@FXML
-	private TabPane tabPane;
-	@FXML
-	private Tab addNewTab;
+
 	@FXML
 	private JFXHamburger hamburger;
 	@FXML
 	private GridPane navigationBar;
 	
 	//Classes objects to get methods or set methods access
-	private History object1 = new History();
-	private Hamburger ham = new Hamburger();
+	public Hamburger ham = new Hamburger();
 	
 	public VBox drawerPane = new VBox();
 	// make obejc to get the setter method for url
 	public WebView browser = new WebView();
 	public WebEngine webEngine = browser.getEngine();
-	
+	 
+	public TabPane tabPane = new TabPane();
+	private Tab firstTab = new Tab("First Tab");
+	private Tab addNewTab = new Tab("+");
 
+/*
+	public JFXHamburger setHamburger(JFXHamburger hamburger2, BorderPane borderpane2) {
+		// TODO Auto-generated method stub
+		return ham.getHamburger(hamburger2, borderpane2, tabPane);
+	}*/
+	
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
+		
+		tabPane.setTabClosingPolicy(TabClosingPolicy.ALL_TABS); 
+		firstTab.setContent(borderpane);
+		//addNewTab.setContent(borderpane);
+		addNewTab.setClosable(false);
+		tabPane.getTabs().addAll(firstTab,addNewTab);
 
+		final ObservableList<Tab> tabs = tabPane.getTabs();
+		System.out.println("First time  tabpane size "+tabs.size());
+		//object.setTabPane(tabPane);
+		
+		
+		//tabPane.getTabs().add(1, addNewTab);
+		//tabPane.getSelectionModel().select(addNewTab);
+		rootBorderPane.setCenter(tabPane);
+		//final ObservableList<Tab> tabs = tabPane.getTabs();
+		//System.out.println(tabs.size());
+		
 		// ---------------All opens tabs should be closed so below line is for
 		// just closing tabs------------------------
-		tabPane.setTabClosingPolicy(TabClosingPolicy.ALL_TABS);
-		pageRender("https://www.google.com.pk/webhp?sourceid=chrome-instant&ion=1&espv=2&ie=UTF-8");
+	
+
+		
+		//pageRender("https://www.google.com.pk/webhp?sourceid=chrome-instant&ion=1&espv=2&ie=UTF-8");
 		
 		//Search Button Listener 
 		search.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
@@ -143,10 +172,13 @@ public class MainController implements Initializable {
 		// -------------------------------------------Hamburger----Drawer----Menu------------------------------------
 		
 		ham.getHamburger(hamburger, borderpane, tabPane);
+		
 		//----------------------------------------TabPane-----------------------------------------------------//
 		//Adding multiple tabs would be done later.
 		
 		TabPaneView tabpan_view = new TabPaneView();
+		tabpan_view.getTabPane(tabPane, addNewTab);
+		
 		//----------------------------------------------------------------------------------------------------//
 		
 		// end intializer method
