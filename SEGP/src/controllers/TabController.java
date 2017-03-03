@@ -27,7 +27,6 @@ import javafx.scene.web.WebView;
 import main.MainController;
 import userInterface.Hamburger;
 import userInterface.History;
-import userInterface.TabPaneView;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TabPane.TabClosingPolicy;
 
@@ -37,24 +36,6 @@ import javafx.scene.control.TabPane.TabClosingPolicy;
  */
 public class TabController implements Initializable {
 
-	/*
-	 * Reference: We got this idea from this link Doc Link:
-	 * https://docs.oracle.com/javase/8/javafx/api/index.html?javafx/scene/web/
-	 * WebEngine.html We got the conceptual thought from Stack: Link:
-	 * http://stackoverflow.com/questions/32486758/detect-url-changes-in-javafx-
-	 * webview Description: 1st rootBorderPane that is the actual root for scene
-	 * and 2nd borderpane is the tabpane #pane Below is 4 buttons for navigation
-	 * backward to go back page,forward to go the previous visited page,refresh
-	 * will reload the page and search button is a specific url search Textfield
-	 * it to write a url.
-	 * 
-	 * We Extends this Main controller Class with Renderer to work more
-	 * efficiently and can easily test any renderer
-	 * 
-	 * 
-	 ***********************************************************************************************************/
-
-	
 	@FXML
 	private BorderPane borderpane;
 	@FXML
@@ -72,6 +53,7 @@ public class TabController implements Initializable {
 	@FXML
 	private GridPane navigationBar;
 	
+	MainController main = new MainController();
 	// Classes objects to get methods or set methods access
 	private Hamburger ham = new Hamburger();
 
@@ -80,21 +62,23 @@ public class TabController implements Initializable {
 	public WebView browser = new WebView();
 	public WebEngine webEngine = browser.getEngine();
 
-	private TabPane tabPane = new TabPane() ;
-	//TabPane tabPane = new TabPane();
+	private TabPane tabPane = main.getTabPane();
+	public TabPane getTabPane() {
+		return tabPane;
+	}
+
+	public void setTabPane(TabPane tabPane) {
+		this.tabPane = tabPane;
+	}
+
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
-		
 
-		///All opens tabs should be closed so below line is for just closing tabs
-		
-		//		
-		
+		/// All opens tabs should be closed so below line is for just closing tabs
+
 		pageRender("https://www.google.com.pk/webhp?sourceid=chrome-instant&ion=1&espv=2&ie=UTF-8");
-		
 		ham.getHamburger(hamburger, borderpane, tabPane);
-		//hamburger = setHamburger(hamburger, borderpane);
-		
+
 		// Search Button Listener
 		search.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
 			pageRender(searchField.getText()); // method call
@@ -106,9 +90,6 @@ public class TabController implements Initializable {
 			}
 		});
 
-		// --------------Renderer
-		// --------------------------------------------------------Backward-------------------------------------------
-
 		back.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
 			try {
 
@@ -119,8 +100,6 @@ public class TabController implements Initializable {
 			}
 		});
 
-		// --------------------------------------------------------Forward--------------------------------------------
-
 		forward.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
 			try {
 				WebHistory history = webEngine.getHistory();
@@ -130,17 +109,11 @@ public class TabController implements Initializable {
 			}
 		});
 
-		// -------------------------------------------Refresh--------------------------------------------------------
-
 		refresh.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
 			webEngine.reload();
 		});
-		
-		// end intializer method
-		
-	}
-	
-	
+
+	}// end intializer method
 
 	// mehtod to rendere page
 	public void pageRender(String url) {
@@ -157,11 +130,10 @@ public class TabController implements Initializable {
 			}
 
 		});
-		
+
 		webEngine.load(url);
 		borderpane.setCenter(browser);
 	}
 	// end class
-
 
 }

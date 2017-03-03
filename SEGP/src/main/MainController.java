@@ -9,9 +9,9 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.controls.JFXTextField;
 
-import controllers.TabController;
 import database.History_Managment;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -21,11 +21,11 @@ import javafx.collections.ObservableList;
 import javafx.concurrent.Worker;
 import javafx.concurrent.Worker.State;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
+import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.control.Tab;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.MouseDragEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -34,8 +34,6 @@ import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebHistory;
 import javafx.scene.web.WebView;
 import userInterface.Hamburger;
-import userInterface.History;
-import userInterface.TabPaneView;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TabPane.TabClosingPolicy;
 
@@ -45,7 +43,7 @@ import javafx.scene.control.TabPane.TabClosingPolicy;
  */
 public class MainController implements Initializable {
 
-	/*
+	/***************************************************************************
 	 * Reference: We got this idea from this link Doc Link:
 	 * https://docs.oracle.com/javase/8/javafx/api/index.html?javafx/scene/web/
 	 * WebEngine.html We got the conceptual thought from Stack: Link:
@@ -60,7 +58,7 @@ public class MainController implements Initializable {
 	 * efficiently and can easily test any renderer
 	 * 
 	 * 
-	 ***********************************************************************************************************/
+	 ***************************************************************************/
 
 	@FXML
 	private BorderPane rootBorderPane;
@@ -74,135 +72,154 @@ public class MainController implements Initializable {
 	private JFXButton refresh;
 	@FXML
 	private JFXButton search;
-
 	@FXML
 	private JFXTextField searchField;
-
 	@FXML
 	private JFXHamburger hamburger;
 	@FXML
 	private GridPane navigationBar;
-	
-	//Classes objects to get methods or set methods access
+
+	// Classes objects to get methods or set methods access
 	public Hamburger ham = new Hamburger();
-	
-	public VBox drawerPane = new VBox();
+
 	// make obejc to get the setter method for url
 	public WebView browser = new WebView();
 	public WebEngine webEngine = browser.getEngine();
-	 
-	public TabPane tabPane = new TabPane();
+
+	public VBox drawerPane = new VBox();
+	public static TabPane tabPane = new TabPane();
 	private Tab firstTab = new Tab("First Tab");
 	private Tab addNewTab = new Tab("+");
 
-/*
-	public JFXHamburger setHamburger(JFXHamburger hamburger2, BorderPane borderpane2) {
-		// TODO Auto-generated method stub
-		return ham.getHamburger(hamburger2, borderpane2, tabPane);
-	}*/
-	
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
-		
-		tabPane.setTabClosingPolicy(TabClosingPolicy.ALL_TABS); 
+
+		// ---All opens tabs should be closed so below line is for just closing
+		// tabs--------
+		tabPane.setTabClosingPolicy(TabClosingPolicy.ALL_TABS);
 		firstTab.setContent(borderpane);
-		//addNewTab.setContent(borderpane);
 		addNewTab.setClosable(false);
-		tabPane.getTabs().addAll(firstTab,addNewTab);
-
-		final ObservableList<Tab> tabs = tabPane.getTabs();
-		System.out.println("First time  tabpane size "+tabs.size());
-		//object.setTabPane(tabPane);
-		
-		
-		//tabPane.getTabs().add(1, addNewTab);
-		//tabPane.getSelectionModel().select(addNewTab);
+		tabPane.getTabs().addAll(firstTab, addNewTab);
 		rootBorderPane.setCenter(tabPane);
-		//final ObservableList<Tab> tabs = tabPane.getTabs();
-		//System.out.println(tabs.size());
-		
-		// ---------------All opens tabs should be closed so below line is for
-		// just closing tabs------------------------
-	
 
-		
-		//pageRender("https://www.google.com.pk/webhp?sourceid=chrome-instant&ion=1&espv=2&ie=UTF-8");
-		
-		//Search Button Listener 
+		// final ObservableList<Tab> tabs = tabPane.getTabs();
+		// System.out.println(tabs.size());
+
+		pageRender("https://www.google.com.pk/webhp?sourceid=chrome-instant&ion=1&espv=2&ie=UTF-8");
+
+		// --------Search Button Listener-----
 		search.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
-			pageRender(searchField.getText()); //method call 
+			pageRender(searchField.getText()); // method call
 		});
-			//Search Field Listener
-			searchField.setOnKeyPressed(event -> {
+
+		// --------Search Field Listener-------
+		searchField.setOnKeyPressed(event -> {
 			if (event.getCode() == KeyCode.ENTER) {
-				pageRender(searchField.getText()); //method call
+
+				pageRender(searchField.getText()); // method call
+
 			}
 		});
 
-		// --------------Renderer
-		// --------------------------------------------------------Backward-------------------------------------------
+		// -------Backward Button-------------
 
 		back.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
 			try {
-
 				WebHistory history = webEngine.getHistory();
 				history.go(-1);
+
 			} catch (IndexOutOfBoundsException e1) {
 				System.out.println(e1);
 			}
 		});
 
-		// --------------------------------------------------------Forward--------------------------------------------
-
+		// --------Forward--------------------
 		forward.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
 			try {
+
 				WebHistory history = webEngine.getHistory();
 				history.go(1);
+
 			} catch (IndexOutOfBoundsException e1) {
 				System.out.println(e1);
 			}
 		});
-
-		// -------------------------------------------Refresh--------------------------------------------------------
-
+		// --------Refresh-------------------
 		refresh.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
-			webEngine.reload();
-		});
-		
-		// -------------------------------------------Hamburger----Drawer----Menu------------------------------------
-		
-		ham.getHamburger(hamburger, borderpane, tabPane);
-		
-		//----------------------------------------TabPane-----------------------------------------------------//
-		//Adding multiple tabs would be done later.
-		
-		TabPaneView tabpan_view = new TabPaneView();
-		tabpan_view.getTabPane(tabPane, addNewTab);
-		
-		//----------------------------------------------------------------------------------------------------//
-		
-		// end intializer method
-		}
 
-	
-	//mehtod to rendere page
-	public void pageRender(String url)
-	{
+			webEngine.reload();
+
+		});
+
+		// --------Hamburger----Drawer----Menu-----------------
+
+		ham.getHamburger(hamburger, borderpane, tabPane);
+
+		// ---------TabPane-------//
+		// Adding multiple tabs would be done later.
+		getTabPaneView(tabPane, addNewTab);
+
+	}// end intializer method
+
+	// ---set method for TabPane---
+	public void setTabPane(TabPane tabPane) {
+		this.tabPane = tabPane;
+	}
+
+	// ---get method for TabPane---
+	public TabPane getTabPane() {
+		return tabPane;
+	}
+
+	public TabPane getTabPaneView(TabPane tabpane, Tab addNewTab) {
+		tabpane.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Tab>() {
+			@Override
+			public void changed(ObservableValue<? extends Tab> ov, Tab t, Tab newSelectedTab) {
+				if (newSelectedTab == addNewTab) {
+
+					// ---------------New tab is created --------------------
+					Tab tab = new Tab("New Tab");
+
+					try {
+						
+						tab.setContent(FXMLLoader.load(getClass().getResource("/userInterface/Tab.fxml")));
+						
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						System.out.println("Exception: New tab click but not working in TabPaneView Class");
+						e.printStackTrace();
+					}
+
+					tab.getStyleClass().addAll("tab-pane");
+
+					final ObservableList<Tab> tabs = tabpane.getTabs();
+					// System.out.println("Now Size"+tabs.size());
+					tabs.add(tabs.size() - 1, tab);
+					
+					SingleSelectionModel<Tab> selectedTab = tabpane.getSelectionModel();
+					selectedTab.select(tab);
+				}
+			}
+		});
+		return tabpane;
+	}
+
+	// mehtod to rendere page
+	public void pageRender(String url) {
 		webEngine.getLoadWorker().stateProperty().addListener(new ChangeListener<State>() {
 			@Override
 			public void changed(ObservableValue ov, State oldState, State newState) {
 
 				if (newState == Worker.State.SUCCEEDED) {
 					searchField.setText(webEngine.getLocation());
-					if(!(webEngine.getLocation().equals("about:blank")))
-					History_Managment.insertUrl(webEngine.getLocation());
+					if (!(webEngine.getLocation().equals("about:blank")))
+						History_Managment.insertUrl(webEngine.getLocation());
 				}
 				
 			}
-			
 		});
 		webEngine.load(url);
 		borderpane.setCenter(browser);
-		}
+	}
 	// end class
 }
