@@ -29,6 +29,10 @@ public class LoginController implements Initializable {
 
 
 
+
+    @FXML
+    private Pane loginPane;
+    
     @FXML
     private JFXTextField user;
 
@@ -41,7 +45,17 @@ public class LoginController implements Initializable {
     @FXML
     private JFXButton signup;
 
-
+    public JFXButton getSingUp(){
+    	return signup;
+    }
+    
+    public JFXButton getLogin(){
+    	return login;
+    }
+    
+    public Pane getLoginPane(){
+    	return loginPane;
+    }
     
     @FXML
     void makelogin(ActionEvent event) {
@@ -69,6 +83,34 @@ public class LoginController implements Initializable {
 				e1.printStackTrace();
 			}
 		});
+	}
+
+	public JFXTextField getUser() {
+		return user;
+	}
+
+	public void setUser(JFXTextField user) {
+		this.user = user;
+	}
+
+	public JFXPasswordField getPassword() {
+		return password;
+	}
+
+	public void setPassword(JFXPasswordField password) {
+		this.password = password;
+	}
+
+	public JFXButton getSignup() {
+		return signup;
+	}
+
+	public void setSignup(JFXButton signup) {
+		this.signup = signup;
+	}
+
+	public void setLogin(JFXButton login) {
+		this.login = login;
 	}
 
 

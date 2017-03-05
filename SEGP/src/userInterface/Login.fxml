@@ -6,7 +6,7 @@
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.Pane?>
 
-<Pane prefHeight="400.0" prefWidth="350.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.LoginController">
+<Pane fx:id="loginPane" prefHeight="400.0" prefWidth="350.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.LoginController">
    <children>
       <JFXTextField fx:id="user" focusColor="#09b6bc" labelFloat="true" layoutX="56.0" layoutY="87.0" minHeight="50.0" minWidth="250.0" promptText="User name" />
       <JFXPasswordField fx:id="password" focusColor="#09b6bc" labelFloat="true" layoutX="56.0" layoutY="181.0" minHeight="50.0" minWidth="250.0" promptText="Password" />

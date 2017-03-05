@@ -77,6 +77,7 @@ public class TabController implements Initializable {
 		/// All opens tabs should be closed so below line is for just closing tabs
 
 		pageRender("https://www.google.com.pk/webhp?sourceid=chrome-instant&ion=1&espv=2&ie=UTF-8");
+		
 		ham.getHamburger(hamburger, borderpane, tabPane);
 
 		// Search Button Listener
@@ -112,7 +113,7 @@ public class TabController implements Initializable {
 		refresh.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
 			webEngine.reload();
 		});
-
+		
 	}// end intializer method
 
 	// mehtod to rendere page
@@ -126,11 +127,8 @@ public class TabController implements Initializable {
 					if (!(webEngine.getLocation().equals("about:blank")))
 						History_Managment.insertUrl(webEngine.getLocation());
 				}
-
 			}
-
 		});
-
 		webEngine.load(url);
 		borderpane.setCenter(browser);
 	}

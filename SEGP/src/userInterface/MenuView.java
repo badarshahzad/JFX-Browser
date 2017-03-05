@@ -8,6 +8,7 @@ import javax.swing.text.html.HTML;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXDrawersStack;
+import com.jfoenix.transitions.hamburger.HamburgerBasicCloseTransition;
 import com.jfoenix.transitions.hamburger.HamburgerSlideCloseTransition;
 
 import downloader.MainDownload;
@@ -35,15 +36,15 @@ public class MenuView {
 
 	private Tab tab = new Tab();
 	private BorderPane settingBorderPane = new BorderPane();
-	private HamburgerSlideCloseTransition transition;
 	private JFXDrawersStack drawersStack;
 	private JFXDrawer rightDrawer;
+	//Hamburger object = new Hamburger();
 
 	public void setMenuViewListener(JFXButton home, JFXButton history, JFXButton downloads, JFXButton bookmarks,
-			JFXButton saveAsPdf, JFXButton setting, TabPane tabPane, HamburgerSlideCloseTransition transition,
+			JFXButton saveAsPdf, JFXButton setting, TabPane tabPane,
 			JFXDrawersStack drawersStack, JFXDrawer rightDrawer) {
 
-		this.transition = transition;
+		
 		this.drawersStack = drawersStack;
 		this.rightDrawer = rightDrawer;
 
@@ -58,7 +59,7 @@ public class MenuView {
 			public void handle(ActionEvent event) {
 
 				// When the menu click Hamburger and DrawerStack will hide
-				onClickHideHamburger();
+			//onClickHideHamburger();
 
 				System.out.println("Home");
 				tab.setText("Home");
@@ -209,11 +210,13 @@ public class MenuView {
 		});
 	}
 
+	
+	
 	public void onClickHideHamburger() {
 			
 			// TODO Auto-generated method stub
-			transition.setRate(transition.getRate() * -1);
-			transition.play();
+			//transition.setRate(transition.getRate() * -1);
+			//transition.play();
 			drawersStack.toggle(rightDrawer);	
 	}
 

@@ -23,7 +23,9 @@ import com.jfoenix.controls.JFXDrawer.DrawerDirection;
 import com.jfoenix.transitions.hamburger.HamburgerSlideCloseTransition;
 
 import controllers.LoginController;
+import controllers.SignUpController;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -116,11 +118,11 @@ public class Setting implements Initializable {
 	private JFXButton changeProxyBtn;
 	
 	private Stage settingStage = new Stage();
+	private Scene root ;
 	
-	BorderPane loginBorderPane = new BorderPane();
-	public void setLoginFrameScene(BorderPane borderpane){
-		loginBorderPane = borderpane;
-	}
+	private FXMLLoader loader;
+	private LoginController loginObject ;
+	private SignUpController signUpObject;
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		
@@ -132,19 +134,61 @@ public class Setting implements Initializable {
 				//loginBorderpane = object.setLoginView(loginBorderpane);
 				
 				//Parent fxmlLoader = FXMLLoader.load(getClass().getResource("Login.fxml"));
+				loader = new  FXMLLoader(getClass().getResource("Login.fxml"));
+				loader.load();
+				loginObject = loader.getController();
 				
-				loginBorderPane.setCenter(FXMLLoader.load(getClass().getResource("Login.fxml")));
-				Scene root = new Scene(loginBorderPane);
+				root = new Scene(loginObject.getLoginPane());
 				settingStage.setScene(root);
 				settingStage.show();
+			
 			} catch (Exception e1) {
 				System.out.println("Login Fxml is not loading");
 				e1.printStackTrace();
 			}
-		
+			//LoginPane  login button listenr
+			loginObject.getLogin().addEventHandler(MouseEvent.MOUSE_CLICKED, (e1)->{
+				System.out.println("Login click button ");
+			});
+			
+			//LoinPane  sing up butotn listner
+			loginObject.getSingUp().addEventHandler(MouseEvent.MOUSE_CLICKED, (e1)->{
+				
+				loader = new  FXMLLoader(getClass().getResource("SignUp.fxml"));
+				try {
+					
+					loader.load();
+					signUpObject = loader.getController();
+					root = new Scene(signUpObject.getSignUpPane());
+					settingStage.setScene(root);
+					settingStage.show();
+				
+					
+				} catch (Exception e2) {
+					e2.printStackTrace();
+				}
+				
+			
+			});
+			
+			
+			//----------Sign up button working
+			
+			signUpObject.getSignUpBt().addEventHandler(MouseEvent.MOUSE_CLICKED, (e4)->{
+				System.out.println("SingUp button click");
+				
+			});
+			
+			signUpObject.getCancel().addEventHandler(MouseEvent.MOUSE_CLICKED, (e5)->{
+				System.out.println("Cancel button click");
+				
+			});
 		});
 		
+
 		
+	
+	
 		changeProxyBtn.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
 			ToggleGroup group = new ToggleGroup();
 			JFXRadioButton noProxy = new JFXRadioButton("No Proxy");
