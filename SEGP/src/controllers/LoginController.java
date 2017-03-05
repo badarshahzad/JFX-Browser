@@ -73,16 +73,6 @@ public class LoginController implements Initializable {
 	public void initialize(URL url, ResourceBundle res) {
 		// TODO Auto-generated method stub
 		
-		signup.addEventHandler(MouseEvent.MOUSE_CLICKED, (e)->{
-			try {
-				
-				
-				
-			} catch (Exception e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-		});
 	}
 
 	public JFXTextField getUser() {

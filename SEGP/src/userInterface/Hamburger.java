@@ -1,5 +1,7 @@
 package userInterface;
 
+import javax.jws.Oneway;
+
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXDrawersStack;
@@ -35,24 +37,30 @@ public class Hamburger {
 	
 	public  JFXHamburger getHamburger(JFXHamburger hamburger, BorderPane borderpane, TabPane settingTabPane) {
 
-		home.setMinSize(30, 40);
+		home.setMinSize(80, 60);
 		home.setGraphic(new ImageView(new Image("/home1.png")));
+		home.addEventHandler(MouseEvent.DRAG_DETECTED, (e)->{
+			
+			home.setStyle("fx-background-color: derive(#28323c,5.0%);");
+		});
+		home.addEventHandler(MouseEvent.MOUSE_DRAGGED, (e)->{
+		});
 		// home.setButtonType(ButtonType.RAISED);//
 		// home.getStyleClass().addAll("animated-option-button","animated-option-sub-button2");
 		
-		history.setMinSize(30, 40);
+		history.setMinSize(80, 60);
 		history.setGraphic(new ImageView(new Image("/history.png")));
 		
-		downloads.setMinSize(30, 40);
+		downloads.setMinSize(80, 60);
 		downloads.setGraphic(new ImageView(new Image("/downloads.png")));
 		
-		bookmarks.setMinSize(30, 40);
+		bookmarks.setMinSize(80, 60);
 		bookmarks.setGraphic(new ImageView(new Image("/bookMarks.png")));
 		
-		saveAsPdf.setMinSize(30, 40);
+		saveAsPdf.setMinSize(80, 60);
 		saveAsPdf.setGraphic(new ImageView(new Image("/pdf.png")));
 	
-		setting.setMinSize(30, 40);
+		setting.setMinSize(80, 60);
 		setting.setGraphic(new ImageView(new Image("/setting.png")));
 
 		// Tooltips Referance: menus
@@ -87,7 +95,7 @@ public class Hamburger {
 		 */
 
 		rightDrawer.setDirection(DrawerDirection.RIGHT);
-		rightDrawer.setDefaultDrawerSize(40);
+		rightDrawer.setDefaultDrawerSize(80);
 		rightDrawer.setSidePane(gridPane);
 				
 		// --------------------------------------------------------Hamburger------------------------------------------------

@@ -15,6 +15,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import userInterface.Setting;
 
 public class SignUpController implements Initializable {
 
@@ -41,10 +42,22 @@ public class SignUpController implements Initializable {
     @FXML
     private JFXButton cancel;
 
+    
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
-	
+		//----------Sign up button working
+		signUpBt.addEventHandler(MouseEvent.MOUSE_CLICKED, (e4)->{
+			System.out.println("SingUp button click");
+			
+		});
+		
+		cancel.addEventHandler(MouseEvent.MOUSE_CLICKED, (e5)->{
+			
+			//To close the login pane
+			userInterface.Setting.getLoginSignInStage().close();
+			
+		});
 		
 	}
 

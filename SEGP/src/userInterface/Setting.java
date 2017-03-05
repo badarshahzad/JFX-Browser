@@ -1,53 +1,41 @@
 package userInterface;
 
-import java.awt.Panel;
 import java.net.URL;
-import java.security.acl.Group;
 import java.util.Optional;
 import java.util.Properties;
 import java.util.ResourceBundle;
 
-import javax.naming.Context;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXDialog;
-import com.jfoenix.controls.JFXDialog.DialogTransition;
+import com.jfoenix.controls.JFXDialogLayout;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXDrawersStack;
 import com.jfoenix.controls.JFXRadioButton;
-import com.jfoenix.controls.JFXTabPane;
-import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXTreeTableView;
 import com.jfoenix.controls.JFXDrawer.DrawerDirection;
-import com.jfoenix.transitions.hamburger.HamburgerSlideCloseTransition;
 
 import controllers.LoginController;
 import controllers.SignUpController;
-import javafx.application.Application;
-import javafx.event.ActionEvent;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.DialogPane;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class Setting implements Initializable {
@@ -117,14 +105,15 @@ public class Setting implements Initializable {
 	@FXML
 	private JFXButton changeProxyBtn;
 	
-	private Stage settingStage = new Stage();
-	private Scene root ;
+	private static Stage loginSignInStage = new Stage();
+	private Scene loginSignInRoot ;
 	
 	private FXMLLoader loader;
 	private LoginController loginObject ;
 	private SignUpController signUpObject;
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		
 		
 		signInBtn.addEventHandler(MouseEvent.MOUSE_CLICKED, (e)->{
 			
@@ -138,16 +127,22 @@ public class Setting implements Initializable {
 				loader.load();
 				loginObject = loader.getController();
 				
-				root = new Scene(loginObject.getLoginPane());
-				settingStage.setScene(root);
-				settingStage.show();
+				loginSignInRoot = new Scene(loginObject.getLoginPane());
+				loginSignInStage.setScene(loginSignInRoot);
+				
+				loginSignInStage.setMaximized(false);
+				loginSignInStage.setResizable(false);
+				loginSignInStage.centerOnScreen();
+				loginSignInStage.show();
+				
+				
 			
 			} catch (Exception e1) {
 				System.out.println("Login Fxml is not loading");
 				e1.printStackTrace();
 			}
 			//LoginPane  login button listenr
-			loginObject.getLogin().addEventHandler(MouseEvent.MOUSE_CLICKED, (e1)->{
+				loginObject.getLogin().addEventHandler(MouseEvent.MOUSE_CLICKED, (e1)->{
 				System.out.println("Login click button ");
 			});
 			
@@ -159,30 +154,20 @@ public class Setting implements Initializable {
 					
 					loader.load();
 					signUpObject = loader.getController();
-					root = new Scene(signUpObject.getSignUpPane());
-					settingStage.setScene(root);
-					settingStage.show();
+					loginSignInRoot = new Scene(signUpObject.getSignUpPane());
+					loginSignInStage.setScene(loginSignInRoot);
+					loginSignInStage.show();
+					
+				
 				
 					
 				} catch (Exception e2) {
 					e2.printStackTrace();
 				}
 				
-			
 			});
 			
 			
-			//----------Sign up button working
-			
-			signUpObject.getSignUpBt().addEventHandler(MouseEvent.MOUSE_CLICKED, (e4)->{
-				System.out.println("SingUp button click");
-				
-			});
-			
-			signUpObject.getCancel().addEventHandler(MouseEvent.MOUSE_CLICKED, (e5)->{
-				System.out.println("Cancel button click");
-				
-			});
 		});
 		
 
@@ -242,6 +227,12 @@ public class Setting implements Initializable {
 			}
 		});
 		//Start the userTreeView from herre
+	}
+	public static Stage getLoginSignInStage() {
+		return loginSignInStage;
+	}
+	public void setLoginSignInStage(Stage loginSignInStage) {
+		Setting.loginSignInStage = loginSignInStage;
 	}
 
 }
