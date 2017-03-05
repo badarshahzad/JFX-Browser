@@ -15,6 +15,7 @@ import javafx.concurrent.Worker;
 import javafx.concurrent.Worker.State;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
@@ -24,9 +25,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebHistory;
 import javafx.scene.web.WebView;
-import main.MainController;
 import userInterface.Hamburger;
-import userInterface.History;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TabPane.TabClosingPolicy;
 
@@ -39,19 +38,23 @@ public class TabController implements Initializable {
 	@FXML
 	private BorderPane borderpane;
 	@FXML
-	private JFXButton back;
+	private Label back;
 	@FXML
-	private JFXButton forward;
+	private Label forward;
 	@FXML
-	private JFXButton refresh;
+	private Label refresh;
 	@FXML
-	private JFXButton search;
+	private Label search;
 	@FXML
 	private JFXTextField searchField;
 	@FXML
 	private JFXHamburger hamburger;
 	@FXML
 	private GridPane navigationBar;
+	@FXML
+    private Label bookmark;
+
+
 	
 	MainController main = new MainController();
 	// Classes objects to get methods or set methods access
@@ -112,6 +115,10 @@ public class TabController implements Initializable {
 
 		refresh.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
 			webEngine.reload();
+		});
+		
+		bookmark.addEventHandler(MouseEvent.MOUSE_CLICKED, (e)->{
+			System.out.println("Bookmarks");
 		});
 		
 	}// end intializer method

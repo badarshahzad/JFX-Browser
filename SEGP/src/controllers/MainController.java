@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package main;
+package controllers;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXHamburger;
@@ -24,6 +24,7 @@ import javafx.concurrent.Worker.State;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.print.PrinterJob;
 import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.control.Tab;
 import javafx.scene.input.KeyCode;
@@ -61,12 +62,13 @@ public class MainController implements Initializable {
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 
+		
 		// All opens tabs should be closed so below line is for just closing tabs
 		tabPane.setTabClosingPolicy(TabClosingPolicy.ALL_TABS);
 		tabPane.setFocusTraversable(false);
 		
 		try {
-			firstTab.setContent(FXMLLoader.load(getClass().getResource("/userInterface/Tab.fxml")));
+			firstTab.setContent(FXMLLoader.load(getClass().getResource("/ui/Tab.fxml")));
 		} catch (IOException e2) {
 			// TODO Auto-generated catch block
 			e2.printStackTrace();
@@ -110,7 +112,7 @@ public class MainController implements Initializable {
 					Tab tab = new Tab("New Tab");
 
 					try {
-						tab.setContent(FXMLLoader.load(getClass().getResource("/userInterface/Tab.fxml")));
+						tab.setContent(FXMLLoader.load(getClass().getResource("/ui/Tab.fxml")));
 					} catch (IOException e) {
 						System.out.println("Exception: New tab click but not working in TabPaneView Class");
 						e.printStackTrace();

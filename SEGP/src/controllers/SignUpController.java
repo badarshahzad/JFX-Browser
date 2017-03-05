@@ -15,7 +15,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
-import userInterface.Setting;
 
 public class SignUpController implements Initializable {
 
@@ -55,7 +54,7 @@ public class SignUpController implements Initializable {
 		cancel.addEventHandler(MouseEvent.MOUSE_CLICKED, (e5)->{
 			
 			//To close the login pane
-			userInterface.Setting.getLoginSignInStage().close();
+			controllers.SettingController.getLoginSignInStage().close();
 			
 		});
 		

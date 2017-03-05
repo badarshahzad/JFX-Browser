@@ -1,4 +1,4 @@
-package userInterface;
+package controllers;
 
 import java.net.URL;
 import java.sql.ResultSet;
@@ -39,7 +39,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.util.Callback;
 
-public class History implements Initializable{
+public class HistoryController implements Initializable{
 	
 	private JFXButton setting = new JFXButton("Setting");
 	private JFXButton history = new JFXButton("History");
@@ -73,7 +73,7 @@ public class History implements Initializable{
 		borderpane.setLeft(drawersStack);
 		try{
 			//borderpane.setCenter(table);
-			borderpane.setCenter(FXMLLoader.load(getClass().getResource("History.fxml")));
+			borderpane.setCenter(FXMLLoader.load(getClass().getResource("/ui/History.fxml")));
 			
 			//borderpane.setCenter(treeTableView);
 			//borderpane.setMinSize(600, 400);

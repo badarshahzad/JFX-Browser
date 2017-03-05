@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXHamburger?>
 <?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
@@ -28,48 +28,58 @@
                   <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="5.0" minWidth="5.0" percentWidth="4.0" prefWidth="5.0" />
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="200.0" />
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="4.0" prefWidth="10.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="10.0" minWidth="10.0" percentWidth="4.0" prefWidth="10.0" />
                </columnConstraints>
                <rowConstraints>
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <JFXButton fx:id="back" maxWidth="20.0" minWidth="10.0">
+                  <Label fx:id="back">
                      <graphic>
                         <ImageView>
                            <image>
-                              <Image url="@../../img/back.png" />
+                              <Image url="@../../../../../../Desktop/backword1.png" />
                            </image>
                         </ImageView>
                      </graphic>
-                  </JFXButton>
-                  <JFXButton fx:id="forward" maxWidth="20.0" minWidth="20.0" GridPane.columnIndex="1">
+                  </Label>
+                  <Label fx:id="forward" GridPane.columnIndex="1">
                      <graphic>
                         <ImageView>
                            <image>
-                              <Image url="@../../img/forward.png" />
+                              <Image url="@../../../../../../Desktop/forward1.png" />
                            </image>
                         </ImageView>
                      </graphic>
-                  </JFXButton>
-                  <JFXButton fx:id="refresh" maxWidth="20.0" minWidth="20.0" GridPane.columnIndex="2">
+                  </Label>
+                  <Label fx:id="refresh" GridPane.columnIndex="2">
                      <graphic>
                         <ImageView>
                            <image>
-                              <Image url="@../../img/refresh.png" />
+                              <Image url="@../../../../../../Desktop/Icon%20folder/ic_refresh_black_24dp/ios/ic_refresh.imageset/ic_refresh.png" />
                            </image>
                         </ImageView>
                      </graphic>
-                  </JFXButton>
+                  </Label>
                   <JFXTextField fx:id="searchField" minWidth="200.0" GridPane.columnIndex="3" />
-                  <JFXButton fx:id="search" maxWidth="20.0" minWidth="20.0" GridPane.columnIndex="4">
+                  <Label fx:id="search" GridPane.columnIndex="4">
                      <graphic>
                         <ImageView>
                            <image>
-                              <Image url="@../../img/search.png" />
+                              <Image url="@../../../../../../Desktop/Icon%20folder/ic_search_black_24dp/ios/ic_search.imageset/ic_search.png" />
                            </image>
                         </ImageView>
                      </graphic>
-                  </JFXButton>
+                  </Label>
+                  <Label fx:id="bookmark" GridPane.columnIndex="5">
+                     <graphic>
+                        <ImageView>
+                           <image>
+                              <Image url="@../../../../../../Desktop/bookmark.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Label>
                </children>
             </GridPane>
             <JFXHamburger fx:id="hamburger" prefHeight="30.0" prefWidth="30.0" GridPane.columnIndex="1" />

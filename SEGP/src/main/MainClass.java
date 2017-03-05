@@ -1,13 +1,11 @@
 package main;
 
-import java.util.Properties;
 
-import database.History_Managment;
+import controllers.MainController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 /**
  *
@@ -19,8 +17,7 @@ public class MainClass extends Application {
 	MainController object;
 	@Override
 	public void start(Stage stage) throws Exception {
-		Parent root = FXMLLoader.load((getClass().getResource("MainFXML.fxml")));
-		//loader.load();
+		Parent root = FXMLLoader.load(getClass().getResource("/ui/MainFXML.fxml"));
 		
 		Scene scene = new Scene(root);
 		scene.getStylesheets().add(getClass().getResource("/stylesheet.css").toExternalForm());

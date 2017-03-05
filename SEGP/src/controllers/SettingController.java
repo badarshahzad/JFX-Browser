@@ -1,4 +1,4 @@
-package userInterface;
+package controllers;
 
 import java.net.URL;
 import java.util.Optional;
@@ -15,9 +15,6 @@ import com.jfoenix.controls.JFXDrawersStack;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTreeTableView;
 import com.jfoenix.controls.JFXDrawer.DrawerDirection;
-
-import controllers.LoginController;
-import controllers.SignUpController;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -38,7 +35,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class Setting implements Initializable {
+public class SettingController implements Initializable {
 
 	public Tab getSettingView(Tab settingTab, BorderPane borderpane) {
 
@@ -73,7 +70,7 @@ public class Setting implements Initializable {
 		try {
 			// ScrollPane scrollPane = new ScrollPane();
 			System.out.println("Setting fxml is ready to set");
-			borderpane.setCenter(FXMLLoader.load(getClass().getResource("Setting.fxml")));
+			borderpane.setCenter(FXMLLoader.load(getClass().getResource("/ui/Setting.fxml")));
 		} catch (Exception e1) {
 			System.out.println("Exception: Setting fxml is not set");
 			System.out.println("File is not find for setting! " + " \n " + e1);
@@ -123,7 +120,7 @@ public class Setting implements Initializable {
 				//loginBorderpane = object.setLoginView(loginBorderpane);
 				
 				//Parent fxmlLoader = FXMLLoader.load(getClass().getResource("Login.fxml"));
-				loader = new  FXMLLoader(getClass().getResource("Login.fxml"));
+				loader = new  FXMLLoader(getClass().getResource("/ui/Login.fxml"));
 				loader.load();
 				loginObject = loader.getController();
 				
@@ -149,7 +146,7 @@ public class Setting implements Initializable {
 			//LoinPane  sing up butotn listner
 			loginObject.getSingUp().addEventHandler(MouseEvent.MOUSE_CLICKED, (e1)->{
 				
-				loader = new  FXMLLoader(getClass().getResource("SignUp.fxml"));
+				loader = new  FXMLLoader(getClass().getResource("/ui/SignUp.fxml"));
 				try {
 					
 					loader.load();
@@ -232,7 +229,7 @@ public class Setting implements Initializable {
 		return loginSignInStage;
 	}
 	public void setLoginSignInStage(Stage loginSignInStage) {
-		Setting.loginSignInStage = loginSignInStage;
+		SettingController.loginSignInStage = loginSignInStage;
 	}
 
 }

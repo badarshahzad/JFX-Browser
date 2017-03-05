@@ -16,7 +16,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<ScrollPane opacity="0.8" pannable="true" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="userInterface.Setting">
+<ScrollPane opacity="0.8" pannable="true" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.SettingController">
    <content>
       <BorderPane>
          <center>
@@ -56,7 +56,7 @@
                               </JFXButton>
                               <Region maxHeight="-Infinity" maxWidth="280.0" minHeight="32.0" minWidth="200.0" prefHeight="46.0" prefWidth="200.0" />
                               <Label fx:id="userAccountNameLbl" alignment="CENTER" minHeight="50.0" prefHeight="50.0" prefWidth="300.0" text="Sign in as sgpe@gmail.com" />
-                              <JFXButton fx:id="disconnectAccountBtn1" alignment="CENTER" contentDisplay="CENTER" minHeight="32.0" prefWidth="180.0" style="-fx-background-color: #03A9F4;" text="Disconnect your account" textFill="WHITE">
+                              <JFXButton  alignment="CENTER" contentDisplay="CENTER" minHeight="32.0" prefWidth="180.0" style="-fx-background-color: #03A9F4;" text="Disconnect your account" textFill="WHITE">
                                  <HBox.margin>
                                     <Insets left="30.0" top="10.0" />
                                  </HBox.margin>

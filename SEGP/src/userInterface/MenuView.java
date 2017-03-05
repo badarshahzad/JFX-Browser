@@ -1,21 +1,17 @@
 package userInterface;
 
-import java.awt.Desktop.Action;
-import java.util.Scanner;
-
-import javax.swing.text.html.HTML;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXDrawersStack;
-import com.jfoenix.transitions.hamburger.HamburgerBasicCloseTransition;
-import com.jfoenix.transitions.hamburger.HamburgerSlideCloseTransition;
 
-import downloader.MainDownload;
+import controllers.HistoryController;
+import controllers.SettingController;
+
 import htmlToPdf.HTMLtoPDF;
+
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.control.Tab;
@@ -87,7 +83,7 @@ public class MenuView {
 			tab.setText("History");
 			tab.setId("history");
 
-			History ob = new History();
+			HistoryController ob = new HistoryController();
 			tab = ob.getHistoryView(tab, settingBorderPane);
 			System.out.println("Size before history added"+tabs.size());
 			tabs.add(tabs.size() - 1, tab);
@@ -189,7 +185,7 @@ public class MenuView {
 			 * that is tab and setting pane
 			 */
 
-			Setting ob = new Setting();
+			SettingController ob = new SettingController();
 			tab = ob.getSettingView(tab, settingBorderPane);
 
 			// System.out.println(tabs.get(tabs.size()-2).getId());
