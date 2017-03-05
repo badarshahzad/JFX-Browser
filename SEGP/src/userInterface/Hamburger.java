@@ -20,10 +20,20 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 
+<<<<<<< HEAD
 /**
  * @author SEGP-group-3
  *
  */
+=======
+<<<<<<< HEAD
+/**
+ * @author SEGP-Group3
+ *
+ */
+=======
+>>>>>>> upstream/master
+>>>>>>> 8995dbeff95d15d59f84b530de9dc39ed3f4a7b6
 public class Hamburger {
 
 	public MenuView menuView = new MenuView();
@@ -31,12 +41,24 @@ public class Hamburger {
 	public JFXDrawersStack drawersStack = new JFXDrawersStack();
 	public JFXDrawer rightDrawer = new JFXDrawer();
 	
+<<<<<<< HEAD
 	/**
 	 * @param hamburger method requires JFXHamburger object
 	 * @param borderpane to add hamburger at right side of the panel
 	 * @param settingTabPane pane to set browser's settings.
 	 * @return javaFx hamburger object with home,history,downloads,bookmarks,saveAsPdf,settings buttons and auto transitions.
 	 */
+=======
+<<<<<<< HEAD
+	/**
+	 * @param hamburger  requires JFXHamburger Object
+	 * @param borderpane to add humburger at the right side of the panel
+	 * @param settingTabPane pane to set browser setting interface
+	 * @return javaFX hamburger object with home,history,download,book marks, settings ,save pdf ,buttons and transitions.
+	 */
+=======
+>>>>>>> upstream/master
+>>>>>>> 8995dbeff95d15d59f84b530de9dc39ed3f4a7b6
 	public JFXHamburger getHamburger(JFXHamburger hamburger, BorderPane borderpane, TabPane settingTabPane) {
 		
 		transition = new HamburgerSlideCloseTransition(hamburger);
@@ -128,6 +150,10 @@ public class Hamburger {
 	}
 
 	JFXButton historyBtn;
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 8995dbeff95d15d59f84b530de9dc39ed3f4a7b6
 	/**
 	 * @param b1 setter for history button
 	 */
@@ -137,6 +163,14 @@ public class Hamburger {
 	/**
 	 * @return getter for history button
 	 */
+<<<<<<< HEAD
+=======
+=======
+	public void setHistoryBtn(JFXButton b1){
+		this.historyBtn = b1;
+	}
+>>>>>>> upstream/master
+>>>>>>> 8995dbeff95d15d59f84b530de9dc39ed3f4a7b6
 	public JFXButton getHistory(){
 		return historyBtn;
 	}

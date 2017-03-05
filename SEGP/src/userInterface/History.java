@@ -16,10 +16,20 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 
+<<<<<<< HEAD
 /**
  * @author SEGP-group-3
  *
  */
+=======
+<<<<<<< HEAD
+/**
+ * @author SEGP-Group3
+ *
+ */
+=======
+>>>>>>> upstream/master
+>>>>>>> 8995dbeff95d15d59f84b530de9dc39ed3f4a7b6
 public class History
 {
 	@FXML
@@ -36,11 +46,22 @@ public class History
 	TreeItem rootItem = new TreeItem("History");
 	
 	
+<<<<<<< HEAD
 	/**
 	 * @param settingTab tab object to show settings interface in.
 	 * @param borderpane root pane to set settings interface in it.
 	 * @return javaFx tab object with fxml file loaded as history interface.
 	 */
+=======
+<<<<<<< HEAD
+	/**
+	 * @param settingTab tab content to show setting interface in.
+	 * @param borderpane root pane to set setting interface in it.
+	 * @return javaFX tab object with fxml file  loaded as history interface.
+	 */
+=======
+>>>>>>> upstream/master
+>>>>>>> 8995dbeff95d15d59f84b530de9dc39ed3f4a7b6
 	public Tab getHistoryView(Tab settingTab, BorderPane borderpane)
 	{
 		
@@ -66,9 +87,18 @@ public class History
 	
 
 
+<<<<<<< HEAD
 	/**
 	 * @param event mouse click event handler.
 	 */
+=======
+<<<<<<< HEAD
+	/**
+	 * @param event mouse event click handler
+	 */
+=======
+>>>>>>> upstream/master
+>>>>>>> 8995dbeff95d15d59f84b530de9dc39ed3f4a7b6
 	private void handleMouseClicked(MouseEvent event) {
 		Node node = event.getPickResult().getIntersectedNode();
 	    // Accept clicks only on node cells, and not on empty spaces of the TreeView
@@ -83,9 +113,18 @@ public class History
 	   
 		
 	}
+<<<<<<< HEAD
 	/**
 	 * @param rs sql resultset to get data from the table. 
 	 */
+=======
+<<<<<<< HEAD
+	/**
+	 * @param rs sql resultSet to get data from sql table
+	 */
+=======
+>>>>>>> upstream/master
+>>>>>>> 8995dbeff95d15d59f84b530de9dc39ed3f4a7b6
 	public void showAllHistory(ResultSet rs)
 	{
 		try {
