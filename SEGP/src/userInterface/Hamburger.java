@@ -30,7 +30,7 @@ public class Hamburger {
 	
 	public  JFXHamburger getHamburger(JFXHamburger hamburger, BorderPane borderpane, TabPane settingTabPane) {
 
-		home.setMinSize(80, 60);
+		home.setMinSize(40, 40);
 		home.setGraphic(new ImageView(new Image("/homeBlack.png")));
 		home.addEventHandler(MouseEvent.DRAG_DETECTED, (e)->{
 			
@@ -41,19 +41,19 @@ public class Hamburger {
 		// home.setButtonType(ButtonType.RAISED);//
 		// home.getStyleClass().addAll("animated-option-button","animated-option-sub-button2");
 		
-		history.setMinSize(80, 60);
+		history.setMinSize(40, 40);
 		history.setGraphic(new ImageView(new Image("/historyBlack.png")));
 		
-		downloads.setMinSize(80, 60);
+		downloads.setMinSize(40, 40);
 		downloads.setGraphic(new ImageView(new Image("/downloadBlack.png")));
 		
-		bookmarks.setMinSize(80, 60);
+		bookmarks.setMinSize(40, 40);
 		bookmarks.setGraphic(new ImageView(new Image("/collectionBookmark.png")));
 		
-		saveAsPdf.setMinSize(80, 60);
+		saveAsPdf.setMinSize(40, 40);
 		saveAsPdf.setGraphic(new ImageView(new Image("/pdf.png")));
 	
-		setting.setMinSize(80, 60);
+		setting.setMinSize(40, 40);
 		setting.setGraphic(new ImageView(new Image("/settingBlack.png")));
 
 		// Tooltips Referance: menus
@@ -85,8 +85,9 @@ public class Hamburger {
 		 */
 
 		rightDrawer.setDirection(DrawerDirection.RIGHT);
-		rightDrawer.setDefaultDrawerSize(80);
+		rightDrawer.setDefaultDrawerSize(60);
 		rightDrawer.setSidePane(vbox);
+		rightDrawer.setOpacity(0.5);
 				
 		// --------------------------------------------------------Hamburger------------------------------------------------
 

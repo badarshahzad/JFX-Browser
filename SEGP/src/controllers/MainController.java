@@ -15,12 +15,15 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Worker;
 import javafx.concurrent.Worker.State;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -79,9 +82,11 @@ public class MainController implements Initializable {
 
 		getTabPaneView(tabPane, addNewTab);
 		tabPaneChangeLiten(tabPane);
+		
+
 	
 	}// end intializer method
-
+	
 	// ---set method for TabPane---
 	public void setTabPane(TabPane tabPane) {
 		this.tabPane = tabPane;
@@ -105,7 +110,34 @@ public class MainController implements Initializable {
 	public TabPane getTabPaneView(TabPane tabpane, Tab addNewTab) {
 		tabpane.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Tab>() {
 			@Override
+			
 			public void changed(ObservableValue<? extends Tab> ov, Tab t, Tab newSelectedTab) {
+
+				//Closeing tab if first index tab close and size will be the 2
+				//https://docs.oracle.com/javase/8/javafx/api/index.html?javafx/scene/package-summary.html
+				
+				tabPane.getTabs().get(0).setOnCloseRequest(new EventHandler<Event>() {
+					@Override
+					public void handle(Event event) {
+						// TODO Auto-generated method stub
+						if(tabPane.getTabs().size()==2)
+							Platform.exit();
+					}
+					
+				});
+			
+				
+				newSelectedTab.setOnClosed(new EventHandler<Event>() {
+					
+					@Override
+					public void handle(Event event) {
+						// TODO Auto-generated method stub
+						if(newSelectedTab.equals(tabpane.getTabs().get(0)) && tabpane.getTabs().size()==2){
+							//System.out.println("Yes here");
+						}
+					//Platform.exit();
+					}
+					});
 				if (newSelectedTab == addNewTab) {
 
 					// ---------------New tab is created --------------------

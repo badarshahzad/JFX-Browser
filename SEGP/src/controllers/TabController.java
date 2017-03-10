@@ -1,21 +1,26 @@
 package controllers;
 
-import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.controls.JFXTextField;
 import database.History_Managment;
 
+import java.awt.Event;
 import java.net.URL;
+import java.util.EventListener;
 import java.util.ResourceBundle;
 
+import javax.lang.model.element.Element;
+import javax.swing.text.Document;
+
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.collections.ObservableList;
 import javafx.concurrent.Worker;
 import javafx.concurrent.Worker.State;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.control.Tab;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
@@ -27,7 +32,6 @@ import javafx.scene.web.WebHistory;
 import javafx.scene.web.WebView;
 import userInterface.Hamburger;
 import javafx.scene.control.TabPane;
-import javafx.scene.control.TabPane.TabClosingPolicy;
 
 /**
  *
@@ -84,8 +88,12 @@ public class TabController implements Initializable {
 		ham.getHamburger(hamburger, borderpane, tabPane);
 
 		// Search Button Listener
+		
 		search.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
-			pageRender(searchField.getText()); // method call
+			//pageRender(searchField.getText()); // method call
+		
+			Document doc = webEngine.getDocument();
+			Element el = 
 		});
 		// Search Field Listener
 		searchField.setOnKeyPressed(event -> {
