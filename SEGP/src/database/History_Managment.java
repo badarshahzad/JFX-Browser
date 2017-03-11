@@ -3,6 +3,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 public class History_Managment
 {
@@ -21,15 +22,20 @@ public class History_Managment
 			System.out.println("Opened database successfully");
 			perp=c.prepareStatement("CREATE TABLE if not exists history(url text primary key ,Time text,Date DEFAULT CURRENT_DATE );");
 			perp.executeUpdate();
+			c.prepareStatement("CREATE TABLE if not exists bookmarks(url text primary key ,"
+					+ "Time text,"
+					+ "Date DEFAULT CURRENT_DATE ,"
+					+ "name varchar(30),"
+					+ "folder varchar(30));").executeUpdate();
 			System.out.println("table created");
 			perp.close();
 			c.close();
-			createBookMarks();
 		}
 		catch(Exception e)
 		{
 			e.printStackTrace();
 			System.out.println("issues");
+			e.printStackTrace();
 		}
 	}
 	//------------------------------------ULR INSERTION IN DATABASE----------------------------------------------------------------//
@@ -81,29 +87,10 @@ public class History_Managment
 	 * if you guys don't mind :P
 	 * */
 
-	//---------------------------------Bookmarks Table---------------------------------------------------------------
 
-	public static void createBookMarks(){
-		try
-		{
-			Class.forName("org.sqlite.JDBC");
-			c = DriverManager.getConnection("jdbc:sqlite:History.db");
-			System.out.println("Opened database successfully");
-			perp=c.prepareStatement("CREATE TABLE if not exists bookmarks(url text primary key ,Time text,Date DEFAULT CURRENT_DATE );");
-			perp.executeUpdate();
-			System.out.println("table created");
-			perp.close();
-			c.close();
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-			System.out.println("issues");
-		}
-
-	}
+	
 //	------------------------------------insert bookmarks----------------------------------------------
-	public static void insertBookmarks(String url)
+	public static void insertBookmarks(String url,String name,String folder)
 	{
 		java.util.Date date = new java.util.Date();
 		SimpleDateFormat formate_time = new SimpleDateFormat("HH:mm:ss");
@@ -112,13 +99,17 @@ public class History_Managment
 		{
 			Class.forName("org.sqlite.JDBC");
 			c = DriverManager.getConnection("jdbc:sqlite:History.db");
-			String insert="insert or replace into bookmarks(url,Time)"+"values(?,?)";
+			String insert="insert or replace into bookmarks(url,Time,name,folder)"+"values(?,?,?,?)";
 			String time=formate_time.format(date);
 			perp=c.prepareStatement(insert);
 			perp.setString(1, url);
 			perp.setString(2,time);
+			perp.setString(3,name);
+			perp.setString(4, folder);
 			perp.executeUpdate();
 			System.out.println("data has been inserted");
+			perp.close();
+			c.close();
 		}
 		catch(Exception e)
 		{
@@ -127,15 +118,16 @@ public class History_Managment
 
 	}
 //	-------------------------------------show bookmarks--------------------------------------------
-	public static ResultSet showBookmarks()
+	public static ResultSet showBookmarks(String folder)
 	{
 		ResultSet rs=null;
 		try
 		{
 			Class.forName("org.sqlite.JDBC");
 			c = DriverManager.getConnection("jdbc:sqlite:History.db");
-			String str="select * from bookmarks order by date DESC";
+			String str="select * from bookmarks where folder = ?";
 			perp=c.prepareStatement(str);
+			perp.setString(1, folder);
 			rs=perp.executeQuery();
 		}
 		catch(Exception e)
@@ -144,4 +136,18 @@ public class History_Managment
 		}
 		return rs;
 	}
+//	public static void main(String[] args) throws SQLException{
+//		History_Managment.CreateDataBase();
+//		History_Managment.insertBookmarks("www.google.com.pk", "google","Entertainment");
+//		History_Managment.insertBookmarks("www.facebook.com.", "facebook","Entertainment");
+//		History_Managment.insertBookmarks("www.twitter.com", "twitter","Entertainment");
+//		History_Managment.insertBookmarks("www.youtube.com", "youtube","Entertainment");
+//		History_Managment.insertBookmarks("www.github.com", "github","Entertainment");
+//		History_Managment.insertBookmarks("www.softonic.com", "softonic softwares","Entertainment");
+//		History_Managment.insertBookmarks("www.ytpak.com", "ytpak videos","Entertainment");
+//		ResultSet result = History_Managment.showBookmarks("Entertainment");
+//		while(result.next()){
+//			System.out.println(result.getString(1)+result.getString(2)+result.getString(5));
+//		}
+//	}
 }

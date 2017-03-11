@@ -46,7 +46,7 @@ public class BookMarksController implements Initializable{
 	    private TreeTableColumn<String, String> bookMarkCol;
 	    TreeItem parentFolder = new TreeItem<>("All Bookmarks",new ImageView(nodeImage));
 	    TreeItem child1 = new TreeItem<>("Programming",new ImageView(nodeImage));
-	    TreeItem child2 = new TreeItem<>("Enetrtainment",new ImageView(nodeImage));
+	    TreeItem child2 = new TreeItem<>("Entertainment",new ImageView(nodeImage));
 	    TreeItem child3 = new TreeItem<>("SEGP",new ImageView(nodeImage));
 	    TreeItem child11 = new TreeItem<>("Java",new ImageView(nodeImage));
 	    TreeItem child12 = new TreeItem<>("C++",new ImageView(nodeImage));
@@ -68,9 +68,7 @@ public class BookMarksController implements Initializable{
 			public ObservableValue<String> call(CellDataFeatures<String, String> param) {
 				return new SimpleStringProperty(param.getValue().getValue());
 			}
-		});
-		list.add(new URLdetails("google.com", "?", "?", "www.google.com.pk"));
-		
+		});		
 		nameCol.setCellValueFactory(new PropertyValueFactory<URLdetails,String>("name"));
 		locationCol.setCellValueFactory(new PropertyValueFactory<URLdetails,String>("location"));
 		dateCol.setCellValueFactory(new PropertyValueFactory<URLdetails,String>("date"));
@@ -85,7 +83,11 @@ public class BookMarksController implements Initializable{
 
 	public void mouseClick(MouseEvent event){
 		TreeItem<String> item = treeView.getSelectionModel().getSelectedItem();
-		if(item!=null)
+		if(item!=null && item.getValue().equals("Entertainment")){
 		System.out.println(item.getValue());
+		ObservableList<URLdetails> list = new PopulateTable().PopulateTable(item.getValue());
+		System.out.println("entered");
+		table.setItems(list);
+		}
 	}
 }
