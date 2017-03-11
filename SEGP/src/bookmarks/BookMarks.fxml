@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TreeTableColumn?>
 <?import javafx.scene.control.TreeTableView?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="505.0" prefWidth="863.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bookmarks.BookMarksController">
@@ -25,4 +28,12 @@
         </columns>
       </TableView>
    </center>
+   <top>
+      <HBox prefHeight="46.0" prefWidth="863.0" BorderPane.alignment="CENTER">
+         <children>
+            <JFXTextField fx:id="searchBar" maxWidth="447.0" minWidth="226.0" prefHeight="39.0" prefWidth="226.0" />
+            <JFXButton fx:id="searchButton" prefHeight="37.0" prefWidth="80.0" text="Search" />
+         </children>
+      </HBox>
+   </top>
 </BorderPane>

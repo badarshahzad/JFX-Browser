@@ -3,9 +3,12 @@ package bookmarks;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXTreeTableView;
 
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -24,6 +27,12 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 
 public class BookMarksController implements Initializable{
+	
+	  @FXML
+	    private JFXTextField searchBar;
+
+	    @FXML
+	    private JFXButton searchButton;
 	    @FXML
 	    private TableColumn<URLdetails, String> nameCol;
 
@@ -39,25 +48,27 @@ public class BookMarksController implements Initializable{
 	    private TableView<URLdetails> table;	
 	public static ObservableList<URLdetails> list = FXCollections.observableArrayList();
 	
-	Image nodeImage = new Image(getClass().getResourceAsStream("folder.png"));
+		private Image folderImage = new Image(getClass().getResourceAsStream("folder.png"));
+		 private Image searchImage = new Image(getClass().getResourceAsStream("search.png"));
 	 @FXML
 	    private TreeTableView<String> treeView;
 	    @FXML
 	    private TreeTableColumn<String, String> bookMarkCol;
-	    TreeItem parentFolder = new TreeItem<>("All Bookmarks",new ImageView(nodeImage));
-	    TreeItem child1 = new TreeItem<>("Programming",new ImageView(nodeImage));
-	    TreeItem child2 = new TreeItem<>("Entertainment",new ImageView(nodeImage));
-	    TreeItem child3 = new TreeItem<>("SEGP",new ImageView(nodeImage));
-	    TreeItem child11 = new TreeItem<>("Java",new ImageView(nodeImage));
-	    TreeItem child12 = new TreeItem<>("C++",new ImageView(nodeImage));
-	    TreeItem child13 = new TreeItem<>("Haskell",new ImageView(nodeImage));
-	    TreeItem child21 = new TreeItem<>("Youtube",new ImageView(nodeImage));
-	    TreeItem child22 = new TreeItem<>("facebook",new ImageView(nodeImage));
-	    TreeItem child23 = new TreeItem<>("Twitter",new ImageView(nodeImage));
-	    TreeItem child31 = new TreeItem<>("Allah Khair",new ImageView(nodeImage));
-	    TreeItem child32 = new TreeItem<>("Aaa Haan",new ImageView(nodeImage));
+	    TreeItem parentFolder = new TreeItem<>("All Bookmarks",new ImageView(folderImage));
+	    TreeItem child1 = new TreeItem<>("Programming",new ImageView(folderImage));
+	    TreeItem child2 = new TreeItem<>("Entertainment",new ImageView(folderImage));
+	    TreeItem child3 = new TreeItem<>("SEGP",new ImageView(folderImage));
+	    TreeItem child11 = new TreeItem<>("Java",new ImageView(folderImage));
+	    TreeItem child12 = new TreeItem<>("C++",new ImageView(folderImage));
+	    TreeItem child13 = new TreeItem<>("Haskell",new ImageView(folderImage));
+	    TreeItem child21 = new TreeItem<>("Youtube",new ImageView(folderImage));
+	    TreeItem child22 = new TreeItem<>("facebook",new ImageView(folderImage));
+	    TreeItem child23 = new TreeItem<>("Twitter",new ImageView(folderImage));
+	    TreeItem child31 = new TreeItem<>("Allah Khair",new ImageView(folderImage));
+	    TreeItem child32 = new TreeItem<>("Aaa Haan",new ImageView(folderImage));
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		searchButton.setGraphic(new ImageView(searchImage));
 		child1.getChildren().setAll(child11,child12,child13);
 		child2.getChildren().setAll(child21,child22,child23);
 		child3.getChildren().setAll(child31,child32);
@@ -78,8 +89,10 @@ public class BookMarksController implements Initializable{
 		treeView.addEventHandler(MouseEvent.MOUSE_CLICKED,e ->{
 			mouseClick(e);
 		});
+		
+		
 	}
-	
+		
 
 	public void mouseClick(MouseEvent event){
 		TreeItem<String> item = treeView.getSelectionModel().getSelectedItem();
