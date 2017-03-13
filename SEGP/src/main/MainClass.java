@@ -28,9 +28,9 @@ public class MainClass extends Application {
 	 *            the command line arguments
 	 */
 	public static void main(String[] args) {
-		Proxy proxy = new Proxy();
-		proxy.setHttpProxy("172.16.0.2", "8080");
-		proxy.setHttpsProxy("172.16.0.2", "8080");
+//		Proxy proxy = new Proxy();
+//		proxy.setHttpProxy("172.16.0.2", "8080");
+//		proxy.setHttpsProxy("172.16.0.2", "8080");
 		
 
 		// following three lines are for proxy settings
