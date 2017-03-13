@@ -1,22 +1,32 @@
 package controllers;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import javax.management.Notification;
+
+import org.controlsfx.control.Notifications;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 
-import javafx.event.ActionEvent;
+import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
+import javafx.util.Duration;
 
-public class SignUpController implements Initializable {
+public class SignUpController  extends Application implements Initializable {
 
 	
 
@@ -45,21 +55,36 @@ public class SignUpController implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
+		
+		
 		//----------Sign up button working
 		signUpBt.addEventHandler(MouseEvent.MOUSE_CLICKED, (e4)->{
-			System.out.println("SingUp button click");
 			
+		boolean flag = getFirstname().getText().isEmpty() | getEmail().getText().isEmpty() |
+						getLastname().getText().isEmpty() | getPassword().getText().isEmpty();
+			
+		if(flag){
+			
+			Notifications noti= Notifications.create()
+    				.title("Empty Field")
+    				.text("Please fill the empty field!")
+    				//.graphic(new ImageView(null))
+    				.hideAfter(Duration.seconds(5))
+    				.position(Pos.TOP_RIGHT);
+			noti.showError();
+
+		}
+		
 		});
 		
 		cancel.addEventHandler(MouseEvent.MOUSE_CLICKED, (e5)->{
-			
 			//To close the login pane
 			controllers.SettingController.getLoginSignInStage().close();
 			
 		});
 		
 	}
-
+	
 	public Pane getSignUpPane() {
 		return signUpPane;
 	}
@@ -108,7 +133,7 @@ public class SignUpController implements Initializable {
 
 
 
-	public JFXPasswordField getPass() {
+	public JFXPasswordField getPassword() {
 		return password;
 	}
 
@@ -140,6 +165,22 @@ public class SignUpController implements Initializable {
 
 	public void setCancel(JFXButton cancel) {
 		this.cancel = cancel;
+	}
+
+	
+	public static void main(String args[]){
+		System.out.println("Yes");
+		launch(args);
+	}
+	
+	@Override
+	public void start(Stage primaryStage) throws Exception {
+		// TODO Auto-generated method stub
+		Parent root = FXMLLoader.load(getClass().getResource("/ui/SignUp.fxml"));
+		Scene scene = new Scene(root);
+		primaryStage.setScene(scene);
+		primaryStage.show();
+		
 	}
 
 

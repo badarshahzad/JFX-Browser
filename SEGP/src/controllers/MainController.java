@@ -28,6 +28,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.print.PrinterJob;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.control.Tab;
 import javafx.scene.input.KeyCode;
@@ -62,28 +63,30 @@ public class MainController implements Initializable {
 	private Tab firstTab = new Tab("First Tab");
 	private Tab addNewTab = new Tab("+");
 
+
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
-
 		
 		// All opens tabs should be closed so below line is for just closing tabs
+		addNewTab.setClosable(false);
 		tabPane.setTabClosingPolicy(TabClosingPolicy.ALL_TABS);
 		tabPane.setFocusTraversable(false);
 		
 		try {
+			// here below adding page title of tab 
 			firstTab.setContent(FXMLLoader.load(getClass().getResource("/ui/Tab.fxml")));
+			
+			
 		} catch (IOException e2) {
 			// TODO Auto-generated catch block
 			e2.printStackTrace();
 		}
-		addNewTab.setClosable(false);
 		tabPane.getTabs().addAll(firstTab, addNewTab);
 		rootBorderPane.setCenter(tabPane);
 
 		getTabPaneView(tabPane, addNewTab);
 		tabPaneChangeLiten(tabPane);
 		
-
 	
 	}// end intializer method
 	
@@ -125,31 +128,18 @@ public class MainController implements Initializable {
 					}
 					
 				});
-			
-				
-				newSelectedTab.setOnClosed(new EventHandler<Event>() {
-					
-					@Override
-					public void handle(Event event) {
-						// TODO Auto-generated method stub
-						if(newSelectedTab.equals(tabpane.getTabs().get(0)) && tabpane.getTabs().size()==2){
-							//System.out.println("Yes here");
-						}
-					//Platform.exit();
-					}
-					});
+
 				if (newSelectedTab == addNewTab) {
 
 					// ---------------New tab is created --------------------
-					Tab tab = new Tab("New Tab");
-
+					Tab tab = new Tab("New tab");
 					try {
 						tab.setContent(FXMLLoader.load(getClass().getResource("/ui/Tab.fxml")));
 					} catch (IOException e) {
 						System.out.println("Exception: New tab click but not working in TabPaneView Class");
 						e.printStackTrace();
 					}
-
+					
 					tab.getStyleClass().addAll("tab-pane");
 					final ObservableList<Tab> tabs = tabpane.getTabs();
 					tabs.add(tabs.size() - 1, tab);

@@ -13,9 +13,20 @@
 }
 
 
-.button:hover{
-		-fx-background-color:rgb(157, 187, 204);
+#setting .button {
+	-fx-background-radius: 25;
 }
+#leftDrawerStack .button{
+
+}
+
+#leftDrawerStack .button:hover{
+	
+		
+}
+
+
+
 
 /*******************************************************************************
  *                                                                             *
@@ -26,14 +37,13 @@
 .scroll-bar:vertical > .track-background,
 .scroll-bar:horizontal > .track-background{
     	-fx-background-color:#ffffff;
+    	-fx-margin:4 0 0 10;
 }
 */
 
 .scroll-bar:vertical > .thumb,
 .scroll-bar:horizontal > .thumb {
 	    -fx-background-color: derive(#28323c,5.0%);
-	    -fx-background-insets: 0.0;
-	    -fx-background-radius: 0.0;
 }
 
 .scroll-bar:hover > .increment-button, 
@@ -44,8 +54,6 @@
 //---------------------TabPane CSS-----------------------------------------------
 
 .tab{
-	//-fx-background-color: white;
-	//-fx-background-color:rgb(42, 42, 42);
 	-fx-text-fill:#222222;
 }
 .tab:selected .focus-indicator {
@@ -65,4 +73,8 @@
 .tab-header-area .tab{
     -fx-padding:4 10 5 10;
     -fx-background-radius: 10 10 0 0;
+}
+
+#righDrawerVbox{
+	-fx-padding: 10,10,10,10;
 }

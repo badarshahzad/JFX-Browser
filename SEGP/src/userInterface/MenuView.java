@@ -36,7 +36,7 @@ public class MenuView {
 	private JFXDrawer rightDrawer;
 	//Hamburger object = new Hamburger();
 
-	public void setMenuViewListener(JFXButton home, JFXButton history, JFXButton downloads, JFXButton bookmarks,
+	public void setMenuViewListener( JFXButton history, JFXButton downloads, JFXButton bookmarks,
 			JFXButton saveAsPdf, JFXButton setting, TabPane tabPane,
 			JFXDrawersStack drawersStack, JFXDrawer rightDrawer) {
 
@@ -46,25 +46,7 @@ public class MenuView {
 
 		final ObservableList<Tab> tabs = tabPane.getTabs();
 		SingleSelectionModel<Tab> selectedTab = tabPane.getSelectionModel();
-
-		// -------------------------------------------------------Home
-		// listener----------------------------------------------------------
-		home.setOnAction(new EventHandler<ActionEvent>() {
-
-			@Override
-			public void handle(ActionEvent event) {
-
-				// When the menu click Hamburger and DrawerStack will hide
-			//onClickHideHamburger();
-
-				System.out.println("Home");
-				tab.setText("Home");
-				tab.setId("home");
-
-			}
-
-		});
-
+		
 		// -------------------------------------------------------Historylistener-------------------------------------------------------
 		history.setOnAction((ActionEvent) -> {
 			System.out.println("History Start!");

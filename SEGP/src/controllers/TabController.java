@@ -1,6 +1,7 @@
 package controllers;
 
 import com.jfoenix.controls.JFXHamburger;
+import com.jfoenix.controls.JFXProgressBar;
 import com.jfoenix.controls.JFXTextField;
 import database.History_Managment;
 
@@ -20,6 +21,7 @@ import javafx.concurrent.Worker.State;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.control.Tab;
 import javafx.scene.input.KeyCode;
@@ -52,24 +54,28 @@ public class TabController implements Initializable {
 	@FXML
 	private JFXTextField searchField;
 	@FXML
+	private Label download;
+	@FXML
+	private Label bookmark;
+	@FXML
 	private JFXHamburger hamburger;
 	@FXML
 	private GridPane navigationBar;
 	@FXML
-    private Label bookmark;
+	private JFXProgressBar progressbar;
 
-
-	
 	MainController main = new MainController();
 	// Classes objects to get methods or set methods access
 	private Hamburger ham = new Hamburger();
-
 	public VBox drawerPane = new VBox();
-	// make obejc to get the setter method for url
+
 	public WebView browser = new WebView();
 	public WebEngine webEngine = browser.getEngine();
 
+	public Worker<Void> worker;
+
 	private TabPane tabPane = main.getTabPane();
+
 	public TabPane getTabPane() {
 		return tabPane;
 	}
@@ -81,22 +87,34 @@ public class TabController implements Initializable {
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 
-		/// All opens tabs should be closed so below line is for just closing tabs
+		// Worker load the page
+		worker = webEngine.getLoadWorker();
+		worker.stateProperty().addListener(new ChangeListener<State>() {
+
+			@Override
+			public void changed(ObservableValue<? extends State> observable, State oldValue, State newValue) {
+				System.out.println("Loading state: " + newValue.toString());
+				if (newValue == Worker.State.SUCCEEDED) {
+					System.out.println("Finish!");
+				}
+			}
+		});
+
+		progressbar.progressProperty().bind(worker.progressProperty());
 
 		pageRender("https://www.google.com.pk/webhp?sourceid=chrome-instant&ion=1&espv=2&ie=UTF-8");
-		
+
 		ham.getHamburger(hamburger, borderpane, tabPane);
 
 		// Search Button Listener
-		
+
 		search.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
-			//pageRender(searchField.getText()); // method call
-		
-			Document doc = webEngine.getDocument();
-			Element el = 
+			pageRender(searchField.getText());
+
 		});
 		// Search Field Listener
 		searchField.setOnKeyPressed(event -> {
+
 			if (event.getCode() == KeyCode.ENTER) {
 				pageRender(searchField.getText()); // method call
 			}
@@ -124,11 +142,15 @@ public class TabController implements Initializable {
 		refresh.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
 			webEngine.reload();
 		});
-		
-		bookmark.addEventHandler(MouseEvent.MOUSE_CLICKED, (e)->{
+
+		bookmark.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
 			System.out.println("Bookmarks");
 		});
 		
+		download.addEventHandler(MouseEvent.MOUSE_CLICKED, (e)->{
+			System.out.println("download click");
+		});
+
 	}// end intializer method
 
 	// mehtod to rendere page
@@ -142,6 +164,7 @@ public class TabController implements Initializable {
 					if (!(webEngine.getLocation().equals("about:blank")))
 						History_Managment.insertUrl(webEngine.getLocation());
 				}
+
 			}
 		});
 		webEngine.load(url);

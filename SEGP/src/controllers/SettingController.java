@@ -1,5 +1,6 @@
 package controllers;
 
+import java.awt.Color;
 import java.net.URL;
 import java.util.Optional;
 import java.util.Properties;
@@ -32,6 +33,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -43,25 +45,27 @@ public class SettingController implements Initializable {
 		setting.setMinSize(100, 50);
 		JFXButton history = new JFXButton("History");
 		history.setMinSize(100, 50);
-
+		
 		/*
 		 * Add two buttons in gridpane that will be put in
 		 * drawer->drawerstack(container) -> left side of border to come ount
 		 * whenever user click the setting button
 		 */
-		GridPane gridPane = new GridPane();
-		gridPane.add(setting, 0, 0);
-		gridPane.add(history, 0, 1);
+		VBox vboxLeftDarwer= new VBox();
+		vboxLeftDarwer.setSpacing(10);
+		vboxLeftDarwer.getChildren().addAll(setting,history);
 
 		// ------------------------------------------------------Right----DrawerStack--------------------------------
 
 		// Alredy detialed mention in Hamburger class about JFx DrawerStack and
 		// JFXDrawer
 		JFXDrawersStack drawersStack = new JFXDrawersStack();
+		drawersStack.setId("leftDrawerStack");
+		//drawersStack.setStyle("-fx-opacity:0.7");
 		JFXDrawer leftDrawer = new JFXDrawer();
 		leftDrawer.setDirection(DrawerDirection.LEFT);
-		leftDrawer.setDefaultDrawerSize(80);
-		leftDrawer.setSidePane(gridPane);
+		leftDrawer.setDefaultDrawerSize(120);
+		leftDrawer.setSidePane(vboxLeftDarwer);
 		leftDrawer.setResizableOnDrag(true);
 
 		// Setting the left side of Borderpane drawerstack container
@@ -112,6 +116,7 @@ public class SettingController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		
 		
+		
 		signInBtn.addEventHandler(MouseEvent.MOUSE_CLICKED, (e)->{
 			
 			try {
@@ -123,10 +128,9 @@ public class SettingController implements Initializable {
 				loader = new  FXMLLoader(getClass().getResource("/ui/Login.fxml"));
 				loader.load();
 				loginObject = loader.getController();
-				
+
 				loginSignInRoot = new Scene(loginObject.getLoginPane());
 				loginSignInStage.setScene(loginSignInRoot);
-				
 				loginSignInStage.setMaximized(false);
 				loginSignInStage.setResizable(false);
 				loginSignInStage.centerOnScreen();
@@ -166,10 +170,6 @@ public class SettingController implements Initializable {
 			
 			
 		});
-		
-
-		
-	
 	
 		changeProxyBtn.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
 			ToggleGroup group = new ToggleGroup();

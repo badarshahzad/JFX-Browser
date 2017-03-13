@@ -16,7 +16,8 @@ public class History_Managment
 		showHistory();
 		
 	}
-//------------------------------------------------------Creating SQLITE DATABASE and TABLE--------------------------------------//
+//--------------------Creating SQLITE DATABASE and TABLE------------------//
+	
 	public static void CreateDataBase()
 	{		
 		try
@@ -80,7 +81,8 @@ public static ResultSet showHistory()
 		 String str="select * from history order by time DESC,date DESC";
 	     perp=c.prepareStatement(str);
 	     rs=perp.executeQuery();
-	    /* while(rs.next())
+	  
+	     while(rs.next())
 		 {
 			 String link1 =rs.getString(1);
 			 String time1=rs.getString(2);
@@ -89,7 +91,7 @@ public static ResultSet showHistory()
 			 System.out.println(time1);
 			 System.out.println(date1);
 			 
-		 }*/
+		 }
 	}
 	catch(Exception e)
 	{

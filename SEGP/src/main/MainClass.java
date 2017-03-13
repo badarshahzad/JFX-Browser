@@ -1,6 +1,8 @@
 package main;
 
 
+import java.util.Properties;
+
 import controllers.MainController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -30,16 +32,14 @@ public class MainClass extends Application {
 	 *            the command line arguments
 	 */
 	public static void main(String[] args) {
-		
-		/*Properties systemProperties = System.getProperties();
 		// Set Proxy for Http
+		Properties systemProperties = System.getProperties();
 		systemProperties.setProperty("http.proxyHost", "172.16.0.2");
 		systemProperties.setProperty("http.proxyPort", "8080");
 
 		// Set Proxy for Https
 		systemProperties.setProperty("https.proxyHost", "172.16.0.2");
-		systemProperties.setProperty("https.proxyPort", "8080");*/
-		//History_Managment.CreateDataBase(); //if datbase is deleted then create new one
+		systemProperties.setProperty("https.proxyPort", "8080");
 		launch(args);
 	}
 
