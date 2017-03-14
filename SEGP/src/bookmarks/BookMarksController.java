@@ -48,8 +48,8 @@ public class BookMarksController implements Initializable{
 	    private TableView<URLdetails> table;	
 	public static ObservableList<URLdetails> list = FXCollections.observableArrayList();
 	
-		private Image folderImage = new Image(getClass().getResourceAsStream("folder.png"));
-		 private Image searchImage = new Image(getClass().getResourceAsStream("search.png"));
+		private Image folderImage = new Image(getClass().getResourceAsStream("/folder.png"));
+		 private Image searchImage = new Image(getClass().getResourceAsStream("/search.png"));
 	 @FXML
 	    private TreeTableView<String> treeView;
 	    @FXML
