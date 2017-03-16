@@ -1,4 +1,6 @@
 
+
+ 
 .animated-option-button {
 	-fx-pref-width:50px;
 	-fx-background-color:#4c4c4c;
@@ -10,6 +12,22 @@
 	-fx-border-width: 4px;
 }
 
+
+#setting .button {
+	-fx-background-radius: 25;
+}
+#leftDrawerStack .button{
+
+}
+
+#leftDrawerStack .button:hover{
+	
+		
+}
+
+
+
+
 /*******************************************************************************
  *                                                                             *
  * ScrollBar 			                                                       *
@@ -19,14 +37,13 @@
 .scroll-bar:vertical > .track-background,
 .scroll-bar:horizontal > .track-background{
     	-fx-background-color:#ffffff;
+    	-fx-margin:4 0 0 10;
 }
 */
 
 .scroll-bar:vertical > .thumb,
 .scroll-bar:horizontal > .thumb {
 	    -fx-background-color: derive(#28323c,5.0%);
-	    -fx-background-insets: 0.0;
-	    -fx-background-radius: 0.0;
 }
 
 .scroll-bar:hover > .increment-button, 
@@ -37,7 +54,6 @@
 //---------------------TabPane CSS-----------------------------------------------
 
 .tab{
-	//-fx-background-color: white;
 	-fx-text-fill:#222222;
 }
 .tab:selected .focus-indicator {
@@ -57,4 +73,8 @@
 .tab-header-area .tab{
     -fx-padding:4 10 5 10;
     -fx-background-radius: 10 10 0 0;
+}
+
+#righDrawerVbox{
+	-fx-padding: 10,10,10,10;
 }

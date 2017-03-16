@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXTreeTableView?>
+<?import javafx.scene.control.TreeTableColumn?>
+
+
+<<<<<<< HEAD:SEGP/bin/userInterface/History.fxml
+<JFXTreeTableView xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1">
+   <columns>
+      <TreeTableColumn fx:id="Date" prefWidth="135.0" text="Date" />
+      <TreeTableColumn fx:id="Links" minWidth="0.0" prefWidth="398.0" text="Links" />
+      <TreeTableColumn fx:id="Time" prefWidth="148.0" text="Time" />
+   </columns>
+</JFXTreeTableView>
+=======
+<JFXTreeTableView fx:id="treeTableView" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.HistoryController" />
+>>>>>>> 9aea2a2650906addf4f66007e806c19f082ee5d9:SEGP/bin/ui/History.fxml
