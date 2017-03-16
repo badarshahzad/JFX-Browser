@@ -4,8 +4,6 @@
 <?import com.jfoenix.controls.JFXProgressBar?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -37,61 +35,13 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <Label fx:id="back">
-                     <graphic>
-                        <ImageView>
-                           <image>
-                              <Image url="@../../img/backword1.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Label>
-                  <Label fx:id="forward" GridPane.columnIndex="1">
-                     <graphic>
-                        <ImageView>
-                           <image>
-                              <Image url="@../../img/forward1.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Label>
-                  <Label fx:id="refresh" GridPane.columnIndex="2">
-                     <graphic>
-                        <ImageView>
-                           <image>
-                              <Image url="@../../../../../../Desktop/Icon%20folder/ic_refresh_black_24dp/ios/ic_refresh.imageset/ic_refresh.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Label>
+                  <Label fx:id="back" />
+                  <Label fx:id="forward" GridPane.columnIndex="1" />
+                  <Label fx:id="refresh" GridPane.columnIndex="2" />
                   <JFXTextField fx:id="searchField" minWidth="200.0" GridPane.columnIndex="3" />
-                  <Label fx:id="search" GridPane.columnIndex="4">
-                     <graphic>
-                        <ImageView>
-                           <image>
-                              <Image url="@../../../../../../Desktop/Icon%20folder/ic_search_black_24dp/ios/ic_search.imageset/ic_search.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Label>
-                  <Label fx:id="download" GridPane.columnIndex="5">
-                     <graphic>
-                        <ImageView>
-                           <image>
-                              <Image url="@../../img/download.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Label>
-                  <Label fx:id="bookmark" GridPane.columnIndex="6">
-                     <graphic>
-                        <ImageView>
-                           <image>
-                              <Image url="@../../img/bookmark.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Label>
+                  <Label fx:id="search" GridPane.columnIndex="4" />
+                  <Label fx:id="download" GridPane.columnIndex="5" />
+                  <Label fx:id="bookmark" GridPane.columnIndex="6" />
                </children>
             </GridPane>
             <JFXHamburger fx:id="hamburger" prefHeight="30.0" prefWidth="30.0" GridPane.columnIndex="1" />

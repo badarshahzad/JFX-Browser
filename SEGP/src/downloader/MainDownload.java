@@ -49,6 +49,7 @@ public class MainDownload {
 	}
 	
 	public static void main (){
+		System.out.println("Yes");
 //		new MainDownload().startDownload("https://examples.javacodegeeks.com/core-java/net/sockettimeoutexception/java-net-sockettimeoutexception-how-to-solve-sockettimeoutexception/");
 //		new MainDownload().startDownload("https://www.namal.edu.pk/wp-content/uploads/2017/01/Cloud-Gaming.pdf");
 //		new MainDownload().startDownload("https://github-windows.s3.amazonaws.com/GitHubSetup.exe");

@@ -6,12 +6,15 @@ import com.jfoenix.controls.JFXTextField;
 import database.History_Managment;
 
 import java.awt.Event;
+import java.awt.TextField;
 import java.net.URL;
 import java.util.EventListener;
 import java.util.ResourceBundle;
 
 import javax.lang.model.element.Element;
 import javax.swing.text.Document;
+
+import org.controlsfx.control.textfield.TextFields;
 
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
@@ -34,6 +37,8 @@ import javafx.scene.web.WebHistory;
 import javafx.scene.web.WebView;
 import userInterface.Hamburger;
 import javafx.scene.control.TabPane;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 /**
  *
@@ -87,6 +92,17 @@ public class TabController implements Initializable {
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 
+		back.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/backword1.png"))));
+		forward.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/forward1.png"))));
+		refresh.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/refresh.png"))));
+		search.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/search.png"))));
+		search.setOpacity(.5);
+		download.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/download.png"))));
+		download.setOpacity(.6);
+		bookmark.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/bookmark.png"))));
+		bookmark.setOpacity(.7);
+		
+		
 		// Worker load the page
 		worker = webEngine.getLoadWorker();
 		worker.stateProperty().addListener(new ChangeListener<State>() {
@@ -112,13 +128,21 @@ public class TabController implements Initializable {
 			pageRender(searchField.getText());
 
 		});
+		
 		// Search Field Listener
+		
 		searchField.setOnKeyPressed(event -> {
 
 			if (event.getCode() == KeyCode.ENTER) {
 				pageRender(searchField.getText()); // method call
 			}
 		});
+		
+		//This will drop down list suggestion keywords
+
+		String [] array = {"a","bb","cc"};
+		TextFields.bindAutoCompletion(searchField, array);
+		
 
 		back.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
 			try {
