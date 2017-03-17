@@ -136,36 +136,36 @@ public class History_Managment
 		}
 		return rs;
 	}
-	public static void main(String[] args) throws SQLException{
-		History_Managment.CreateDataBase();
-		History_Managment.insertBookmarks("www.google.com.pk", "google","Entertainment");
-		History_Managment.insertBookmarks("www.facebook.com.", "facebook","Entertainment");
-		History_Managment.insertBookmarks("www.twitter.com", "twitter","Entertainment");
-		History_Managment.insertBookmarks("www.youtube.com", "youtube","Entertainment");
-		History_Managment.insertBookmarks("www.github.com", "github","Entertainment");
-		History_Managment.insertBookmarks("www.softonic.com", "softonic softwares","Programming");
-		History_Managment.insertBookmarks("www.ytpak.com", "ytpak videos","Entertainment");
-		History_Managment.insertBookmarks("www.stackoverflow.com", "stackoverflow","Programming");
-		History_Managment.insertBookmarks("www.tutorialspoint.com", "tutorialspoint","Programming");
-		History_Managment.insertBookmarks("http://www.cplusplus.com/doc/tutorial/", "Learn C++","C++");
-		History_Managment.insertBookmarks("https://www.tutorialspoint.com/cplusplus/", "Learn C++ tuttorialpoint","C++");
-		History_Managment.insertBookmarks("http://www.cprogramming.com/tutorial/c++-tutorial.html", "cprogramming.com","C++");
-		History_Managment.insertBookmarks("https://www.udemy.com/free-learn-c-tutorial-beginners/", "udemy","C++");
-		History_Managment.insertBookmarks("https://www.programiz.com/cpp-programming", "programiz","C++");
-		History_Managment.insertBookmarks("https://www.tutorialcup.com/cplusplus", "totorialzcup","C++");
-		History_Managment.insertBookmarks("https://www.tutorialcup.com/java", "totorialzcup","Java");
-		History_Managment.insertBookmarks("https://www.tutorialspoint.com/java/", "tpoint","Java");
-		History_Managment.insertBookmarks("https://www.udemy.com/java-tutorial/", "udemy","Java");
-		History_Managment.insertBookmarks("http://learnyouahaskell.com/", "haskellpro","Haskell");
-		History_Managment.insertBookmarks("http://learnyouahaskell.com/chapters", "chapters","Haskell");
-		History_Managment.insertBookmarks("https://github.com/bitemyapp/learnhaskell", "github","Haskell");
-		History_Managment.insertBookmarks("http://www.happylearnhaskelltutorial.com/", "happylearnhaskell","Haskell");
-		History_Managment.insertBookmarks("https://youtube.com", "youtube.com","Youtube");
-		History_Managment.insertBookmarks("https://facebook.com", "facebook.com","facebook");
-		History_Managment.insertBookmarks("https://twitter.com", "twitter.com","twitter");
-		ResultSet result = History_Managment.showBookmarks("Entertainment");
-		while(result.next()){
-			System.out.println(result.getString(1)+result.getString(2)+result.getString(5));
-		}
-	}
+//	public static void main(String[] args) throws SQLException{
+//		History_Managment.CreateDataBase();
+//		History_Managment.insertBookmarks("www.google.com.pk", "google","Entertainment");
+//		History_Managment.insertBookmarks("www.facebook.com.", "facebook","Entertainment");
+//		History_Managment.insertBookmarks("www.twitter.com", "twitter","Entertainment");
+//		History_Managment.insertBookmarks("www.youtube.com", "youtube","Entertainment");
+//		History_Managment.insertBookmarks("www.github.com", "github","Entertainment");
+//		History_Managment.insertBookmarks("www.softonic.com", "softonic softwares","Programming");
+//		History_Managment.insertBookmarks("www.ytpak.com", "ytpak videos","Entertainment");
+//		History_Managment.insertBookmarks("www.stackoverflow.com", "stackoverflow","Programming");
+//		History_Managment.insertBookmarks("www.tutorialspoint.com", "tutorialspoint","Programming");
+//		History_Managment.insertBookmarks("http://www.cplusplus.com/doc/tutorial/", "Learn C++","C++");
+//		History_Managment.insertBookmarks("https://www.tutorialspoint.com/cplusplus/", "Learn C++ tuttorialpoint","C++");
+//		History_Managment.insertBookmarks("http://www.cprogramming.com/tutorial/c++-tutorial.html", "cprogramming.com","C++");
+//		History_Managment.insertBookmarks("https://www.udemy.com/free-learn-c-tutorial-beginners/", "udemy","C++");
+//		History_Managment.insertBookmarks("https://www.programiz.com/cpp-programming", "programiz","C++");
+//		History_Managment.insertBookmarks("https://www.tutorialcup.com/cplusplus", "totorialzcup","C++");
+//		History_Managment.insertBookmarks("https://www.tutorialcup.com/java", "totorialzcup","Java");
+//		History_Managment.insertBookmarks("https://www.tutorialspoint.com/java/", "tpoint","Java");
+//		History_Managment.insertBookmarks("https://www.udemy.com/java-tutorial/", "udemy","Java");
+//		History_Managment.insertBookmarks("http://learnyouahaskell.com/", "haskellpro","Haskell");
+//		History_Managment.insertBookmarks("http://learnyouahaskell.com/chapters", "chapters","Haskell");
+//		History_Managment.insertBookmarks("https://github.com/bitemyapp/learnhaskell", "github","Haskell");
+//		History_Managment.insertBookmarks("http://www.happylearnhaskelltutorial.com/", "happylearnhaskell","Haskell");
+//		History_Managment.insertBookmarks("https://youtube.com", "youtube.com","Youtube");
+//		History_Managment.insertBookmarks("https://facebook.com", "facebook.com","facebook");
+//		History_Managment.insertBookmarks("https://twitter.com", "twitter.com","Twitter");
+//		ResultSet result = History_Managment.showBookmarks("Twitter");
+//		while(result.next()){
+//			System.out.println(result.getString(1)+result.getString(2)+result.getString(5));
+//		}
+//	}
 }
