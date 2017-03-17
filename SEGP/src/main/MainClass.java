@@ -40,9 +40,15 @@ public class MainClass extends Application {
 	 */
 	public static void main(String[] args) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		Proxy proxy = new Proxy();
 		proxy.setHttpProxy("172.16.0.2", "8080");
 		proxy.setHttpsProxy("172.16.0.2", "8080");
+=======
+//		Proxy proxy = new Proxy();
+//		proxy.setHttpProxy("172.16.0.2", "8080");
+//		proxy.setHttpsProxy("172.16.0.2", "8080");
+>>>>>>> phase5
 		
 
 		// following three lines are for proxy settings
