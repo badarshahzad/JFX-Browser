@@ -10,6 +10,9 @@ import javafx.collections.ObservableList;
 public class PopulateTable {
 	private ObservableList<URLdetails> list = FXCollections.observableArrayList();
 	
+	
+//	public ObservableList<URLdetails> 
+	
 	public ObservableList<URLdetails> PopulateTable(String folder){
 		ResultSet bookmarks = History_Managment.showBookmarks(folder);
 		try {

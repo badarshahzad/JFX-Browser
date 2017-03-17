@@ -64,14 +64,14 @@ public class BookMarksController implements Initializable{
 	    TreeItem child21 = new TreeItem<>("Youtube",new ImageView(folderImage));
 	    TreeItem child22 = new TreeItem<>("facebook",new ImageView(folderImage));
 	    TreeItem child23 = new TreeItem<>("Twitter",new ImageView(folderImage));
-	    TreeItem child31 = new TreeItem<>("Allah Khair",new ImageView(folderImage));
-	    TreeItem child32 = new TreeItem<>("Aaa Haan",new ImageView(folderImage));
+//	    TreeItem child31 = new TreeItem<>("Allah Khair",new ImageView(folderImage));
+//	    TreeItem child32 = new TreeItem<>("Aaa Haan",new ImageView(folderImage));
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		searchButton.setGraphic(new ImageView(searchImage));
 		child1.getChildren().setAll(child11,child12,child13);
 		child2.getChildren().setAll(child21,child22,child23);
-		child3.getChildren().setAll(child31,child32);
+//		child3.getChildren().setAll(child31,child32);
 		parentFolder.getChildren().setAll(child1,child2,child3);
 		bookMarkCol.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<String,String>, ObservableValue<String>>() {
 			
@@ -96,7 +96,7 @@ public class BookMarksController implements Initializable{
 
 	public void mouseClick(MouseEvent event){
 		TreeItem<String> item = treeView.getSelectionModel().getSelectedItem();
-		if(item!=null && item.getValue().equals("Entertainment")){
+		if(item!=null){
 		System.out.println(item.getValue());
 		ObservableList<URLdetails> list = new PopulateTable().PopulateTable(item.getValue());
 		System.out.println("entered");
