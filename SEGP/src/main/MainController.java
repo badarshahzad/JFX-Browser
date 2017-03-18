@@ -184,18 +184,24 @@ public class MainController implements Initializable {
 							+ "}"
 							+ "}");
 					String check = "var p =  document.getElementsByTagName('body')[0];"
-					    +"var newElement = document.createElement('div');"
+					    +"var newElement = document.createElement('p');"
 					    +"newElement.innerHTML = \"I am a paragraph\";"
 					    +"p.appendChild(newElement);";
-					String elem = "<div class='square-box'>"
-				    +"<div class='square-content'><div><span>Aspect ratio 1:1</span></div></div>"
-				    +"</div>";
-					String div = "var p =  document.getElementsByTagName('body')[0];"
-							+ "var elem = document.createElement('div');"
-							+ " elem.innerHTML =\"<div class='square-box'>"
-							+"<div class='square-content'><div><span>Aspect ratio 1:1</span></div></div>"
-							+"</div>\";"
-							+ "p.appendChild(elem);";
+					
+					String div = "var body =  document.getElementsByTagName('body')[0];"
+							+ "var newElement = document.createElement('div');"
+							+ "var eleChild = document.createElement('span');"
+							+ "eleChild.innerHTML='Lala Jhalain vat ...Daz';"
+							+ "newElement.appendChild(eleChild);"
+							+ "newElement.setAttribute('id', 'custom_div');"
+							+"body.appendChild(newElement);"
+							+ "newElement.style.backgroundColor = '#666666';"
+							+ "newElement.style.width = '100px';"
+							+ "newElement.style.height = '100px';"
+							+ "newElement.style.padding = '25px';"
+							+ "newElement.style.margin = '25px';"
+							+ "newElement.style.float = 'left;'";
+							
 					
 					webEngine.executeScript(div);
 					
