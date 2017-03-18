@@ -107,11 +107,11 @@ public class MainController implements Initializable {
 	public void initialize(URL url, ResourceBundle rb) {
 		
 		//Temporary set or url 
-		searchField.setText("https://www.facebook.com");
+		searchField.setText("https://www.google.com.com");
 
 		// ---------------All opens tabs should be closed so below line is for  just closing tabs------------------------
 		tabPane.setTabClosingPolicy(TabClosingPolicy.ALL_TABS);
-		pageRender("https://www.facebook.com");
+		pageRender("https://www.google.com");
 		
 		//Search Button Listener 
 		search.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
@@ -183,7 +183,22 @@ public class MainController implements Initializable {
 							+ "console.log('username: ',list.elements[i-1].value);"
 							+ "}"
 							+ "}");
-
+					String check = "var p =  document.getElementsByTagName('body')[0];"
+					    +"var newElement = document.createElement('div');"
+					    +"newElement.innerHTML = \"I am a paragraph\";"
+					    +"p.appendChild(newElement);";
+					String elem = "<div class='square-box'>"
+				    +"<div class='square-content'><div><span>Aspect ratio 1:1</span></div></div>"
+				    +"</div>";
+					String div = "var p =  document.getElementsByTagName('body')[0];"
+							+ "var elem = document.createElement('div');"
+							+ " elem.innerHTML =\"<div class='square-box'>"
+							+"<div class='square-content'><div><span>Aspect ratio 1:1</span></div></div>"
+							+"</div>\";"
+							+ "p.appendChild(elem);";
+					
+					webEngine.executeScript(div);
+					
 					
 					}
 					catch(Exception e){
