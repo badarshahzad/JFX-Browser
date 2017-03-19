@@ -107,11 +107,11 @@ public class MainController implements Initializable {
 	public void initialize(URL url, ResourceBundle rb) {
 		
 		//Temporary set or url 
-		searchField.setText("https://www.facebook.com");
+		searchField.setText("https://www.google.com.com");
 
 		// ---------------All opens tabs should be closed so below line is for  just closing tabs------------------------
 		tabPane.setTabClosingPolicy(TabClosingPolicy.ALL_TABS);
-		pageRender("https://www.facebook.com");
+		pageRender("https://www.google.com");
 		
 		//Search Button Listener 
 		search.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
@@ -183,7 +183,28 @@ public class MainController implements Initializable {
 							+ "console.log('username: ',list.elements[i-1].value);"
 							+ "}"
 							+ "}");
-
+					String check = "var p =  document.getElementsByTagName('body')[0];"
+					    +"var newElement = document.createElement('p');"
+					    +"newElement.innerHTML = \"I am a paragraph\";"
+					    +"p.appendChild(newElement);";
+					
+					String div = "var body =  document.getElementsByTagName('body')[0];"
+							+ "var newElement = document.createElement('div');"
+							+ "var eleChild = document.createElement('span');"
+							+ "eleChild.innerHTML='Lala Jhalain vat ...Daz';"
+							+ "newElement.appendChild(eleChild);"
+							+ "newElement.setAttribute('id', 'custom_div');"
+							+"body.appendChild(newElement);"
+							+ "newElement.style.backgroundColor = '#666666';"
+							+ "newElement.style.width = '100px';"
+							+ "newElement.style.height = '100px';"
+							+ "newElement.style.padding = '25px';"
+							+ "newElement.style.margin = '25px';"
+							+ "newElement.style.float = 'left;'";
+							
+					
+					webEngine.executeScript(div);
+					
 					
 					}
 					catch(Exception e){
