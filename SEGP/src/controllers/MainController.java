@@ -9,10 +9,13 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.controls.JFXTextField;
 
-import database.History_Managment;
+import database.HistoryManagment;
 
+import java.awt.Window;
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.net.URL;
+import java.util.EventListener;
 import java.util.ResourceBundle;
 
 import javafx.application.Platform;
@@ -23,6 +26,7 @@ import javafx.collections.ObservableList;
 import javafx.concurrent.Worker;
 import javafx.concurrent.Worker.State;
 import javafx.event.Event;
+import javafx.event.EventDispatcher;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -69,8 +73,9 @@ public class MainController implements Initializable {
 		
 		// All opens tabs should be closed so below line is for just closing tabs
 		addNewTab.setClosable(false);
+		
 		tabPane.setTabClosingPolicy(TabClosingPolicy.ALL_TABS);
-		tabPane.setFocusTraversable(false);
+		//tabPane.setFocusTraversable(false);
 		
 		try {
 			// here below adding page title of tab 
@@ -86,6 +91,15 @@ public class MainController implements Initializable {
 
 		getTabPaneView(tabPane, addNewTab);
 		tabPaneChangeLiten(tabPane);
+
+		EventListener listener = new EventListener() {
+			public void handleEvent(Event event) {
+				if (event.getEventType().equals(KeyCode.ALT) || event.getEventType().equals(KeyCode.BACK_SPACE)) {
+					System.out.println("yes alt");
+				}
+			}
+		};
+		
 		
 	
 	}// end intializer method

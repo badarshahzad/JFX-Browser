@@ -3,10 +3,11 @@ package controllers;
 import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.controls.JFXProgressBar;
 import com.jfoenix.controls.JFXTextField;
-import database.History_Managment;
+import database.HistoryManagment;
 
 import java.awt.Event;
 import java.awt.TextField;
+import java.awt.event.KeyEvent;
 import java.net.URL;
 import java.util.EventListener;
 import java.util.ResourceBundle;
@@ -21,18 +22,22 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.concurrent.Worker;
 import javafx.concurrent.Worker.State;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.control.Tab;
+import javafx.scene.input.InputEvent;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.CubicCurve;
 import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebEvent;
 import javafx.scene.web.WebHistory;
 import javafx.scene.web.WebView;
 import userInterface.Hamburger;
@@ -63,6 +68,8 @@ public class TabController implements Initializable {
 	@FXML
 	private Label bookmark;
 	@FXML
+	private Label htmlAsPdf;
+	@FXML
 	private JFXHamburger hamburger;
 	@FXML
 	private GridPane navigationBar;
@@ -88,10 +95,21 @@ public class TabController implements Initializable {
 	public void setTabPane(TabPane tabPane) {
 		this.tabPane = tabPane;
 	}
+	
+	// we made this webgine object to get access the current url of webpage
+	static WebEngine engine;
+	public void setWebEngine(WebEngine webEngine){
+		engine = webEngine;
+	}
+	public static WebEngine getWebEngine(){
+		return engine;
+	}
 
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
-
+		
+		setWebEngine(webEngine);
+		
 		back.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/backword1.png"))));
 		forward.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/forward1.png"))));
 		refresh.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/refresh.png"))));
@@ -101,6 +119,7 @@ public class TabController implements Initializable {
 		download.setOpacity(.6);
 		bookmark.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/bookmark.png"))));
 		bookmark.setOpacity(.7);
+		htmlAsPdf.setGraphic(new ImageView(new Image (getClass().getResourceAsStream("/pdfConverter.png"))));
 		
 		
 		// Worker load the page
@@ -138,6 +157,16 @@ public class TabController implements Initializable {
 			}
 		});
 		
+		//Tabpane listener for new tab or for security password:  @testing phase 
+		tabPane.setOnKeyPressed(event->{
+			/*
+			switch (event.getCode() ) {
+			case T :
+			case CONTROL:
+				System.out.println(event.getCode());
+				break;
+			}*/
+		});
 		//This will drop down list suggestion keywords
 
 		String [] array = {"a","bb","cc"};
@@ -186,7 +215,7 @@ public class TabController implements Initializable {
 				if (newState == Worker.State.SUCCEEDED) {
 					searchField.setText(webEngine.getLocation());
 					if (!(webEngine.getLocation().equals("about:blank")))
-						History_Managment.insertUrl(webEngine.getLocation());
+						HistoryManagment.insertUrl(webEngine.getLocation());
 				}
 
 			}
@@ -194,6 +223,5 @@ public class TabController implements Initializable {
 		webEngine.load(url);
 		borderpane.setCenter(browser);
 	}
-	// end class
 
 }

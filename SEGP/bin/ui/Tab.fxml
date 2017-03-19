@@ -30,6 +30,7 @@
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="25.0" minWidth="20.0" prefWidth="25.0" />
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="25.0" minWidth="20.0" prefWidth="25.0" />
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="25.0" minWidth="20.0" prefWidth="25.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="25.0" minWidth="20.0" prefWidth="100.0" />
                </columnConstraints>
                <rowConstraints>
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -42,6 +43,7 @@
                   <Label fx:id="search" GridPane.columnIndex="4" />
                   <Label fx:id="download" GridPane.columnIndex="5" />
                   <Label fx:id="bookmark" GridPane.columnIndex="6" />
+                  <Label fx:id="htmlAsPdf" GridPane.columnIndex="7" />
                </children>
             </GridPane>
             <JFXHamburger fx:id="hamburger" prefHeight="30.0" prefWidth="30.0" GridPane.columnIndex="1" />

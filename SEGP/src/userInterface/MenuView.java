@@ -49,15 +49,6 @@ public class MenuView {
 		
 		// -------------------------------------------------------Historylistener-------------------------------------------------------
 		history.setOnAction((ActionEvent) -> {
-			System.out.println("History Start!");
-			Renderer b = new Renderer();
-			WebHistory History = b.webEngine.getHistory();
-			ObservableList<Entry> list = History.getEntries();
-			for (int i = 0; i < list.size(); i++) {
-				System.out.println(list.get(i));
-			}
-			// When the menu click Hamburger and DrawerStack will hide
-			onClickHideHamburger();
 
 			System.out.println("History");
 
@@ -66,6 +57,7 @@ public class MenuView {
 			tab.setId("history");
 
 			HistoryController ob = new HistoryController();
+			
 			tab = ob.getHistoryView(tab, settingBorderPane);
 			System.out.println("Size before history added"+tabs.size());
 			tabs.add(tabs.size() - 1, tab);
@@ -74,7 +66,6 @@ public class MenuView {
 			selectedTab.select(tab);
 
 			if (tabs.get(tabs.size() - 2).getId() == ("history")) {
-				System.out.println("Adfa");
 				selectedTab.select(tabs.size() - 2);
 				return;
 			}
@@ -128,12 +119,13 @@ public class MenuView {
 		// listener-----------------------------------------------------
 		saveAsPdf.addEventHandler(MouseEvent.MOUSE_CLICKED, (ActionEvent) -> {
 
+			HTMLtoPDF object = new HTMLtoPDF();
+			object.convertHtmlToPdf();
 			// When the menu click Hamburger and DrawerStack will hide
 			onClickHideHamburger();
 			Thread th = new Thread(new Runnable() {
 				public void run() {
-					HTMLtoPDF object = new HTMLtoPDF();
-					object.convertHtmlToPdf();
+					
 
 				}
 			});
