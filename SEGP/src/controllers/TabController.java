@@ -1,5 +1,7 @@
 package controllers;
 
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.controls.JFXProgressBar;
 import com.jfoenix.controls.JFXTextField;
@@ -15,16 +17,20 @@ import java.util.ResourceBundle;
 import javax.lang.model.element.Element;
 import javax.swing.text.Document;
 
+import org.controlsfx.control.PopOver;
 import org.controlsfx.control.textfield.TextFields;
 
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.concurrent.Worker;
 import javafx.concurrent.Worker.State;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.SingleSelectionModel;
@@ -34,6 +40,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.CubicCurve;
 import javafx.scene.web.WebEngine;
@@ -76,7 +83,7 @@ public class TabController implements Initializable {
 	@FXML
 	private JFXProgressBar progressbar;
 
-	MainController main = new MainController();
+	MainController mainController = new MainController();
 	// Classes objects to get methods or set methods access
 	private Hamburger ham = new Hamburger();
 	public VBox drawerPane = new VBox();
@@ -86,15 +93,15 @@ public class TabController implements Initializable {
 
 	public Worker<Void> worker;
 
-	private TabPane tabPane = main.getTabPane();
-
+	private TabPane tabPane = mainController.getTabPane();
+/*
 	public TabPane getTabPane() {
 		return tabPane;
 	}
 
 	public void setTabPane(TabPane tabPane) {
 		this.tabPane = tabPane;
-	}
+	}*/
 	
 	// we made this webgine object to get access the current url of webpage
 	static WebEngine engine;
@@ -131,7 +138,12 @@ public class TabController implements Initializable {
 				System.out.println("Loading state: " + newValue.toString());
 				if (newValue == Worker.State.SUCCEEDED) {
 					System.out.println("Finish!");
+					if(!webEngine.getTitle().equals(null)){
+						System.out.println("Title: "+webEngine.getTitle());
+					
+					}
 				}
+				
 			}
 		});
 
@@ -197,7 +209,49 @@ public class TabController implements Initializable {
 		});
 
 		bookmark.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
-			System.out.println("Bookmarks");
+			
+
+			Label bookmarksLabel = new Label("Bookmarks");
+			VBox popUpContent = new VBox();
+			
+			popUpContent.setMinSize(300, 250);
+			popUpContent.setSpacing(5);
+			popUpContent.setPadding(new Insets(5, 5, 5, 5));
+			Label nameLabel = new Label("Name");
+			JFXTextField markNameText = new JFXTextField();
+			Label folderLabel = new Label("Folder");
+			ObservableList<String> options =  FXCollections.observableArrayList("option1","option2","option3");
+			JFXComboBox<String> markFolderList = new JFXComboBox<>(options);
+			markFolderList.setMinWidth(300);
+			
+			JFXButton cancelPopup = new JFXButton("Cancel");
+			cancelPopup.setMinSize(100, 50);
+			JFXButton newFolderMarkFolder = new JFXButton("New Folder");
+			newFolderMarkFolder.setMinSize(100, 50);
+			JFXButton saveMark = new JFXButton("Save");
+			saveMark.setMinSize(100, 50);
+			
+			HBox hbox = new HBox();
+			hbox.getChildren().addAll(cancelPopup, newFolderMarkFolder,saveMark);
+			//markFolderList.setVisibleRowCount(0);
+			
+			VBox.setMargin(bookmarksLabel, new Insets(5, 5, 5, 5));
+			VBox.setMargin(nameLabel, new Insets(5, 5, 5, 5));
+			VBox.setMargin(markNameText, new Insets(5, 5, 5, 5));
+			VBox.setMargin(folderLabel, new Insets(5, 5, 5, 5));
+			VBox.setMargin(markFolderList, new Insets(5, 5, 5, 5));
+			
+			popUpContent.getChildren().addAll(bookmarksLabel,nameLabel,markNameText,folderLabel,markFolderList,hbox);
+			
+			PopOver popOver = new PopOver(new JFXButton("Yes"));
+
+			//popOver.getRoot().getStylesheets().add("Yes");
+			//popOver.setDetachable(true);
+			popOver.setCornerRadius(4);
+			popOver.setContentNode(popUpContent);
+			//popOver.setMinSize(400, 400);
+			popOver.setArrowLocation(PopOver.ArrowLocation.TOP_RIGHT);
+			popOver.show(bookmark);
 		});
 		
 		download.addEventHandler(MouseEvent.MOUSE_CLICKED, (e)->{
@@ -217,10 +271,13 @@ public class TabController implements Initializable {
 					if (!(webEngine.getLocation().equals("about:blank")))
 						HistoryManagment.insertUrl(webEngine.getLocation());
 				}
-
+				
+				
 			}
+			
 		});
 		webEngine.load(url);
+		
 		borderpane.setCenter(browser);
 	}
 

@@ -58,8 +58,8 @@ public class MainController implements Initializable {
 	private BorderPane rootBorderPane;
 
 	public Hamburger ham = new Hamburger();	
-	public WebView browser = new WebView();
-	public WebEngine webEngine = browser.getEngine();
+//	public WebView browser = new WebView();
+	//public WebEngine webEngine = browser.getEngine();
 	public VBox drawerPane = new VBox();
 	
 	public static TabPane tabPane = new TabPane();
@@ -71,16 +71,17 @@ public class MainController implements Initializable {
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 		
-		// All opens tabs should be closed so below line is for just closing tabs
+		
+		//------All opens tabs should be closed so below line is for just closing tabs
 		addNewTab.setClosable(false);
 		
 		tabPane.setTabClosingPolicy(TabClosingPolicy.ALL_TABS);
-		//tabPane.setFocusTraversable(false);
+		//------tabPane.setFocusTraversable(false);
 		
 		try {
-			// here below adding page title of tab 
+			//-----here below adding page title of tab 
 			firstTab.setContent(FXMLLoader.load(getClass().getResource("/ui/Tab.fxml")));
-			
+		
 			
 		} catch (IOException e2) {
 			// TODO Auto-generated catch block
@@ -92,6 +93,7 @@ public class MainController implements Initializable {
 		getTabPaneView(tabPane, addNewTab);
 		tabPaneChangeLiten(tabPane);
 
+		//-------------------Key codes to for browser----
 		EventListener listener = new EventListener() {
 			public void handleEvent(Event event) {
 				if (event.getEventType().equals(KeyCode.ALT) || event.getEventType().equals(KeyCode.BACK_SPACE)) {
