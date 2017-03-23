@@ -5,45 +5,22 @@
  */
 package controllers;
 
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXHamburger;
-import com.jfoenix.controls.JFXTextField;
 
-import database.HistoryManagment;
-
-import java.awt.Window;
-import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.net.URL;
-import java.util.EventListener;
 import java.util.ResourceBundle;
 
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
-import javafx.concurrent.Worker;
-import javafx.concurrent.Worker.State;
-import javafx.event.Event;
-import javafx.event.EventDispatcher;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.print.PrinterJob;
-import javafx.scene.control.ProgressBar;
 import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.control.Tab;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.web.WebEngine;
-import javafx.scene.web.WebHistory;
-import javafx.scene.web.WebView;
 import userInterface.Hamburger;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TabPane.TabClosingPolicy;
@@ -58,8 +35,6 @@ public class MainController implements Initializable {
 	private BorderPane rootBorderPane;
 
 	public Hamburger ham = new Hamburger();	
-//	public WebView browser = new WebView();
-	//public WebEngine webEngine = browser.getEngine();
 	public VBox drawerPane = new VBox();
 	
 	public static TabPane tabPane = new TabPane();
@@ -94,19 +69,22 @@ public class MainController implements Initializable {
 		tabPaneChangeLiten(tabPane);
 
 		//-------------------Key codes to for browser----
-		EventListener listener = new EventListener() {
+		/*EventListener listener = new EventListener() {
+			@SuppressWarnings("unused")
 			public void handleEvent(Event event) {
 				if (event.getEventType().equals(KeyCode.ALT) || event.getEventType().equals(KeyCode.BACK_SPACE)) {
 					System.out.println("yes alt");
 				}
 			}
 		};
-		
+		*/
 		
 	
 	}// end intializer method
 	
 	// ---set method for TabPane---
+	
+	@SuppressWarnings("static-access")
 	public void setTabPane(TabPane tabPane) {
 		this.tabPane = tabPane;
 	}
@@ -134,16 +112,11 @@ public class MainController implements Initializable {
 
 				//Closeing tab if first index tab close and size will be the 2
 				//https://docs.oracle.com/javase/8/javafx/api/index.html?javafx/scene/package-summary.html
-				
-				tabPane.getTabs().get(0).setOnCloseRequest(new EventHandler<Event>() {
-					@Override
-					public void handle(Event event) {
-						// TODO Auto-generated method stub
-						if(tabPane.getTabs().size()==2)
+
+				//-- to close a browser when last tab will be close
+				if(tabPane.getTabs().size()==1){
 							Platform.exit();
-					}
-					
-				});
+				}
 
 				if (newSelectedTab == addNewTab) {
 

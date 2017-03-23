@@ -9,7 +9,9 @@ import java.text.SimpleDateFormat;
 public class HistoryManagment {
 	private static Connection c = null;
 	private static PreparedStatement perp = null;
+	@SuppressWarnings("unused")
 	private static java.util.Date date = new java.util.Date();
+	@SuppressWarnings("unused")
 	private static SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
 
 	public static void CreateDataBase() {

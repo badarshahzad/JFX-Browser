@@ -4,17 +4,13 @@ import pdfcrowd.*;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.util.Properties;
 
-import controllers.MainController;
 import controllers.TabController;
-import javafx.scene.control.TabPane;
 import javafx.stage.FileChooser;
 import main.MainClass;
 
 public class HTMLtoPDF {
 
-	@SuppressWarnings("deprecation")
 	public void convertHtmlToPdf() {
 		try {
 
@@ -28,7 +24,7 @@ public class HTMLtoPDF {
 			
 
 			Client client = new Client("Hassan_Iqbal", "962ca71a838132f00947f2ec13984587");
-			if(file.isFile()){
+		//	if(file.isFile()){
 			FileOutputStream fileStream = new FileOutputStream(file);
 			
 			
@@ -36,9 +32,9 @@ public class HTMLtoPDF {
 			client.convertURI(currentUrl, fileStream);
 
 			fileStream.close();
-			}else{
+			//}else{
 			System.out.println("File Download:check");
-			}
+			//}
 			//
 		} catch (Exception e) {
 			e.printStackTrace();

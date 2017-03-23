@@ -18,9 +18,6 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.web.WebHistory;
-import javafx.scene.web.WebHistory.Entry;
-import main.Renderer;
 
 public class MenuView {
 

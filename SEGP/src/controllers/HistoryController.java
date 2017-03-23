@@ -3,15 +3,9 @@ package controllers;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.ResourceBundle;
 
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXDrawer;
-import com.jfoenix.controls.JFXDrawersStack;
 import com.jfoenix.controls.JFXTreeTableColumn;
 import com.jfoenix.controls.JFXTreeTableView;
 import com.jfoenix.controls.RecursiveTreeItem;
@@ -19,7 +13,6 @@ import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 
 import database.HistoryManagment;
 
-import com.jfoenix.controls.JFXDrawer.DrawerDirection;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -32,9 +25,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 import javafx.scene.control.TreeCell;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
@@ -42,7 +32,6 @@ import javafx.scene.control.TreeTableColumn.CellDataFeatures;
 import javafx.scene.control.TreeView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.util.Callback;
 import userInterface.HistoryTree;
@@ -55,14 +44,18 @@ public class HistoryController implements Initializable {
 
 	// private static TabPane tabPane;
 
+	@SuppressWarnings("rawtypes")
 	private ArrayList<TreeItem> storeItems = HistoryTree.getStoreItems();
+	@SuppressWarnings("rawtypes")
 	private TreeView treeView = new TreeView();
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	private TreeItem rootItem = new TreeItem("History");
 
 	EventHandler<MouseEvent> mouseEventHandle = (MouseEvent event) -> {
 		handleMouseClicked(event);
 	};
 
+	@SuppressWarnings("rawtypes")
 	private void handleMouseClicked(MouseEvent event) {
 		Node node = event.getPickResult().getIntersectedNode();
 		// Accept clicks only on node cells, and not on empty spaces of the
@@ -74,6 +67,7 @@ public class HistoryController implements Initializable {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	public Tab getHistoryView(Tab historyTab, BorderPane borderPaneHistory) {
 
 		treeView.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEventHandle);
@@ -97,6 +91,7 @@ public class HistoryController implements Initializable {
 		return historyTab;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 

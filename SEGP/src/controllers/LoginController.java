@@ -1,6 +1,5 @@
 package controllers;
 
-import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,7 +7,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-import javax.naming.spi.DirStateFactory.Result;
 
 import org.controlsfx.control.Notifications;
 
@@ -17,8 +15,7 @@ import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 
 import database.SqliteConnection;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -26,16 +23,15 @@ import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Border;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 /**
  *
  * @author Segp-Group 3
  */
-public class LoginController implements Initializable {
+public class LoginController extends Application implements Initializable {
 
 	@FXML
 	private Pane loginPane;
@@ -77,7 +73,7 @@ public class LoginController implements Initializable {
 		}
 	}
 
-	public boolean isDbConnecited() {
+/*	public boolean isDbConnecited() {
 		try {
 			return !connection.isClosed();
 		} catch (SQLException e) {
@@ -85,7 +81,7 @@ public class LoginController implements Initializable {
 			e.printStackTrace();
 		}
 		return false;
-	}
+	}*/
 
 	public boolean isLogin(String username, String password) {
 		PreparedStatement prepareStatment = null;
@@ -138,6 +134,14 @@ public class LoginController implements Initializable {
 						.hideAfter(Duration.seconds(5)).position(Pos.TOP_RIGHT);
 				noti.showError();
 				
+			}else{
+				Notifications noti = Notifications.create()
+						.title("Successfull")
+						.text("Congratulation! You successfully login. ")
+						// .graphic(new ImageView(null))
+						.hideAfter(Duration.seconds(3)).position(Pos.TOP_RIGHT);
+				noti.showError();
+				
 			}
 		});
 
@@ -169,6 +173,20 @@ public class LoginController implements Initializable {
 
 	public void setLogin(JFXButton login) {
 		this.login = login;
+	}
+	
+	public static void main(String args[]){
+		launch(args);
+	}
+	@Override
+	public void start(Stage primaryStage) throws Exception {
+		System.out.println("yes");
+		// TODO Auto-generated method stub
+		Parent root = FXMLLoader.load(getClass().getResource("/ui/Login.fxml"));
+		Scene scene = new Scene(root);
+		primaryStage.setScene(scene);
+		primaryStage.show();
+		
 	}
 
 }

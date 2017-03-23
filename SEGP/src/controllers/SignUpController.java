@@ -73,6 +73,14 @@ public class SignUpController  extends Application implements Initializable {
     				.position(Pos.TOP_RIGHT);
 			noti.showError();
 
+		}else{
+			Notifications noti= Notifications.create()
+    				.title("Successfull")
+    				.text("Congratulation! You successfully sign up.")
+    				//.graphic(new ImageView(null))
+    				.hideAfter(Duration.seconds(5))
+    				.position(Pos.TOP_RIGHT);
+			noti.showInformation();
 		}
 		
 		});

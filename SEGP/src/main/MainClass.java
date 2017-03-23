@@ -1,17 +1,12 @@
 package main;
 
 
-import java.awt.event.KeyEvent;
-import java.util.Properties;
 
 import controllers.MainController;
 import javafx.application.Application;
-import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 /**
  *
@@ -36,6 +31,7 @@ public class MainClass extends Application {
 		stage.show();
 	}
 
+	@SuppressWarnings("static-access")
 	private void setStage(Stage stage) {
 		// TODO Auto-generated method stub
 		this.stage = stage;

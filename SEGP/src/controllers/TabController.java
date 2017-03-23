@@ -7,44 +7,29 @@ import com.jfoenix.controls.JFXProgressBar;
 import com.jfoenix.controls.JFXTextField;
 import database.HistoryManagment;
 
-import java.awt.Event;
-import java.awt.TextField;
-import java.awt.event.KeyEvent;
 import java.net.URL;
-import java.util.EventListener;
 import java.util.ResourceBundle;
-
-import javax.lang.model.element.Element;
-import javax.swing.text.Document;
 
 import org.controlsfx.control.PopOver;
 import org.controlsfx.control.textfield.TextFields;
 
-import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Worker;
 import javafx.concurrent.Worker.State;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
-import javafx.scene.control.ProgressBar;
-import javafx.scene.control.SingleSelectionModel;
-import javafx.scene.control.Tab;
-import javafx.scene.input.InputEvent;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.shape.CubicCurve;
 import javafx.scene.web.WebEngine;
-import javafx.scene.web.WebEvent;
 import javafx.scene.web.WebHistory;
 import javafx.scene.web.WebView;
 import userInterface.Hamburger;
@@ -84,7 +69,9 @@ public class TabController implements Initializable {
 	private JFXProgressBar progressbar;
 
 	MainController mainController = new MainController();
+	
 	// Classes objects to get methods or set methods access
+	
 	private Hamburger ham = new Hamburger();
 	public VBox drawerPane = new VBox();
 
@@ -94,29 +81,28 @@ public class TabController implements Initializable {
 	public Worker<Void> worker;
 
 	private TabPane tabPane = mainController.getTabPane();
-/*
-	public TabPane getTabPane() {
-		return tabPane;
-	}
+	/*
+	 * public TabPane getTabPane() { return tabPane; }
+	 * 
+	 * public void setTabPane(TabPane tabPane) { this.tabPane = tabPane; }
+	 */
 
-	public void setTabPane(TabPane tabPane) {
-		this.tabPane = tabPane;
-	}*/
-	
 	// we made this webgine object to get access the current url of webpage
 	static WebEngine engine;
-	public void setWebEngine(WebEngine webEngine){
+
+	public void setWebEngine(WebEngine webEngine) {
 		engine = webEngine;
 	}
-	public static WebEngine getWebEngine(){
+
+	public static WebEngine getWebEngine() {
 		return engine;
 	}
 
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
-		
+
 		setWebEngine(webEngine);
-		
+
 		back.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/backword1.png"))));
 		forward.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/forward1.png"))));
 		refresh.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/refresh.png"))));
@@ -126,9 +112,8 @@ public class TabController implements Initializable {
 		download.setOpacity(.6);
 		bookmark.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/bookmark.png"))));
 		bookmark.setOpacity(.7);
-		htmlAsPdf.setGraphic(new ImageView(new Image (getClass().getResourceAsStream("/pdfConverter.png"))));
-		
-		
+		htmlAsPdf.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/pdfConverter.png"))));
+
 		// Worker load the page
 		worker = webEngine.getLoadWorker();
 		worker.stateProperty().addListener(new ChangeListener<State>() {
@@ -138,12 +123,11 @@ public class TabController implements Initializable {
 				System.out.println("Loading state: " + newValue.toString());
 				if (newValue == Worker.State.SUCCEEDED) {
 					System.out.println("Finish!");
-					if(!webEngine.getTitle().equals(null)){
-						System.out.println("Title: "+webEngine.getTitle());
-					
+					if (!webEngine.getTitle().equals(null)) {
+						System.out.println("Title: " +  webEngine.getTitle());
 					}
 				}
-				
+
 			}
 		});
 
@@ -159,31 +143,27 @@ public class TabController implements Initializable {
 			pageRender(searchField.getText());
 
 		});
-		
+
 		// Search Field Listener
-		
+
 		searchField.setOnKeyPressed(event -> {
 
 			if (event.getCode() == KeyCode.ENTER) {
 				pageRender(searchField.getText()); // method call
 			}
 		});
-		
-		//Tabpane listener for new tab or for security password:  @testing phase 
-		tabPane.setOnKeyPressed(event->{
-			/*
-			switch (event.getCode() ) {
-			case T :
-			case CONTROL:
-				System.out.println(event.getCode());
-				break;
-			}*/
-		});
-		//This will drop down list suggestion keywords
 
-		String [] array = {"a","bb","cc"};
+		// Tabpane listener for new tab or for security password: @testing phase
+		tabPane.setOnKeyPressed(event -> {
+			/*
+			 * switch (event.getCode() ) { case T : case CONTROL:
+			 * System.out.println(event.getCode()); break; }
+			 */
+		});
+		// This will drop down list suggestion keywords
+
+		String[] array = { "a", "bb", "cc" };
 		TextFields.bindAutoCompletion(searchField, array);
-		
 
 		back.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
 			try {
@@ -209,52 +189,53 @@ public class TabController implements Initializable {
 		});
 
 		bookmark.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
-			
 
 			Label bookmarksLabel = new Label("Bookmarks");
 			VBox popUpContent = new VBox();
-			
+
 			popUpContent.setMinSize(300, 250);
 			popUpContent.setSpacing(5);
 			popUpContent.setPadding(new Insets(5, 5, 5, 5));
 			Label nameLabel = new Label("Name");
 			JFXTextField markNameText = new JFXTextField();
 			Label folderLabel = new Label("Folder");
-			ObservableList<String> options =  FXCollections.observableArrayList("option1","option2","option3");
+			ObservableList<String> options = FXCollections.observableArrayList("option1", "option2", "option3");
 			JFXComboBox<String> markFolderList = new JFXComboBox<>(options);
 			markFolderList.setMinWidth(300);
-			
+			markFolderList.setValue("option1");
+
 			JFXButton cancelPopup = new JFXButton("Cancel");
 			cancelPopup.setMinSize(100, 50);
 			JFXButton newFolderMarkFolder = new JFXButton("New Folder");
 			newFolderMarkFolder.setMinSize(100, 50);
 			JFXButton saveMark = new JFXButton("Save");
 			saveMark.setMinSize(100, 50);
-			
+
 			HBox hbox = new HBox();
-			hbox.getChildren().addAll(cancelPopup, newFolderMarkFolder,saveMark);
-			//markFolderList.setVisibleRowCount(0);
-			
+			hbox.getChildren().addAll(cancelPopup, newFolderMarkFolder, saveMark);
+			// markFolderList.setVisibleRowCount(0);
+
 			VBox.setMargin(bookmarksLabel, new Insets(5, 5, 5, 5));
 			VBox.setMargin(nameLabel, new Insets(5, 5, 5, 5));
 			VBox.setMargin(markNameText, new Insets(5, 5, 5, 5));
 			VBox.setMargin(folderLabel, new Insets(5, 5, 5, 5));
 			VBox.setMargin(markFolderList, new Insets(5, 5, 5, 5));
-			
-			popUpContent.getChildren().addAll(bookmarksLabel,nameLabel,markNameText,folderLabel,markFolderList,hbox);
-			
+
+			popUpContent.getChildren().addAll(bookmarksLabel, nameLabel, markNameText, folderLabel, markFolderList,
+					hbox);
+
 			PopOver popOver = new PopOver(new JFXButton("Yes"));
 
-			//popOver.getRoot().getStylesheets().add("Yes");
-			//popOver.setDetachable(true);
+			// popOver.getRoot().getStylesheets().add("Yes");
+			// popOver.setDetachable(true);
 			popOver.setCornerRadius(4);
 			popOver.setContentNode(popUpContent);
-			//popOver.setMinSize(400, 400);
+			// popOver.setMinSize(400, 400);
 			popOver.setArrowLocation(PopOver.ArrowLocation.TOP_RIGHT);
 			popOver.show(bookmark);
 		});
-		
-		download.addEventHandler(MouseEvent.MOUSE_CLICKED, (e)->{
+
+		download.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
 			System.out.println("download click");
 		});
 
@@ -264,20 +245,19 @@ public class TabController implements Initializable {
 	public void pageRender(String url) {
 		webEngine.getLoadWorker().stateProperty().addListener(new ChangeListener<State>() {
 			@Override
-			public void changed(ObservableValue ov, State oldState, State newState) {
+			public void changed(@SuppressWarnings("rawtypes") ObservableValue ov, State oldState, State newState) {
 
 				if (newState == Worker.State.SUCCEEDED) {
 					searchField.setText(webEngine.getLocation());
 					if (!(webEngine.getLocation().equals("about:blank")))
 						HistoryManagment.insertUrl(webEngine.getLocation());
 				}
-				
-				
+
 			}
-			
+
 		});
 		webEngine.load(url);
-		
+
 		borderpane.setCenter(browser);
 	}
 

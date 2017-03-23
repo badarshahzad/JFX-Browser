@@ -6,20 +6,16 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.net.FileNameMap;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.net.URLConnection;
-import java.nio.charset.MalformedInputException;
 import java.nio.file.Paths;
 
 import javax.net.ssl.HttpsURLConnection;
 
-import org.omg.PortableInterceptor.RequestInfo;
 
 public class DownloadThread extends Thread{
 
@@ -88,6 +84,7 @@ public class DownloadThread extends Thread{
 	/* (non-Javadoc)
 	 * @see java.lang.Thread#run()
 	 */
+	@SuppressWarnings("static-access")
 	@Override
 	public void run(){
 		try{
