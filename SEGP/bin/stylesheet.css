@@ -1,0 +1,80 @@
+
+
+ 
+.animated-option-button {
+	-fx-pref-width:50px;
+	-fx-background-color:#4c4c4c;
+	-fx-background-radius:50px;
+	-fx-pref-height:50px;
+	-fx-text-fill:white;
+	-fx-border-color:WHITE;
+	-fx-border-radius: 50px; 
+	-fx-border-width: 4px;
+}
+
+
+#setting .button {
+	-fx-background-radius: 25;
+}
+#leftDrawerStack .button{
+
+}
+
+#leftDrawerStack .button:hover{
+	
+		
+}
+
+
+
+
+/*******************************************************************************
+ *                                                                             *
+ * ScrollBar 			                                                       *
+ *                                                                             *
+ ******************************************************************************/
+/*
+.scroll-bar:vertical > .track-background,
+.scroll-bar:horizontal > .track-background{
+    	-fx-background-color:#ffffff;
+    	-fx-margin:4 0 0 10;
+}
+*/
+
+.scroll-bar:vertical > .thumb,
+.scroll-bar:horizontal > .thumb {
+	    -fx-background-color: derive(#28323c,5.0%);
+}
+
+.scroll-bar:hover > .increment-button, 
+.scroll-bar:hover > .decrement-button {
+     	-fx-background-color: derive(#28323c,30.0%);
+}
+
+//---------------------TabPane CSS-----------------------------------------------
+
+.tab{
+	-fx-text-fill:#222222;
+}
+.tab:selected .focus-indicator {
+	
+    -fx-border-radius: 10 10 0 0, 10 10 0 0;
+    -fx-border-insets: -6 -9 -8 -8, -5 -8 -7 -7;
+}
+/*
+.tab-pane > .tab-header-area > .headers-region > .tab:selected{
+    -fx-border-insets: 0 1 1 0, 1 2 0 1, 2 3 0 2;
+}
+*/
+.tab-pane > .tab-header-area > .headers-region > .tab > .tab-container > .tab-label {
+    -fx-padding:0 0 0 0;
+}
+
+.tab-header-area .tab{
+    -fx-padding:4 10 5 10;
+    -fx-background-radius: 10 10 0 0;
+}
+
+#righDrawerVbox{
+	-fx-padding: 10,10,10,10;
+}
