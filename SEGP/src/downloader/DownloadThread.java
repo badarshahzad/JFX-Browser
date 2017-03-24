@@ -22,7 +22,10 @@ import javax.net.ssl.HttpsURLConnection;
 import org.omg.PortableInterceptor.RequestInfo;
 
 public class DownloadThread extends Thread{
+<<<<<<< HEAD
 
+=======
+>>>>>>> phase5
 	private String url ;
 	private String filePath ;
 	private static final int BUFFER_SIZE = 4096;
@@ -37,12 +40,20 @@ public class DownloadThread extends Thread{
 	 * @return downloaded file
 	 * @throws URISyntaxException url syntax not valid
 	 * @throws MalformedURLException not a url
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> phase5
 	/**
 	 * @param dispose
 	 * @param fileURL
 	 * @return
 	 * @throws URISyntaxException 
 	 * @throws MalformedURLException 
+<<<<<<< HEAD
+=======
+>>>>>>> upstream/master
+>>>>>>> phase5
 	 */
 	private File createFile(String contentType , String url) throws URISyntaxException, MalformedURLException{
 		String fileTitle = "[videoPlayback]";
@@ -176,3 +187,7 @@ public class DownloadThread extends Thread{
 	}
 
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> phase5

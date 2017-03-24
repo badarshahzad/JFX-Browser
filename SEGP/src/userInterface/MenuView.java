@@ -1,9 +1,17 @@
 package userInterface;
 
+<<<<<<< HEAD
+=======
+import java.awt.Desktop.Action;
+import java.util.Scanner;
+
+import javax.swing.text.html.HTML;
+>>>>>>> phase5
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXDrawersStack;
+<<<<<<< HEAD
 
 import controllers.HistoryController;
 import controllers.SettingController;
@@ -12,6 +20,15 @@ import htmlToPdf.HTMLtoPDF;
 
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+=======
+import com.jfoenix.transitions.hamburger.HamburgerSlideCloseTransition;
+
+import downloader.MainDownload;
+import htmlToPdf.HTMLtoPDF;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.Event;
+>>>>>>> phase5
 import javafx.event.EventHandler;
 import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.control.Tab;
@@ -22,6 +39,13 @@ import javafx.scene.web.WebHistory;
 import javafx.scene.web.WebHistory.Entry;
 import main.Renderer;
 
+<<<<<<< HEAD
+=======
+/**
+ * @author SEGP-Group3
+ *
+ */
+>>>>>>> phase5
 public class MenuView {
 
 	/*
@@ -32,6 +56,7 @@ public class MenuView {
 
 	private Tab tab = new Tab();
 	private BorderPane settingBorderPane = new BorderPane();
+<<<<<<< HEAD
 	private JFXDrawersStack drawersStack;
 	private JFXDrawer rightDrawer;
 	//Hamburger object = new Hamburger();
@@ -41,21 +66,70 @@ public class MenuView {
 			JFXDrawersStack drawersStack, JFXDrawer rightDrawer) {
 
 		
+=======
+	private HamburgerSlideCloseTransition transition;
+	private JFXDrawersStack drawersStack;
+	private JFXDrawer rightDrawer;
+
+	/**
+	 * @param home home button
+	 * @param history history button
+	 * @param downloads download button
+	 * @param bookmarks bookmarks button
+	 * @param saveAsPdf saveAsPdf button
+	 * @param setting setting button
+	 * @param tabPane javaFX tabPane object to show triggered by these buttons 
+	 * @param transition javaFX HamburgerTransition object to switch transition states of Hamburger. 
+	 * @param drawersStack javaFX object drawerStack object for Hamburger
+	 * @param rightDrawer javaFx Drawer a container to attach buttons with hamburger 
+	 */
+	public void setMenuViewListener(JFXButton home, JFXButton history, JFXButton downloads, JFXButton bookmarks,
+			JFXButton saveAsPdf, JFXButton setting, TabPane tabPane, HamburgerSlideCloseTransition transition,
+			JFXDrawersStack drawersStack, JFXDrawer rightDrawer) {
+
+		this.transition = transition;
+>>>>>>> phase5
 		this.drawersStack = drawersStack;
 		this.rightDrawer = rightDrawer;
 
 		final ObservableList<Tab> tabs = tabPane.getTabs();
 		SingleSelectionModel<Tab> selectedTab = tabPane.getSelectionModel();
+<<<<<<< HEAD
 		
 		// -------------------------------------------------------Historylistener-------------------------------------------------------
 		history.setOnAction((ActionEvent) -> {
 
 			System.out.println("History");
 
+=======
+
+		// -------------------------------------------------------Home listener----------------------------------------------------------
+		home.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent event) {
+
+				// When the menu click Hamburger and DrawerStack will hide
+				onClickHideHamburger();
+
+				System.out.println("Home");
+				tab.setText("Home");
+				tab.setId("home");
+
+			}
+
+		});
+
+		// -------------------------------------------------------Historylistener-------------------------------------------------------
+		history.setOnAction((ActionEvent) -> {
+			// When the menu click Hamburger and DrawerStack will hide
+			onClickHideHamburger();
+>>>>>>> phase5
 			// tab name and id for accessing
 			tab.setText("History");
 			tab.setId("history");
 
+<<<<<<< HEAD
 			HistoryController ob = new HistoryController();
 			
 			tab = ob.getHistoryView(tab, settingBorderPane);
@@ -66,14 +140,33 @@ public class MenuView {
 			selectedTab.select(tab);
 
 			if (tabs.get(tabs.size() - 2).getId() == ("history")) {
+=======
+			if (tabs.get(tabs.size() - 2).getId() != ("history")) {
+
+				History ob = new History();
+				System.out.println("@BorderPane is set@");
+				tab = ob.getHistoryView(tab, settingBorderPane);
+				tabs.add(tabs.size() - 1, tab);
+
+				// The below is just select the current tab
+				selectedTab.select(tab);
+			}
+
+			if (tabs.get(tabs.size() - 2).getId() == ("history")) {
+				System.out.println("Adfa");
+>>>>>>> phase5
 				selectedTab.select(tabs.size() - 2);
 				return;
 			}
 
 		});
 
+<<<<<<< HEAD
 		// -------------------------------------------------------Downloads
 		// listener-----------------------------------------------------
+=======
+		// -------------------------------------------------------Downloads listener-----------------------------------------------------
+>>>>>>> phase5
 		downloads.setOnAction((e) -> {
 
 			// When the menu click Hamburger and DrawerStack will hide
@@ -119,13 +212,21 @@ public class MenuView {
 		// listener-----------------------------------------------------
 		saveAsPdf.addEventHandler(MouseEvent.MOUSE_CLICKED, (ActionEvent) -> {
 
+<<<<<<< HEAD
 			HTMLtoPDF object = new HTMLtoPDF();
 			object.convertHtmlToPdf();
+=======
+>>>>>>> phase5
 			// When the menu click Hamburger and DrawerStack will hide
 			onClickHideHamburger();
 			Thread th = new Thread(new Runnable() {
 				public void run() {
+<<<<<<< HEAD
 					
+=======
+					HTMLtoPDF object = new HTMLtoPDF();
+					object.convertHtmlToPdf();
+>>>>>>> phase5
 
 				}
 			});
@@ -149,6 +250,7 @@ public class MenuView {
 			// tab name and id for accessing
 			tab.setText("Setting");
 			tab.setId("setting");
+<<<<<<< HEAD
 			/*
 			 * Here we developed a tab and its borderpane for setting we made
 			 * setting class that design the layout of setting then a single tab
@@ -171,6 +273,41 @@ public class MenuView {
 
 			// The below is just select the current tab
 			selectedTab.select(tab);
+=======
+
+			if (tabs.get(tabs.size() - 2).getId() != ("setting")) {
+
+				/*
+				 * Here we developed a tab and its borderpane for setting we
+				 * made setting class that design the layout of setting then a
+				 * single tab for all menus set a Tab and only in one tab all
+				 * menu can be seen Is this cool? or not give me constructive
+				 * feedback!
+				 */
+				// ----------Bug of New Tab open then click setting and if index
+				// is not less than -2 then
+				// ----------it will not find setting and again same setting tab
+				// will open ! issue can be resolved but need time!
+
+				/*
+				 * Setting is class that will only desinge the layout of setting
+				 * tab and we are just calling its method getSettingView and
+				 * give two arguments that is tab and setting pane
+				 */
+				Setting ob = new Setting();
+				tab = ob.getSettingView(tab, settingBorderPane);
+
+				// System.out.println(tabs.get(tabs.size()-2).getId());
+				// This is just selecitng the just now opened tab
+				tabs.add(tabs.size() - 1, tab);
+
+				// System.out.println(tab.getId());
+				// System.out.println(tabs.size());
+
+				// The below is just select the current tab
+				selectedTab.select(tab);
+			}
+>>>>>>> phase5
 
 			if (tabs.get(tabs.size() - 2).getId() == ("setting")) {
 				System.out.println("Adfa");
@@ -180,6 +317,7 @@ public class MenuView {
 		});
 	}
 
+<<<<<<< HEAD
 	
 	
 	public void onClickHideHamburger() {
@@ -191,3 +329,15 @@ public class MenuView {
 	}
 
 }
+=======
+	/**
+	 * on cick within drawer stack area hide Hamburger.
+	 */
+	public void onClickHideHamburger() {
+		transition.setRate(transition.getRate() * -1);
+		transition.play();
+		drawersStack.toggle(rightDrawer);
+	}
+
+}
+>>>>>>> phase5

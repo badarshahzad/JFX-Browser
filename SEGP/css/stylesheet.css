@@ -1,6 +1,9 @@
 
+<<<<<<< HEAD
 
  
+=======
+>>>>>>> phase5
 .animated-option-button {
 	-fx-pref-width:50px;
 	-fx-background-color:#4c4c4c;
@@ -12,6 +15,7 @@
 	-fx-border-width: 4px;
 }
 
+<<<<<<< HEAD
 
 #setting .button {
 	-fx-background-radius: 25;
@@ -28,6 +32,8 @@
 
 
 
+=======
+>>>>>>> phase5
 /*******************************************************************************
  *                                                                             *
  * ScrollBar 			                                                       *
@@ -37,13 +43,21 @@
 .scroll-bar:vertical > .track-background,
 .scroll-bar:horizontal > .track-background{
     	-fx-background-color:#ffffff;
+<<<<<<< HEAD
     	-fx-margin:4 0 0 10;
+=======
+>>>>>>> phase5
 }
 */
 
 .scroll-bar:vertical > .thumb,
 .scroll-bar:horizontal > .thumb {
 	    -fx-background-color: derive(#28323c,5.0%);
+<<<<<<< HEAD
+=======
+	    -fx-background-insets: 0.0;
+	    -fx-background-radius: 0.0;
+>>>>>>> phase5
 }
 
 .scroll-bar:hover > .increment-button, 
@@ -54,6 +68,10 @@
 //---------------------TabPane CSS-----------------------------------------------
 
 .tab{
+<<<<<<< HEAD
+=======
+	//-fx-background-color: white;
+>>>>>>> phase5
 	-fx-text-fill:#222222;
 }
 .tab:selected .focus-indicator {
@@ -74,7 +92,10 @@
     -fx-padding:4 10 5 10;
     -fx-background-radius: 10 10 0 0;
 }
+<<<<<<< HEAD
 
 #righDrawerVbox{
 	-fx-padding: 10,10,10,10;
 }
+=======
+>>>>>>> phase5

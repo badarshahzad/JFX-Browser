@@ -2,11 +2,25 @@ package userInterface;
 import java.util.ArrayList;
 import javafx.scene.control.TreeItem;
 
+<<<<<<< HEAD
+=======
+/**
+ * @author SEGP-Group3
+ *
+ */
+>>>>>>> phase5
 public class HistoryTree 
 {
 
 	// This method creates an ArrayList of TreeItems (Links)
+<<<<<<< HEAD
 	public static ArrayList<TreeItem> getStoreItems()
+=======
+	/**
+	 * @return arrayList having javaFX treeItems objects added to store details of visited URL's 
+	 */
+	public ArrayList<TreeItem> getStoreItems()
+>>>>>>> phase5
 	{
 		ArrayList<TreeItem> storeItems = new ArrayList<TreeItem>();
 		
