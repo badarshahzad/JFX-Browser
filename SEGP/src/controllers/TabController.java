@@ -5,7 +5,11 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.controls.JFXProgressBar;
 import com.jfoenix.controls.JFXTextField;
+
+import bookmarks.BookMarks;
 import database.HistoryManagment;
+import downloader.MainDownload;
+import downloader.Notification;
 
 import java.awt.Event;
 import java.awt.TextField;
@@ -19,6 +23,12 @@ import javax.swing.text.Document;
 
 import org.controlsfx.control.PopOver;
 import org.controlsfx.control.textfield.TextFields;
+import org.w3c.dom.Attr;
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.w3c.dom.html.HTMLFormElement;
+import org.w3c.dom.html.HTMLInputElement;
 
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
@@ -47,6 +57,7 @@ import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebEvent;
 import javafx.scene.web.WebHistory;
 import javafx.scene.web.WebView;
+import netscape.javascript.JSObject;
 import userInterface.Hamburger;
 import javafx.scene.control.TabPane;
 import javafx.scene.image.Image;
@@ -142,8 +153,75 @@ public class TabController implements Initializable {
 						System.out.println("Title: "+webEngine.getTitle());
 					
 					}
+					org.w3c.dom.Document doc = webEngine.getDocument();
+					 if (doc!=null && doc.getElementsByTagName("form").getLength() > 0) {
+	                        HTMLFormElement form = (HTMLFormElement) doc.getElementsByTagName("form").item(0);
+                            NodeList nodes = form.getElementsByTagName("input");
+                            nodes.item(0).setTextContent("gooooooooooogle");
+                            for (int i = 0; i < nodes.getLength(); i++) {
+                            	if(nodes.item(i).hasAttributes()){
+                            		NamedNodeMap attr = nodes.item(i).getAttributes();
+                            		for (int j=0 ; j<attr.getLength();j++){
+                            			Attr atribute = (Attr)attr.item(j);
+                            			if(atribute.getValue().equals("password")){
+                            				System.out.println("Password detected");
+                            				HTMLInputElement password = (HTMLInputElement) nodes.item(i);
+                            				HTMLInputElement username = (HTMLInputElement) nodes.item(i-1);
+                            				password.setValue("helloword");
+                            				username.setValue("helloword");
+                            			}
+                            		}
+                            	}
+                            	
+                            }
+
+					 }
+					 
+					 
+					 
+					 
+					 
+					 
+//					 webEngine.executeScript( "var allElements = document.getElementsByTagName('Form');"
+//								+ "var list = allElements[0];"
+//								+ "for (var i=0 ; i<list.length;i++){"
+//								+ "var attr = document.forms[0].elements[i].attributes;"
+//								+ "	if(list.elements[i].type=='password'){"
+//								+ "list.elements[i].value = 'password';"
+//								+ "list.elements[i-1].value = 'username';"
+//								+ "}"
+//								+ "}");
+					 
+					 
+					 
+					 
+					 
+					 
+					 
+					 
+					 
+					 
+					 
+					 
+					 
+					
 				}
 				
+			}
+		});
+		/*location property to get the location of the webview.
+		 * 
+		 * 
+		 * 
+		 * */
+		 
+		webEngine.locationProperty().addListener(new ChangeListener<String>() {
+
+			@Override
+			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+				System.out.println("location of engine: "+newValue);
+				dwnlod.startDownload(newValue,webEngine.getTitle());
+			
 			}
 		});
 
@@ -220,7 +298,7 @@ public class TabController implements Initializable {
 			Label nameLabel = new Label("Name");
 			JFXTextField markNameText = new JFXTextField();
 			Label folderLabel = new Label("Folder");
-			ObservableList<String> options =  FXCollections.observableArrayList("option1","option2","option3");
+			ObservableList<String> options =  FXCollections.observableArrayList("folder 1","folder 2","folder 3");
 			JFXComboBox<String> markFolderList = new JFXComboBox<>(options);
 			markFolderList.setMinWidth(300);
 			
@@ -261,6 +339,7 @@ public class TabController implements Initializable {
 	}// end intializer method
 
 	// mehtod to rendere page
+	MainDownload dwnlod = new MainDownload();
 	public void pageRender(String url) {
 		webEngine.getLoadWorker().stateProperty().addListener(new ChangeListener<State>() {
 			@Override
@@ -270,6 +349,7 @@ public class TabController implements Initializable {
 					searchField.setText(webEngine.getLocation());
 					if (!(webEngine.getLocation().equals("about:blank")))
 						HistoryManagment.insertUrl(webEngine.getLocation());
+					
 				}
 				
 				

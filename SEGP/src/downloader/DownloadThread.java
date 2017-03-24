@@ -19,19 +19,22 @@ import java.nio.file.Paths;
 
 import javax.net.ssl.HttpsURLConnection;
 
+import org.controlsfx.control.Notifications;
 import org.omg.PortableInterceptor.RequestInfo;
 
-public class DownloadThread extends Thread{
-<<<<<<< HEAD
+import javafx.geometry.Pos;
 
-=======
->>>>>>> phase5
+public class DownloadThread extends Thread{
+
 	private String url ;
 	private String filePath ;
+	private String title = "Unknown";
 	private static final int BUFFER_SIZE = 4096;
-	public DownloadThread(String url ,String path){
+	public DownloadThread(String url ,String path,String title){
 		this.url = url;
 		this.filePath = path;
+		if(title!=null)
+		this.title = title;
 	}
 	
 	/**
@@ -40,23 +43,15 @@ public class DownloadThread extends Thread{
 	 * @return downloaded file
 	 * @throws URISyntaxException url syntax not valid
 	 * @throws MalformedURLException not a url
-<<<<<<< HEAD
-=======
-=======
->>>>>>> phase5
 	/**
 	 * @param dispose
 	 * @param fileURL
 	 * @return
 	 * @throws URISyntaxException 
 	 * @throws MalformedURLException 
-<<<<<<< HEAD
-=======
->>>>>>> upstream/master
->>>>>>> phase5
 	 */
 	private File createFile(String contentType , String url) throws URISyntaxException, MalformedURLException{
-		String fileTitle = "[videoPlayback]";
+		String fileTitle = title;
 		System.out.println(Paths.get(new URI(url).getPath()).getFileName().toString());
 		if((url.length()-url.lastIndexOf('.'))==4){
 			System.out.println("plain url.");
@@ -91,10 +86,10 @@ public class DownloadThread extends Thread{
 			return true;
 		}else if (content.contains("audio")){
 			return true;
+		}else if(content.contains("image")){
+			return true;
 		}
 		return false;
-
-		
 	}
 	/* (non-Javadoc)
 	 * @see java.lang.Thread#run()
@@ -113,35 +108,11 @@ public class DownloadThread extends Thread{
 			connection.setUseCaches(true);
 			connection.setConnectTimeout(60000);
 			connection.setReadTimeout(60000);
-			connection.connect(); // connect to the server with in the specified url
-			//			System.out.println(FilenameUtils.getBaseName(obj.getPath())); // -> file
-			//	        System.out.println(FilenameUtils.getExtension(obj.getPath())); // -> xml
-			//	        System.out.println(FilenameUtils.getName(obj.getPath())); // -> file.xml
-			//			FileNameMap file=connection.getFileNameMap();
-			//			 System.out.println(FilenameUtils.getBaseName(url.getPath())); // -> file
-			//		        System.out.println(FilenameUtils.getExtension(url.getPath())); // -> xml
-			//		        System.out.println(FileNameMap.getName(url.getPath())); // -> file.xml
-			//			System.out.println(file.toString());
-			//			try {
-			//				System.out.println(Paths.get(new URI(url).getPath()).getFileName().toString());
-			//				System.out.println(connection.getContentType());
-			//			} catch (URISyntaxException e) {
-			//				// TODO Auto-generated catch block
-			//				System.out.println("hwllo");
-			//			}
-			int requestinfo = connection.getResponseCode(); // get the responce code from the server which might be helpful in understanding the server response for the download request.
-			//			String dispose = connection.getHeaderField("Content-Disposition");
-			//			if(connection.getContentType().contains("Application")){
-			//				System.out.println("This is a downloadable link.");
-			//			}
-			//			if(dispose!=null){
-			//				System.out.println("no header filed.");
-			//				System.out.println("Content-Disposition :  "+dispose );
-			//			}else{
-			//				System.out.println("no dispose content.");
+			connection.connect();
+			int requestinfo = connection.getResponseCode();
 			String  contentType = connection.getContentType();
-			//			}
 			if (requestinfo == connection.HTTP_OK && isDownloadable(contentType)) {
+				new Notification();
 				System.out.println("Download started on link  "+url);
 				BufferedInputStream in = new BufferedInputStream(connection.getInputStream()); // open the input stream on the established tcp connection.
 				FileOutputStream out = new FileOutputStream(createFile(contentType,url)); // create a file and open the output stream to write on file.
@@ -187,7 +158,3 @@ public class DownloadThread extends Thread{
 	}
 
 }
-<<<<<<< HEAD
-=======
-
->>>>>>> phase5

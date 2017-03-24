@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> phase5
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
@@ -10,16 +6,3 @@
 	<classpathentry kind="lib" path="C:/Program Files/Java/jre1.8.0_102/lib/jfxswt.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
-<<<<<<< HEAD
-=======
-=======
-<?xml version="1.0" encoding="UTF-8"?>
-<classpath>
-	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="C:/Users/Muhmmmad Khan/Desktop/jsoup-1.10.1.jar"/>
-	<classpathentry kind="lib" path="C:/Program Files/Java/jre1.8.0_102/lib/jfxswt.jar"/>
-	<classpathentry kind="output" path="bin"/>
-</classpath>
->>>>>>> upstream/master
->>>>>>> phase5

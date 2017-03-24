@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> phase5
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
 	<name>Web Browser</name>
@@ -19,25 +15,3 @@
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
 </projectDescription>
-<<<<<<< HEAD
-=======
-=======
-<?xml version="1.0" encoding="UTF-8"?>
-<projectDescription>
-	<name>Web Browser</name>
-	<comment></comment>
-	<projects>
-	</projects>
-	<buildSpec>
-		<buildCommand>
-			<name>org.eclipse.jdt.core.javabuilder</name>
-			<arguments>
-			</arguments>
-		</buildCommand>
-	</buildSpec>
-	<natures>
-		<nature>org.eclipse.jdt.core.javanature</nature>
-	</natures>
-</projectDescription>
->>>>>>> upstream/master
->>>>>>> phase5

@@ -6,14 +6,6 @@
 	</projects>
 	<buildSpec>
 		<buildCommand>
-<<<<<<< HEAD
-=======
-			<name>org.eclipse.xtext.ui.shared.xtextBuilder</name>
-			<arguments>
-			</arguments>
-		</buildCommand>
-		<buildCommand>
->>>>>>> phase5
 			<name>org.eclipse.jdt.core.javabuilder</name>
 			<arguments>
 			</arguments>
@@ -21,9 +13,5 @@
 	</buildSpec>
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
-<<<<<<< HEAD
-=======
-		<nature>org.eclipse.xtext.ui.shared.xtextNature</nature>
->>>>>>> phase5
 	</natures>
 </projectDescription>

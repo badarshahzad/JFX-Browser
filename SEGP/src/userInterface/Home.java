@@ -1,5 +1,0 @@
-package userInterface;
-
-class Home {
-
-}
