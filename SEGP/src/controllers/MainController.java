@@ -115,7 +115,8 @@ public class MainController implements Initializable {
 
 				//-- to close a browser when last tab will be close
 				if(tabPane.getTabs().size()==1){
-							Platform.exit();
+							//Platform.exit();
+					System.exit(0);
 				}
 
 				if (newSelectedTab == addNewTab) {

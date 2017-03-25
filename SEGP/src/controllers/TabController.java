@@ -69,9 +69,9 @@ public class TabController implements Initializable {
 	private JFXProgressBar progressbar;
 
 	MainController mainController = new MainController();
-	
+
 	// Classes objects to get methods or set methods access
-	
+
 	private Hamburger ham = new Hamburger();
 	public VBox drawerPane = new VBox();
 
@@ -81,11 +81,6 @@ public class TabController implements Initializable {
 	public Worker<Void> worker;
 
 	private TabPane tabPane = mainController.getTabPane();
-	/*
-	 * public TabPane getTabPane() { return tabPane; }
-	 * 
-	 * public void setTabPane(TabPane tabPane) { this.tabPane = tabPane; }
-	 */
 
 	// we made this webgine object to get access the current url of webpage
 	static WebEngine engine;
@@ -124,7 +119,7 @@ public class TabController implements Initializable {
 				if (newValue == Worker.State.SUCCEEDED) {
 					System.out.println("Finish!");
 					if (!webEngine.getTitle().equals(null)) {
-						System.out.println("Title: " +  webEngine.getTitle());
+						System.out.println("Title: " + webEngine.getTitle());
 					}
 				}
 
@@ -134,6 +129,7 @@ public class TabController implements Initializable {
 		progressbar.progressProperty().bind(worker.progressProperty());
 
 		pageRender("https://www.google.com.pk/webhp?sourceid=chrome-instant&ion=1&espv=2&ie=UTF-8");
+		
 
 		ham.getHamburger(hamburger, borderpane, tabPane);
 
@@ -239,6 +235,11 @@ public class TabController implements Initializable {
 			System.out.println("download click");
 		});
 
+		/*
+		 * this one is to make a box in window
+		 */
+		
+
 	}// end intializer method
 
 	// mehtod to rendere page
@@ -249,8 +250,45 @@ public class TabController implements Initializable {
 
 				if (newState == Worker.State.SUCCEEDED) {
 					searchField.setText(webEngine.getLocation());
-					if (!(webEngine.getLocation().equals("about:blank")))
+					if (!(webEngine.getLocation().equals("about:blank"))){
 						HistoryManagment.insertUrl(webEngine.getLocation());
+					}
+					/*this one is to make a box in window
+					*/
+										String check = "var p =  document.getElementsByTagName('body')[0];"
+										    +"var newElement = document.createElement('p');"
+										    +"newElement.innerHTML = \"I am a paragraph\";"
+										    +"p.appendChild(newElement);";
+										String img = "var body =  document.getElementsByTagName('body')[0];"
+												+" var x = document.createElement('img');"
+												+ " x.src = '/backword1.png';"
+												+"body.appendChild(x);";
+										
+										String div = "var body =  document.getElementsByTagName('body')[0];"
+												
+												+ "var newElement = document.createElement('div');"
+												+ "var eleChild = document.createElement('span');"
+												+ "eleChild.innerHTML='Lala Jhalain vat ...Daz';"
+												+ "newElement.appendChild(eleChild);"
+												+ "newElement.setAttribute('id', 'custom_div');"
+												
+												+ " var x = document.createElement('img');"
+												+ " x.src =http://www.google.com/intl/en_com/images/logo_plain.png;";
+												//+ " x.setAttribute('src', 'backword1.png');"
+												//+ " x.setAttribute('width', '304');"
+												//+ " x.setAttribute('height', '228');"
+												//+ " x.setAttribute('alt', 'bacword1 image');"
+												//+ "body.appendChild(x);"
+												//+"body.appendChild(newElement);"
+												//+ "newElement.style.backgroundColor = '#666666';"
+												//+ "newElement.style.width = '100px';"
+												//+ "newElement.style.height = '100px';"
+												//+ "newElement.style.padding = '25px';"
+												//+ "newElement.style.margin = '10px,10px,10px,100px';"
+												//+ "newElement.style.float = 'left;'";
+												
+										
+										webEngine.executeScript(img);
 				}
 
 			}

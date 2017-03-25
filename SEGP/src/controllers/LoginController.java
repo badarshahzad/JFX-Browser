@@ -86,7 +86,7 @@ public class LoginController extends Application implements Initializable {
 	public boolean isLogin(String username, String password) {
 		PreparedStatement prepareStatment = null;
 		ResultSet resultSet = null;
-		String query = "Select * from login where uName = ? and pass = ?";
+		String query = "Select * from login where username = ? and password = ?";
 		try {
 			prepareStatment = connection.prepareStatement(query);
 			prepareStatment.setString(1, username);
@@ -135,12 +135,21 @@ public class LoginController extends Application implements Initializable {
 				noti.showError();
 				
 			}else{
-				Notifications noti = Notifications.create()
+				if(isLogin(getUser().getText(), getPassword().getText())){
+					Notifications noti = Notifications.create()
 						.title("Successfull")
 						.text("Congratulation! You successfully login. ")
 						// .graphic(new ImageView(null))
 						.hideAfter(Duration.seconds(3)).position(Pos.TOP_RIGHT);
-				noti.showError();
+				noti.showInformation();
+				}else{
+					Notifications noti = Notifications.create()
+							.title("Username and Password Incorrect!")
+							.text("Please give your valid username or password. ")
+							// .graphic(new ImageView(null))
+							.hideAfter(Duration.seconds(3)).position(Pos.TOP_RIGHT);
+					noti.showError();
+				}
 				
 			}
 		});
@@ -180,7 +189,7 @@ public class LoginController extends Application implements Initializable {
 	}
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		System.out.println("yes");
+		//System.out.println("yes");
 		// TODO Auto-generated method stub
 		Parent root = FXMLLoader.load(getClass().getResource("/ui/Login.fxml"));
 		Scene scene = new Scene(root);
