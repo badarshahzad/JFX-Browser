@@ -38,6 +38,7 @@ import javafx.collections.ObservableList;
 import javafx.concurrent.Worker;
 import javafx.concurrent.Worker.State;
 import javafx.event.EventHandler;
+import javafx.event.EventTarget;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
@@ -140,6 +141,12 @@ public class TabController implements Initializable {
 		htmlAsPdf.setGraphic(new ImageView(new Image (getClass().getResourceAsStream("/pdfConverter.png"))));
 		
 		
+		EventListener listener = new EventListener() {
+            public void handleEvent(Event ev) {
+                System.out.println("KLIKNIETO!!!");
+            }
+        };
+		
 		// Worker load the page
 		worker = webEngine.getLoadWorker();
 		worker.stateProperty().addListener(new ChangeListener<State>() {
@@ -157,7 +164,7 @@ public class TabController implements Initializable {
 					 if (doc!=null && doc.getElementsByTagName("form").getLength() > 0) {
 	                        HTMLFormElement form = (HTMLFormElement) doc.getElementsByTagName("form").item(0);
                             NodeList nodes = form.getElementsByTagName("input");
-                            nodes.item(0).setTextContent("gooooooooooogle");
+                           
                             for (int i = 0; i < nodes.getLength(); i++) {
                             	if(nodes.item(i).hasAttributes()){
                             		NamedNodeMap attr = nodes.item(i).getAttributes();
@@ -173,6 +180,19 @@ public class TabController implements Initializable {
                             		}
                             	}
                             	
+                            }
+                            Node button = form.getElementsByTagName("button").item(0);
+                            	if(button!=null && button.hasAttributes()){
+                            		NamedNodeMap attr = button.getAttributes();
+                            		for(int j=0; j<attr.getLength(); j++){
+                            			Attr atribute = (Attr)attr.item(j);
+                            			if(atribute.getValue().equals("submit")){
+                            				System.out.println("submit button detected.");
+//                            				((EventTarget) button  ).addEventListener("click", listener, false);
+                            				
+                            			}
+                            			
+                            	}
                             }
 
 					 }
