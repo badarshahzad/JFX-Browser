@@ -5,3 +5,6 @@
 /main/
 /controllers/
 /downloader/
+/htmlToPdf/
+/pdfcrowd/
+/passwordVault/

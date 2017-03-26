@@ -1,64 +1,44 @@
 package controllers;
-
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.controls.JFXProgressBar;
 import com.jfoenix.controls.JFXTextField;
-
-import bookmarks.BookMarks;
 import database.HistoryManagment;
 import downloader.MainDownload;
-import downloader.Notification;
-
-import java.awt.Event;
-import java.awt.TextField;
-import java.awt.event.KeyEvent;
 import java.net.URL;
-import java.util.EventListener;
 import java.util.ResourceBundle;
-
-import javax.lang.model.element.Element;
-import javax.swing.text.Document;
-
 import org.controlsfx.control.PopOver;
 import org.controlsfx.control.textfield.TextFields;
 import org.w3c.dom.Attr;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import org.w3c.dom.events.Event;
+import org.w3c.dom.events.EventListener;
+import org.w3c.dom.events.EventTarget;
 import org.w3c.dom.html.HTMLFormElement;
 import org.w3c.dom.html.HTMLInputElement;
-
-import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Worker;
 import javafx.concurrent.Worker.State;
-import javafx.event.EventHandler;
-import javafx.event.EventTarget;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
-import javafx.scene.control.ProgressBar;
-import javafx.scene.control.SingleSelectionModel;
-import javafx.scene.control.Tab;
-import javafx.scene.input.InputEvent;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.shape.CubicCurve;
 import javafx.scene.web.WebEngine;
-import javafx.scene.web.WebEvent;
 import javafx.scene.web.WebHistory;
 import javafx.scene.web.WebView;
-import netscape.javascript.JSObject;
+import passwordVault.DetectForm;
 import userInterface.Hamburger;
 import javafx.scene.control.TabPane;
 import javafx.scene.image.Image;
@@ -68,7 +48,9 @@ import javafx.scene.image.ImageView;
  *
  * @author Segp-Group 3
  */
-public class TabController implements Initializable {
+public class TabController implements Initializable
+
+ {
 
 	@FXML
 	private BorderPane borderpane;
@@ -124,6 +106,7 @@ public class TabController implements Initializable {
 		return engine;
 	}
 
+	private DetectForm detectForm = new DetectForm();
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 		
@@ -141,11 +124,7 @@ public class TabController implements Initializable {
 		htmlAsPdf.setGraphic(new ImageView(new Image (getClass().getResourceAsStream("/pdfConverter.png"))));
 		
 		
-		EventListener listener = new EventListener() {
-            public void handleEvent(Event ev) {
-                System.out.println("KLIKNIETO!!!");
-            }
-        };
+		
 		
 		// Worker load the page
 		worker = webEngine.getLoadWorker();
@@ -156,75 +135,8 @@ public class TabController implements Initializable {
 				System.out.println("Loading state: " + newValue.toString());
 				if (newValue == Worker.State.SUCCEEDED) {
 					System.out.println("Finish!");
-					if(!webEngine.getTitle().equals(null)){
-						System.out.println("Title: "+webEngine.getTitle());
-					
-					}
 					org.w3c.dom.Document doc = webEngine.getDocument();
-					 if (doc!=null && doc.getElementsByTagName("form").getLength() > 0) {
-	                        HTMLFormElement form = (HTMLFormElement) doc.getElementsByTagName("form").item(0);
-                            NodeList nodes = form.getElementsByTagName("input");
-                           
-                            for (int i = 0; i < nodes.getLength(); i++) {
-                            	if(nodes.item(i).hasAttributes()){
-                            		NamedNodeMap attr = nodes.item(i).getAttributes();
-                            		for (int j=0 ; j<attr.getLength();j++){
-                            			Attr atribute = (Attr)attr.item(j);
-                            			if(atribute.getValue().equals("password")){
-                            				System.out.println("Password detected");
-                            				HTMLInputElement password = (HTMLInputElement) nodes.item(i);
-                            				HTMLInputElement username = (HTMLInputElement) nodes.item(i-1);
-                            				password.setValue("helloword");
-                            				username.setValue("helloword");
-                            			}
-                            		}
-                            	}
-                            	
-                            }
-                            Node button = form.getElementsByTagName("button").item(0);
-                            	if(button!=null && button.hasAttributes()){
-                            		NamedNodeMap attr = button.getAttributes();
-                            		for(int j=0; j<attr.getLength(); j++){
-                            			Attr atribute = (Attr)attr.item(j);
-                            			if(atribute.getValue().equals("submit")){
-                            				System.out.println("submit button detected.");
-//                            				((EventTarget) button  ).addEventListener("click", listener, false);
-                            				
-                            			}
-                            			
-                            	}
-                            }
-
-					 }
-					 
-					 
-					 
-					 
-					 
-					 
-//					 webEngine.executeScript( "var allElements = document.getElementsByTagName('Form');"
-//								+ "var list = allElements[0];"
-//								+ "for (var i=0 ; i<list.length;i++){"
-//								+ "var attr = document.forms[0].elements[i].attributes;"
-//								+ "	if(list.elements[i].type=='password'){"
-//								+ "list.elements[i].value = 'password';"
-//								+ "list.elements[i-1].value = 'username';"
-//								+ "}"
-//								+ "}");
-					 
-					 
-					 
-					 
-					 
-					 
-					 
-					 
-					 
-					 
-					 
-					 
-					 
-					
+					detectForm.detect(doc);
 				}
 				
 			}
@@ -380,5 +292,7 @@ public class TabController implements Initializable {
 		
 		borderpane.setCenter(browser);
 	}
+	
+	
 
 }
