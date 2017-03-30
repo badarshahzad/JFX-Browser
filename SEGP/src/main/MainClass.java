@@ -2,12 +2,22 @@ package main;
 
 
 
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.util.Properties;
+
+import org.controlsfx.control.Notifications;
+
 import controllers.MainController;
 import javafx.application.Application;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 /**
  *
  * @author Segp-Group 3
@@ -20,17 +30,21 @@ public class MainClass extends Application {
 	@Override
 	public void start(Stage stage) throws Exception {
 		Parent root = FXMLLoader.load(getClass().getResource("/ui/MainFXML.fxml"));
-		
 		Scene scene = new Scene(root);
-		
-		//key listeners
+	
+		scene.setOnKeyPressed(event -> {
+
+			if (event.getCode() == KeyCode.P  && event.isControlDown()) {
+				Notifications.create().title("Pin").text("Please type your pin!").hideAfter(Duration.seconds(5)).showConfirm();
+			}
+		});
 		
 		scene.getStylesheets().add(getClass().getResource("/stylesheet.css").toExternalForm());
 		stage.setScene(scene);
 		setStage(stage);
 		stage.show();
 	}
-
+	
 	@SuppressWarnings("static-access")
 	private void setStage(Stage stage) {
 		// TODO Auto-generated method stub

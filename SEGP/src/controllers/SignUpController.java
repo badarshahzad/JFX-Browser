@@ -1,5 +1,6 @@
 package controllers;
 
+import java.awt.event.KeyEvent;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -37,13 +38,13 @@ public class SignUpController  extends Application implements Initializable {
     private JFXTextField firstname;
 
     @FXML
-    private JFXTextField lastname;
-
-    @FXML
     private JFXTextField email;
 
     @FXML
     private JFXPasswordField password;
+    
+    @FXML
+    private JFXTextField pin;
 
     @FXML
     private JFXButton signUpBt;
@@ -58,13 +59,20 @@ public class SignUpController  extends Application implements Initializable {
     	if(connection==null)
     		System.exit(1);
 	}
-	public boolean insertNewAccount(String username, String password){
+    
+    /*
+     * For the sake of test and devloping the pin will be String later according to team decesion this
+     * will be change
+     */
+	public boolean insertNewAccount(String firstName, String username, String password,String pin){
 		PreparedStatement prepareStatment = null;
-		String query = "INSERT INTO login(uName,pass) VALUES (?,?)";
+		String query = "INSERT INTO login(username,password,name,pin) VALUES (?,?,?,?)";
 		try {
 			prepareStatment = connection.prepareStatement(query);
 			prepareStatment.setString(1, username);
 			prepareStatment.setString(2, password);
+			prepareStatment.setString(3, firstName);
+			prepareStatment.setString(4, pin);
 			prepareStatment.executeUpdate();
 
 			return true;
@@ -88,11 +96,12 @@ public class SignUpController  extends Application implements Initializable {
 		// TODO Auto-generated method stub
 		
 		
+		
 		//----------Sign up button working
 		signUpBt.addEventHandler(MouseEvent.MOUSE_CLICKED, (e4)->{
 			
 		boolean flag = getFirstname().getText().isEmpty() | getEmail().getText().isEmpty() |
-						getLastname().getText().isEmpty() | getPassword().getText().isEmpty();
+						getPin().getText().isEmpty() | getPassword().getText().isEmpty();
 			
 		if(flag){
 			
@@ -105,7 +114,7 @@ public class SignUpController  extends Application implements Initializable {
 			noti.showError();
 
 		}else{
-			if(insertNewAccount(getEmail().getText(), getPassword().getText())){
+			if(insertNewAccount(getFirstname().getText(),getEmail().getText(), getPassword().getText(),getPin().getText())){
 			Notifications noti= Notifications.create()
     				.title("Successfull")
     				.text("Congratulation! You successfully Create an Account.")
@@ -151,14 +160,14 @@ public class SignUpController  extends Application implements Initializable {
 
 
 
-	public JFXTextField getLastname() {
-		return lastname;
+	public JFXTextField getPin() {
+		return pin;
 	}
 
 
 
-	public void setLastname(JFXTextField lastname) {
-		this.lastname = lastname;
+	public void setPin(JFXTextField pin) {
+		this.pin= pin;
 	}
 
 

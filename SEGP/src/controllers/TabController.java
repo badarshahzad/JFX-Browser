@@ -2,6 +2,8 @@ package controllers;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXDialog;
+import com.jfoenix.controls.JFXDialogLayout;
 import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.controls.JFXProgressBar;
 import com.jfoenix.controls.JFXTextField;
@@ -10,7 +12,12 @@ import database.HistoryManagment;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javax.management.NotificationFilter;
+
+import org.controlsfx.control.NotificationPane;
+import org.controlsfx.control.Notifications;
 import org.controlsfx.control.PopOver;
+import org.controlsfx.control.action.Action;
 import org.controlsfx.control.textfield.TextFields;
 
 import javafx.beans.value.ChangeListener;
@@ -19,19 +26,28 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Worker;
 import javafx.concurrent.Worker.State;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebEvent;
 import javafx.scene.web.WebHistory;
 import javafx.scene.web.WebView;
+import javafx.stage.Stage;
+import javafx.util.Duration;
+import main.MainClass;
+import netscape.javascript.JSObject;
 import userInterface.Hamburger;
 import javafx.scene.control.TabPane;
 import javafx.scene.image.Image;
@@ -233,6 +249,14 @@ public class TabController implements Initializable {
 
 		download.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
 			System.out.println("download click");
+			/*NotificationPane noti = new NotificationPane();
+			noti.getStylesheets().add("yes");
+			noti.setShowFromTop(true);
+			
+			
+			noti.setCloseButtonVisible(true);
+			noti.setText("This text");
+			noti.show();*/
 		});
 
 		/*
@@ -249,46 +273,17 @@ public class TabController implements Initializable {
 			public void changed(@SuppressWarnings("rawtypes") ObservableValue ov, State oldState, State newState) {
 
 				if (newState == Worker.State.SUCCEEDED) {
+					
+					//set the titile of the title bar
+					MainClass.getStage().setTitle(webEngine.getTitle());
+					
 					searchField.setText(webEngine.getLocation());
 					if (!(webEngine.getLocation().equals("about:blank"))){
 						HistoryManagment.insertUrl(webEngine.getLocation());
 					}
-					/*this one is to make a box in window
-					*/
-										String check = "var p =  document.getElementsByTagName('body')[0];"
-										    +"var newElement = document.createElement('p');"
-										    +"newElement.innerHTML = \"I am a paragraph\";"
-										    +"p.appendChild(newElement);";
-										String img = "var body =  document.getElementsByTagName('body')[0];"
-												+" var x = document.createElement('img');"
-												+ " x.src = '/backword1.png';"
-												+"body.appendChild(x);";
-										
-										String div = "var body =  document.getElementsByTagName('body')[0];"
-												
-												+ "var newElement = document.createElement('div');"
-												+ "var eleChild = document.createElement('span');"
-												+ "eleChild.innerHTML='Lala Jhalain vat ...Daz';"
-												+ "newElement.appendChild(eleChild);"
-												+ "newElement.setAttribute('id', 'custom_div');"
-												
-												+ " var x = document.createElement('img');"
-												+ " x.src =http://www.google.com/intl/en_com/images/logo_plain.png;";
-												//+ " x.setAttribute('src', 'backword1.png');"
-												//+ " x.setAttribute('width', '304');"
-												//+ " x.setAttribute('height', '228');"
-												//+ " x.setAttribute('alt', 'bacword1 image');"
-												//+ "body.appendChild(x);"
-												//+"body.appendChild(newElement);"
-												//+ "newElement.style.backgroundColor = '#666666';"
-												//+ "newElement.style.width = '100px';"
-												//+ "newElement.style.height = '100px';"
-												//+ "newElement.style.padding = '25px';"
-												//+ "newElement.style.margin = '10px,10px,10px,100px';"
-												//+ "newElement.style.float = 'left;'";
-												
-										
-										webEngine.executeScript(img);
+					
+					 
+
 				}
 
 			}

@@ -5,6 +5,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXDrawersStack;
 
+import controllers.DownloadController;
 import controllers.HistoryController;
 import controllers.SettingController;
 
@@ -46,6 +47,8 @@ public class MenuView {
 		
 		// -------------------------------------------------------Historylistener-------------------------------------------------------
 		history.setOnAction((ActionEvent) -> {
+
+			onClickHideHamburger();
 
 			System.out.println("History");
 
@@ -91,8 +94,24 @@ public class MenuView {
 
 			System.out.println("Downloads");
 
-			// tab.setText("Downloads");
-			// tab.setId("downloads");
+			tab.setText("Downloads");
+			tab.setId("downloads");
+			
+			System.out.println("History");
+
+			DownloadController ob= new DownloadController();
+			
+			tab = ob.getDownloadView(tab, settingBorderPane);
+			System.out.println("Size before downloadTab added"+tabs.size());
+			tabs.add(tabs.size() - 1, tab);
+
+			// The below is just select the current tab
+			selectedTab.select(tab);
+
+			if (tabs.get(tabs.size() - 2).getId() == ("downloads")) {
+				selectedTab.select(tabs.size() - 2);
+				return;
+			}
 		});
 
 		// -------------------------------------------------------Bookmarks

@@ -1,7 +1,5 @@
-/controllers/
-/database/
-/downloader/
-/htmlToPdf/
+/fxml/
+/ui/
 /main/
-/pdfcrowd/
 /userInterface/
+/controllers/

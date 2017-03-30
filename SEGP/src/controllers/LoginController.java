@@ -91,7 +91,7 @@ public class LoginController extends Application implements Initializable {
 			prepareStatment = connection.prepareStatement(query);
 			prepareStatment.setString(1, username);
 			prepareStatment.setString(2, password);
-
+			
 			resultSet = prepareStatment.executeQuery();
 			if (resultSet.next()) {
 				String a = resultSet.getString(1);
