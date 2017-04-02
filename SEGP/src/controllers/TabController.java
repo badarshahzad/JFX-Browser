@@ -41,6 +41,7 @@ import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebHistory;
 import javafx.scene.web.WebView;
 import passwordVault.DetectForm;
+import passwordVault.PopUp;
 import userInterface.Hamburger;
 import javafx.scene.control.TabPane;
 import javafx.scene.image.Image;
@@ -269,12 +270,20 @@ public class TabController implements Initializable
 			});
 			saveMark.addEventHandler(MouseEvent.MOUSE_CLICKED, (s)->{
 				String folder = markFolderList.getSelectionModel().getSelectedItem();
+				
+				System.out.println(folder);
 				BookMarksDataBase.insertBookmarks(searchField.getText(), folder);
+				popOver.hide();
+			});
+			newFolderMarkFolder.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+				markFolderList.setEditable(true);
+				
 			});
 		});
 		
 		
 		download.addEventHandler(MouseEvent.MOUSE_CLICKED, (e)->{
+			PopUp pop = new PopUp(download);
 			System.out.println("download click");
 		});
 
@@ -301,6 +310,9 @@ public class TabController implements Initializable
 		webEngine.load(url);
 		
 		borderpane.setCenter(browser);
+	}
+	public JFXHamburger getHamburger() {
+		return hamburger;
 	}
 	
 	

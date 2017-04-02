@@ -33,30 +33,30 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 
 public class BookMarks {
-	
-	    private JFXTextField searchBar;
-	    private JFXButton searchButton;
-	    private TableColumn<URLdetails, String> nameCol =  new TableColumn<>("name");
-	    private TableColumn<URLdetails, String> timeCol =  new TableColumn<>("time");
-	    private TableColumn<URLdetails, String> dateCol =  new TableColumn<>("date");
-	    private TableColumn<URLdetails, String> locationCol =  new TableColumn<>("location");
-	    private TableView<URLdetails> table = new TableView<>();	
-	public static ObservableList<URLdetails> list = FXCollections.observableArrayList();
-		private Image folderImage = new Image(getClass().getResourceAsStream("folder.png"));
-	    private TreeTableView<String> treeView  = new TreeTableView<>();
-	    private TreeTableColumn<String, String> bookMarkCol = new TreeTableColumn<>("BookMarks");
-	    TreeItem parentFolder = new TreeItem<>("All Bookmarks",new ImageView(folderImage));
-	    TreeItem child1 = new TreeItem<>("Programming",new ImageView(folderImage));
-	    TreeItem child2 = new TreeItem<>("Entertainment",new ImageView(folderImage));
-	    TreeItem child3 = new TreeItem<>("SEGP",new ImageView(folderImage));
-	    TreeItem child11 = new TreeItem<>("Java",new ImageView(folderImage));
-	    TreeItem child12 = new TreeItem<>("C++",new ImageView(folderImage));
-	    TreeItem child13 = new TreeItem<>("Haskell",new ImageView(folderImage));
-	    TreeItem child21 = new TreeItem<>("Youtube",new ImageView(folderImage));
-	    TreeItem child22 = new TreeItem<>("facebook",new ImageView(folderImage));
-	    TreeItem child23 = new TreeItem<>("Twitter",new ImageView(folderImage));
 
-	    public BookMarks(){
+	private JFXTextField searchBar;
+	private JFXButton searchButton;
+	private TableColumn<URLdetails, String> nameCol =  new TableColumn<>("name");
+	private TableColumn<URLdetails, String> timeCol =  new TableColumn<>("time");
+	private TableColumn<URLdetails, String> dateCol =  new TableColumn<>("date");
+	private TableColumn<URLdetails, String> locationCol =  new TableColumn<>("location");
+	private TableView<URLdetails> table = new TableView<>();	
+	public static ObservableList<URLdetails> list = FXCollections.observableArrayList();
+	private Image folderImage = new Image(getClass().getResourceAsStream("folder.png"));
+	private TreeTableView<String> treeView  = new TreeTableView<>();
+	private TreeTableColumn<String, String> bookMarkCol = new TreeTableColumn<>("BookMarks");
+	TreeItem parentFolder = new TreeItem<>("All Bookmarks",new ImageView(folderImage));
+	TreeItem child1 = new TreeItem<>("Programming",new ImageView(folderImage));
+	TreeItem child2 = new TreeItem<>("Entertainment",new ImageView(folderImage));
+	TreeItem child3 = new TreeItem<>("SEGP",new ImageView(folderImage));
+	TreeItem child11 = new TreeItem<>("Java",new ImageView(folderImage));
+	TreeItem child12 = new TreeItem<>("C++",new ImageView(folderImage));
+	TreeItem child13 = new TreeItem<>("Haskell",new ImageView(folderImage));
+	TreeItem child21 = new TreeItem<>("Youtube",new ImageView(folderImage));
+	TreeItem child22 = new TreeItem<>("facebook",new ImageView(folderImage));
+	TreeItem child23 = new TreeItem<>("Twitter",new ImageView(folderImage));
+
+	public BookMarks(){
 		child1.getChildren().setAll(child11,child12,child13);
 		child2.getChildren().setAll(child21,child22,child23);
 		parentFolder.getChildren().setAll(child1,child2,child3);
@@ -71,23 +71,23 @@ public class BookMarks {
 		dateCol.setCellValueFactory(new PropertyValueFactory<URLdetails,String>("date"));
 		timeCol.setCellValueFactory(new PropertyValueFactory<URLdetails,String>("time"));
 		treeView.getSelectionModel().selectedItemProperty().addListener( new ChangeListener() {
-	        @Override
-	        public void changed(ObservableValue observable, Object oldValue,
-	                Object newValue) {
+			@Override
+			public void changed(ObservableValue observable, Object oldValue,
+					Object newValue) {
 
-	            TreeItem<String> selectedItem = (TreeItem<String>) newValue;
-	            System.out.println("Selected Text : " + selectedItem.getValue());
-	            ObservableList<URLdetails> list = new PopulateTable().PopulateTable(selectedItem.getValue());
-	    		table.setItems(list);
-	        }
+				TreeItem<String> selectedItem = (TreeItem<String>) newValue;
+				System.out.println("Selected Text : " + selectedItem.getValue());
+				ObservableList<URLdetails> list = new PopulateTable().PopulateTable(selectedItem.getValue());
+				table.setItems(list);
+			}
 
-	      });
+		});
 		bookMarkCol.setPrefWidth(150);
 		nameCol.setPrefWidth(200);
 		timeCol.setPrefWidth(150);
 		dateCol.setPrefWidth(150);
 		locationCol.setPrefWidth(300);
-		
+
 		treeView.getColumns().add(bookMarkCol);
 		treeView.setRoot(parentFolder);
 		table.getColumns().addAll(nameCol,locationCol,dateCol,timeCol);
@@ -101,6 +101,6 @@ public class BookMarks {
 		bookmarkTab.setContent(borderPaneBookmark);
 		return bookmarkTab;
 	}
-		
-	
+
+
 }
