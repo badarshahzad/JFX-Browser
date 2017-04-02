@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXTreeTableView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.TreeView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane fx:id="borderPaneHistory" prefHeight="658.0" prefWidth="946.0" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="userInterface.History">
+   <left>
+      <TreeView fx:id="treeView" prefHeight="658.0" prefWidth="198.0" BorderPane.alignment="CENTER" />
+   </left>
+   <right>
+      <VBox fx:id="vBox" prefHeight="658.0" prefWidth="244.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox fx:id="hBox" prefHeight="78.0" prefWidth="244.0">
+               <children>
+                  <ImageView fitHeight="27.0" fitWidth="28.0">
+                     <image>
+                        <Image url="@../../img/search.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets left="25.0" top="19.0" />
+                     </HBox.margin>
+                  </ImageView>
+                  <JFXTextField fx:id="search" maxWidth="239.0" minWidth="151.0" onMouseClicked="#SearchDataInTable" prefHeight="31.0" prefWidth="151.0">
+                     <HBox.margin>
+                        <Insets left="30.0" top="10.0" />
+                     </HBox.margin>
+                  </JFXTextField>
+               </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </HBox>
+            <JFXButton fx:id="btn" onMouseClicked="#deleteHistory" prefHeight="33.0" prefWidth="93.0" stylesheets="@buttonStyles.css" text="Delete">
+               <VBox.margin>
+                  <Insets left="38.0" top="65.0" />
+               </VBox.margin>
+            </JFXButton>
+         </children>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+      </VBox>
+   </right>
+   <center>
+      <JFXTreeTableView fx:id="table" BorderPane.alignment="CENTER" />
+   </center>
+</BorderPane>
