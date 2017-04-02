@@ -66,8 +66,8 @@ public class BookMarks {
 				return new SimpleStringProperty(param.getValue().getValue());
 			}
 		});		
-		nameCol.setCellValueFactory(new PropertyValueFactory<URLdetails,String>("name"));
-		locationCol.setCellValueFactory(new PropertyValueFactory<URLdetails,String>("location"));
+		nameCol.setCellValueFactory(new PropertyValueFactory<URLdetails,String>("Title"));
+		locationCol.setCellValueFactory(new PropertyValueFactory<URLdetails,String>("Url"));
 		dateCol.setCellValueFactory(new PropertyValueFactory<URLdetails,String>("date"));
 		timeCol.setCellValueFactory(new PropertyValueFactory<URLdetails,String>("time"));
 		treeView.getSelectionModel().selectedItemProperty().addListener( new ChangeListener() {
@@ -92,7 +92,6 @@ public class BookMarks {
 		treeView.setRoot(parentFolder);
 		table.getColumns().addAll(nameCol,locationCol,dateCol,timeCol);
 		table.setItems(list);
-		treeView.getSelectionModel().select(parentFolder);	
 	}
 	public Tab getBookmarkView(Tab bookmarkTab, BorderPane borderPaneBookmark) {
 		treeView.setMinWidth(150);

@@ -14,6 +14,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.net.UnknownHostException;
 import java.nio.charset.MalformedInputException;
 import java.nio.file.Paths;
 
@@ -145,7 +146,10 @@ public class DownloadThread extends Thread{
 		}catch(MalformedURLException e){
 			System.err.println("invalid url.");
 
-		}catch(IOException e){
+		}catch(UnknownHostException e){
+			System.err.println("Error while downloading : Unknown Host Exception.");
+		}
+		catch(IOException e){
 			System.err.println("input output exception .");
 			e.printStackTrace();
 		} catch (URISyntaxException e) {

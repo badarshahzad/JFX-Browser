@@ -87,7 +87,7 @@ public class HistoryController implements Initializable {
 		try {
 			borderPaneHistory.setCenter(FXMLLoader.load(getClass().getResource("/ui/History.fxml")));
 		} catch (Exception e1) {
-			System.out.println("File is not find for setting! " + " \n " + e1);
+			System.out.println("File is not found for setting! " + " \n " + e1);
 			e1.printStackTrace();
 		}
 		// settingTab.setContent(borderpane);
@@ -131,26 +131,30 @@ public class HistoryController implements Initializable {
 						return param.getValue().getValue().getTime();
 					}
 				});
-		
-		//Database fetching data and showing in table
 		ObservableList<HistoryStoreView> historyStoreView = FXCollections.observableArrayList();
-		ResultSet rs = HistoryManagment.showHistory(); // method call to fetch
+		/*
+		 * 
+		 * 
+		 * Error explainations 
+		 * 
+		 * 
+//		ResultSet rs = HistoryManagment.showHistory(); // method call to fetch
 														// the data from history
 														// table.
-		try {
-			while (rs.next()) // loop for data fetching and pass it to GUI table
-								// view
-			{
-				String link1 = rs.getString(1);
-				String time1 = rs.getString(2);
-				String date1 = rs.getString(3);
-				
-				historyStoreView.add(new HistoryStoreView(date1, link1, time1));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
+//		try {
+//			while (rs.next()) // loop for data fetching and pass it to GUI table
+//								// view
+//			{
+//				String link1 = rs.getString(1);
+//				String time1 = rs.getString(2);
+//				String date1 = rs.getString(3);
+//				
+//				historyStoreView.add(new HistoryStoreView(date1, link1, time1));
+//			}
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}
+*/
 		final TreeItem<HistoryStoreView> root = new RecursiveTreeItem<HistoryStoreView>(historyStoreView,
 				RecursiveTreeObject::getChildren);
 		historyTable.getColumns().setAll(date, link, time);

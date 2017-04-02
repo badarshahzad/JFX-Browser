@@ -4,6 +4,8 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.controls.JFXProgressBar;
 import com.jfoenix.controls.JFXTextField;
+
+import database.BookMarksDataBase;
 import database.HistoryManagment;
 import downloader.MainDownload;
 import java.net.URL;
@@ -230,17 +232,16 @@ public class TabController implements Initializable
 			Label nameLabel = new Label("Name");
 			JFXTextField markNameText = new JFXTextField();
 			Label folderLabel = new Label("Folder");
-			ObservableList<String> options =  FXCollections.observableArrayList("folder 1","folder 2","folder 3");
+			ObservableList<String> options =  BookMarksDataBase.folders();
 			JFXComboBox<String> markFolderList = new JFXComboBox<>(options);
 			markFolderList.setMinWidth(300);
-			
+			markFolderList.getSelectionModel().select(0);
 			JFXButton cancelPopup = new JFXButton("Cancel");
 			cancelPopup.setMinSize(100, 50);
 			JFXButton newFolderMarkFolder = new JFXButton("New Folder");
 			newFolderMarkFolder.setMinSize(100, 50);
 			JFXButton saveMark = new JFXButton("Save");
 			saveMark.setMinSize(100, 50);
-			
 			HBox hbox = new HBox();
 			hbox.getChildren().addAll(cancelPopup, newFolderMarkFolder,saveMark);
 			//markFolderList.setVisibleRowCount(0);
@@ -262,7 +263,16 @@ public class TabController implements Initializable
 			//popOver.setMinSize(400, 400);
 			popOver.setArrowLocation(PopOver.ArrowLocation.TOP_RIGHT);
 			popOver.show(bookmark);
+			
+			cancelPopup.addEventHandler(MouseEvent.MOUSE_CLICKED, eventHandler ->{
+				popOver.hide();
+			});
+			saveMark.addEventHandler(MouseEvent.MOUSE_CLICKED, (s)->{
+				String folder = markFolderList.getSelectionModel().getSelectedItem();
+				BookMarksDataBase.insertBookmarks(searchField.getText(), folder);
+			});
 		});
+		
 		
 		download.addEventHandler(MouseEvent.MOUSE_CLICKED, (e)->{
 			System.out.println("download click");

@@ -29,7 +29,7 @@ public class DetectForm {
 					for (int j=0 ; j<attr.getLength();j++){
 						Attr atribute = (Attr)attr.item(j);
 						if(atribute.getValue().equals("password")){
-							System.out.println("Password detected");
+//							System.out.println("Password detected");
 							password = (HTMLInputElement) nodes.item(i);
 							username = (HTMLInputElement) nodes.item(i-1);
 							//             				password.setValue("helloword");
@@ -48,6 +48,7 @@ public class DetectForm {
 					if(username!=null && password!=null){
 						String user = username.getValue();
 						String pass = password.getValue();
+						System.out.println("want to save username password: "+user+"  "+pass);
 					}
 
 
@@ -60,7 +61,7 @@ public class DetectForm {
 					for(int j=0; j<attr.getLength(); j++){
 						Attr atribute = (Attr)attr.item(j);
 						if(atribute.getValue().equals("submit")){
-							System.out.println("submit button detected.");
+//							System.out.println("submit button detected.");
 							((EventTarget) button).addEventListener("click", listener, false);
 
 						}

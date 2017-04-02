@@ -15,13 +15,12 @@ public class PopulateTable {
 				ResultSet bookmarks = db.showBookmarks(folder);
 		try {
 			while(bookmarks.next()){
-				URLdetails bookmark = new URLdetails(bookmarks.getString(4), bookmarks.getString(2), bookmarks.getString(3), bookmarks.getString(1));
+				URLdetails bookmark = new URLdetails(bookmarks.getString(1), bookmarks.getString(2), bookmarks.getString(3), bookmarks.getString(4));
 				list.add(bookmark);
 			}
 			return list;
 		} catch (SQLException e) {
 			System.out.println("SQLITE Exception in populate table.");
-			System.out.println(e.getMessage());
 		}
 		return null;
 	}
