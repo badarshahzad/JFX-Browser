@@ -145,7 +145,6 @@ public class TabController implements Initializable {
 		progressbar.progressProperty().bind(worker.progressProperty());
 
 		pageRender("https://www.google.com.pk/webhp?sourceid=chrome-instant&ion=1&espv=2&ie=UTF-8");
-		
 
 		ham.getHamburger(hamburger, borderpane, tabPane);
 
@@ -249,20 +248,19 @@ public class TabController implements Initializable {
 
 		download.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
 			System.out.println("download click");
-			/*NotificationPane noti = new NotificationPane();
-			noti.getStylesheets().add("yes");
-			noti.setShowFromTop(true);
-			
-			
-			noti.setCloseButtonVisible(true);
-			noti.setText("This text");
-			noti.show();*/
+			/*
+			 * NotificationPane noti = new NotificationPane();
+			 * noti.getStylesheets().add("yes"); noti.setShowFromTop(true);
+			 * 
+			 * 
+			 * noti.setCloseButtonVisible(true); noti.setText("This text");
+			 * noti.show();
+			 */
 		});
 
 		/*
 		 * this one is to make a box in window
 		 */
-		
 
 	}// end intializer method
 
@@ -273,16 +271,14 @@ public class TabController implements Initializable {
 			public void changed(@SuppressWarnings("rawtypes") ObservableValue ov, State oldState, State newState) {
 
 				if (newState == Worker.State.SUCCEEDED) {
-					
-					//set the titile of the title bar
+
+					// set the titile of the title bar
 					MainClass.getStage().setTitle(webEngine.getTitle());
-					
+
 					searchField.setText(webEngine.getLocation());
-					if (!(webEngine.getLocation().equals("about:blank"))){
+					if (!(webEngine.getLocation().equals("about:blank"))) {
 						HistoryManagment.insertUrl(webEngine.getLocation());
 					}
-					
-					 
 
 				}
 

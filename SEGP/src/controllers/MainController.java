@@ -5,7 +5,6 @@
  */
 package controllers;
 
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -34,30 +33,29 @@ public class MainController implements Initializable {
 	@FXML
 	private BorderPane rootBorderPane;
 
-	public Hamburger ham = new Hamburger();	
+	public Hamburger ham = new Hamburger();
 	public VBox drawerPane = new VBox();
-	
-	public static TabPane tabPane = new TabPane();
-	
-	private Tab firstTab = new Tab("First Tab");
-	private Tab addNewTab = new Tab("+");
 
+	public static TabPane tabPane = new TabPane();
+
+	private Tab firstTab = new Tab("First Tab");
+
+	private Tab addNewTab = new Tab("+");
 
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
-		
-		
-		//------All opens tabs should be closed so below line is for just closing tabs
+
+		// ------All opens tabs should be closed so below line is for just
+		// closing tabs
 		addNewTab.setClosable(false);
-		
+
 		tabPane.setTabClosingPolicy(TabClosingPolicy.ALL_TABS);
-		//------tabPane.setFocusTraversable(false);
-		
+		// ------tabPane.setFocusTraversable(false);
+
 		try {
-			//-----here below adding page title of tab 
+			// -----here below adding page title of tab
 			firstTab.setContent(FXMLLoader.load(getClass().getResource("/ui/Tab.fxml")));
-		
-			
+
 		} catch (IOException e2) {
 			// TODO Auto-generated catch block
 			e2.printStackTrace();
@@ -68,22 +66,20 @@ public class MainController implements Initializable {
 		getTabPaneView(tabPane, addNewTab);
 		tabPaneChangeLiten(tabPane);
 
-		//-------------------Key codes to for browser----
-		/*EventListener listener = new EventListener() {
-			@SuppressWarnings("unused")
-			public void handleEvent(Event event) {
-				if (event.getEventType().equals(KeyCode.ALT) || event.getEventType().equals(KeyCode.BACK_SPACE)) {
-					System.out.println("yes alt");
-				}
-			}
-		};
-		*/
-		
-	
+		// -------------------Key codes to for browser----
+		/*
+		 * EventListener listener = new EventListener() {
+		 * 
+		 * @SuppressWarnings("unused") public void handleEvent(Event event) { if
+		 * (event.getEventType().equals(KeyCode.ALT) ||
+		 * event.getEventType().equals(KeyCode.BACK_SPACE)) {
+		 * System.out.println("yes alt"); } } };
+		 */
+
 	}// end intializer method
-	
+
 	// ---set method for TabPane---
-	
+
 	@SuppressWarnings("static-access")
 	public void setTabPane(TabPane tabPane) {
 		this.tabPane = tabPane;
@@ -94,12 +90,20 @@ public class MainController implements Initializable {
 		return tabPane;
 	}
 
+	public Tab getAddNewTab() {
+		return addNewTab;
+	}
+
+	public void setAddNewTab(Tab addNewTab) {
+		this.addNewTab = addNewTab;
+	}
+
 	public void tabPaneChangeLiten(TabPane tabpane) {
 		tabpane.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Tab>() {
 			@Override
 			public void changed(ObservableValue<? extends Tab> ov, Tab t, Tab newSelectedTab) {
 				ham.hideHamburgerPane();
-				
+
 			}
 		});
 	}
@@ -107,41 +111,59 @@ public class MainController implements Initializable {
 	public TabPane getTabPaneView(TabPane tabpane, Tab addNewTab) {
 		tabpane.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Tab>() {
 			@Override
-			
+
 			public void changed(ObservableValue<? extends Tab> ov, Tab t, Tab newSelectedTab) {
 
-				//Closeing tab if first index tab close and size will be the 2
-				//https://docs.oracle.com/javase/8/javafx/api/index.html?javafx/scene/package-summary.html
+				// Closeing tab if first index tab close and size will be the 2
+				// https://docs.oracle.com/javase/8/javafx/api/index.html?javafx/scene/package-summary.html
 
-				//-- to close a browser when last tab will be close
-				if(tabPane.getTabs().size()==1){
-							//Platform.exit();
+				// -- to close a browser when last tab will be close
+				if (tabPane.getTabs().size() == 1) {
+					// Platform.exit();
 					System.exit(0);
 				}
 
 				if (newSelectedTab == addNewTab) {
 
 					// ---------------New tab is created --------------------
-					Tab tab = new Tab("New tab");
-					try {
-						tab.setContent(FXMLLoader.load(getClass().getResource("/ui/Tab.fxml")));
-					} catch (IOException e) {
-						System.out.println("Exception: New tab click but not working in TabPaneView Class");
-						e.printStackTrace();
-					}
-					
-					tab.getStyleClass().addAll("tab-pane");
-					final ObservableList<Tab> tabs = tabpane.getTabs();
-					tabs.add(tabs.size() - 1, tab);
-
-					SingleSelectionModel<Tab> selectedTab = tabpane.getSelectionModel();
-					selectedTab.select(tab);
+					creatNewTab(tabpane, addNewTab);
+					/*
+					 * Tab tab = new Tab("New tab"); try {
+					 * tab.setContent(FXMLLoader.load(getClass().getResource(
+					 * "/ui/Tab.fxml"))); } catch (IOException e) {
+					 * System.out.println(
+					 * "Exception: New tab click but not working in TabPaneView Class"
+					 * ); e.printStackTrace(); }
+					 * 
+					 * tab.getStyleClass().addAll("tab-pane"); final
+					 * ObservableList<Tab> tabs = tabpane.getTabs();
+					 * tabs.add(tabs.size() - 1, tab);
+					 * 
+					 * SingleSelectionModel<Tab> selectedTab =
+					 * tabpane.getSelectionModel(); selectedTab.select(tab);
+					 */
 				}
 			}
 		});
 		return tabpane;
 	}
 
-	// end class
+	public void creatNewTab(TabPane tabpane, Tab addNewTab) {
+		Tab tab = new Tab("New tab");
+		try {
+			tab.setContent(FXMLLoader.load(getClass().getResource("/ui/Tab.fxml")));
+		} catch (IOException e) {
+			System.out.println("Exception: New tab click but not working in TabPaneView Class");
+			e.printStackTrace();
+		}
 
+		tab.getStyleClass().addAll("tab-pane");
+		final ObservableList<Tab> tabs = tabpane.getTabs();
+		tabs.add(tabs.size() - 1, tab);
+
+		SingleSelectionModel<Tab> selectedTab = tabpane.getSelectionModel();
+		selectedTab.select(tab);
+	}
+
+	// end class
 }
