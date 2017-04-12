@@ -43,6 +43,7 @@ public class PopUp{
 		popOver.setContentNode(popUpContent);
 		popOver.setArrowLocation(PopOver.ArrowLocation.TOP_RIGHT);
 		popOver.show(download);
+		popOver.detach();	
 		cancelPopup.addEventHandler(MouseEvent.MOUSE_CLICKED, eventHandler ->{
 			popOver.hide();
 		});
@@ -50,7 +51,7 @@ public class PopUp{
 			//database save.
 		});
 		
-		//		popOver.detach();	
+		//		
 	}
 
 	

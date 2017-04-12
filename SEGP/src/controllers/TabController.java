@@ -8,6 +8,9 @@ import com.jfoenix.controls.JFXTextField;
 import database.BookMarksDataBase;
 import database.HistoryManagment;
 import downloader.MainDownload;
+
+import java.io.File;
+import java.net.URI;
 import java.net.URL;
 import java.util.ResourceBundle;
 import org.controlsfx.control.PopOver;
@@ -140,6 +143,24 @@ public class TabController implements Initializable
 					System.out.println("Finish!");
 					org.w3c.dom.Document doc = webEngine.getDocument();
 					detectForm.detect(doc);
+					URL url = getClass().getResource("/home.png");
+					File image = new File(url.getPath());
+					System.out.println(image.toURI().toString());
+					String div = "var body =  document.getElementsByTagName('body')[0];"
+							+ "var newElement = document.createElement('div');"
+							+ "var center = document.createElement('center');"
+							+ "for(var i=0 ;i<6 ;i++){"
+							+ "var image = document.createElement('img');"
+							+ "image.src =\""+image.toURI()+"\" ;"
+							+ "image.style.width = '100px';"
+							+ "image.style.height = '100px';"
+							+ "image.style.padding = '0px 10px';"
+							+ "newElement.appendChild(image);"
+							+ "}"
+							+ "newElement.setAttribute('id', 'custom_div');"
+							+ "center.appendChild(newElement);"
+							+"body.appendChild(center);";
+					webEngine.executeScript(div);
 				}
 				
 			}

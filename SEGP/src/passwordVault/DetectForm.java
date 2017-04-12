@@ -48,7 +48,7 @@ public class DetectForm {
 					if(username!=null && password!=null){
 						String user = username.getValue();
 						String pass = password.getValue();
-						System.out.println("want to save username password: "+user+"  "+pass);
+						System.err.println("want to save username:  "+user+" password: "+"  "+pass);
 					}
 
 
@@ -61,7 +61,7 @@ public class DetectForm {
 					for(int j=0; j<attr.getLength(); j++){
 						Attr atribute = (Attr)attr.item(j);
 						if(atribute.getValue().equals("submit")){
-//							System.out.println("submit button detected.");
+							System.out.println("DETECTION");
 							((EventTarget) button).addEventListener("click", listener, false);
 
 						}
