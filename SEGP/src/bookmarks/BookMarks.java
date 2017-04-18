@@ -60,8 +60,8 @@ public class BookMarks {
 				return new SimpleStringProperty(param.getValue().getValue());
 			}
 		});		
-		nameCol.setCellValueFactory(new PropertyValueFactory<URLdetails,String>("Title"));
-		locationCol.setCellValueFactory(new PropertyValueFactory<URLdetails,String>("Url"));
+		nameCol.setCellValueFactory(new PropertyValueFactory<URLdetails,String>("name"));
+		locationCol.setCellValueFactory(new PropertyValueFactory<URLdetails,String>("location"));
 		dateCol.setCellValueFactory(new PropertyValueFactory<URLdetails,String>("date"));
 		timeCol.setCellValueFactory(new PropertyValueFactory<URLdetails,String>("time"));
 		treeView.getSelectionModel().selectedItemProperty().addListener( new ChangeListener() {

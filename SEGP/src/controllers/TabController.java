@@ -48,7 +48,6 @@ import javafx.scene.web.WebHistory;
 import javafx.scene.web.WebView;
 import javafx.stage.Window;
 import passwordVault.DetectForm;
-import passwordVault.PopUp;
 import userInterface.Hamburger;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextInputDialog;
@@ -89,6 +88,7 @@ public class TabController implements Initializable
 	private JFXProgressBar progressbar;
 	private String folder;
 	String title;
+	ObservableList<String> options;
 	MainController mainController = new MainController();
 	// Classes objects to get methods or set methods access
 	private Hamburger ham = new Hamburger();
@@ -260,7 +260,7 @@ public class TabController implements Initializable
 			JFXTextField markNameText = new JFXTextField();
 			markNameText.setText(webEngine.getTitle());
 			Label folderLabel = new Label("Folder");
-			ObservableList<String> options =  BookMarksDataBase.folders();
+			options =  BookMarksDataBase.folders();
 			JFXComboBox<String> markFolderList = new JFXComboBox<>(options);
 			markFolderList.setMinWidth(300);
 			markFolderList.getSelectionModel().select(0);
@@ -297,8 +297,8 @@ public class TabController implements Initializable
 			});
 			saveMark.addEventHandler(MouseEvent.MOUSE_CLICKED, (s)->{
 				System.out.println(folder);
-				if(folder.equals("")){
-					markFolderList.getItems().get(0);
+				if(folder==null){
+					folder=markFolderList.getItems().get(0);
 				}
 				 title = markNameText.getText();
 				if(title==null){
@@ -315,12 +315,14 @@ public class TabController implements Initializable
 				dialog.setContentText("Please enter folder name:");
 				Optional<String> result = dialog.showAndWait();
 				result.ifPresent(name ->{
-					this.folder = name;
+					if(!name.equals("")){
+						this.folder = name;
+						options.add(folder);
+					}
 					if(title==null){
 						title = webEngine.getTitle();
 					}
 					BookMarksDataBase.insertBookmarks(searchField.getText(), folder,title,1);
-					
 							});
 				
 				
@@ -329,7 +331,6 @@ public class TabController implements Initializable
 		
 		
 		download.addEventHandler(MouseEvent.MOUSE_CLICKED, (e)->{
-			PopUp pop = new PopUp(download);
 			System.out.println("download click");
 		});
 
