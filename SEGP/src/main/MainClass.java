@@ -5,6 +5,7 @@ import java.awt.event.KeyEvent;
 import java.util.Properties;
 
 import controllers.MainController;
+import database.BookMarksDataBase;
 import database.HistoryManagment;
 import javafx.application.Application;
 import javafx.event.Event;
@@ -57,6 +58,7 @@ public class MainClass extends Application {
 		systemProperties.setProperty("https.proxyHost","172.16.0.2");
 		systemProperties.setProperty("https.proxyPort","8080");
 		HistoryManagment.CreateDataBase();
+//		BookMarksDataBase.createBookMarksDataBase();
 		launch(args);
 	}
 

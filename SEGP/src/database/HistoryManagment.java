@@ -24,9 +24,9 @@ public class HistoryManagment
 		{
 			  Class.forName("org.sqlite.JDBC");
 		      c = DriverManager.getConnection("jdbc:sqlite:History.db");
-		      System.out.println("Open'ed database successfully");
-		      perp=c.prepareStatement("CREATE TABLE if not exists history(url text primary key ,Time text,Date text );");
-		      perp.executeUpdate();
+	      perp=c.prepareStatement("CREATE TABLE if not exists history(url text primary key ,Time varchar(30),Date varchar(30),"
+		      		+ "domain varchar(40),title varchar(50), user_id integer );");
+		      perp.executeUpdate(); 
 		      System.out.println("table created");
 		      perp.close();
 		      c.close();
@@ -39,7 +39,7 @@ public class HistoryManagment
 		}
 //------------------------------------ULR INSERTION IN DATABASE----------------------------------------------------------------//
 	
-	public static void insertUrl(String url)
+	public static void insertUrl(String url,String domain,String title)
 	{
 		dateTime = new java.util.Date();
 		formateTime = new SimpleDateFormat("HH:mm:ss");
@@ -49,13 +49,17 @@ public class HistoryManagment
 		{
 			  Class.forName("org.sqlite.JDBC");
 		      c = DriverManager.getConnection("jdbc:sqlite:History.db");
-			  String insert="insert or replace into history(url,Time,Date)"+"values(?,?,?)";
+			  String insert="insert or replace into history(url,Time,Date,domain,title,user_id)"+"values(?,?,?,?,?,?)";
 			  String time=formateTime.format(dateTime);
 			  String date=dateFormate.format(dateTime);
+			  int user= 1;
 		      perp=c.prepareStatement(insert);
 		      perp.setString(1, url);
 		      perp.setString(2,time);
 		      perp.setString(3,date);
+		      perp.setString(4, domain);
+		      perp.setString(5, title);
+		      perp.setInt(6, user);
 		      perp.executeUpdate();
 		      System.out.println("data has been inserted");
 		      perp.close();
@@ -106,7 +110,9 @@ public static  ObservableList fullHistoryShow(ObservableList fullHistory)
     	String link1 =rs.getString(1);
     	String time1=rs.getString(2);
     	String date1=rs.getString(3);
-    	fullHistory=History.addDataInList(link1, time1,date1,fullHistory);
+    	String domain1=rs.getString(4);
+    	String title1=rs.getString(5);
+    	fullHistory=History.addDataInList(link1, time1,date1,domain1,title1,fullHistory);
     	}
     	rs.close();
     	perp.close();
@@ -157,7 +163,9 @@ public static ObservableList getHistory(ObservableList list,int dateRange)
 		 String link1 =rs.getString(1);
 		 String time1=rs.getString(2);
 		 String date1=rs.getString(3);
-		 list=History.addDataInList(link1,time1,date1,list);
+		 String domain1=rs.getString(4);
+	    	String title1=rs.getString(5);
+		 list=History.addDataInList(link1,time1,date1,domain1,title1,list);
 	}
 		
 		rs.close();
@@ -207,7 +215,9 @@ public static ObservableList pastHoursHistory(ObservableList pastHour,int time)
 		String link1 =rs.getString(1);
 		String time1=rs.getString(2);
 		String date1=rs.getString(3);
-		pastHour=History.addDataInList(link1,time1,date1,pastHour);
+		String domain1=rs.getString(4);
+    	String title1=rs.getString(5);
+		pastHour=History.addDataInList(link1,time1,date1,domain1,title1,pastHour);
 	 }
 	}
 	catch(Exception e)

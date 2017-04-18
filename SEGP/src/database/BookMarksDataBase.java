@@ -16,28 +16,31 @@ public class BookMarksDataBase
 	private static PreparedStatement perp=null;
 	private static java.util.Date date = new java.util.Date();
 	private static SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
-	public BookMarksDataBase(){
+	public static void createBookMarksDataBase(){
+		  try {
+			Class.forName("org.sqlite.JDBC");
+			c = DriverManager.getConnection("jdbc:sqlite:History.db");
+	      perp=c.prepareStatement("CREATE TABLE if not exists bookmark(url text ,folder_name varchar(20),"
+	      		+ "title varchar (30), user_id integer );");
+		      perp.executeUpdate();
+		      System.out.println("table created");
+		} catch (ClassNotFoundException | SQLException e) {
+		}
+	      
 	}
-	public static void insertBookmarks(String url,String folder){
+	public static void insertBookmarks(String url,String folder,String title,int user_id){
 		
 		try
 		{
-			int urlId=0;
-			String query = "select url from history where url = ? and user_id = ?";
-			perp=c.prepareStatement(query);
-			perp.setString(1,url);
-			perp.setInt(2,1);
-			ResultSet rs = perp.executeQuery();
-			while(rs.next()){
-				urlId = rs.getInt(1);
-			}
-			String insert="insert or replace into bookmark(url_id,folder,user_id)"+"values(?,?,?)";
+			
+			String insert="insert or replace into bookmark(url,folder_name,title,user_id)"+"values(?,?,?,?)";
 			perp=c.prepareStatement(insert);
-			perp.setInt(1, urlId);
+			perp.setString(1, url);
 			perp.setString(2,folder);
-			perp.setInt(3,1);
+			perp.setString(3, title);
+			perp.setInt(4,user_id);
 			perp.executeUpdate();
-			perp.close();
+			System.out.println("Bookmark Entry added.");
 		}
 		catch(Exception e)
 		{
@@ -52,7 +55,7 @@ public class BookMarksDataBase
 		try
 		{
 			String query="select history.title, history.time ,history.date, history.url "
-					+ "from history where url_id in (select url_id from bookmark where folder = ?);";
+					+ "from history where url in (select url from bookmark where folder_name = ?);";
 			perp=c.prepareStatement(query);
 			perp.setString(1, folder);
 			rs=perp.executeQuery();
@@ -68,7 +71,7 @@ public class BookMarksDataBase
 		ResultSet rs;
 		String query=null;
 		ObservableList<String> list = FXCollections.observableArrayList();
-			query ="select distinct folder from bookmark;";			
+			query ="select distinct folder_name from bookmark;";			
 		try {
 			rs = c.prepareStatement(query).executeQuery();
 			while(rs.next()){

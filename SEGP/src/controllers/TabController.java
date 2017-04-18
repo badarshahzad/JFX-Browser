@@ -1,6 +1,7 @@
 package controllers;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.controls.JFXProgressBar;
 import com.jfoenix.controls.JFXTextField;
@@ -10,8 +11,10 @@ import database.HistoryManagment;
 import downloader.MainDownload;
 
 import java.io.File;
+import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import org.controlsfx.control.PopOver;
 import org.controlsfx.control.textfield.TextFields;
@@ -48,6 +51,7 @@ import passwordVault.DetectForm;
 import passwordVault.PopUp;
 import userInterface.Hamburger;
 import javafx.scene.control.TabPane;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -83,7 +87,8 @@ public class TabController implements Initializable
 	private GridPane navigationBar;
 	@FXML
 	private JFXProgressBar progressbar;
-
+	private String folder;
+	String title;
 	MainController mainController = new MainController();
 	// Classes objects to get methods or set methods access
 	private Hamburger ham = new Hamburger();
@@ -253,6 +258,7 @@ public class TabController implements Initializable
 			popUpContent.setPadding(new Insets(5, 5, 5, 5));
 			Label nameLabel = new Label("Name");
 			JFXTextField markNameText = new JFXTextField();
+			markNameText.setText(webEngine.getTitle());
 			Label folderLabel = new Label("Folder");
 			ObservableList<String> options =  BookMarksDataBase.folders();
 			JFXComboBox<String> markFolderList = new JFXComboBox<>(options);
@@ -290,14 +296,33 @@ public class TabController implements Initializable
 				popOver.hide();
 			});
 			saveMark.addEventHandler(MouseEvent.MOUSE_CLICKED, (s)->{
-				String folder = markFolderList.getSelectionModel().getSelectedItem();
-				
 				System.out.println(folder);
-				BookMarksDataBase.insertBookmarks(searchField.getText(), folder);
+				if(folder.equals("")){
+					markFolderList.getItems().get(0);
+				}
+				 title = markNameText.getText();
+				if(title==null){
+					title = webEngine.getTitle();
+				}
+				BookMarksDataBase.insertBookmarks(searchField.getText(), folder,title,1);
 				popOver.hide();
 			});
 			newFolderMarkFolder.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-				markFolderList.setEditable(true);
+				
+				TextInputDialog dialog = new TextInputDialog("walter");
+				dialog.setTitle("Create New Folder");
+				dialog.setHeaderText("Create New Folder");
+				dialog.setContentText("Please enter folder name:");
+				Optional<String> result = dialog.showAndWait();
+				result.ifPresent(name ->{
+					this.folder = name;
+					if(title==null){
+						title = webEngine.getTitle();
+					}
+					BookMarksDataBase.insertBookmarks(searchField.getText(), folder,title,1);
+					
+							});
+				
 				
 			});
 		});
@@ -319,8 +344,14 @@ public class TabController implements Initializable
 
 				if (newState == Worker.State.SUCCEEDED) {
 					searchField.setText(webEngine.getLocation());
+					URL domain = null;
 					if (!(webEngine.getLocation().equals("about:blank")))
-						HistoryManagment.insertUrl(webEngine.getLocation());
+						try {
+							domain  = new URL(webEngine.getLocation());
+						} catch (MalformedURLException e) {
+							System.err.println("Invalid domain.");
+						}
+						HistoryManagment.insertUrl(webEngine.getLocation(),domain.getHost(),webEngine.getTitle());
 					
 				}
 				

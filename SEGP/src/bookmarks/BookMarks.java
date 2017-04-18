@@ -8,6 +8,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXTreeTableView;
 
+import database.BookMarksDataBase;
 import javafx.beans.Observable;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
@@ -46,20 +47,13 @@ public class BookMarks {
 	private TreeTableView<String> treeView  = new TreeTableView<>();
 	private TreeTableColumn<String, String> bookMarkCol = new TreeTableColumn<>("BookMarks");
 	TreeItem parentFolder = new TreeItem<>("All Bookmarks",new ImageView(folderImage));
-	TreeItem child1 = new TreeItem<>("Programming",new ImageView(folderImage));
-	TreeItem child2 = new TreeItem<>("Entertainment",new ImageView(folderImage));
-	TreeItem child3 = new TreeItem<>("SEGP",new ImageView(folderImage));
-	TreeItem child11 = new TreeItem<>("Java",new ImageView(folderImage));
-	TreeItem child12 = new TreeItem<>("C++",new ImageView(folderImage));
-	TreeItem child13 = new TreeItem<>("Haskell",new ImageView(folderImage));
-	TreeItem child21 = new TreeItem<>("Youtube",new ImageView(folderImage));
-	TreeItem child22 = new TreeItem<>("facebook",new ImageView(folderImage));
-	TreeItem child23 = new TreeItem<>("Twitter",new ImageView(folderImage));
-
+	private ObservableList<String> folders = BookMarksDataBase.folders();
+ 	
 	public BookMarks(){
-		child1.getChildren().setAll(child11,child12,child13);
-		child2.getChildren().setAll(child21,child22,child23);
-		parentFolder.getChildren().setAll(child1,child2,child3);
+		for(int i=0 ; i< folders.size();i++){
+			System.out.println(i);
+			parentFolder.getChildren().add(new TreeItem<>(folders.get(i),new ImageView(folderImage)));
+		}
 		bookMarkCol.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<String,String>, ObservableValue<String>>() {
 			@Override
 			public ObservableValue<String> call(CellDataFeatures<String, String> param) {

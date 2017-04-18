@@ -79,6 +79,8 @@ public class History implements Initializable{
 	JFXTreeTableColumn <HistoryStoreView, String> linkCol=new JFXTreeTableColumn<HistoryStoreView,String>("Links");
 	
 	JFXTreeTableColumn <HistoryStoreView, String> timeCol=new JFXTreeTableColumn<HistoryStoreView,String>("Time");
+	JFXTreeTableColumn <HistoryStoreView, String> domainCol=new JFXTreeTableColumn<HistoryStoreView,String>("Domain Name");
+	JFXTreeTableColumn <HistoryStoreView, String> titleCol=new JFXTreeTableColumn<HistoryStoreView,String>("Title");
 	
 	@FXML
 	JFXTextField search;
@@ -215,8 +217,26 @@ public class History implements Initializable{
 						return param.getValue().getValue().time1;
 					}
 				});
+		domainCol.setPrefWidth(150);
+		domainCol.setCellValueFactory(
+				new Callback<TreeTableColumn.CellDataFeatures<HistoryStoreView, String>, ObservableValue<String>>() {
+					@Override
+					public ObservableValue<String> call(CellDataFeatures<HistoryStoreView, String> param) {
+						return param.getValue().getValue().domain1;
+					}
+				});
+		titleCol.setPrefWidth(150);
+		titleCol.setCellValueFactory(
+				new Callback<TreeTableColumn.CellDataFeatures<HistoryStoreView, String>, ObservableValue<String>>() {
+					@Override
+					public ObservableValue<String> call(CellDataFeatures<HistoryStoreView, String> param) {
+						return param.getValue().getValue().title1;
+					}
+				});
+			
+		
 		final TreeItem<HistoryStoreView> root = new RecursiveTreeItem<HistoryStoreView>(list,RecursiveTreeObject::getChildren);
-		table.getColumns().setAll(dateCol, linkCol, timeCol);
+		table.getColumns().setAll(dateCol, linkCol, timeCol,domainCol,titleCol);
 		table.setRoot(root);
 		table.setShowRoot(false);
 		
@@ -269,9 +289,9 @@ public class History implements Initializable{
 		});
 
 	}
-	   public static  ObservableList addDataInList(String link,String time ,String date,ObservableList list)
+	   public static  ObservableList addDataInList(String link,String time ,String date,String domain,String title,ObservableList list)
 	   {
-		   list.add(new HistoryStoreView(date,link,time));
+		   list.add(new HistoryStoreView(date,link,time,domain,title));
 		   return list;
 	   }
 
@@ -291,11 +311,15 @@ public class History implements Initializable{
 	StringProperty date1;
 	StringProperty link1;
 	StringProperty time1;
+	StringProperty domain1;
+	StringProperty title1;
 	
-	public HistoryStoreView(String date,String link, String time ){
+	public HistoryStoreView(String date,String link, String time,String domain,String title ){
 		this.date1 = new SimpleStringProperty(date);
 		this.link1 = new SimpleStringProperty(link);
 		this.time1 = new SimpleStringProperty(time);
+		this.domain1 = new SimpleStringProperty(domain);
+		this.title1 = new SimpleStringProperty(title);
 	}
 }	
 
