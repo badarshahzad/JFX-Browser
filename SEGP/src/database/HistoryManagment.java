@@ -24,7 +24,7 @@ public class HistoryManagment
 		{
 			  Class.forName("org.sqlite.JDBC");
 		      c = DriverManager.getConnection("jdbc:sqlite:History.db");
-		      System.out.println("Opened database successfully");
+		      System.out.println("Open'ed database successfully");
 		      perp=c.prepareStatement("CREATE TABLE if not exists history(url text primary key ,Time text,Date text );");
 		      perp.executeUpdate();
 		      System.out.println("table created");

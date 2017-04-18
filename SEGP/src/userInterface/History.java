@@ -182,7 +182,7 @@ public class History implements Initializable{
 		    //all View in tab
 		    
 		    tabPane=MainController.tabPane;
-			addTab= new Tab("pk " + (tabPane.getTabs().size() + 1));
+			addTab= new Tab("pk " + (tabPane.getTabs().size() - 1));
 			addTab.setContent(borderPaneHistory);	
 			tabPane.getTabs().add(addTab);
 		    tabPane.getSelectionModel().select(addTab);

@@ -23,7 +23,7 @@ public class BookMarksDataBase
 		try
 		{
 			int urlId=0;
-			String query = "select url_id from history where url = ? and user_id = ?";
+			String query = "select url from history where url = ? and user_id = ?";
 			perp=c.prepareStatement(query);
 			perp.setString(1,url);
 			perp.setInt(2,1);

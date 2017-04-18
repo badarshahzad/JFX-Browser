@@ -3,6 +3,7 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import com.jfoenix.controls.JFXTreeTableView?>
+<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.TreeView?>
 <?import javafx.scene.image.Image?>
@@ -11,7 +12,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane fx:id="borderPaneHistory" prefHeight="658.0" prefWidth="946.0" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="userInterface.History">
+<BorderPane fx:id="borderPaneHistory" prefHeight="658.0" prefWidth="946.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="userInterface.History">
    <left>
       <TreeView fx:id="treeView" prefHeight="658.0" prefWidth="198.0" BorderPane.alignment="CENTER" />
    </left>
@@ -38,10 +39,14 @@
                   <Insets />
                </VBox.margin>
             </HBox>
-            <JFXButton fx:id="btn" onMouseClicked="#deleteHistory" prefHeight="33.0" prefWidth="93.0" stylesheets="@buttonStyles.css" text="Delete">
+            <JFXButton fx:id="btn" onMouseClicked="#deleteHistory" prefHeight="33.0" prefWidth="93.0" text="Delete">
                <VBox.margin>
                   <Insets left="38.0" top="65.0" />
                </VBox.margin>
+               <stylesheets>
+                  <URL value="@buttonStyles.css" />
+                  <URL value="@../../css/buttonStyles.css" />
+               </stylesheets>
             </JFXButton>
          </children>
          <BorderPane.margin>

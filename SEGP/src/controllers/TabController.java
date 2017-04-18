@@ -43,6 +43,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebHistory;
 import javafx.scene.web.WebView;
+import javafx.stage.Window;
 import passwordVault.DetectForm;
 import passwordVault.PopUp;
 import userInterface.Hamburger;
@@ -143,25 +144,24 @@ public class TabController implements Initializable
 					System.out.println("Finish!");
 					org.w3c.dom.Document doc = webEngine.getDocument();
 					detectForm.detect(doc);
-					URL url = getClass().getResource("/home.png");
-					File image = new File(url.getPath());
-					System.out.println(image.toURI().toString());
-					String div = "var body =  document.getElementsByTagName('body')[0];"
-							+ "var newElement = document.createElement('div');"
-							+ "var center = document.createElement('center');"
-							+ "for(var i=0 ;i<6 ;i++){"
-							+ "var image = document.createElement('img');"
-							+ "image.src =\""+image.toURI()+"\" ;"
-							+ "image.style.width = '100px';"
-							+ "image.style.height = '100px';"
-							+ "image.style.padding = '0px 10px';"
-							+ "newElement.appendChild(image);"
-							+ "}"
-							+ "newElement.setAttribute('id', 'custom_div');"
-							+ "center.appendChild(newElement);"
-							+"body.appendChild(center);";
-					webEngine.executeScript(div);
-				}
+//					String imgs = "";
+//					 File f = new File(getClass().getResource("/screenshots").getFile());
+//				        for (File fs : f.listFiles()) {
+//				            imgs += "<img src=\""+fs.toURI()+"\" width='100' height = '100' />";
+//				        }
+//				        System.out.println("images:"+imgs);
+//				        System.out.println("Hello \"" + imgs + "\"");
+////				        webEngine.loadContent("<div>"+imgs+"</div>");
+//					String div = "var body =  document.getElementsByTagName('body')[0];"
+//							+ "var newElement = document.createElement('div');"
+//							+ "var center = document.createElement('center');"
+//							+ "newElement.append = "
+//							+ "newElement.setAttribute('id', 'custom_div');"
+//							+ "center.appendChild(newElement);"
+//							+"body.appendChild(center);";
+////					webEngine.executeScript("document.getElementsByTagName('body')[0].innerHTML =\"" + imgs + "\"");
+//					webEngine.executeScript("if (!window.indexedDB) window.alert(\"Your browser doesn't support a stable version of IndexedDB.\")");			
+					}
 				
 			}
 		});

@@ -6,7 +6,6 @@ import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXDrawersStack;
 
 import bookmarks.BookMarks;
-import controllers.HistoryController;
 import controllers.SettingController;
 
 import htmlToPdf.HTMLtoPDF;
@@ -14,6 +13,8 @@ import htmlToPdf.HTMLtoPDF;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
@@ -52,14 +53,21 @@ public class MenuView {
 		history.setOnAction((ActionEvent) -> {
 
 			System.out.println("History");
-
-			// tab name and id for accessing
-			tab.setText("History");
+			try {
+				FXMLLoader.load(getClass().getResource("/ui/historyLayout.fxml"));
+				} 
+			catch (Exception e1) 
+				{
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+				}
+			/*/ tab name and id for accessing
+			/tab.setText("History");
 			tab.setId("history");
 
-			HistoryController ob = new HistoryController();
+			History ob = new History();
 			
-			tab = ob.getHistoryView(tab, settingBorderPane);
+//			tab = ob.(tab, settingBorderPane);
 			System.out.println("Size before history added"+tabs.size());
 			tabs.add(tabs.size() - 1, tab);
 
@@ -70,7 +78,7 @@ public class MenuView {
 				selectedTab.select(tabs.size() - 2);
 				return;
 			}
-
+*/
 		});
 
 		// -------------------------------------------------------Downloads
