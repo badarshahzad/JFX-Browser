@@ -198,17 +198,17 @@ public class SettingController extends Application implements Initializable {
 	}
 
 	public Tab getSettingView(Tab settingTab, BorderPane borderpane) {
-
+/*
 		JFXButton setting = new JFXButton("Setting");
 		setting.setMinSize(100, 50);
 		JFXButton history = new JFXButton("History");
 		history.setMinSize(100, 50);
 
-		/*
+		
 		 * Add two buttons in gridpane that will be put in
 		 * drawer->drawerstack(container) -> left side of border to come ount
 		 * whenever user click the setting button
-		 */
+		 
 		VBox vboxLeftDarwer = new VBox();
 		vboxLeftDarwer.setSpacing(10);
 		vboxLeftDarwer.getChildren().addAll(setting, history);
@@ -227,7 +227,7 @@ public class SettingController extends Application implements Initializable {
 		leftDrawer.setResizableOnDrag(true);
 
 		// Setting the left side of Borderpane drawerstack container
-		borderpane.setLeft(drawersStack);
+		borderpane.setLeft(drawersStack);*/
 		System.out.println("Setting fxml is ready ");
 		try {
 			// ScrollPane scrollPane = new ScrollPane();
@@ -240,7 +240,7 @@ public class SettingController extends Application implements Initializable {
 		}
 
 		// borderpane.setCenter(root);
-		drawersStack.toggle(leftDrawer);
+		//drawersStack.toggle(leftDrawer);
 		settingTab.setContent(borderpane);
 
 		return settingTab;

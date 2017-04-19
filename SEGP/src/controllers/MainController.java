@@ -127,21 +127,6 @@ public class MainController implements Initializable {
 
 					// ---------------New tab is created --------------------
 					creatNewTab(tabpane, addNewTab);
-					/*
-					 * Tab tab = new Tab("New tab"); try {
-					 * tab.setContent(FXMLLoader.load(getClass().getResource(
-					 * "/ui/Tab.fxml"))); } catch (IOException e) {
-					 * System.out.println(
-					 * "Exception: New tab click but not working in TabPaneView Class"
-					 * ); e.printStackTrace(); }
-					 * 
-					 * tab.getStyleClass().addAll("tab-pane"); final
-					 * ObservableList<Tab> tabs = tabpane.getTabs();
-					 * tabs.add(tabs.size() - 1, tab);
-					 * 
-					 * SingleSelectionModel<Tab> selectedTab =
-					 * tabpane.getSelectionModel(); selectedTab.select(tab);
-					 */
 				}
 			}
 		});

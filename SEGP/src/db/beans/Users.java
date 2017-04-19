@@ -6,9 +6,15 @@ public class Users {
 	 * Javebean class used for User database class update,search and delte.
 	 * For more information what is Javabean please search on google.
 	 */
-	
+	private String user_id;
 	private String pin;
 	private String firstName;
+	public String getUser_id() {
+		return user_id;
+	}
+	public void setUser_id(String user_id) {
+		this.user_id = user_id;
+	}
 	private String email;
 	private String password;
 	

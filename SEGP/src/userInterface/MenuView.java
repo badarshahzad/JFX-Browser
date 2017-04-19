@@ -9,8 +9,6 @@ import controllers.DownloadController;
 import controllers.HistoryController;
 import controllers.SettingController;
 
-import htmlToPdf.HTMLtoPDF;
-
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -35,8 +33,7 @@ public class MenuView {
 	//Hamburger object = new Hamburger();
 
 	public void setMenuViewListener( JFXButton history, JFXButton downloads, JFXButton bookmarks,
-			JFXButton saveAsPdf, JFXButton setting, TabPane tabPane,
-			JFXDrawersStack drawersStack, JFXDrawer rightDrawer) {
+			JFXButton setting, TabPane tabPane, JFXDrawersStack drawersStack, JFXDrawer rightDrawer) {
 
 		
 		this.drawersStack = drawersStack;
@@ -129,28 +126,6 @@ public class MenuView {
 				tab.setId("bookmarks");
 
 			}
-		});
-
-		// -------------------------------------------------------SaveAsPdf
-		// listener-----------------------------------------------------
-		saveAsPdf.addEventHandler(MouseEvent.MOUSE_CLICKED, (ActionEvent) -> {
-
-			HTMLtoPDF object = new HTMLtoPDF();
-			object.convertHtmlToPdf();
-			// When the menu click Hamburger and DrawerStack will hide
-			onClickHideHamburger();
-			Thread th = new Thread(new Runnable() {
-				public void run() {
-					
-
-				}
-			});
-			th.start();
-
-			System.out.println("Save As PDF");
-			// tab.setText("Save As Pdf");
-			// tab.setId("saveAsPdf");
-
 		});
 
 		// -------------------------------------------------------Setting

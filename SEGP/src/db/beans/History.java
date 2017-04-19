@@ -5,7 +5,7 @@ public class History {
 	private String title;
 	private String domain_name;
 	private String time;
-	private String datel; 
+	private String date; 
 	private String user_id;
 	
 	public String getTitle() {
@@ -26,11 +26,11 @@ public class History {
 	public void setTime(String time) {
 		this.time = time;
 	}
-	public String getDatel() {
-		return datel;
+	public String getDate() {
+		return date;
 	}
-	public void setDatel(String datel) {
-		this.datel = datel;
+	public void setDatel(String date) {
+		this.date = date;
 	}
 	public String getUser_id() {
 		return user_id;

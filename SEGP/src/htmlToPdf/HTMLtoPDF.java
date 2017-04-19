@@ -8,11 +8,20 @@ import java.io.FileOutputStream;
 import org.controlsfx.control.Notifications;
 
 import controllers.TabController;
+import javafx.application.Platform;
 import javafx.stage.FileChooser;
 import javafx.util.Duration;
 import main.MainClass;
 
-public class HTMLtoPDF {
+public class HTMLtoPDF extends Thread{
+	public HTMLtoPDF(){
+		Platform.runLater(new  Runnable() {
+			public void run() {
+				convertHtmlToPdf();
+			}
+		});
+		
+	}
 
 	public void convertHtmlToPdf() {
 		try {
@@ -39,6 +48,7 @@ public class HTMLtoPDF {
 			fileStream.close();
 			}
 			//}else{
+			
 			Notifications.create()
 						.title("File Downloaded")
 						.text("Your HTML to PDF file Downloaded \n Path: "+file)

@@ -14,6 +14,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 
+import database.CRUD;
 import database.SqliteConnection;
 import javafx.application.Application;
 import javafx.fxml.FXML;
@@ -60,20 +61,11 @@ public class LoginController extends Application implements Initializable {
 		return loginPane;
 	}
 
-	// SqliteConnection class obj
-	Connection connection;
-
+	
 	// As in Sqlite section we are returing null so to handle null value
 	// below we just handle that with system.exit to stop the system.
 
-	public LoginController() {
-		connection = SqliteConnection.Connector();
-		if (connection == null) {
-			System.exit(1);
-		}
-	}
-
-/*	public boolean isDbConnecited() {
+	/*	public boolean isDbConnecited() {
 		try {
 			return !connection.isClosed();
 		} catch (SQLException e) {
@@ -82,41 +74,6 @@ public class LoginController extends Application implements Initializable {
 		}
 		return false;
 	}*/
-
-	public boolean isLogin(String username, String password) {
-		PreparedStatement prepareStatment = null;
-		ResultSet resultSet = null;
-		String query = "Select * from login where username = ? and password = ?";
-		try {
-			prepareStatment = connection.prepareStatement(query);
-			prepareStatment.setString(1, username);
-			prepareStatment.setString(2, password);
-			
-			resultSet = prepareStatment.executeQuery();
-			if (resultSet.next()) {
-				String a = resultSet.getString(1);
-				String b = resultSet.getString(2);
-				System.out.println(a + "\n" + b);
-
-				return true;
-			} else {
-				return false;
-			}
-
-		} catch (Exception e) {
-			System.out.println("Exception in Login:" + e);
-			return false;
-			// TODO: handle exception
-		} finally {
-			try {
-				prepareStatment.close();
-				resultSet.close();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-	}
 
 	@Override
 	public void initialize(URL url, ResourceBundle res) {
@@ -135,7 +92,7 @@ public class LoginController extends Application implements Initializable {
 				noti.showError();
 				
 			}else{
-				if(isLogin(getUser().getText(), getPassword().getText())){
+				if(CRUD.isLogin(getUser().getText(), getPassword().getText())){
 					Notifications noti = Notifications.create()
 						.title("Successfull")
 						.text("Congratulation! You successfully login. ")

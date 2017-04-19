@@ -115,19 +115,19 @@ public class DownloadController  extends Application implements Initializable{
 		
 		// TODO Auto-generated method stub
 		table.setOpacity(.8);
-		TableColumn col1 = new TableColumn("File Name");
-		col1.setMinWidth(150);
+		TableColumn fileName = new TableColumn("File Name");
+		fileName.setMinWidth(150);
 		
 		//col1.setStyle("-fx-background-color: #2959cb");
 		
 		
-		TableColumn col2 = new TableColumn("Status");
-		col2.setMinWidth(150);
+		TableColumn fileStatus = new TableColumn("Status");
+		fileStatus.setMinWidth(150);
 		//col2.setStyle("-fx-background-color:#2959ea");
-		TableColumn col3 = new TableColumn("Url");
-		col3.setMinWidth(800);
+		TableColumn  url = new TableColumn("Url");
+		url.setMinWidth(800);
 		//col3.setStyle("-fx-background-color:#2959ea");
-		table.getColumns().addAll(col1,col2,col3);
+		table.getColumns().addAll(fileName,fileStatus,url);
 				
 	}
 	public Tab getDownloadView(Tab downloadTab, BorderPane borderPaneDownload) {

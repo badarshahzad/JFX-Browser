@@ -9,6 +9,7 @@ import com.jfoenix.controls.JFXProgressBar;
 import com.jfoenix.controls.JFXTextField;
 import database.HistoryManagment;
 
+
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -20,6 +21,7 @@ import org.controlsfx.control.PopOver;
 import org.controlsfx.control.action.Action;
 import org.controlsfx.control.textfield.TextFields;
 
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -49,6 +51,7 @@ import javafx.util.Duration;
 import main.MainClass;
 import netscape.javascript.JSObject;
 import userInterface.Hamburger;
+import userInterface.MenuView;
 import javafx.scene.control.TabPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -88,6 +91,7 @@ public class TabController implements Initializable {
 
 	// Classes objects to get methods or set methods access
 
+	private MenuView menviewObject = new MenuView();
 	private Hamburger ham = new Hamburger();
 	public VBox drawerPane = new VBox();
 
@@ -154,6 +158,27 @@ public class TabController implements Initializable {
 			pageRender(searchField.getText());
 
 		});
+		
+		htmlAsPdf.addEventHandler(MouseEvent.MOUSE_CLICKED, (e)->{
+			
+			System.out.println("Ht");
+			
+			// When the menu click Hamburger and DrawerStack will hide
+			
+			//---- if htmlPDf button click if you wanna hide hamburger bar then call below onClickHideHamburger()
+			
+			/*Platform.runLater(new  Runnable() {
+				public void run() {
+				//	menviewObject.onClickHideHamburger();
+				
+				}
+			});*/
+			System.out.println("Save As PDF");
+			// tab.setText("Save As Pdf");
+			// tab.setId("saveAsPdf");
+
+		});
+		
 
 		// Search Field Listener
 

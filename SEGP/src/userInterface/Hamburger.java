@@ -23,7 +23,7 @@ public class Hamburger {
 	JFXButton history = new JFXButton();
 	JFXButton downloads = new JFXButton();
 	JFXButton bookmarks = new JFXButton();
-	JFXButton saveAsPdf = new JFXButton();
+	//JFXButton saveAsPdf = new JFXButton();
 	JFXButton setting = new JFXButton();
 	
 	public  JFXHamburger getHamburger(JFXHamburger hamburger, BorderPane borderpane, TabPane settingTabPane) {
@@ -40,9 +40,9 @@ public class Hamburger {
 		bookmarks.setGraphic(new ImageView(new Image("/bookmarks.png")));
 		bookmarks.setTooltip(new Tooltip("Bookmarks"));
 		
-		saveAsPdf.setMinSize(48, 48);
-		saveAsPdf.setGraphic(new ImageView(new Image("/pdf.png")));
-		saveAsPdf.setTooltip(new Tooltip("Save As PDF"));
+		//saveAsPdf.setMinSize(48, 48);
+		//saveAsPdf.setGraphic(new ImageView(new Image("/pdf.png")));
+		//saveAsPdf.setTooltip(new Tooltip("Save As PDF"));
 	
 		setting.setMinSize(48, 48);
 		setting.setGraphic(new ImageView(new Image("/setting.png")));
@@ -56,7 +56,7 @@ public class Hamburger {
 		
 	
 		VBox vbox = new VBox();
-		vbox.getChildren().addAll(history,downloads,bookmarks,saveAsPdf,setting);
+		vbox.getChildren().addAll(history,downloads,bookmarks,setting);
 		vbox.setSpacing(25);
 		vbox.setId("righDrawerVbox");
 		
@@ -89,7 +89,7 @@ public class Hamburger {
 		 * is clicked then this menView method send action event to MenuView
 		 * Class method menuView.
 		 */
-		menuView.setMenuViewListener(history, downloads, bookmarks, saveAsPdf, setting, settingTabPane,
+		menuView.setMenuViewListener(history, downloads, bookmarks, setting, settingTabPane,
 				 drawersStack, rightDrawer);
 		// setting.getStyleClass().addAll("animated-option-button","animated-option-sub-button2");
 		setHistoryBtn(history);

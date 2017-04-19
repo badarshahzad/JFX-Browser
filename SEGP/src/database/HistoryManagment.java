@@ -51,7 +51,7 @@ public class HistoryManagment {
 
 	}
 	// ---------------------------------Full HISTORY
-	// Show--------------------------------------------------------------------------//
+	// Show-----------------------------------------//
 
 	public static ResultSet showHistory() {
 		ResultSet rs = null;

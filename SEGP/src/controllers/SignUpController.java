@@ -14,6 +14,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 
+import database.CRUD;
 import database.SqliteConnection;
 import javafx.application.Application;
 import javafx.fxml.FXML;
@@ -28,8 +29,6 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 public class SignUpController  extends Application implements Initializable {
-
-	
 
     @FXML
     private Pane signUpPane;
@@ -52,45 +51,7 @@ public class SignUpController  extends Application implements Initializable {
     @FXML
     private JFXButton cancel;
 
-    Connection connection;
-    public SignUpController() {
-		// TODO Auto-generated constructor stub
-    	connection = SqliteConnection.Connector();
-    	if(connection==null)
-    		System.exit(1);
-	}
-    
-    /*
-     * For the sake of test and devloping the pin will be String later according to team decesion this
-     * will be change
-     */
-	public boolean insertNewAccount(String firstName, String username, String password,String pin){
-		PreparedStatement prepareStatment = null;
-		String query = "INSERT INTO login(username,password,name,pin) VALUES (?,?,?,?)";
-		try {
-			prepareStatment = connection.prepareStatement(query);
-			prepareStatment.setString(1, username);
-			prepareStatment.setString(2, password);
-			prepareStatment.setString(3, firstName);
-			prepareStatment.setString(4, pin);
-			prepareStatment.executeUpdate();
-
-			return true;
-		}catch (Exception e) {
-			System.out.println("Exception in Login:" + e);
-			// TODO: handle exception
-		} finally {
-			try {
-				//connection.close();
-				prepareStatment.close();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		return false;
-	}
-
+   
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
@@ -114,7 +75,7 @@ public class SignUpController  extends Application implements Initializable {
 			noti.showError();
 
 		}else{
-			if(insertNewAccount(getFirstname().getText(),getEmail().getText(), getPassword().getText(),getPin().getText())){
+			if(CRUD.insertNewAccount(getFirstname().getText(),getEmail().getText(), getPassword().getText(),getPin().getText())){
 			Notifications noti= Notifications.create()
     				.title("Successfull")
     				.text("Congratulation! You successfully Create an Account.")
@@ -130,7 +91,7 @@ public class SignUpController  extends Application implements Initializable {
 		cancel.addEventHandler(MouseEvent.MOUSE_CLICKED, (e5)->{
 			//To close the login pane
 			controllers.SettingController.getLoginSignInStage().close();
-			System.exit(0);
+			//System.exit(0);
 			
 		});
 		

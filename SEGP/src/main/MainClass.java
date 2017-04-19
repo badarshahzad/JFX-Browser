@@ -1,16 +1,12 @@
 package main;
 
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
+
 import java.util.Properties;
 
 import org.controlsfx.control.Notifications;
 
 import controllers.MainController;
-import controllers.TabController;
 import javafx.application.Application;
-import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -34,7 +30,7 @@ public class MainClass extends Application {
 		Scene scene = new Scene(root);
 
 		scene.setOnKeyPressed(event -> {
-
+ 
 			if (event.getCode() == KeyCode.P && event.isControlDown()) {
 				Notifications.create().title("Pin").text("Please type your pin!").hideAfter(Duration.seconds(5))
 						.showConfirm();
@@ -69,13 +65,13 @@ public class MainClass extends Application {
 	 */
 	public static void main(String[] args) {
 		// Set Proxy for Http
-		Properties systemProperties = System.getProperties();
+		/* Properties systemProperties = System.getProperties();
 		systemProperties.setProperty("http.proxyHost", "172.16.0.2");
 		systemProperties.setProperty("http.proxyPort", "8080");
 
 		// Set Proxy for Https
 		systemProperties.setProperty("https.proxyHost", "172.16.0.2");
-		systemProperties.setProperty("https.proxyPort", "8080");
+		systemProperties.setProperty("https.proxyPort", "8080");*/
 		launch(args);
 	}
 
