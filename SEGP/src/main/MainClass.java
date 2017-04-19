@@ -69,13 +69,13 @@ public class MainClass extends Application {
 	 */
 	public static void main(String[] args) {
 		// Set Proxy for Http
-		Properties systemProperties = System.getProperties();
-		systemProperties.setProperty("http.proxyHost", "172.16.0.2");
-		systemProperties.setProperty("http.proxyPort", "8080");
-
-		// Set Proxy for Https
-		systemProperties.setProperty("https.proxyHost", "172.16.0.2");
-		systemProperties.setProperty("https.proxyPort", "8080");
+//		Properties systemProperties = System.getProperties();
+//		systemProperties.setProperty("http.proxyHost", "172.16.0.2");
+//		systemProperties.setProperty("http.proxyPort", "8080");
+//
+//		// Set Proxy for Https
+//		systemProperties.setProperty("https.proxyHost", "172.16.0.2");
+//		systemProperties.setProperty("https.proxyPort", "8080");
 		launch(args);
 	}
 
