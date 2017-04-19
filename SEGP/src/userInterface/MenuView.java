@@ -10,7 +10,7 @@ import controllers.HistoryController;
 import controllers.SettingController;
 
 import htmlToPdf.HTMLtoPDF;
-
+import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -19,6 +19,8 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.FileChooser;
+import main.MainClass;
 
 public class MenuView {
 
@@ -135,21 +137,15 @@ public class MenuView {
 		// listener-----------------------------------------------------
 		saveAsPdf.addEventHandler(MouseEvent.MOUSE_CLICKED, (ActionEvent) -> {
 
-			HTMLtoPDF object = new HTMLtoPDF();
-			object.convertHtmlToPdf();
-			// When the menu click Hamburger and DrawerStack will hide
+			FileChooser fileChooser = new FileChooser();
+			FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("PDF File (*.pdf)", "*.pdf");
+			fileChooser.getExtensionFilters().add(extFilter);
+			 
+			HTMLtoPDF object = new HTMLtoPDF(fileChooser.showSaveDialog(MainClass.getStage()));
+			object.setDaemon(true);
+			object.start();
 			onClickHideHamburger();
-			Thread th = new Thread(new Runnable() {
-				public void run() {
-					
-
-				}
-			});
-			th.start();
-
 			System.out.println("Save As PDF");
-			// tab.setText("Save As Pdf");
-			// tab.setId("saveAsPdf");
 
 		});
 
