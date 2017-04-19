@@ -331,7 +331,7 @@ public class TabController implements Initializable
 		
 		
 		download.addEventHandler(MouseEvent.MOUSE_CLICKED, (e)->{
-			System.out.println("download click");
+			
 		});
 
 	}// end intializer method
