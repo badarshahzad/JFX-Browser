@@ -19,6 +19,7 @@ import java.nio.charset.MalformedInputException;
 import java.nio.file.Paths;
 
 import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLHandshakeException;
 
 import org.controlsfx.control.Notifications;
 import org.omg.PortableInterceptor.RequestInfo;
@@ -148,7 +149,10 @@ public class DownloadThread extends Thread{
 		}catch(MalformedURLException e){
 			System.err.println("invalid url.");
 
-		}catch(UnknownHostException e){
+		}catch(SSLHandshakeException e){
+			System.err.println("Error while SSL handshake.");
+		}
+		catch(UnknownHostException e){
 			System.err.println("Error while downloading : Unknown Host Exception.");
 		}
 		catch(IOException e){

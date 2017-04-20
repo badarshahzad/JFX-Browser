@@ -1,5 +1,7 @@
 package passwordVault;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Optional;
 
 import org.controlsfx.control.PopOver;
@@ -20,6 +22,7 @@ import com.jfoenix.controls.JFXDialog.DialogTransition;
 
 import controllers.MainController;
 import controllers.TabController;
+import database.UserAccounts;
 
 import com.jfoenix.controls.JFXDialogLayout;
 
@@ -34,6 +37,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.scene.web.WebEngine;
 
 public class DetectForm {
 
@@ -77,22 +81,26 @@ public class DetectForm {
 				System.out.println("action listener from DOM.");
 				String user = username.getValue();
 				String pass = password.getValue();
-				Alert alert = new Alert(AlertType.CONFIRMATION);
-				//				alert.setX(50);
-				//				alert.setY(50);
-				alert.setTitle("Confirmation Dialog");
-				alert.setHeaderText("Confirmation");
-				alert.setContentText("Would you like to save password for this Account ?");
-				Optional<ButtonType> result = alert.showAndWait();
-				if (result.get() == ButtonType.OK){
-					// ... user chose OK
-				} else {
-					// ... user chose CANCEL or closed the dialog
+				if(!(user.isEmpty()&&pass.isEmpty())){
+					Alert alert = new Alert(AlertType.CONFIRMATION);
+					//				alert.setX(50);
+					alert.setTitle("Confirmation Dialog");
+					alert.setHeaderText("Confirmation");
+					alert.setContentText("Would you like to save password for this Account ?");
+					Optional<ButtonType> result = alert.showAndWait();
+					if (result.get() == ButtonType.OK){
+						try {
+							UserAccounts.insertAccount(new URL(TabController.getWebEngine().getLocation()).getHost(), user, pass, 1);
+						} catch (MalformedURLException e) {
+							System.err.println("Url exception in detect form.");
+							e.printStackTrace();
+						}
+					} else {
+						// ... user chose CANCEL or closed the dialog
+					}
+
 				}
 				System.err.println("want to save username:  "+user+" password: "+"  "+pass);
-
-
-
 			}
 		};
 
@@ -105,10 +113,11 @@ public class DetectForm {
 						NamedNodeMap attr = nodes.item(i).getAttributes();
 						for (int j=0 ; j<attr.getLength();j++){
 							Attr atribute = (Attr)attr.item(j);
+							if(atribute.getValue().equals("text")){
+								username = (HTMLInputElement) nodes.item(i);
+							}
 							if(atribute.getValue().equals("password")){
-								//							System.out.println("Password detected");
 								password = (HTMLInputElement) nodes.item(i);
-								username = (HTMLInputElement) nodes.item(i-1);
 								isForm=true;
 							}else if(atribute.getValue().equals("submit")){
 								System.out.println("DETECTION");
@@ -143,5 +152,29 @@ public class DetectForm {
 
 
 	}
+	public void insert(Document doc){
+		if (doc!=null && doc.getElementsByTagName("form").getLength() > 0) {
+			for(int k=0;k<doc.getElementsByTagName("form").getLength();k++){
+				HTMLFormElement form = (HTMLFormElement) doc.getElementsByTagName("form").item(k);
+				NodeList nodes = form.getElementsByTagName("input");
+				for (int i = 0; i < nodes.getLength(); i++) {
+					if(nodes.item(i).hasAttributes()){
+						NamedNodeMap attr = nodes.item(i).getAttributes();
+						for (int j=0 ; j<attr.getLength();j++){
+							Attr atribute = (Attr)attr.item(j);
+							if(atribute.getValue().equals("text")){
+								nodes.item(i).setNodeValue("username");;
+							}
+							if(atribute.getValue().equals("password")){
+								nodes.item(i).setNodeValue("password");;
+							}
+						}
+					}
 
+				}
+			}
+
+		}
+
+	}
 }

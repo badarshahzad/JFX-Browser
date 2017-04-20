@@ -14,8 +14,6 @@ public class BookMarksDataBase
 {
 	private static Connection c = SqliteConnection.Connector();
 	private static PreparedStatement perp=null;
-	private static java.util.Date date = new java.util.Date();
-	private static SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
 	public static void createBookMarksDataBase(){
 		  try {
 			Class.forName("org.sqlite.JDBC");
