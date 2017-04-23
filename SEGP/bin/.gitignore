@@ -1,1 +1,7 @@
 /controllers/
+/userInterface/
+/database/
+/downloader/
+/main/
+/ui/
+/htmlToPdf/
