@@ -13,7 +13,7 @@ import com.jfoenix.controls.JFXTreeTableColumn;
 import bookmarks.URLdetails;
 import database.DownloadDatabase;
 import database.SqliteConnection;
-import downloader.download;
+import downloader.*;
 import javafx.application.Application;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -55,7 +55,8 @@ public class DownloadController  extends Application implements Initializable{
 
     @SuppressWarnings("rawtypes")
 	@FXML
-    private TableView<download> table;
+	private TableView<download> table;
+    
     private ObservableList<download>  list = FXCollections.observableArrayList();
     Connection connection;
 	public DownloadController(){
@@ -118,6 +119,3 @@ public class DownloadController  extends Application implements Initializable{
 	
 		
 	}
-	
-
-

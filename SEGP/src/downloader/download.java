@@ -31,3 +31,4 @@ public class download{
 		this.fileStatus = new SimpleStringProperty(fileStatus);
 	}
 }
+
