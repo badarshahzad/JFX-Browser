@@ -48,7 +48,7 @@ public class MenuView {
 		// BorderPane settingTabBPane = new BorderPane();
 		// tab.setContent(settingTabBPane);
 		try {
-		//	historyTab.setText("History");
+			//historyTab.setText("History");
 			//historyTab.setContent(FXMLLoader.load(getClass().getResource("/ui/History.fxml")));
 
 			downloadsTab.setText("Downloads");
