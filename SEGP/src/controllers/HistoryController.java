@@ -67,8 +67,7 @@ public class HistoryController implements Initializable {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
-	public Tab getHistoryView(Tab historyTab, BorderPane borderPaneHistory) {
+	/*public Tab getHistoryView(Tab historyTab, BorderPane borderPaneHistory) {
 
 		treeView.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEventHandle);
 
@@ -89,7 +88,7 @@ public class HistoryController implements Initializable {
 		historyTab.setContent(borderPaneHistory);
 
 		return historyTab;
-	}
+	}*/
 
 	@SuppressWarnings("unchecked")
 	@Override

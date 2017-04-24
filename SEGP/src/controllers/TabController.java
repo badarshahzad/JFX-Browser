@@ -140,11 +140,14 @@ public class TabController implements Initializable {
 					System.out.println("Finish!");
 					if (!webEngine.getTitle().equals(null)) {
 						System.out.println("Title: " + webEngine.getTitle());
+						
+						
 					}
 				}
 
 			}
 		});
+		
 
 		progressbar.progressProperty().bind(worker.progressProperty());
 
@@ -288,7 +291,15 @@ public class TabController implements Initializable {
 		 */
 
 	}// end intializer method
-
+	
+	static String titleOfPage;
+	public void setTitle(String title){
+		titleOfPage = title;
+		
+	}
+	public static String getTitle(){
+		return titleOfPage;
+	}
 	// mehtod to rendere page
 	public void pageRender(String url) {
 		webEngine.getLoadWorker().stateProperty().addListener(new ChangeListener<State>() {
@@ -303,6 +314,7 @@ public class TabController implements Initializable {
 					searchField.setText(webEngine.getLocation());
 					if (!(webEngine.getLocation().equals("about:blank"))) {
 						HistoryManagment.insertUrl(webEngine.getLocation());
+						setTitle(webEngine.getTitle());
 					}
 
 				}

@@ -55,6 +55,8 @@ public class MainController implements Initializable {
 		try {
 			// -----here below adding page title of tab
 			firstTab.setContent(FXMLLoader.load(getClass().getResource("/ui/Tab.fxml")));
+			
+			
 
 		} catch (IOException e2) {
 			// TODO Auto-generated catch block
@@ -63,6 +65,7 @@ public class MainController implements Initializable {
 		tabPane.getTabs().addAll(firstTab, addNewTab);
 		rootBorderPane.setCenter(tabPane);
 
+		//System.out.println("Setter title:"+TabController.getTitle());
 		getTabPaneView(tabPane, addNewTab);
 		tabPaneChangeLiten(tabPane);
 

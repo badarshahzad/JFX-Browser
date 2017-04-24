@@ -130,7 +130,7 @@ public class DownloadController  extends Application implements Initializable{
 		table.getColumns().addAll(fileName,fileStatus,url);
 				
 	}
-	public Tab getDownloadView(Tab downloadTab, BorderPane borderPaneDownload) {
+	/*public Tab getDownloadView(Tab downloadTab, BorderPane borderPaneDownload) {
 
 
 		try {
@@ -145,7 +145,7 @@ public class DownloadController  extends Application implements Initializable{
 
 		return downloadTab;
 	}
-	
+*/	
 	public static void main(String args[]){
 		launch(args);
 	}
