@@ -3,10 +3,6 @@ package downloader;
 import java.io.File;
 import java.util.Properties;
 
-import org.controlsfx.control.Notifications;
-
-import javafx.geometry.Pos;
-
 public class MainDownload {
 //	private  String title ;
 	/* sample URL

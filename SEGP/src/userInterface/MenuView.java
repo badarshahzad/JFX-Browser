@@ -14,15 +14,11 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.web.WebHistory;
-import javafx.scene.web.WebHistory.Entry;
-import main.Renderer;
 
 public class MenuView {
 
@@ -147,6 +143,7 @@ public class MenuView {
 			// When the menu click Hamburger and DrawerStack will hide
 			onClickHideHamburger();
 			Thread th = new Thread(new Runnable() {
+				@Override
 				public void run() {
 					
 

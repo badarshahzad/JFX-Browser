@@ -35,7 +35,8 @@ public final class PdfcrowdError extends RuntimeException
         statusCode = code;
     }
 
-    public String getMessage() {
+    @Override
+	public String getMessage() {
         if (statusCode != 0) {
             return new String(Integer.toString(statusCode) + " - " + super.getMessage());
         }

@@ -6,26 +6,19 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.net.FileNameMap;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.net.URLConnection;
 import java.net.UnknownHostException;
-import java.nio.charset.MalformedInputException;
 import java.nio.file.Paths;
 
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLHandshakeException;
 
-import org.controlsfx.control.Notifications;
-import org.omg.PortableInterceptor.RequestInfo;
-
 import database.DownloadDatabase;
-import javafx.geometry.Pos;
 
 public class DownloadThread extends Thread{
 
@@ -114,7 +107,7 @@ public class DownloadThread extends Thread{
 			connection.connect();
 			int requestinfo = connection.getResponseCode();
 			String  contentType = connection.getContentType();
-			if (requestinfo == connection.HTTP_OK && isDownloadable(contentType)) {
+			if (requestinfo == HttpURLConnection.HTTP_OK && isDownloadable(contentType)) {
 				new Notification();
 				System.out.println("Download started on link  "+url);
 				DownloadDatabase.insertDownload(url, title, "downloading", 1);

@@ -3,8 +3,6 @@ package controllers;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import javax.management.Notification;
-
 import org.controlsfx.control.Notifications;
 
 import com.jfoenix.controls.JFXButton;
@@ -12,15 +10,12 @@ import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 
 import javafx.application.Application;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ProgressBar;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;

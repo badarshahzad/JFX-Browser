@@ -4,11 +4,7 @@ import pdfcrowd.*;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.util.Properties;
-
-import controllers.MainController;
 import controllers.TabController;
-import javafx.scene.control.TabPane;
 import javafx.stage.FileChooser;
 import main.MainClass;
 

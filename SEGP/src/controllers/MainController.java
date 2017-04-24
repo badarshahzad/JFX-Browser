@@ -5,14 +5,6 @@
  */
 package controllers;
 
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXHamburger;
-import com.jfoenix.controls.JFXTextField;
-
-import database.HistoryManagment;
-
-import java.awt.Window;
-import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.util.EventListener;
@@ -21,29 +13,17 @@ import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
-import javafx.concurrent.Worker;
-import javafx.concurrent.Worker.State;
 import javafx.event.Event;
-import javafx.event.EventDispatcher;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.print.PrinterJob;
-import javafx.scene.control.ProgressBar;
 import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.control.Tab;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.web.WebEngine;
-import javafx.scene.web.WebHistory;
-import javafx.scene.web.WebView;
 import userInterface.Hamburger;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TabPane.TabClosingPolicy;
@@ -108,7 +88,7 @@ public class MainController implements Initializable {
 	
 	// ---set method for TabPane---
 	public void setTabPane(TabPane tabPane) {
-		this.tabPane = tabPane;
+		MainController.tabPane = tabPane;
 	}
 
 	// ---get method for TabPane---
