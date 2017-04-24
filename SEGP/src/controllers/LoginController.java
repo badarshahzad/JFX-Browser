@@ -2,9 +2,6 @@ package controllers;
 
 import java.net.URL;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import org.controlsfx.control.Notifications;
@@ -19,13 +16,21 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+
+import database.CRUD;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+
 import javafx.util.Duration;
 
 /**
  *
  * @author Segp-Group 3
  */
-public class LoginController implements Initializable {
+public class LoginController extends Application implements Initializable {
 
 	@FXML
 	private Pane loginPane;
@@ -67,7 +72,12 @@ public class LoginController implements Initializable {
 		}
 	}
 
-	public boolean isDbConnecited() {
+	
+	// As in Sqlite section we are returing null so to handle null value
+	// below we just handle that with system.exit to stop the system.
+
+	/*	public boolean isDbConnecited() {
+>>>>>>> master
 		try {
 			return !connection.isClosed();
 		} catch (SQLException e) {
@@ -75,6 +85,7 @@ public class LoginController implements Initializable {
 			e.printStackTrace();
 		}
 		return false;
+<<<<<<< HEAD
 	}
 
 	public boolean isLogin(String username, String password) {
@@ -111,6 +122,8 @@ public class LoginController implements Initializable {
 			}
 		}
 	}
+=======
+	}*/
 
 	@Override
 	public void initialize(URL url, ResourceBundle res) {
@@ -127,6 +140,23 @@ public class LoginController implements Initializable {
 						// .graphic(new ImageView(null))
 						.hideAfter(Duration.seconds(5)).position(Pos.TOP_RIGHT);
 				noti.showError();
+				
+			}else{
+				if(CRUD.isLogin(getUser().getText(), getPassword().getText())){
+					Notifications noti = Notifications.create()
+						.title("Successfull")
+						.text("Congratulation! You successfully login. ")
+						// .graphic(new ImageView(null))
+						.hideAfter(Duration.seconds(3)).position(Pos.TOP_RIGHT);
+				noti.showInformation();
+				}else{
+					Notifications noti = Notifications.create()
+							.title("Username and Password Incorrect!")
+							.text("Please give your valid username or password. ")
+							// .graphic(new ImageView(null))
+							.hideAfter(Duration.seconds(3)).position(Pos.TOP_RIGHT);
+					noti.showError();
+				}
 				
 			}
 		});
@@ -159,6 +189,20 @@ public class LoginController implements Initializable {
 
 	public void setLogin(JFXButton login) {
 		this.login = login;
+	}
+	
+	public static void main(String args[]){
+		launch(args);
+	}
+	@Override
+	public void start(Stage primaryStage) throws Exception {
+		//System.out.println("yes");
+		// TODO Auto-generated method stub
+		Parent root = FXMLLoader.load(getClass().getResource("/ui/Login.fxml"));
+		Scene scene = new Scene(root);
+		primaryStage.setScene(scene);
+		primaryStage.show();
+		
 	}
 
 }

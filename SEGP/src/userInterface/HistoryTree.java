@@ -6,6 +6,7 @@ public class HistoryTree
 {
 
 	// This method creates an ArrayList of TreeItems (Links)
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public static ArrayList<TreeItem> getStoreItems()
 	{
 		ArrayList<TreeItem> storeItems = new ArrayList<TreeItem>();

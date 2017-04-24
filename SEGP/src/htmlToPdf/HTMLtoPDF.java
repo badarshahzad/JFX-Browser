@@ -1,16 +1,29 @@
+
 package htmlToPdf;
 
 import pdfcrowd.*;
 
 import java.io.File;
 import java.io.FileOutputStream;
+
+import org.controlsfx.control.Notifications;
+
 import controllers.TabController;
+import javafx.application.Platform;
 import javafx.stage.FileChooser;
+import javafx.util.Duration;
 import main.MainClass;
 
-public class HTMLtoPDF {
+public class HTMLtoPDF extends Thread{
+	public HTMLtoPDF(){
+		Platform.runLater(new  Runnable() {
+			public void run() {
+				convertHtmlToPdf();
+			}
+		});
+		
+	}
 
-	@SuppressWarnings("deprecation")
 	public void convertHtmlToPdf() {
 		try {
 
@@ -21,10 +34,12 @@ public class HTMLtoPDF {
 			// Show save file dialog
 			//The stage for show dialouge is get from MainClass stage
 			File file = fileChooser.showSaveDialog(MainClass.getStage());
-			
-
+			System.out.println("File name I think:" + file);
+			if(file==null){
+			return;	
+			}else{
 			Client client = new Client("Hassan_Iqbal", "962ca71a838132f00947f2ec13984587");
-			if(file.isFile()){
+		//	if(file.isFile()){
 			FileOutputStream fileStream = new FileOutputStream(file);
 			
 			
@@ -32,11 +47,21 @@ public class HTMLtoPDF {
 			client.convertURI(currentUrl, fileStream);
 
 			fileStream.close();
-			}else{
-			System.out.println("File Download:check");
 			}
+			//}else{
+			
+			Notifications.create()
+						.title("File Downloaded")
+						.text("Your HTML to PDF file Downloaded \n Path: "+file)
+						.darkStyle()
+						.hideAfter(Duration
+								.seconds(10))
+						.showInformation();
+			System.out.println("File Download:check");
+			//}
 			//
 		} catch (Exception e) {
+			System.err.println("Exception as you didn't select any file : ");
 			e.printStackTrace();
 		}
 	}

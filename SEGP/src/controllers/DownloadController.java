@@ -12,16 +12,22 @@ import downloader.*;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+
+import java.sql.PreparedStatement;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+
+
 import javafx.stage.Stage;
 
 public class DownloadController  extends Application implements Initializable{
@@ -49,6 +55,7 @@ public class DownloadController  extends Application implements Initializable{
 	private TableView<download> table;
     
     private ObservableList<download>  list = FXCollections.observableArrayList();
+
     Connection connection;
 	public DownloadController(){
     	connection = SqliteConnection.Connector();
@@ -66,6 +73,32 @@ public class DownloadController  extends Application implements Initializable{
 		
 	}
 	
+	public ResultSet downloadHistory() {
+		
+		PreparedStatement prepareStatment = null;
+		ResultSet resultSet = null;
+		String query = "Select * from download";
+		try {
+			prepareStatment = connection.prepareStatement(query);
+			resultSet = prepareStatment.executeQuery();
+			
+			return resultSet;
+		} catch (Exception e) {
+			System.out.println("Exception in Login:" + e);
+			// TODO: handle exception
+		} finally {
+			try {
+				prepareStatment.close();
+				resultSet.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return resultSet;
+		
+	}
+
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 
@@ -94,6 +127,23 @@ public class DownloadController  extends Application implements Initializable{
 			table.setItems(list);
 	}
 		
+		
+	/*public Tab getDownloadView(Tab downloadTab, BorderPane borderPaneDownload) {
+
+
+		try {
+			borderPaneDownload.setCenter(FXMLLoader.load(getClass().getResource("/ui/Downloads.fxml")));
+		} catch (Exception e1) {
+			System.out.println("File is not find for setting downloads ! " + " \n " + e1);
+			e1.printStackTrace();
+		}
+		// settingTab.setContent(borderpane);
+
+		downloadTab.setContent(borderPaneDownload);
+
+		return downloadTab;
+	}
+*/	
 	public static void main(String args[]){
 		launch(args);
 	}
@@ -104,9 +154,7 @@ public class DownloadController  extends Application implements Initializable{
 		Scene scene = new Scene(root);
 		stage.setScene(scene);
 		stage.show();
-				
-		
+			
 	}
-	
-		
-	}
+
+}

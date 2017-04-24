@@ -23,6 +23,7 @@
 package pdfcrowd;
 
 
+@SuppressWarnings("serial")
 public final class PdfcrowdError extends RuntimeException
 {
     public int statusCode = 0;
