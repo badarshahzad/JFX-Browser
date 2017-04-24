@@ -1,18 +1,14 @@
 package userInterface;
 
 import java.io.IOException;
+
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXDrawersStack;
-
-import bookmarks.BookMarks;
-import controllers.SettingController;
-
-import htmlToPdf.HTMLtoPDF;
-
 import com.jfoenix.controls.JFXTabPane;
 
 import controllers.DownloadController;
+import controllers.SettingController;
 
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -45,7 +41,6 @@ public class MenuView {
 	private JFXDrawersStack drawersStack;
 	private JFXDrawer rightDrawer;
 	// Hamburger object = new Hamburger();
-	// Hamburger object = new Hamburger();
 
 	public void setMenuViewListener(JFXButton history, JFXButton downloads, JFXButton bookmarks, JFXButton setting,
 			TabPane tabPane, JFXDrawersStack drawersStack, JFXDrawer rightDrawer) {
@@ -53,8 +48,8 @@ public class MenuView {
 		// BorderPane settingTabBPane = new BorderPane();
 		// tab.setContent(settingTabBPane);
 		try {
-			historyTab.setText("History");
-			historyTab.setContent(FXMLLoader.load(getClass().getResource("/ui/History.fxml")));
+		//	historyTab.setText("History");
+			//historyTab.setContent(FXMLLoader.load(getClass().getResource("/ui/History.fxml")));
 
 			downloadsTab.setText("Downloads");
 			downloadsTab.setContent(FXMLLoader.load(getClass().getResource("/ui/Downloads.fxml")));
@@ -99,6 +94,14 @@ public class MenuView {
 
 			// When the menu click Hamburger and DrawerStack will hide
 			onClickHideHamburger();
+			historyTab.setText("History");
+			try {
+				historyTab.setContent(FXMLLoader.load(getClass().getResource("/ui/History.fxml")));
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+
 			tab.setText("History");
 			fxSelectedTab.select(fxTabs.get(0));
 
@@ -125,38 +128,38 @@ public class MenuView {
 			@Override
 			public void handle(ActionEvent event) {
 
-				onClickHideHamburger();
 				tabs.add(tabs.size() - 1, tab);
 				selectedTab.select(tab);
 
+				// When the menu click Hamburger and DrawerStack will hide
+				onClickHideHamburger();
+				tab.setText("Bookmarks");
 				fxSelectedTab.select(fxTabs.get(2));
+
 			}
+
 		});
 
 		// -------------------------------------------------------Setting
 		// listener-------------------------------------------------------
 		setting.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
 
+			tabs.add(tabs.size() - 1, tab);
+			selectedTab.select(tab);
+
 			// When the menu click Hamburger and DrawerStack will hide
 			onClickHideHamburger();
 
 			tab.setText("Setting");
-			tabs.add(tabs.size() - 1, tab);
-			selectedTab.select(tab);
 			fxSelectedTab.select(fxTabs.get(3));
-		
+			
 
-		
-		for(int a=0;a<tabs.size();a++){
-			if(tabs.get(a).getText().equals("Setting")){
-				System.out.println("Setting");
-			}
-		}
 		});
-
+	
 		tab.setContent(fxTabpane);
 		fxTabpane.getTabs().addAll(historyTab, downloadsTab, bookmarksTab, settingTab);
 		
+
 	}
 
 	public void onClickHideHamburger() {
@@ -166,5 +169,5 @@ public class MenuView {
 		// transition.play();
 		drawersStack.toggle(rightDrawer);
 	}
-}
 
+}
