@@ -203,11 +203,11 @@ public class TabController implements Initializable {
 				System.out.println("location of engine: "+newValue);
 				dwnlod.startDownload(newValue,webEngine.getTitle());
 
-				if (!webEngine.getTitle().equals(null)) {
-						System.out.println("Title: " + webEngine.getTitle());
+			//	if (!webEngine.getTitle().equals(null)) {
+				//		System.out.println("Title: " + webEngine.getTitle());
 						
 						
-					}
+					//}
 
 			}
 		});

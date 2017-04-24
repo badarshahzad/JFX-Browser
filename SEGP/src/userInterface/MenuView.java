@@ -60,7 +60,7 @@ public class MenuView {
 			downloadsTab.setContent(FXMLLoader.load(getClass().getResource("/ui/Downloads.fxml")));
 
 			bookmarksTab.setText("Bookmarks");
-			// bookmarkTab.setContent(FXMLLoader.load(getClass().getResource("/ui/bookmarks.fxml")));
+			bookmarksTab.setContent(FXMLLoader.load(getClass().getResource("/ui/bookmarks.fxml")));
 
 			settingTab.setText("Setting");
 			settingTab.setContent(FXMLLoader.load(getClass().getResource("/ui/Setting.fxml")));
@@ -125,6 +125,7 @@ public class MenuView {
 			@Override
 			public void handle(ActionEvent event) {
 
+				onClickHideHamburger();
 				tabs.add(tabs.size() - 1, tab);
 				selectedTab.select(tab);
 
