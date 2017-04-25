@@ -75,7 +75,8 @@ public class BookMarks {
 		table.getColumns().addAll(nameCol,locationCol,dateCol,timeCol);
 		table.setItems(list);
 	}
-	public Tab getBookmarkView(Tab bookmarkTab, BorderPane borderPaneBookmark) {
+	public Tab getBookmarkView(Tab bookmarkTab) {
+		BorderPane borderPaneBookmark = new BorderPane();
 		treeView.setMinWidth(150);
 		treeView.setMaxWidth(150);
 		borderPaneBookmark.setLeft(treeView);

@@ -7,6 +7,7 @@ import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXDrawersStack;
 import com.jfoenix.controls.JFXTabPane;
 
+import bookmarks.BookMarks;
 import controllers.DownloadController;
 import controllers.SettingController;
 
@@ -48,14 +49,17 @@ public class MenuView {
 		// BorderPane settingTabBPane = new BorderPane();
 		// tab.setContent(settingTabBPane);
 		try {
-			//historyTab.setText("History");
-			//historyTab.setContent(FXMLLoader.load(getClass().getResource("/ui/History.fxml")));
+			fxTabpane.setTabMinWidth(150);
+			fxTabpane.setTabMinHeight(50);
+			
+			historyTab.setText("History");
+			historyTab.setContent(FXMLLoader.load(getClass().getResource("/ui/History.fxml")));
 
 			downloadsTab.setText("Downloads");
 			downloadsTab.setContent(FXMLLoader.load(getClass().getResource("/ui/Downloads.fxml")));
 
 			bookmarksTab.setText("Bookmarks");
-			bookmarksTab.setContent(FXMLLoader.load(getClass().getResource("/ui/bookmarks.fxml")));
+			//bookmarksTab.setContent(FXMLLoader.load(getClass().getResource("/ui/bookmarks.fxml")));
 
 			settingTab.setText("Setting");
 			settingTab.setContent(FXMLLoader.load(getClass().getResource("/ui/Setting.fxml")));
@@ -66,6 +70,8 @@ public class MenuView {
 
 		this.drawersStack = drawersStack;
 		this.rightDrawer = rightDrawer;
+		
+		
 
 		final ObservableList<Tab> tabs = tabPane.getTabs();
 		final ObservableList<Tab> fxTabs = fxTabpane.getTabs();
@@ -94,14 +100,6 @@ public class MenuView {
 
 			// When the menu click Hamburger and DrawerStack will hide
 			onClickHideHamburger();
-			historyTab.setText("History");
-			try {
-				historyTab.setContent(FXMLLoader.load(getClass().getResource("/ui/History.fxml")));
-			} catch (Exception e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-
 			tab.setText("History");
 			fxSelectedTab.select(fxTabs.get(0));
 
@@ -128,12 +126,19 @@ public class MenuView {
 			@Override
 			public void handle(ActionEvent event) {
 
-				tabs.add(tabs.size() - 1, tab);
-				selectedTab.select(tab);
-
-				// When the menu click Hamburger and DrawerStack will hide
 				onClickHideHamburger();
+				
+				tabs.add(tabs.size() - 1, tab);
+
+				BookMarks ob = new BookMarks();
+				
+				bookmarksTab = ob.getBookmarkView(bookmarksTab);//ob.getBookmarkView(bookmarksTab, settingBorderPane);
+				//System.out.println("Size before history added"+tabs.size());
+
 				tab.setText("Bookmarks");
+				// The below is just select the current tab
+				// When the menu click Hamburger and DrawerStack will hide
+				selectedTab.select(tab);
 				fxSelectedTab.select(fxTabs.get(2));
 
 			}

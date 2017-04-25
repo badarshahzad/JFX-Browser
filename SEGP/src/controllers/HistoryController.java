@@ -1,17 +1,20 @@
-package userInterface;
+package controllers;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
+
+import org.controlsfx.control.Notifications;
+
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXTreeTableColumn;
 import com.jfoenix.controls.JFXTreeTableView;
 import com.jfoenix.controls.RecursiveTreeItem;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
-import controllers.MainController;
-import database.HistoryManagment;
 
+import database.HistoryManagment;
+import javafx.application.Application;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.beans.value.ObservableValue;
@@ -19,8 +22,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
@@ -31,14 +37,18 @@ import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.TreeTableColumn.CellDataFeatures;
 import javafx.scene.control.TreeView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import javafx.util.Callback;
+import javafx.util.Duration;
+import userInterface.HistoryTree;
 
-public class History implements Initializable{
+public class HistoryController implements Initializable{
 	
 	
 	@FXML
@@ -71,8 +81,8 @@ public class History implements Initializable{
 	private TreeItem rootItem;
 
 	
-	private static TabPane tabPane;
-	Tab addTab;
+	//private static TabPane tabPane;
+	//Tab addTab;
 	 
 	//Lists for maintaining different Histories
 	ObservableList<HistoryStoreView> fullHistory=FXCollections.observableArrayList();
@@ -155,11 +165,11 @@ public class History implements Initializable{
 		  //  drawersStack.setContent(vBox);
 		    //all View in tab
 		    
-		    tabPane=MainController.tabPane;
-			addTab= new Tab("pk " + (tabPane.getTabs().size() - 1));
-			addTab.setContent(borderPaneHistory);	
-			tabPane.getTabs().add(addTab);
-		    tabPane.getSelectionModel().select(addTab);
+		    //tabPane=MainController.tabPane;
+			//addTab= new Tab("pk " + (tabPane.getTabs().size() - 1));
+			//addTab.setContent(borderPaneHistory);	
+		//	tabPane.getTabs().add(addTab);
+		  //  tabPane.getSelectionModel().select(addTab);
 	   }
 	   	
 	  
@@ -275,7 +285,6 @@ public class History implements Initializable{
 			
 			
 		}
-				
 	}
 
 

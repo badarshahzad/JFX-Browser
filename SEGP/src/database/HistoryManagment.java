@@ -8,8 +8,9 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+
+import controllers.HistoryController;
 import javafx.collections.ObservableList;
-import userInterface.History;
 public class HistoryManagment
 {
 	private static Connection c = null;
@@ -112,7 +113,7 @@ public static  ObservableList fullHistoryShow(ObservableList fullHistory)
     	String date1=rs.getString(3);
     	String domain1=rs.getString(4);
     	String title1=rs.getString(5);
-    	fullHistory=History.addDataInList(link1, time1,date1,domain1,title1,fullHistory);
+    	fullHistory=HistoryController.addDataInList(link1, time1,date1,domain1,title1,fullHistory);
     	}
     	rs.close();
     	perp.close();
@@ -165,7 +166,7 @@ public static ObservableList getHistory(ObservableList list,int dateRange)
 		 String date1=rs.getString(3);
 		 String domain1=rs.getString(4);
 	    	String title1=rs.getString(5);
-		 list=History.addDataInList(link1,time1,date1,domain1,title1,list);
+		 list=HistoryController.addDataInList(link1,time1,date1,domain1,title1,list);
 	}
 		
 		rs.close();
@@ -217,7 +218,7 @@ public static ObservableList pastHoursHistory(ObservableList pastHour,int time)
 		String date1=rs.getString(3);
 		String domain1=rs.getString(4);
     	String title1=rs.getString(5);
-		pastHour=History.addDataInList(link1,time1,date1,domain1,title1,pastHour);
+		pastHour=HistoryController.addDataInList(link1,time1,date1,domain1,title1,pastHour);
 	 }
 	}
 	catch(Exception e)
