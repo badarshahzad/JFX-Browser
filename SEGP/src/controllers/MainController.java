@@ -49,10 +49,19 @@ public class MainController implements Initializable {
 
 	public static TabPane tabPane = new TabPane();
 
-	private Tab firstTab = new Tab("First Tab");
+	private static  Tab firstTab = new Tab("First Tab");
 	
 
-	private Tab addNewTab = new Tab("+");
+	public static Tab getFirstTab() {
+		return firstTab;
+	}
+
+	public  static void setFirstTab(Tab firstTab) {
+		firstTab = firstTab;
+	}
+
+
+	private static Tab addNewTab = new Tab("+");
 
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
@@ -69,7 +78,7 @@ public class MainController implements Initializable {
 		try {
 			// -----here below adding page title of tab
 			firstTab.setContent(FXMLLoader.load(getClass().getResource("/ui/Tab.fxml")));
-			firstTab.setText("Google");
+			//firstTab.setText("Google");
 			
 			
 			
@@ -125,7 +134,7 @@ public class MainController implements Initializable {
 		return tabPane;
 	}
 
-	public Tab getAddNewTab() {
+	public static Tab getAddNewTab() {
 		return addNewTab;
 	}
 

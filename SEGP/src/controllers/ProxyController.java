@@ -83,8 +83,8 @@ public class ProxyController implements Initializable {
 		ToggleGroup group = new ToggleGroup();
 
 		noProxy.setToggleGroup(group);
-		noProxy.setSelected(true);
-
+		
+		useSystemProxy.setSelected(true);
 		useSystemProxy.setToggleGroup(group);
 		manualProxy.setToggleGroup(group);
 

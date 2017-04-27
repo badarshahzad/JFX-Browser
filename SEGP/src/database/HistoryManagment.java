@@ -13,7 +13,7 @@ import controllers.HistoryController;
 import javafx.collections.ObservableList;
 public class HistoryManagment
 {
-	private static Connection c = null;
+	//private static Connection c = SqliteConnection.Connector();
 	private static PreparedStatement perp=null;
 	private static java.util.Date dateTime;
 	static SimpleDateFormat formateTime;
@@ -23,14 +23,14 @@ public class HistoryManagment
 	{		
 		try
 		{
-			  Class.forName("org.sqlite.JDBC");
-		      c = DriverManager.getConnection("jdbc:sqlite:History.db");
-	      perp=c.prepareStatement("CREATE TABLE if not exists history(url text primary key ,Time varchar(30),Date varchar(30),"
+			  //Class.forName("org.sqlite.JDBC");
+		      //c = DriverManager.getConnection("jdbc:sqlite:History.db");
+	      perp=SqliteConnection.Connector().prepareStatement("CREATE TABLE if not exists history(url text primary key ,Time varchar(30),Date varchar(30),"
 		      		+ "domain varchar(40),title varchar(50), user_id integer );");
 		      perp.executeUpdate(); 
 		      System.out.println("table created");
 		      perp.close();
-		      c.close();
+		      SqliteConnection.Connector().close();
 		}
 		catch(Exception e)
 		{
@@ -48,13 +48,13 @@ public class HistoryManagment
 		
 		try
 		{
-			  Class.forName("org.sqlite.JDBC");
-		      c = DriverManager.getConnection("jdbc:sqlite:History.db");
+			  //Class.forName("org.sqlite.JDBC");
+		      //c = DriverManager.getConnection("jdbc:sqlite:History.db");
 			  String insert="insert or replace into history(url,Time,Date,domain,title,user_id)"+"values(?,?,?,?,?,?)";
 			  String time=formateTime.format(dateTime);
 			  String date=dateFormate.format(dateTime);
 			  int user= 1;
-		      perp=c.prepareStatement(insert);
+		      perp=SqliteConnection.Connector().prepareStatement(insert);
 		      perp.setString(1, url);
 		      perp.setString(2,time);
 		      perp.setString(3,date);
@@ -64,7 +64,7 @@ public class HistoryManagment
 		      perp.executeUpdate();
 		      System.out.println("data has been inserted");
 		      perp.close();
-		      c.close();
+		      SqliteConnection.Connector().close();
 		      
 		}
 		catch(Exception e)
@@ -79,10 +79,10 @@ public class HistoryManagment
 		ResultSet rs=null;
 		try
 		{
-		Class.forName("org.sqlite.JDBC");
-	    c = DriverManager.getConnection("jdbc:sqlite:History.db");
+		//Class.forName("org.sqlite.JDBC");
+	    //c = DriverManager.getConnection("jdbc:sqlite:History.db");
 	    String qeury="delete  from history;";
-	    perp=c.prepareStatement(qeury);
+	    perp=SqliteConnection.Connector().prepareStatement(qeury);
 	    perp.executeUpdate();
 		}
 		catch(Exception e)
@@ -100,10 +100,10 @@ public static  ObservableList fullHistoryShow(ObservableList fullHistory)
 	ResultSet rs=null;
 	try
 	{
-	Class.forName("org.sqlite.JDBC");
-    c = DriverManager.getConnection("jdbc:sqlite:History.db");
+	//Class.forName("org.sqlite.JDBC");
+    //c = DriverManager.getConnection("jdbc:sqlite:History.db");
     String str="select * from(select * from history order by Time DESC) history order by Date DESC";
-    perp=c.prepareStatement(str);
+    perp=SqliteConnection.Connector().prepareStatement(str);
     rs=perp.executeQuery();
   
     	while(rs.next()) //loop for data fetching and pass it to GUI table view
@@ -117,7 +117,7 @@ public static  ObservableList fullHistoryShow(ObservableList fullHistory)
     	}
     	rs.close();
     	perp.close();
-    	c.close();
+    	SqliteConnection.Connector().close();
 	}
 	catch(Exception e)
 	{
@@ -142,20 +142,20 @@ public static ObservableList getHistory(ObservableList list,int dateRange)
     String qeury;
     try
 	{
-	Class.forName("org.sqlite.JDBC");
-	c = DriverManager.getConnection("jdbc:sqlite:History.db");
+	//Class.forName("org.sqlite.JDBC");
+	//c = DriverManager.getConnection("jdbc:sqlite:History.db");
 	//user aske for today or yesterday history
 	if(dateRange==0||dateRange==-1)
 	{
 	qeury="select * from (select * from history order by Time DESC) history where Date like"+pastDate+";";
-	perp=c.prepareStatement(qeury);
+	perp=SqliteConnection.Connector().prepareStatement(qeury);
 	rs=perp.executeQuery();
 	}
 	//if user asks for more two day history
 	else
 	{
 	qeury="select * from (select * from history order by Time DESC) history where Date>="+pastDate+" Order BY Date DESC;";
-	perp=c.prepareStatement(qeury);
+	perp=SqliteConnection.Connector().prepareStatement(qeury);
 	rs=perp.executeQuery();
 	}
 
@@ -171,7 +171,7 @@ public static ObservableList getHistory(ObservableList list,int dateRange)
 		
 		rs.close();
 		perp.close();
-		c.close();
+		SqliteConnection.Connector().close();
 	}
 	catch(Exception e)
 	{
@@ -205,10 +205,10 @@ public static ObservableList pastHoursHistory(ObservableList pastHour,int time)
 	System.out.println(currentDate);
 	try
 	{
-	Class.forName("org.sqlite.JDBC");
-	c = DriverManager.getConnection("jdbc:sqlite:History.db");
+	//Class.forName("org.sqlite.JDBC");
+	//c = DriverManager.getConnection("jdbc:sqlite:History.db");
 	String qeury="select * from history where Time>"+pastHourTime+"AND Date LIKE "+currentDate+"order by Time DESC;";
-	perp=c.prepareStatement(qeury);
+	perp=SqliteConnection.Connector().prepareStatement(qeury);
 	rs=perp.executeQuery();
 	System.out.println(rs.next());
 	while(rs.next()) //loop for data fetching and pass it to GUI table view

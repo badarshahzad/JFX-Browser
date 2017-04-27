@@ -24,22 +24,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 
-import com.jfoenix.controls.JFXDialog;
-import com.jfoenix.controls.JFXDialogLayout;
+import javafx.stage.FileChooser;
 
-
-import javax.management.NotificationFilter;
-
-import org.controlsfx.control.NotificationPane;
-import org.controlsfx.control.Notifications;
-import org.controlsfx.control.action.Action;
-
-import javafx.application.Platform;
-import javafx.collections.FXCollections;
-import javafx.event.ActionEvent;
-import javafx.scene.Scene;
+import htmlToPdf.HTMLtoPDF;
 
 import javafx.scene.control.Label;
+import javafx.scene.control.Tab;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
@@ -55,13 +45,7 @@ import userInterface.Hamburger;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextInputDialog;
 
-import javafx.scene.layout.StackPane;
-import javafx.scene.text.Text;
-import javafx.scene.web.WebEvent;
-import javafx.stage.Stage;
-import javafx.util.Duration;
 import main.MainClass;
-import netscape.javascript.JSObject;
 import userInterface.MenuView;
 
 import javafx.scene.image.Image;
@@ -157,6 +141,8 @@ public class TabController implements Initializable {
 
 		setWebEngine(webEngine);
 
+		searchField.setText("https://www.google.com");
+		
 		back.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/backword1.png"))));
 		back.setStyle("");
 		forward.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/forward1.png"))));
@@ -233,27 +219,20 @@ public class TabController implements Initializable {
 		// Search Button Listener
 
 		search.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
+			
 			pageRender(searchField.getText());
 
 		});
 		
 		htmlAsPdf.addEventHandler(MouseEvent.MOUSE_CLICKED, (e)->{
 			
-			System.out.println("Ht");
-			
-			// When the menu click Hamburger and DrawerStack will hide
-			
-			//---- if htmlPDf button click if you wanna hide hamburger bar then call below onClickHideHamburger()
-			
-			/*Platform.runLater(new  Runnable() {
-				public void run() {
-				//	menviewObject.onClickHideHamburger();
-				
-				}
-			});*/
-			System.out.println("Save As PDF");
-			// tab.setText("Save As Pdf");
-			// tab.setId("saveAsPdf");
+			FileChooser fileChooser = new FileChooser();
+			FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("PDF File (*.pdf)", "*.pdf");
+			fileChooser.getExtensionFilters().add(extFilter);
+			 
+			HTMLtoPDF object = new HTMLtoPDF(fileChooser.showSaveDialog(MainClass.getStage()));
+			object.setDaemon(true);
+			object.start();
 
 		});
 		
@@ -401,6 +380,7 @@ public class TabController implements Initializable {
 	}// end intializer method
 
 	// mehtod to rendere page
+	
 	MainDownload dwnlod = new MainDownload();
 	public void pageRender(String url) {
 		webEngine.getLoadWorker().stateProperty().addListener(new ChangeListener<State>() {
@@ -409,6 +389,13 @@ public class TabController implements Initializable {
 
 				if (newState == Worker.State.SUCCEEDED) {
 					searchField.setText(webEngine.getLocation());
+					
+					//Tab tab = MainController.getFirstTab();
+					//tab.setText(webEngine.getTitle());
+					//MainController.setFirstTab(tab);
+					
+					System.out.println("Sudo title of tab"+webEngine.getTitle());
+					
 					URL domain = null;
 					if (!(webEngine.getLocation().equals("about:blank")))
 						try {

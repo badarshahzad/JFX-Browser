@@ -9,6 +9,6 @@
     -fx-text-fill: #d8d8d8;
     -fx-background-insets: 0 0 0 0, 0, 1, 2;
 }
-button:hover {
+#button:hover {
     -fx-background-color: #3a3a3a;
 }
