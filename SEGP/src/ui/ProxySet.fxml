@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXRadioButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane fx:id="proxyPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="276.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ProxyController">
+   <children>
+      <Label layoutX="51.0" layoutY="16.0" prefHeight="45.0" prefWidth="325.0" text="Configure Proxies to Access the Internet">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+      <JFXRadioButton fx:id="noProxy" layoutX="51.0" layoutY="72.0" text="No Proxy" />
+      <JFXRadioButton fx:id="useSystemProxy" layoutX="51.0" layoutY="111.0" text="Use system proxy settings" />
+      <JFXRadioButton fx:id="manualProxy" layoutX="51.0" layoutY="154.0" text="Manual Proxy Configuration" />
+      <Label layoutX="100.0" layoutY="194.0" text="HTTP Proxy:" />
+      <TextField fx:id="httpProxyField" layoutX="190.0" layoutY="189.0" />
+      <Label layoutX="378.0" layoutY="194.0" text="Port:" />
+      <TextField fx:id="portField" layoutX="422.0" layoutY="188.0" prefHeight="26.0" prefWidth="79.0" />
+      <JFXButton fx:id="okBt" layoutX="363.0" layoutY="235.0" prefHeight="30.0" prefWidth="100.0" text="Ok" />
+      <JFXButton fx:id="cancelBt" layoutX="481.0" layoutY="237.0" prefHeight="30.0" prefWidth="100.0" text="Cancel" />
+   </children>
+</AnchorPane>
