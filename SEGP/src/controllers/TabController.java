@@ -75,29 +75,41 @@ import javafx.scene.image.ImageView;
 public class TabController implements Initializable {
 
 	@FXML
-	private BorderPane borderpane;
-	@FXML
-	private Label back;
-	@FXML
-	private Label forward;
-	@FXML
-	private Label refresh;
-	@FXML
-	private Label search;
-	@FXML
-	private JFXTextField searchField;
-	@FXML
-	private Label download;
-	@FXML
-	private Label bookmark;
-	@FXML
-	private Label htmlAsPdf;
-	@FXML
-	private JFXHamburger hamburger;
-	@FXML
-	private GridPane navigationBar;
-	@FXML
-	private JFXProgressBar progressbar;
+    private BorderPane borderpane;
+
+    @FXML
+    private GridPane navigationBar;
+
+
+    @FXML
+    private Label back;
+
+    @FXML
+    private Label forward;
+
+    @FXML
+    private Label refresh;
+
+    @FXML
+    private JFXTextField searchField;
+
+    @FXML
+    private Label search;
+
+    @FXML
+    private Label download;
+
+    @FXML
+    private Label bookmark;
+
+    @FXML
+    private Label htmlAsPdf;
+
+    @FXML
+    private JFXHamburger hamburger;
+
+    @FXML
+    private JFXProgressBar progressbar;
 
 	private String folder;
 	String title;
@@ -146,14 +158,13 @@ public class TabController implements Initializable {
 		setWebEngine(webEngine);
 
 		back.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/backword1.png"))));
+		back.setStyle("");
 		forward.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/forward1.png"))));
 		refresh.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/refresh.png"))));
 		search.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/search.png"))));
-		search.setOpacity(.5);
+		search.setId("search");
 		download.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/download.png"))));
-		download.setOpacity(.6);
 		bookmark.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/bookmark.png"))));
-		bookmark.setOpacity(.7);
 		htmlAsPdf.setGraphic(new ImageView(new Image (getClass().getResourceAsStream("/pdfConverter.png"))));
 
 		// Worker load the page

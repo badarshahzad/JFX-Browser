@@ -10,9 +10,12 @@ import com.jfoenix.controls.JFXTabPane;
 import bookmarks.BookMarks;
 import controllers.DownloadController;
 import controllers.SettingController;
-
+import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.SingleSelectionModel;
@@ -50,8 +53,9 @@ public class MenuView {
 		// tab.setContent(settingTabBPane);
 		try {
 			fxTabpane.setTabMinWidth(150);
-			fxTabpane.setTabMinHeight(50);
-			
+			fxTabpane.setTabMinHeight(30);
+			fxTabpane.setId("settingTabPane");
+
 			historyTab.setText("History");
 			historyTab.setContent(FXMLLoader.load(getClass().getResource("/ui/History.fxml")));
 
@@ -59,7 +63,7 @@ public class MenuView {
 			downloadsTab.setContent(FXMLLoader.load(getClass().getResource("/ui/Downloads.fxml")));
 
 			bookmarksTab.setText("Bookmarks");
-			//bookmarksTab.setContent(FXMLLoader.load(getClass().getResource("/ui/bookmarks.fxml")));
+			// bookmarksTab.setContent(FXMLLoader.load(getClass().getResource("/ui/bookmarks.fxml")));
 
 			settingTab.setText("Setting");
 			settingTab.setContent(FXMLLoader.load(getClass().getResource("/ui/Setting.fxml")));
@@ -70,8 +74,6 @@ public class MenuView {
 
 		this.drawersStack = drawersStack;
 		this.rightDrawer = rightDrawer;
-		
-		
 
 		final ObservableList<Tab> tabs = tabPane.getTabs();
 		final ObservableList<Tab> fxTabs = fxTabpane.getTabs();
@@ -79,7 +81,6 @@ public class MenuView {
 		SingleSelectionModel<Tab> selectedTab = tabPane.getSelectionModel();
 		SingleSelectionModel<Tab> fxSelectedTab = fxTabpane.getSelectionModel();
 
-		
 		/*
 		 * Here we developed a tab and its borderpane for setting we made
 		 * setting class that design the layout of setting then a single tab for
@@ -90,16 +91,17 @@ public class MenuView {
 		 * setting pane
 		 */
 
-		//tab.setText("Settig");
+		// tab.setText("Settig");
 		// -------------------------------------------------------Historylistener-------------------------------------------------------
 		history.setOnAction((ActionEvent) -> {
-
 
 			tabs.add(tabs.size() - 1, tab);
 			selectedTab.select(tab);
 
 			// When the menu click Hamburger and DrawerStack will hide
 			onClickHideHamburger();
+			getBookMarkView();
+			
 			tab.setText("History");
 			fxSelectedTab.select(fxTabs.get(0));
 
@@ -114,6 +116,8 @@ public class MenuView {
 
 			// When the menu click Hamburger and DrawerStack will hide
 			onClickHideHamburger();
+			getBookMarkView();
+			
 			tab.setText("Downloads");
 			fxSelectedTab.select(fxTabs.get(1));
 
@@ -127,14 +131,10 @@ public class MenuView {
 			public void handle(ActionEvent event) {
 
 				onClickHideHamburger();
-				
+
 				tabs.add(tabs.size() - 1, tab);
-
-				BookMarks ob = new BookMarks();
+				getBookMarkView();
 				
-				bookmarksTab = ob.getBookmarkView(bookmarksTab);//ob.getBookmarkView(bookmarksTab, settingBorderPane);
-				//System.out.println("Size before history added"+tabs.size());
-
 				tab.setText("Bookmarks");
 				// The below is just select the current tab
 				// When the menu click Hamburger and DrawerStack will hide
@@ -154,19 +154,51 @@ public class MenuView {
 
 			// When the menu click Hamburger and DrawerStack will hide
 			onClickHideHamburger();
+			getBookMarkView();
 
 			tab.setText("Setting");
 			fxSelectedTab.select(fxTabs.get(3));
 			
+			
 
 		});
-	
+
+		//As the bookmarks is not designed in fxml so: When the bookmarks tab 
+		//access to show the view of bookmark 
+		//if(fxTabpane.getSelectionModel().selectedIndexProperty().getName().equals("Bookmarks")){
+			
+		//}
+		
 		tab.setContent(fxTabpane);
 		fxTabpane.getTabs().addAll(historyTab, downloadsTab, bookmarksTab, settingTab);
 		
-
+		fxTabpane.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Tab>() {
+			@Override
+			
+			public void changed(ObservableValue<? extends Tab> ov, Tab t, Tab newSelectedTab) {
+			
+				if (newSelectedTab == historyTab) {
+					tab.setText("History");
+				}
+				if (newSelectedTab == bookmarksTab) {
+					tab.setText("Bookarks");
+				}
+				if (newSelectedTab == downloadsTab) {
+					tab.setText("Downloads");
+				}
+				if (newSelectedTab == settingTab) {
+					tab.setText("Setting");
+				}
+			}
+		});
 	}
 
+
+	public void getBookMarkView(){
+		BookMarks ob = new BookMarks();
+		bookmarksTab = ob.getBookmarkView(bookmarksTab);
+	}
+	
 	public void onClickHideHamburger() {
 
 		// TODO Auto-generated method stub

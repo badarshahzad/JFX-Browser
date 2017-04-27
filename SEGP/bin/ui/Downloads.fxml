@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="borderPane" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.DownloadController">
+<BorderPane fx:id="borderPane" prefHeight="469.0" prefWidth="643.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.DownloadController">
    <top>
       <GridPane opacity="0.84" style="-fx-background-color: #2959ea;" BorderPane.alignment="CENTER">
         <columnConstraints>
@@ -58,7 +58,7 @@
    <left>
       <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0" BorderPane.alignment="CENTER">
          <children>
-            <JFXButton fx:id="clean" opacity="0.8" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #2959ea;" text="Clean" textFill="WHITE">
+            <JFXButton fx:id="clean" opacity="0.8" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #2959ea;" text="Clean" textFill="#f4f4f4">
                <VBox.margin>
                   <Insets />
                </VBox.margin>
@@ -76,7 +76,7 @@
             </JFXButton>
          </children>
          <BorderPane.margin>
-            <Insets bottom="5.0" left="10.0" right="5.0" top="20.0" />
+            <Insets bottom="5.0" left="20.0" right="20.0" top="20.0" />
          </BorderPane.margin>
       </VBox>
    </left>

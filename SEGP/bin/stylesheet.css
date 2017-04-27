@@ -16,6 +16,7 @@
 #setting .button {
 	-fx-background-radius: 25;
 }
+
 #leftDrawerStack .button{
 
 }
@@ -26,14 +27,52 @@
 }
 
 
+/*******************************************************************************
+ *                                                                             *
+ * Tab / Setting TabPane									                                       *
+ *                                                                             *
+ ******************************************************************************/
 
+#settingTabPane .tab{
+ 	-fx-text-fill-color:white;
+ 	-fx-border-radius: 10.0;
+ 	-fx-spacing: 5.0;
+ 	-fx-opacity:0.9;
+ }
+
+#settingTabPane .tab-header-background{
+		-fx-background-color:derive(#2959ea,20.0%);
+		-fx-opacity:0.9;
+}
+ 
+#settingTabPane .tab:hover{
+ -fx-background-color:derive(#2959ea,10.0%);
+ 
+}
+#settingTabPane  .tab:focused,
+#settingTabPane  .tab:default:focused{
+ 	-fx-background-color:derive(#2959ea,20.0%);
+}
+
+/*******************************************************************************
+ *                                                                             *
+ * Label  			                                                       *
+ *                                                                             *
+ ******************************************************************************/
+
+.label:hover {
+     -fx-background-color: derive(#777777,80.0%);
+    
+}
 
 /*******************************************************************************
  *                                                                             *
  * ScrollBar 			                                                       *
  *                                                                             *
  ******************************************************************************/
+ 
 /*
+ 
 .scroll-bar:vertical > .track-background,
 .scroll-bar:horizontal > .track-background{
     	-fx-background-color:#ffffff;
@@ -48,32 +87,39 @@
 
 .scroll-bar:hover > .increment-button, 
 .scroll-bar:hover > .decrement-button {
+	
      	-fx-background-color: derive(#28323c,30.0%);
+     	
 }
 
 
 .tab{
-	-fx-text-fill:#222222;
-}
-.tab:selected .focus-indicator {
 	
+	-fx-text-fill:white;
+	
+	
+	
+}
+.tab:selected .focus-indicator {	
+    
     -fx-border-radius: 10 10 0 0, 10 10 0 0;
+  
     -fx-border-insets: -6 -9 -8 -8, -5 -8 -7 -7;
-}
-/*
-.tab-pane > .tab-header-area > .headers-region > .tab:selected{
-    -fx-border-insets: 0 1 1 0, 1 2 0 1, 2 3 0 2;
-}
-*/
-.tab-pane > .tab-header-area > .headers-region > .tab > .tab-container > .tab-label {
-    -fx-padding:0 0 0 0;
 }
 
 .tab-header-area .tab{
     -fx-padding:4 10 5 10;
     -fx-background-radius: 10 10 0 0;
 }
-
+#addNewTab{
+	 -fx-padding:5 10 5 10;
+    -fx-background-radius: 12 12 4 4;
+	 -fx-background-color: derive(#777777,80.0%);
+    -fx-border-radius: 10 10 0 10;
+    
+    -fx-border-insets: -1 -1 -5 -5, -1 -1 -5 -5;
+	
+}
 #righDrawerVbox{
 	-fx-padding: 10,10,10,10;
 }

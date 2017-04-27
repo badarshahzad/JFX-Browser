@@ -6,6 +6,7 @@
 package controllers;
 
 
+import java.awt.Color;
 import java.io.IOException;
 import java.net.URL;
 
@@ -49,6 +50,7 @@ public class MainController implements Initializable {
 	public static TabPane tabPane = new TabPane();
 
 	private Tab firstTab = new Tab("First Tab");
+	
 
 	private Tab addNewTab = new Tab("+");
 
@@ -58,6 +60,8 @@ public class MainController implements Initializable {
 		// ------All opens tabs should be closed so below line is for just
 		// closing tabs
 		addNewTab.setClosable(false);
+		addNewTab.setId("addNewTab");
+		
 
 		tabPane.setTabClosingPolicy(TabClosingPolicy.ALL_TABS);
 		// ------tabPane.setFocusTraversable(false);
@@ -65,6 +69,8 @@ public class MainController implements Initializable {
 		try {
 			// -----here below adding page title of tab
 			firstTab.setContent(FXMLLoader.load(getClass().getResource("/ui/Tab.fxml")));
+			firstTab.setText("Google");
+			
 			
 			
 
@@ -154,18 +160,7 @@ public class MainController implements Initializable {
 					}
 					
 				});
-/*
-			public void changed(ObservableValue<? extends Tab> ov, Tab t, Tab newSelectedTab) {
 
-				// Closeing tab if first index tab close and size will be the 2
-				// https://docs.oracle.com/javase/8/javafx/api/index.html?javafx/scene/package-summary.html
-
-				// -- to close a browser when last tab will be close
-				if (tabPane.getTabs().size() == 1) {
-					// Platform.exit();
-					System.exit(0);
-				}
-*/
 				if (newSelectedTab == addNewTab) {
 					// ---------------New tab is created --------------------
 					creatNewTab(tabpane, addNewTab);
