@@ -1,26 +1,26 @@
 package controllers;
 
-import java.awt.Color;
 import java.net.URL;
 import java.util.Optional;
 import java.util.Properties;
 import java.util.ResourceBundle;
 
+import org.controlsfx.control.Notifications;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
-import com.jfoenix.controls.JFXDialog;
-import com.jfoenix.controls.JFXDialogLayout;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXDrawersStack;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTreeTableView;
 import com.jfoenix.controls.JFXDrawer.DrawerDirection;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -30,12 +30,9 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Paint;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 public class SettingController implements Initializable {
 
@@ -172,59 +169,56 @@ public class SettingController implements Initializable {
 		});
 	
 		changeProxyBtn.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
-			ToggleGroup group = new ToggleGroup();
-			JFXRadioButton noProxy = new JFXRadioButton("No Proxy");
-			noProxy.setToggleGroup(group);
-			noProxy.setSelected(true);
-			JFXRadioButton useSystemProxySettings = new JFXRadioButton("Use system proxy setting");
-			useSystemProxySettings.setToggleGroup(group);
+			
+			ProxyController proxyObject ;
+			FXMLLoader loader = new  FXMLLoader(getClass().getResource("/ui/ProxySet.fxml"));			
+			
+			try {
 
-			VBox root = new VBox();
-			VBox.setMargin(noProxy, new Insets(5, 5, 5, 5));
-			VBox.setMargin(useSystemProxySettings, new Insets(5, 5, 5, 5));
-			root.setPadding(new Insets(5, 5, 5, 5));
-			root.setSpacing(15);
-			root.setMinSize(100, 100);
-			root.getChildren().addAll(noProxy, useSystemProxySettings);
-
-			Alert alert = new Alert(AlertType.CONFIRMATION);
-			alert.setGraphic(root);
-			alert.setTitle("Proxy Setting");
-			alert.setHeaderText("Configure Proxy to Access Internet");
-
-			Optional<ButtonType> result = alert.showAndWait();
-			Properties systemProperties = System.getProperties();
-			if (result.get() == ButtonType.OK) {
-				if (group.getSelectedToggle().equals(noProxy)) {
-					System.out.println("No Proxy");
-/*
-					// Remove Proxy for Http
-					systemProperties.setProperty("http.proxyHost", "");
-					systemProperties.setProperty("http.proxyPort", "");
-
-					// Remove Proxy for Https
-					systemProperties.setProperty("https.proxyHost", "");
-					systemProperties.setProperty("https.proxyPort", "");*/
-
-				}
-				if (group.getSelectedToggle().equals(useSystemProxySettings)) {
-					System.out.println("Use system proxy");
-/*
-					// Set Proxy for Http
-					systemProperties.setProperty("http.proxyHost", "172.16.0.2");
-					systemProperties.setProperty("http.proxyPort", "8080");
-
-					// Set Proxy for Https
-					systemProperties.setProperty("https.proxyHost", "172.16.0.2");
-					systemProperties.setProperty("https.proxyPort", "8080");*/
-				}
-				System.out.println("Ok click!");
-			} else {
-				System.out.println("Cancel Click!");
+				loader.load();
+				
+			} catch (Exception e2) {
+				// TODO Auto-generated catch block
+				e2.printStackTrace();
 			}
+			
+			Stage primaryStage = new Stage();
+			proxyObject = loader.getController();
+			
+			Scene root = new Scene(proxyObject.getProxyPane());
+			primaryStage.setScene(root);
+			primaryStage.centerOnScreen();
+			primaryStage.setResizable(false);
+			primaryStage.setMaximized(false);
+			primaryStage.setAlwaysOnTop(true);
+			primaryStage.setOpacity(.9);
+			
+			primaryStage.show();
+			
+			proxyObject.getOkBt().addEventHandler(MouseEvent.MOUSE_CLICKED, (e1)->{
+					
+				 Platform.runLater(new Runnable() {
+			            @Override
+			            public void run() {
+			            	
+						 Notifications.create()
+						 .title("Proxy Set")
+						 .text("You have successfully set your system proxy.")
+						 .hideAfter(Duration.seconds(3))
+						 .showInformation();
+						 
+			            }
+				 });          
+						
+			primaryStage.close();
+				
+			});
+			//ob.getStage().show();
 		});
 		//Start the userTreeView from herre
 	}
+	
+	
 	public static Stage getLoginSignInStage() {
 		return loginSignInStage;
 	}

@@ -8,6 +8,7 @@ import javafx.geometry.Pos;
 public class Notification {
 	public Notification(){
 		Platform.runLater(new Runnable() {
+			@Override
 			public void run() {
 				Notifications notify = Notifications.create().title("Download")
 						.text("Download File")

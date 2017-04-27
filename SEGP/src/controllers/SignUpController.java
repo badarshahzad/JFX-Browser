@@ -3,7 +3,10 @@ package controllers;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import javax.management.Notification;
+import java.awt.event.KeyEvent;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 import org.controlsfx.control.Notifications;
 
@@ -11,24 +14,22 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 
+import database.CRUD;
+import database.SqliteConnection;
+
 import javafx.application.Application;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ProgressBar;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
 public class SignUpController  extends Application implements Initializable {
-
-	
 
     @FXML
     private Pane signUpPane;
@@ -37,13 +38,13 @@ public class SignUpController  extends Application implements Initializable {
     private JFXTextField firstname;
 
     @FXML
-    private JFXTextField lastname;
-
-    @FXML
     private JFXTextField email;
 
     @FXML
     private JFXPasswordField password;
+    
+    @FXML
+    private JFXTextField pin;
 
     @FXML
     private JFXButton signUpBt;
@@ -51,7 +52,6 @@ public class SignUpController  extends Application implements Initializable {
     @FXML
     private JFXButton cancel;
 
-    
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
@@ -61,7 +61,7 @@ public class SignUpController  extends Application implements Initializable {
 		signUpBt.addEventHandler(MouseEvent.MOUSE_CLICKED, (e4)->{
 			
 		boolean flag = getFirstname().getText().isEmpty() | getEmail().getText().isEmpty() |
-						getLastname().getText().isEmpty() | getPassword().getText().isEmpty();
+						getPin().getText().isEmpty() | getPassword().getText().isEmpty();
 			
 		if(flag){
 			
@@ -73,6 +73,16 @@ public class SignUpController  extends Application implements Initializable {
     				.position(Pos.TOP_RIGHT);
 			noti.showError();
 
+		}else{
+			if(CRUD.insertNewAccount(getFirstname().getText(),getEmail().getText(), getPassword().getText(),getPin().getText())){
+			Notifications noti= Notifications.create()
+    				.title("Successfull")
+    				.text("Congratulation! You successfully Create an Account.")
+    				//.graphic(new ImageView(null))
+    				.hideAfter(Duration.seconds(5))
+    				.position(Pos.TOP_RIGHT);
+			noti.showInformation();
+			}
 		}
 		
 		});
@@ -80,6 +90,7 @@ public class SignUpController  extends Application implements Initializable {
 		cancel.addEventHandler(MouseEvent.MOUSE_CLICKED, (e5)->{
 			//To close the login pane
 			controllers.SettingController.getLoginSignInStage().close();
+			//System.exit(0);
 			
 		});
 		
@@ -109,14 +120,14 @@ public class SignUpController  extends Application implements Initializable {
 
 
 
-	public JFXTextField getLastname() {
-		return lastname;
+	public JFXTextField getPin() {
+		return pin;
 	}
 
 
 
-	public void setLastname(JFXTextField lastname) {
-		this.lastname = lastname;
+	public void setPin(JFXTextField pin) {
+		this.pin= pin;
 	}
 
 

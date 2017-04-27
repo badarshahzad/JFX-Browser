@@ -1,7 +1,6 @@
 package controllers;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
-import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.controls.JFXProgressBar;
 import com.jfoenix.controls.JFXTextField;
@@ -10,47 +9,61 @@ import database.BookMarksDataBase;
 import database.HistoryManagment;
 import downloader.MainDownload;
 
-import java.io.File;
 import java.net.MalformedURLException;
-import java.net.URI;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import org.controlsfx.control.PopOver;
 import org.controlsfx.control.textfield.TextFields;
-import org.w3c.dom.Attr;
-import org.w3c.dom.NamedNodeMap;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.w3c.dom.events.Event;
-import org.w3c.dom.events.EventListener;
-import org.w3c.dom.events.EventTarget;
-import org.w3c.dom.html.HTMLFormElement;
-import org.w3c.dom.html.HTMLInputElement;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Worker;
 import javafx.concurrent.Worker.State;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+
+import com.jfoenix.controls.JFXDialog;
+import com.jfoenix.controls.JFXDialogLayout;
+
+
+import javax.management.NotificationFilter;
+
+import org.controlsfx.control.NotificationPane;
+import org.controlsfx.control.Notifications;
+import org.controlsfx.control.action.Action;
+
+import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
+import javafx.scene.Scene;
+
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+
 import javafx.scene.layout.VBox;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebHistory;
 import javafx.scene.web.WebView;
-import javafx.stage.Window;
 import passwordVault.DetectForm;
 import userInterface.Hamburger;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextInputDialog;
+
+import javafx.scene.layout.StackPane;
+import javafx.scene.text.Text;
+import javafx.scene.web.WebEvent;
+import javafx.stage.Stage;
+import javafx.util.Duration;
+import main.MainClass;
+import netscape.javascript.JSObject;
+import userInterface.MenuView;
+
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -58,39 +71,56 @@ import javafx.scene.image.ImageView;
  *
  * @author Segp-Group 3
  */
-public class TabController implements Initializable
 
- {
+public class TabController implements Initializable {
 
 	@FXML
-	private BorderPane borderpane;
-	@FXML
-	private Label back;
-	@FXML
-	private Label forward;
-	@FXML
-	private Label refresh;
-	@FXML
-	private Label search;
-	@FXML
-	private JFXTextField searchField;
-	@FXML
-	private Label download;
-	@FXML
-	private Label bookmark;
-	@FXML
-	private Label htmlAsPdf;
-	@FXML
-	private JFXHamburger hamburger;
-	@FXML
-	private GridPane navigationBar;
-	@FXML
-	private JFXProgressBar progressbar;
+    private BorderPane borderpane;
+
+    @FXML
+    private GridPane navigationBar;
+
+
+    @FXML
+    private Label back;
+
+    @FXML
+    private Label forward;
+
+    @FXML
+    private Label refresh;
+
+    @FXML
+    private JFXTextField searchField;
+
+    @FXML
+    private Label search;
+
+    @FXML
+    private Label download;
+
+    @FXML
+    private Label bookmark;
+
+    @FXML
+    private Label htmlAsPdf;
+
+    @FXML
+    private JFXHamburger hamburger;
+
+    @FXML
+    private JFXProgressBar progressbar;
+
 	private String folder;
 	String title;
 	ObservableList<String> options;
+
 	MainController mainController = new MainController();
+
 	// Classes objects to get methods or set methods access
+
+	private MenuView menviewObject = new MenuView();
+
 	private Hamburger ham = new Hamburger();
 	public VBox drawerPane = new VBox();
 
@@ -110,34 +140,33 @@ public class TabController implements Initializable
 	}*/
 	
 	// we made this webgine object to get access the current url of webpage
+
+	// we made this webgine object to get access the current url of webpage
 	static WebEngine engine;
-	public void setWebEngine(WebEngine webEngine){
+
+	public void setWebEngine(WebEngine webEngine) {
 		engine = webEngine;
 	}
-	public static WebEngine getWebEngine(){
+
+	public static WebEngine getWebEngine() {
 		return engine;
 	}
 
-	private DetectForm detectForm = new DetectForm();
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
-		
+
 		setWebEngine(webEngine);
-		
+
 		back.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/backword1.png"))));
+		back.setStyle("");
 		forward.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/forward1.png"))));
 		refresh.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/refresh.png"))));
 		search.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/search.png"))));
-		search.setOpacity(.5);
+		search.setId("search");
 		download.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/download.png"))));
-		download.setOpacity(.6);
 		bookmark.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/bookmark.png"))));
-		bookmark.setOpacity(.7);
 		htmlAsPdf.setGraphic(new ImageView(new Image (getClass().getResourceAsStream("/pdfConverter.png"))));
-		
-		
-		
-		
+
 		// Worker load the page
 		worker = webEngine.getLoadWorker();
 		worker.stateProperty().addListener(new ChangeListener<State>() {
@@ -147,7 +176,9 @@ public class TabController implements Initializable
 				System.out.println("Loading state: " + newValue.toString());
 				if (newValue == Worker.State.SUCCEEDED) {
 					System.out.println("Finish!");
+
 					org.w3c.dom.Document doc = webEngine.getDocument();
+					DetectForm detectForm = new DetectForm();
 					detectForm.detect(doc);
 //					String imgs = "";
 //					 File f = new File(getClass().getResource("/screenshots").getFile());
@@ -182,9 +213,16 @@ public class TabController implements Initializable
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
 				System.out.println("location of engine: "+newValue);
 				dwnlod.startDownload(newValue,webEngine.getTitle());
-			
+
+			//	if (!webEngine.getTitle().equals(null)) {
+				//		System.out.println("Title: " + webEngine.getTitle());
+						
+						
+					//}
+
 			}
 		});
+		
 
 		progressbar.progressProperty().bind(worker.progressProperty());
 
@@ -199,8 +237,29 @@ public class TabController implements Initializable
 
 		});
 		
-		// Search Field Listener
+		htmlAsPdf.addEventHandler(MouseEvent.MOUSE_CLICKED, (e)->{
+			
+			System.out.println("Ht");
+			
+			// When the menu click Hamburger and DrawerStack will hide
+			
+			//---- if htmlPDf button click if you wanna hide hamburger bar then call below onClickHideHamburger()
+			
+			/*Platform.runLater(new  Runnable() {
+				public void run() {
+				//	menviewObject.onClickHideHamburger();
+				
+				}
+			});*/
+			System.out.println("Save As PDF");
+			// tab.setText("Save As Pdf");
+			// tab.setId("saveAsPdf");
+
+		});
 		
+
+		// Search Field Listener
+
 		searchField.setOnKeyPressed(event -> {
 
 			if (event.getCode() == KeyCode.ENTER) {
@@ -223,6 +282,8 @@ public class TabController implements Initializable
 		String [] array = {"a","bb","cc"};
 		TextFields.bindAutoCompletion(searchField, array);
 		
+
+		TextFields.bindAutoCompletion(searchField, array);
 
 		back.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
 			try {
@@ -248,7 +309,6 @@ public class TabController implements Initializable
 		});
 
 		bookmark.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
-			
 
 			Label bookmarksLabel = new Label("Bookmarks");
 			VBox popUpContent = new VBox();
@@ -258,22 +318,26 @@ public class TabController implements Initializable
 			popUpContent.setPadding(new Insets(5, 5, 5, 5));
 			Label nameLabel = new Label("Name");
 			JFXTextField markNameText = new JFXTextField();
+
 			markNameText.setText(webEngine.getTitle());
 			Label folderLabel = new Label("Folder");
 			options =  BookMarksDataBase.folders();
 			JFXComboBox<String> markFolderList = new JFXComboBox<>(options);
 			markFolderList.setMinWidth(300);
 			markFolderList.getSelectionModel().select(0);
+
 			JFXButton cancelPopup = new JFXButton("Cancel");
 			cancelPopup.setMinSize(100, 50);
 			JFXButton newFolderMarkFolder = new JFXButton("New Folder");
 			newFolderMarkFolder.setMinSize(100, 50);
 			JFXButton saveMark = new JFXButton("Save");
 			saveMark.setMinSize(100, 50);
+
 			HBox hbox = new HBox();
 			hbox.getChildren().addAll(cancelPopup, newFolderMarkFolder,saveMark);
 			//markFolderList.setVisibleRowCount(0);
 			
+
 			VBox.setMargin(bookmarksLabel, new Insets(5, 5, 5, 5));
 			VBox.setMargin(nameLabel, new Insets(5, 5, 5, 5));
 			VBox.setMargin(markNameText, new Insets(5, 5, 5, 5));
@@ -368,6 +432,4 @@ public class TabController implements Initializable
 		return hamburger;
 	}
 	
-	
-
 }

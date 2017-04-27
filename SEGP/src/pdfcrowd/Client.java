@@ -379,7 +379,8 @@ public class Client {
 
 
     private final static HostnameVerifier HOSTNAME_VERIFIER = new HostnameVerifier() {
-        public boolean verify(String hostname, SSLSession session) {
+        @Override
+		public boolean verify(String hostname, SSLSession session) {
             return true;
             //return "pdfcrowd.com".equals(hostname);
         }

@@ -1,24 +1,13 @@
 package bookmarks;
 
-import java.io.IOException;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.ResourceBundle;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
-import com.jfoenix.controls.JFXTreeTableView;
-
 import database.BookMarksDataBase;
-import javafx.beans.Observable;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.scene.control.SelectionModel;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -27,7 +16,6 @@ import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.TreeTableView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.control.TreeTableColumn.CellDataFeatures;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -87,7 +75,8 @@ public class BookMarks {
 		table.getColumns().addAll(nameCol,locationCol,dateCol,timeCol);
 		table.setItems(list);
 	}
-	public Tab getBookmarkView(Tab bookmarkTab, BorderPane borderPaneBookmark) {
+	public Tab getBookmarkView(Tab bookmarkTab) {
+		BorderPane borderPaneBookmark = new BorderPane();
 		treeView.setMinWidth(150);
 		treeView.setMaxWidth(150);
 		borderPaneBookmark.setLeft(treeView);

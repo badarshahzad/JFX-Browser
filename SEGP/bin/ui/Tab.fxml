@@ -25,7 +25,7 @@
                <columnConstraints>
                   <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="5.0" percentWidth="3.0" prefWidth="5.0" />
                   <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="5.0" percentWidth="3.0" prefWidth="5.0" />
-                  <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="5.0" minWidth="5.0" percentWidth="3.0" prefWidth="5.0" />
+                  <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="5.0" percentWidth="3.0" prefWidth="5.0" />
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="200.0" />
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="25.0" minWidth="20.0" prefWidth="25.0" />
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="25.0" minWidth="20.0" prefWidth="25.0" />
