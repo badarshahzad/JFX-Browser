@@ -38,36 +38,15 @@ public class SettingController implements Initializable {
 
 	public Tab getSettingView(Tab settingTab, BorderPane borderpane) {
 
-		JFXButton setting = new JFXButton("Setting");
-		setting.setMinSize(100, 50);
-		JFXButton history = new JFXButton("History");
-		history.setMinSize(100, 50);
-		
 		/*
 		 * Add two buttons in gridpane that will be put in
 		 * drawer->drawerstack(container) -> left side of border to come ount
 		 * whenever user click the setting button
 		 */
-		VBox vboxLeftDarwer= new VBox();
-		vboxLeftDarwer.setSpacing(10);
-		vboxLeftDarwer.getChildren().addAll(setting,history);
 
 		// ------------------------------------------------------Right----DrawerStack--------------------------------
 
-		// Alredy detialed mention in Hamburger class about JFx DrawerStack and
-		// JFXDrawer
-		JFXDrawersStack drawersStack = new JFXDrawersStack();
-		drawersStack.setId("leftDrawerStack");
-		//drawersStack.setStyle("-fx-opacity:0.7");
-		JFXDrawer leftDrawer = new JFXDrawer();
-		leftDrawer.setDirection(DrawerDirection.LEFT);
-		leftDrawer.setDefaultDrawerSize(120);
-		leftDrawer.setSidePane(vboxLeftDarwer);
-		leftDrawer.setResizableOnDrag(true);
-
 		// Setting the left side of Borderpane drawerstack container
-		borderpane.setLeft(drawersStack);
-		System.out.println("Setting fxml is ready ");
 		try {
 			// ScrollPane scrollPane = new ScrollPane();
 			System.out.println("Setting fxml is ready to set");
@@ -79,7 +58,6 @@ public class SettingController implements Initializable {
 		}
 
 		// borderpane.setCenter(root);
-		drawersStack.toggle(leftDrawer);
 		settingTab.setContent(borderpane);
 
 		return settingTab;
