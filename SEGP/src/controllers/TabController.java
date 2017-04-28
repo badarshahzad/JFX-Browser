@@ -111,7 +111,7 @@ public class TabController implements Initializable {
     @FXML
     private JFXProgressBar progressbar;
 
-	private String folder;
+	private String folder = null;
 	String title;
 	ObservableList<String> options;
 
@@ -321,7 +321,7 @@ public class TabController implements Initializable {
 
 			markNameText.setText(webEngine.getTitle());
 			Label folderLabel = new Label("Folder");
-			options =  BookMarksDataBase.folders();
+			options =  BookMarksDataBase.folders(1);
 			JFXComboBox<String> markFolderList = new JFXComboBox<>(options);
 			markFolderList.setMinWidth(300);
 			markFolderList.getSelectionModel().select(0);
@@ -361,11 +361,11 @@ public class TabController implements Initializable {
 			});
 			saveMark.addEventHandler(MouseEvent.MOUSE_CLICKED, (s)->{
 				System.out.println(folder);
-				if(folder==null){
+				if(folder.equals(null)){
 					folder=markFolderList.getItems().get(0);
 				}
 				 title = markNameText.getText();
-				if(title==null){
+				if(title.equals(null)){
 					title = webEngine.getTitle();
 				}
 				BookMarksDataBase.insertBookmarks(searchField.getText(), folder,title,1);
@@ -373,17 +373,20 @@ public class TabController implements Initializable {
 			});
 			newFolderMarkFolder.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
 				
-				TextInputDialog dialog = new TextInputDialog("walter");
+				TextInputDialog dialog = new TextInputDialog("All Bookmarks");
 				dialog.setTitle("Create New Folder");
 				dialog.setHeaderText("Create New Folder");
 				dialog.setContentText("Please enter folder name:");
 				Optional<String> result = dialog.showAndWait();
 				result.ifPresent(name ->{
-					if(!name.equals("")){
+					if(name.equals(null)){
 						this.folder = name;
 						options.add(folder);
+					}else{
+						
 					}
-					if(title==null){
+					if(title.equals(null)){
+						System.out.println("null title");
 						title = webEngine.getTitle();
 					}
 					BookMarksDataBase.insertBookmarks(searchField.getText(), folder,title,1);

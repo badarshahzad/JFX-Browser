@@ -35,7 +35,7 @@ public class BookMarks {
 	private TreeTableView<String> treeView  = new TreeTableView<>();
 	private TreeTableColumn<String, String> bookMarkCol = new TreeTableColumn<>("BookMarks");
 	TreeItem parentFolder = new TreeItem<>("All Bookmarks",new ImageView(folderImage));
-	private ObservableList<String> folders = BookMarksDataBase.folders();
+	private ObservableList<String> folders = BookMarksDataBase.folders(1);
  	
 	public BookMarks(){
 		for(int i=0 ; i< folders.size();i++){
