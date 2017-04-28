@@ -19,6 +19,7 @@ import org.controlsfx.control.PopOver;
 import org.controlsfx.control.textfield.TextFields;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Worker;
 import javafx.concurrent.Worker.State;
@@ -151,6 +152,14 @@ public class TabController implements Initializable {
 		bookmark.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/bookmark.png"))));
 		htmlAsPdf.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/pdfConverter.png"))));
 
+		
+		back.setId("header");
+		forward.setId("headerMenuLabel");
+		refresh.setId("headerMenuLabel");
+		search.setId("headerMenuLabel");
+		bookmark.setId("headerMenuLabel");
+		htmlAsPdf.setId("headerMenuLabel");
+		
 		// Worker load the page
 		worker = webEngine.getLoadWorker();
 		worker.stateProperty().addListener(new ChangeListener<State>() {
@@ -215,7 +224,7 @@ public class TabController implements Initializable {
 
 		progressbar.progressProperty().bind(worker.progressProperty());
 
-		pageRender("https://www.google.com.pk/webhp?sourceid=chrome-instant&ion=1&espv=2&ie=UTF-8");
+	//	pageRender("https://www.google.com.pk/webhp?sourceid=chrome-instant&ion=1&espv=2&ie=UTF-8");
 
 		ham.getHamburger(hamburger, borderpane, tabPane);
 
@@ -262,10 +271,11 @@ public class TabController implements Initializable {
 		});
 		// This will drop down list suggestion keywords
 
-		String[] array = { "a", "bb", "cc" };
-		TextFields.bindAutoCompletion(searchField, array);
-
-		TextFields.bindAutoCompletion(searchField, array);
+		String[] array = { "a", "bb", "cc" ,"badar","kaka"};
+		
+		ObservableList<HistoryStoreView> fullHistory = FXCollections.observableArrayList();
+		fullHistory = fullHistory = HistoryManagment.fullHistoryShow(fullHistory);
+		TextFields.bindAutoCompletion(searchField,fullHistory);
 
 		back.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
 			try {
@@ -309,16 +319,25 @@ public class TabController implements Initializable {
 			markFolderList.getSelectionModel().select(0);
 
 			JFXButton cancelPopup = new JFXButton("Cancel");
-			cancelPopup.setMinSize(100, 50);
+			cancelPopup.setMinSize(100, 30);
+			
 			JFXButton newFolderMarkFolder = new JFXButton("New Folder");
-			newFolderMarkFolder.setMinSize(100, 50);
+			newFolderMarkFolder.setMinSize(100, 30);
+			
 			JFXButton saveMark = new JFXButton("Save");
-			saveMark.setMinSize(100, 50);
+			saveMark.setMinSize(100, 30);
 
 			HBox hbox = new HBox();
+			hbox.setSpacing(5);
 			hbox.getChildren().addAll(cancelPopup, newFolderMarkFolder, saveMark);
 			// markFolderList.setVisibleRowCount(0);
 
+			bookmarksLabel.setId("bookmarkLabel");
+			nameLabel.setId("bookmarkLabel");
+			markFolderList.setId("bookmarkLabel");
+			folderLabel.setId("bookmarkLabel");
+			markFolderList.setId("bookmarkLabel");
+			
 			VBox.setMargin(bookmarksLabel, new Insets(5, 5, 5, 5));
 			VBox.setMargin(nameLabel, new Insets(5, 5, 5, 5));
 			VBox.setMargin(markNameText, new Insets(5, 5, 5, 5));

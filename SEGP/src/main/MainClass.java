@@ -46,6 +46,7 @@ public class MainClass extends Application {
 		scene.getStylesheets().add(getClass().getResource("/stylesheet.css").toExternalForm());
 		stage.setScene(scene);
 		setStage(stage);
+		
 		stage.show();
 	}
 /*
@@ -72,6 +73,7 @@ public class MainClass extends Application {
 	public static void main(String[] args) {
 
 		launch(args);
+		System.exit(1);
 	}
 
 }

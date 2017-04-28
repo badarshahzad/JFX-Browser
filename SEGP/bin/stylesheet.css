@@ -1,35 +1,32 @@
 
 
- 
-.animated-option-button {
-	-fx-pref-width:50px;
-	-fx-background-color:#4c4c4c;
-	-fx-background-radius:50px;
-	-fx-pref-height:50px;
-	-fx-text-fill:white;
-	-fx-border-color:WHITE;
-	-fx-border-radius: 50px; 
-	-fx-border-width: 4px;
-}
-
-
-#setting .button {
-	-fx-background-radius: 25;
-}
-
-#leftDrawerStack .button{
-
-}
-
-#leftDrawerStack .button:hover{
-	
-		
-}
-
 
 /*******************************************************************************
  *                                                                             *
- * Tab / Setting TabPane									                                       *
+ * Button   												                   *
+ *                                                                             *
+ ******************************************************************************/
+#button .button {
+	-fx-text-fill-color:white;
+	-fx-border-radius: 5 5 5 5, 5 5 5 5;
+    -fx-border-color: #2959ea;
+    -fx-border-width: 2;
+    -fx-background-radius: 0;
+    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-size: 11pt;
+    -fx-background-color:derive(#2959ea,20.0%);
+    
+}
+#button  .button:hover {
+    -fx-background-color: derive(#2959ea,50.0%);
+}
+#setting .button {
+	-fx-background-radius: 5;
+}
+
+/*******************************************************************************
+ *                                                                             *
+ * Tab / Setting TabPane									                   *
  *                                                                             *
  ******************************************************************************/
 
@@ -60,7 +57,7 @@
  *                                                                             *
  ******************************************************************************/
 
-.label:hover {
+#header .label:hover {
      -fx-background-color: derive(#777777,80.0%);
     
 }

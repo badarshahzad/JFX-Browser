@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
+import java.net.SocketTimeoutException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -136,7 +137,10 @@ public class DownloadThread extends Thread{
 				connection.disconnect();
 			}
 
-		}catch(FileNotFoundException e){
+		}catch(SocketTimeoutException e){
+			System.out.println("Connection is not establishs...");
+		}
+		catch(FileNotFoundException e){
 			System.err.println("Error While Downloading : file not found . ");
 			e.printStackTrace();
 		}catch(ProtocolException e){
@@ -158,7 +162,7 @@ public class DownloadThread extends Thread{
 			// TODO Auto-generated catch block
 			System.out.println("Exception occured in filTitle URL.");
 			e.printStackTrace();
-		}
+		} 
 
 
 	}

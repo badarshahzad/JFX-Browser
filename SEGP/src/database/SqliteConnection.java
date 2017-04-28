@@ -9,7 +9,9 @@ import java.sql.SQLException;
 
 import org.controlsfx.control.Notifications;
 
+import controllers.HistoryController;
 import db.beans.Users;
+import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.util.Duration;
@@ -36,25 +38,25 @@ public class SqliteConnection {
 		String sql = "Select * from users where username = ? and password = ?";
 		ResultSet rs = null;
 		try (
-				//Connection conn = DriverManager.getConnection("jdbc:sqlite:History.db");
-				PreparedStatement stmt = Connector().prepareStatement(sql);
-				) {
+				// Connection conn =
+				// DriverManager.getConnection("jdbc:sqlite:History.db");
+				PreparedStatement stmt = Connector().prepareStatement(sql);) {
 			stmt.setString(1, username);
 			stmt.setString(2, password);
 			rs = stmt.executeQuery();
-			
-			if(rs.next()){
+
+			if (rs.next()) {
 				Users userBean = new Users();
 				userBean.setFirstName(rs.getString("name"));
 				userBean.setEmail(username);
 				userBean.setPassword(password);
 				userBean.setPin(rs.getString("pin"));
 				return userBean;
-			}else{
-				
+			} else {
+
 				return null;
 			}
-			
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -62,5 +64,52 @@ public class SqliteConnection {
 		return null;
 
 	}
-	
+
+	public static void excuteQuery(String deleteItem) {
+		String sql = "delete from history where url = ?;";
+
+		// Connection conn =
+		// DriverManager.getConnection("jdbc:sqlite:History.db");
+		PreparedStatement stmt;
+		try {
+			stmt = Connector().prepareStatement(sql);
+			stmt.setString(1, deleteItem);
+			stmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public static ObservableList getFullHistory(ObservableList fullHistory) {
+
+		ResultSet rs = null;
+		PreparedStatement perp;
+		try {
+			// Class.forName("org.sqlite.JDBC");
+			// c = DriverManager.getConnection("jdbc:sqlite:History.db");
+			String str = "select * from history";
+			perp = Connector().prepareStatement(str);
+			rs = perp.executeQuery();
+
+			while (rs.next()) // loop for data fetching and pass it to GUI table
+								// view
+			{
+				String link1 = rs.getString(1);
+				String time1 = rs.getString(2);
+				String date1 = rs.getString(3);
+				String domain1 = rs.getString(4);
+				String title1 = rs.getString(5);
+
+				fullHistory = HistoryController.addDataInList(link1, time1, date1, domain1, title1, fullHistory);
+			}
+			rs.close();
+			perp.close();
+			SqliteConnection.Connector().close();
+		} catch (Exception e) {
+			System.out.println("Issues in fullHistoryShow method");
+		}
+		return fullHistory;
+	}
+
 }

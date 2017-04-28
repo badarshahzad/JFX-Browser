@@ -70,7 +70,6 @@ public class MainController implements Initializable {
 		// closing tabs
 		addNewTab.setClosable(false);
 		addNewTab.setId("addNewTab");
-		
 
 		tabPane.setTabClosingPolicy(TabClosingPolicy.ALL_TABS);
 		// ------tabPane.setFocusTraversable(false);

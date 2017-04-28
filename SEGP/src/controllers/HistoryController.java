@@ -15,6 +15,7 @@ import com.jfoenix.controls.RecursiveTreeItem;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 
 import database.HistoryManagment;
+import database.SqliteConnection;
 import javafx.application.Application;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -28,6 +29,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.PieChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
@@ -55,14 +61,19 @@ public class HistoryController implements Initializable {
 	private BorderPane borderPaneHistory;
 	@FXML
 	private JFXTreeTableView<HistoryStoreView> table;
-	 
+
 	@FXML
 	JFXTextField search;
 
 	@FXML
-	private VBox vBox;
+	private VBox paneForChart;
+	
+    @FXML
+    private PieChart historyPieChart;
+	
 	@FXML
-	private JFXButton btn;
+	private VBox vBox;
+
 	@FXML
 	private TreeView treeView;
 	@FXML
@@ -100,6 +111,35 @@ public class HistoryController implements Initializable {
 		handleMouseClicked(event);
 	};
 
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+
+		deleteSingle.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
+			StringProperty selectedItem = table.getSelectionModel().getSelectedItem().getValue().link1;
+			if (!selectedItem.equals(null)) {
+				System.out.println("Index to be deleted:" + selectedItem.getValue());
+				SqliteConnection.excuteQuery(selectedItem.getValue());
+
+				// Update the history table
+				ObservableList<HistoryStoreView> fullHistory = FXCollections.observableArrayList();
+				fullHistory = SqliteConnection.getFullHistory(fullHistory);
+				addListInTable(fullHistory);
+				table.refresh();
+				System.out.println("History updated check!");
+				// addListInTable(fullHistory);
+				// System.out.println("Value of index
+				// "+table.getSelectionModel().getSelectedItem().valueProperty();
+			} else {
+				return;
+			}
+
+		});
+		
+		System.out.println("kakaka");
+		initializingView();
+		initializeListsWithData();
+
+	}
 	private void handleMouseClicked(MouseEvent event) {
 		Node node = event.getPickResult().getIntersectedNode();
 		// Accept clicks only on node cells, and not on empty spaces of the
@@ -130,7 +170,9 @@ public class HistoryController implements Initializable {
 				addListInTable(pastMonthHistory);
 			}
 
-			borderPaneHistory.setCenter(table);
+			// table.setMinWidth(600);
+			// table.setMaxWidth(800);
+			// borderPaneHistory.setCenter(table);
 
 		}
 	}
@@ -152,13 +194,13 @@ public class HistoryController implements Initializable {
 		rootItem = new TreeItem("History");
 		rootItem.getChildren().addAll(storeItems);
 		treeView.setRoot(rootItem);
-		treeView.setPrefWidth(200);
-		borderPaneHistory.setLeft(treeView);
+		// treeView.setPrefWidth(200);
+		// borderPaneHistory.setLeft(treeView);
 		treeView.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEventHandle);
 		// Border pane Middle view
 		fullHistory = HistoryManagment.fullHistoryShow(fullHistory);
 		addListInTable(fullHistory);
-		borderPaneHistory.setCenter(table);
+		// borderPaneHistory.setCenter(table);
 		// drawersStack.setContent(vBox);
 		// all View in tab
 
@@ -213,7 +255,7 @@ public class HistoryController implements Initializable {
 
 		final TreeItem<HistoryStoreView> root = new RecursiveTreeItem<HistoryStoreView>(list,
 				RecursiveTreeObject::getChildren);
-		
+
 		table.getColumns().setAll(dateCol, linkCol, timeCol, domainCol, titleCol);
 		table.setRoot(root);
 		table.setShowRoot(false);
@@ -252,8 +294,6 @@ public class HistoryController implements Initializable {
 
 	}
 
-	
-	
 	@FXML
 	public void SearchDataInTable() {
 		System.out.println("lalala");
@@ -271,22 +311,7 @@ public class HistoryController implements Initializable {
 		return list;
 	}
 
-	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
-		
-		deleteSingle.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
-			 int selectedItem =  table.getSelectionModel().getSelectedIndex();
-			System.out.println("Index to be deleted:"+table.getSelectionModel().getSelectedCells().indexOf(selectedItem));
-			//System.out.println("Value of index "+table.getSelectionModel().getSelectedItem().valueProperty();
-			 
-			    
-		});
-		
-		System.out.println("kakaka");
-		initializingView();
-		initializeListsWithData();
 
-	}
 }
 
 class HistoryStoreView extends RecursiveTreeObject<HistoryStoreView> {
