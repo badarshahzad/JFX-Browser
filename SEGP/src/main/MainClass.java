@@ -37,6 +37,7 @@ public class MainClass extends Application {
 			}
 
 			if (event.getCode() == KeyCode.T && event.isControlDown()) {
+				
 				MainController mainCont = new MainController();
 				mainCont.creatNewTab(mainCont.getTabPane(), mainCont.getAddNewTab());
 

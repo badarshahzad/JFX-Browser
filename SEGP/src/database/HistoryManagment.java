@@ -10,6 +10,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 import controllers.HistoryController;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 public class HistoryManagment
 {
@@ -113,6 +114,8 @@ public static  ObservableList fullHistoryShow(ObservableList fullHistory)
     	String date1=rs.getString(3);
     	String domain1=rs.getString(4);
     	String title1=rs.getString(5);
+    	
+    	//System.out.println(link1, time1,date1,domain1,title1);
     	fullHistory=HistoryController.addDataInList(link1, time1,date1,domain1,title1,fullHistory);
     	}
     	rs.close();
@@ -126,6 +129,37 @@ public static  ObservableList fullHistoryShow(ObservableList fullHistory)
 return fullHistory;
 }
 
+
+public static  ObservableList getDomainNames(ObservableList domainNames)
+{
+	
+	ResultSet rs=null;
+	try
+	{
+    String str="select url from history";
+    perp=SqliteConnection.Connector().prepareStatement(str);
+    rs=perp.executeQuery();
+  
+    	while(rs.next()) //loop for data fetching and pass it to GUI table view
+    	{
+    	String link1 =rs.getString(1);
+    	
+    	ObservableList<String> domainNamesList = FXCollections.observableArrayList();
+    	domainNamesList.add(link1);
+    	
+    	System.out.println(domainNamesList);
+    	//System.out.println(link1, time1,date1,domain1,title1);
+    	}
+    	rs.close();
+    	perp.close();
+    	SqliteConnection.Connector().close();
+	}
+	catch(Exception e)
+	{
+	System.out.println("Issues in fullHistoryShow method");
+	}
+return domainNames;
+}
 //------------------------------------this method return user specified histories--------------------------------------------------------------------//1
 public static ObservableList getHistory(ObservableList list,int dateRange)
 {

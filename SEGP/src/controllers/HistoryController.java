@@ -115,8 +115,16 @@ public class HistoryController implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 
 		deleteSingle.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
+		
 			StringProperty selectedItem = table.getSelectionModel().getSelectedItem().getValue().link1;
-			if (!selectedItem.equals(null)) {
+			System.out.println("Kaka Daikh wat : "+selectedItem);
+			
+			if (selectedItem.equals(null)) {
+				
+			System.out.println("wa");
+			
+				
+			} else {
 				System.out.println("Index to be deleted:" + selectedItem.getValue());
 				SqliteConnection.excuteQuery(selectedItem.getValue());
 
@@ -129,7 +137,6 @@ public class HistoryController implements Initializable {
 				// addListInTable(fullHistory);
 				// System.out.println("Value of index
 				// "+table.getSelectionModel().getSelectedItem().valueProperty();
-			} else {
 				return;
 			}
 
@@ -305,12 +312,12 @@ public class HistoryController implements Initializable {
 
 	}
 
+	
 	public static ObservableList addDataInList(String link, String time, String date, String domain, String title,
 			ObservableList list) {
 		list.add(new HistoryStoreView(date, link, time, domain, title));
 		return list;
 	}
-
 
 }
 

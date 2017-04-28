@@ -5,6 +5,7 @@
 <?import com.jfoenix.controls.JFXTreeTableView?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TreeView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -14,57 +15,63 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane fx:id="borderPaneHistory" prefHeight="658.0" prefWidth="946.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.HistoryController">
-   <left>
-      <VBox minHeight="600.0" minWidth="250.0" prefHeight="600.0" prefWidth="250.0" BorderPane.alignment="CENTER">
-         <children>
-            <TreeView fx:id="treeView" prefHeight="212.0" prefWidth="240.0">
-               <VBox.margin>
-                  <Insets bottom="5.0" left="5.0" right="5.0" />
-               </VBox.margin></TreeView>
-            <PieChart fx:id="pieChart" />
-         </children>
-         <BorderPane.margin>
-            <Insets top="5.0" />
-         </BorderPane.margin>
-      </VBox>
-   </left>
-   <center>
-      <JFXTreeTableView fx:id="table" BorderPane.alignment="CENTER" />
-   </center>
-   <top>
-      <GridPane BorderPane.alignment="CENTER">
-         <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="400.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="30.0" minWidth="5.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="150.0" minWidth="10.0" prefWidth="150.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
-         </columnConstraints>
-         <rowConstraints>
-            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-         </rowConstraints>
-         <children>
-            <JFXTextField fx:id="search" onMouseClicked="#SearchDataInTable" GridPane.columnIndex="1" />
-            <JFXButton fx:id="btn" buttonType="RAISED" onMouseClicked="#deleteHistory" opacity="0.9" prefHeight="30.0" prefWidth="103.0" ripplerFill="#e71b26" style="-fx-background-color: #e71b26;" text="Clear History" GridPane.columnIndex="4">
-               <GridPane.margin>
-                  <Insets bottom="5.0" left="20.0" right="5.0" top="5.0" />
-               </GridPane.margin>
-            </JFXButton>
-            <JFXButton fx:id="deleteSingle" buttonType="RAISED" opacity="0.9" prefHeight="30.0" prefWidth="125.0" ripplerFill="#eb3b3b" style="-fx-background-color: #eb3b3b;" text="Delete Seleted" GridPane.columnIndex="3">
-               <GridPane.margin>
-                  <Insets bottom="5.0" left="20.0" right="5.0" top="5.0" />
-               </GridPane.margin>
-            </JFXButton>
-            <ImageView fitHeight="27.0" fitWidth="28.0" GridPane.columnIndex="2">
-               <image>
-                  <Image url="@../../img/search.png" />
-               </image>
-            </ImageView>
-         </children>
-         <BorderPane.margin>
-            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-         </BorderPane.margin>
-      </GridPane>
-   </top>
-</BorderPane>
+
+<ScrollPane xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.HistoryController">
+   <content>
+      <BorderPane fx:id="borderPaneHistory" prefHeight="658.0" prefWidth="946.0">
+         <left>
+            <VBox fx:id="paneForChart" minHeight="600.0" minWidth="250.0" prefHeight="600.0" prefWidth="250.0" BorderPane.alignment="CENTER">
+               <children>
+                  <TreeView fx:id="treeView" prefHeight="212.0" prefWidth="240.0">
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" />
+                     </VBox.margin>
+                  </TreeView>
+                  <PieChart fx:id="historyPieChart" />
+               </children>
+               <BorderPane.margin>
+                  <Insets top="5.0" />
+               </BorderPane.margin>
+            </VBox>
+         </left>
+         <center>
+            <JFXTreeTableView fx:id="table" BorderPane.alignment="CENTER" />
+         </center>
+         <top>
+            <GridPane BorderPane.alignment="CENTER">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="400.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="30.0" minWidth="5.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="150.0" minWidth="10.0" prefWidth="150.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <JFXTextField fx:id="search" onMouseClicked="#SearchDataInTable" GridPane.columnIndex="1" />
+                  <JFXButton fx:id="btn" buttonType="RAISED" onMouseClicked="#deleteHistory" opacity="0.9" prefHeight="30.0" prefWidth="103.0" ripplerFill="#3c7cea" style="-fx-background-color: #3c7cea;" text="Clear History" GridPane.columnIndex="4">
+                     <GridPane.margin>
+                        <Insets bottom="5.0" left="20.0" right="5.0" top="5.0" />
+                     </GridPane.margin>
+                  </JFXButton>
+                  <JFXButton fx:id="deleteSingle" buttonType="RAISED" opacity="0.9" prefHeight="30.0" prefWidth="125.0" ripplerFill="#3c7cea" style="-fx-background-color: #3c7cea;" text="Delete Seleted" GridPane.columnIndex="3">
+                     <GridPane.margin>
+                        <Insets bottom="5.0" left="20.0" right="5.0" top="5.0" />
+                     </GridPane.margin>
+                  </JFXButton>
+                  <ImageView fitHeight="27.0" fitWidth="28.0" GridPane.columnIndex="2">
+                     <image>
+                        <Image url="@../../img/search.png" />
+                     </image>
+                  </ImageView>
+               </children>
+               <BorderPane.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </BorderPane.margin>
+            </GridPane>
+         </top>
+      </BorderPane>
+   </content>
+</ScrollPane>

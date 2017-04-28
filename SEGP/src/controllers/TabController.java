@@ -10,6 +10,8 @@ import database.BookMarksDataBase;
 import database.HistoryManagment;
 import downloader.MainDownload;
 
+import java.util.regex.*;  
+
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -256,11 +258,32 @@ public class TabController implements Initializable {
 		// Search Field Listener
 
 		searchField.setOnKeyPressed(event -> {
-
+			
+			Pattern p = Pattern.compile("[a-z]*[ ]*[A-Z]*[ ]*[0-9]*[ ]");//. represents single character  
+			Matcher m = p.matcher(searchField.getText());  
+			boolean b = m.matches();
+			
 			if (event.getCode() == KeyCode.ENTER) {
-				pageRender(searchField.getText()); // method call
+				
+				if(b){
+					pageRender("https://www.google.com.pk/search?q="+searchField.getText()); // method call
+				}else {
+					pageRender(searchField.getText()); // method call
+				}
 			}
+			
+			ObservableList<String> domainNames = FXCollections.observableArrayList();
+			domainNames = HistoryManagment.getDomainNames(domainNames);
+		
+			if (event.getCode() == KeyCode.S && event.isControlDown()) {
+				
+				TextFields.bindAutoCompletion(searchField,domainNames);
+				
+			}
+			
 		});
+		
+		//System.out.println("Full history index 0: +"+fullHistory.get(0));
 
 		// Tabpane listener for new tab or for security password: @testing phase
 		tabPane.setOnKeyPressed(event -> {
@@ -270,13 +293,7 @@ public class TabController implements Initializable {
 			 */
 		});
 		// This will drop down list suggestion keywords
-
-		String[] array = { "a", "bb", "cc" ,"badar","kaka"};
 		
-		ObservableList<HistoryStoreView> fullHistory = FXCollections.observableArrayList();
-		fullHistory = fullHistory = HistoryManagment.fullHistoryShow(fullHistory);
-		TextFields.bindAutoCompletion(searchField,fullHistory);
-
 		back.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
 			try {
 
