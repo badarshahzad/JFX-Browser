@@ -361,11 +361,11 @@ public class TabController implements Initializable {
 			});
 			saveMark.addEventHandler(MouseEvent.MOUSE_CLICKED, (s)->{
 				System.out.println(folder);
-				if(folder.equals(null)){
+				if(folder==null){
 					folder=markFolderList.getItems().get(0);
 				}
 				 title = markNameText.getText();
-				if(title.equals(null)){
+				if(title==null){
 					title = webEngine.getTitle();
 				}
 				BookMarksDataBase.insertBookmarks(searchField.getText(), folder,title,1);
@@ -379,13 +379,13 @@ public class TabController implements Initializable {
 				dialog.setContentText("Please enter folder name:");
 				Optional<String> result = dialog.showAndWait();
 				result.ifPresent(name ->{
-					if(name.equals(null)){
+					if(name==null){
 						this.folder = name;
 						options.add(folder);
 					}else{
 						
 					}
-					if(title.equals(null)){
+					if(title==null){
 						System.out.println("null title");
 						title = webEngine.getTitle();
 					}
@@ -422,7 +422,6 @@ public class TabController implements Initializable {
 						HistoryManagment.insertUrl(webEngine.getLocation(),domain.getHost(),webEngine.getTitle());
 					
 				}
-				
 				
 			}
 			
