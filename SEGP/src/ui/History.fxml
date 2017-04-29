@@ -15,14 +15,13 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-
 <ScrollPane xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.HistoryController">
    <content>
-      <BorderPane fx:id="borderPaneHistory" prefHeight="658.0" prefWidth="946.0">
+      <BorderPane fx:id="borderPaneHistory">
          <left>
-            <VBox fx:id="paneForChart" minHeight="600.0" minWidth="250.0" prefHeight="600.0" prefWidth="250.0" BorderPane.alignment="CENTER">
+            <VBox fx:id="paneForChart" minHeight="600.0" minWidth="150.0" prefHeight="600.0" prefWidth="150.0" BorderPane.alignment="CENTER">
                <children>
-                  <TreeView fx:id="treeView" prefHeight="212.0" prefWidth="240.0">
+                  <TreeView fx:id="treeView" opacity="0.8" prefHeight="200.0">
                      <VBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" />
                      </VBox.margin>
@@ -30,13 +29,10 @@
                   <PieChart fx:id="historyPieChart" />
                </children>
                <BorderPane.margin>
-                  <Insets top="5.0" />
+                  <Insets bottom="5.0" left="5.0" />
                </BorderPane.margin>
             </VBox>
          </left>
-         <center>
-            <JFXTreeTableView fx:id="table" BorderPane.alignment="CENTER" />
-         </center>
          <top>
             <GridPane BorderPane.alignment="CENTER">
                <columnConstraints>
@@ -72,6 +68,9 @@
                </BorderPane.margin>
             </GridPane>
          </top>
+         <center>
+            <JFXTreeTableView fx:id="table" minWidth="800.0" prefWidth="1050.0" BorderPane.alignment="CENTER" />
+         </center>
       </BorderPane>
    </content>
 </ScrollPane>

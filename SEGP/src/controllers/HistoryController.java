@@ -37,6 +37,7 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TreeCell;
@@ -61,7 +62,7 @@ public class HistoryController implements Initializable {
 	private BorderPane borderPaneHistory;
 	@FXML
 	private JFXTreeTableView<HistoryStoreView> table;
-
+	
 	@FXML
 	JFXTextField search;
 
@@ -114,6 +115,10 @@ public class HistoryController implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 
+		
+		table.setEditable(false);
+		table.setId("treetable");
+		
 		deleteSingle.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
 		
 			StringProperty selectedItem = table.getSelectionModel().getSelectedItem().getValue().link1;
@@ -154,7 +159,7 @@ public class HistoryController implements Initializable {
 		// TreeView
 		if (node instanceof Text || (node instanceof TreeCell && ((TreeCell) node).getText() != null)) {
 			String name = (String) ((TreeItem) treeView.getSelectionModel().getSelectedItem()).getValue();
-			System.out.println(name);
+			//System.out.println(name);
 			if (name.equals("History")) {
 				addListInTable(fullHistory);
 
@@ -228,7 +233,7 @@ public class HistoryController implements Initializable {
 						return param.getValue().getValue().date1;
 					}
 				});
-		linkCol.setPrefWidth(150);
+		linkCol.setPrefWidth(400);
 		linkCol.setCellValueFactory(
 				new Callback<TreeTableColumn.CellDataFeatures<HistoryStoreView, String>, ObservableValue<String>>() {
 					@Override
@@ -244,7 +249,7 @@ public class HistoryController implements Initializable {
 						return param.getValue().getValue().time1;
 					}
 				});
-		domainCol.setPrefWidth(150);
+		domainCol.setPrefWidth(200);
 		domainCol.setCellValueFactory(
 				new Callback<TreeTableColumn.CellDataFeatures<HistoryStoreView, String>, ObservableValue<String>>() {
 					@Override

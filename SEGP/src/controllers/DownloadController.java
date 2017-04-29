@@ -104,14 +104,17 @@ public class DownloadController  extends Application implements Initializable{
 
 	public void initialize(URL location, ResourceBundle resources) {
 		
+		table.setEditable(false);
+		
 		downloadMenu.addEventHandler(MouseEvent.MOUSE_CLICKED, (e)->{
 			System.out.println("hellow");
 			String url=null,filename=null,status=null ;
 		});
 		table.setOpacity(.8);
-		TableColumn<download, String> url =  new TableColumn<>("File Url");
-		 TableColumn<download, String> fileName =  new TableColumn<>("File Name");
-		 TableColumn<download, String> fileStatus =  new TableColumn<>("File Status");
+		TableColumn<download, String> url =  new TableColumn<>(" Url ");
+		 TableColumn<download, String> fileName =  new TableColumn<>(" Name ");
+		 TableColumn<download, String> fileStatus =  new TableColumn<>(" Status ");
+		 
 			url.setCellValueFactory(new PropertyValueFactory<download,String>("url"));
 			fileName.setCellValueFactory(new PropertyValueFactory<download,String>("fileName"));
 			fileStatus.setCellValueFactory(new PropertyValueFactory<download,String>("fileStatus"));

@@ -10,7 +10,9 @@ import database.BookMarksDataBase;
 import database.HistoryManagment;
 import downloader.MainDownload;
 
-import java.util.regex.*;  
+import java.util.regex.*;
+
+import javax.swing.RootPaneContainer;
 
 import java.io.File;
 import java.net.MalformedURLException;
@@ -115,6 +117,8 @@ public class TabController implements Initializable {
 	public WebView browser = new WebView();
 	public WebEngine webEngine = browser.getEngine();
 
+	private WebHistory history = webEngine.getHistory();
+
 	public Worker<Void> worker;
 
 	private TabPane tabPane = mainController.getTabPane();
@@ -142,20 +146,27 @@ public class TabController implements Initializable {
 
 		setWebEngine(webEngine);
 		searchField.setText("https://www.google.com");
-		
-		//Home Page Link
+
+		// Home Page Link
 		pageRender(searchField.getText());
 
 		back.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/backword1.png"))));
-		back.setStyle("");
+		back.setDisable(true);
+		
 		forward.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/forward1.png"))));
+		forward.setDisable(true);
+		
 		refresh.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/refresh.png"))));
+		
 		search.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/search.png"))));
 		search.setId("search");
-		download.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/download.png"))));
-		bookmark.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/bookmark.png"))));
-		htmlAsPdf.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/pdfConverter.png"))));
 		
+		download.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/download.png"))));
+		
+		bookmark.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/bookmark.png"))));
+		
+		htmlAsPdf.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/pdfConverter.png"))));
+
 		// Worker load the page
 		worker = webEngine.getLoadWorker();
 		worker.stateProperty().addListener(new ChangeListener<State>() {
@@ -165,13 +176,13 @@ public class TabController implements Initializable {
 				System.out.println("Loading state: " + newValue.toString());
 				if (newValue == Worker.State.SUCCEEDED) {
 					System.out.println("Finish!");
-					
+
 					tabPane.getSelectionModel().getSelectedItem().setText(webEngine.getTitle());
 
 					org.w3c.dom.Document doc = webEngine.getDocument();
 					DetectForm detectForm = new DetectForm();
 					detectForm.detect(doc);
-					
+
 					// String imgs = "";
 					// File f = new
 					// File(getClass().getResource("/screenshots").getFile());
@@ -195,7 +206,7 @@ public class TabController implements Initializable {
 					// webEngine.executeScript("if (!window.indexedDB)
 					// window.alert(\"Your browser doesn't support a stable
 					// version of IndexedDB.\")");
-					
+
 				}
 
 			}
@@ -217,8 +228,6 @@ public class TabController implements Initializable {
 		});
 
 		progressbar.progressProperty().bind(worker.progressProperty());
-
-	
 
 		ham.getHamburger(hamburger, borderpane, tabPane);
 
@@ -250,37 +259,38 @@ public class TabController implements Initializable {
 		// Search Field Listener
 
 		searchField.setOnKeyPressed(event -> {
-			
-			Pattern p = Pattern.compile("[a-z]*[ ]*[A-Z]*[ ]*[0-9]*[ ]");//. represents single character  
-			Matcher m = p.matcher(searchField.getText());  
+
+			Pattern p = Pattern.compile("[a-z]*[ ]*[A-Z]*[ ]*[0-9]*[ ]");// .
+																			// represents
+																			// single
+																			// character
+			Matcher m = p.matcher(searchField.getText());
 			boolean b = m.matches();
-			
+
 			if (event.getCode() == KeyCode.ENTER) {
-				
-				if(b){
-					pageRender("https://www.google.com.pk/search?q="+searchField.getText()); // method call
-				}else {
+
+				if (b) {
+					pageRender("https://www.google.com.pk/search?q=" + searchField.getText()); // method
+																								// call
+				} else {
 					pageRender(searchField.getText()); // method call
 				}
 			}
-			
-		
-				
-				ObservableList<String> domainNames = FXCollections.observableArrayList();
-				domainNames = HistoryManagment.getDomainNames(domainNames);
-				String[]array = new String[domainNames.size()];
-				
-				for(int a = 0; a< domainNames.size();a++){
-					array[a] = domainNames.get(a);
-					//System.out.println("Ghin Value"+array[a]);
-				}
-				
-				TextFields.bindAutoCompletion(searchField,array);
-				
-			
+
+			ObservableList<String> domainNames = FXCollections.observableArrayList();
+			domainNames = HistoryManagment.getDomainNames(domainNames);
+			String[] array = new String[domainNames.size()];
+
+			for (int a = 0; a < domainNames.size(); a++) {
+				array[a] = domainNames.get(a);
+				// System.out.println("Ghin Value"+array[a]);
+			}
+
+			TextFields.bindAutoCompletion(searchField, array);
+
 		});
-		
-		//System.out.println("Full history index 0: +"+fullHistory.get(0));
+
+		// System.out.println("Full history index 0: +"+fullHistory.get(0));
 
 		// Tabpane listener for new tab or for security password: @testing phase
 		tabPane.setOnKeyPressed(event -> {
@@ -290,12 +300,14 @@ public class TabController implements Initializable {
 			 */
 		});
 		// This will drop down list suggestion keywords
-		
+
 		back.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
 			try {
 
-				WebHistory history = webEngine.getHistory();
+				System.out.println("Max size :" + history.getEntries().size());
+				System.out.println("Current index backword: " + history.getCurrentIndex());
 				history.go(-1);
+
 			} catch (IndexOutOfBoundsException e1) {
 				System.out.println(e1);
 			}
@@ -303,8 +315,10 @@ public class TabController implements Initializable {
 
 		forward.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
 			try {
-				WebHistory history = webEngine.getHistory();
+				System.out.println("Max size :" + history.getEntries().size());
+				System.out.println("Current index forward: " + history.getCurrentIndex());
 				history.go(1);
+
 			} catch (IndexOutOfBoundsException e1) {
 				System.out.println(e1);
 			}
@@ -334,10 +348,10 @@ public class TabController implements Initializable {
 
 			JFXButton cancelPopup = new JFXButton("Cancel");
 			cancelPopup.setMinSize(100, 30);
-			
+
 			JFXButton newFolderMarkFolder = new JFXButton("New Folder");
 			newFolderMarkFolder.setMinSize(100, 30);
-			
+
 			JFXButton saveMark = new JFXButton("Save");
 			saveMark.setMinSize(100, 30);
 
@@ -351,7 +365,7 @@ public class TabController implements Initializable {
 			markFolderList.setId("bookmarkLabel");
 			folderLabel.setId("bookmarkLabel");
 			markFolderList.setId("bookmarkLabel");
-			
+
 			VBox.setMargin(bookmarksLabel, new Insets(5, 5, 5, 5));
 			VBox.setMargin(nameLabel, new Insets(5, 5, 5, 5));
 			VBox.setMargin(markNameText, new Insets(5, 5, 5, 5));
@@ -416,21 +430,22 @@ public class TabController implements Initializable {
 	// mehtod to rendere page
 
 	MainDownload dwnlod = new MainDownload();
-/*	
-	String titleOfPage;
-	
-	public String  getTitleOfPage(){
-		webEngine.getLoadWorker().stateProperty().addListener(new ChangeListener<State>() {
-			@Override
-			public void changed(ObservableValue ov, State oldState, State newState) {
-					
-				titleOfPage = webEngine.getTitle();
-			}
-		});
-		
-		return titleOfPage;
-				
-	}*/
+	/*
+	 * String titleOfPage;
+	 * 
+	 * public String getTitleOfPage(){
+	 * webEngine.getLoadWorker().stateProperty().addListener(new
+	 * ChangeListener<State>() {
+	 * 
+	 * @Override public void changed(ObservableValue ov, State oldState, State
+	 * newState) {
+	 * 
+	 * titleOfPage = webEngine.getTitle(); } });
+	 * 
+	 * return titleOfPage;
+	 * 
+	 * }
+	 */
 
 	public void pageRender(String url) {
 		webEngine.getLoadWorker().stateProperty().addListener(new ChangeListener<State>() {
@@ -438,12 +453,35 @@ public class TabController implements Initializable {
 			public void changed(ObservableValue ov, State oldState, State newState) {
 
 				if (newState == Worker.State.SUCCEEDED) {
-					
+
 					searchField.setText(webEngine.getLocation());
 
+					// The name of current tab set in Window
 					MainClass.getStage().setTitle(webEngine.getTitle());
+
+					
+					// The backword & forward tab disabled and enable when index
+					// 0 disabled and when > 0 then enabled
+					if (history.getCurrentIndex() == 0) {
+						back.setDisable(true);
+						forward.setDisable(true);
+						if(history.getEntries().size()>1){
+							forward.setDisable(false);	
+						}
+					}
+
+					if (history.getCurrentIndex() > 0) {
+						back.setDisable(false);
+						forward.setDisable(false);
+					}
+
+					if ((history.getCurrentIndex()+1) == history.getEntries().size()) {
+						forward.setDisable(true);
+					}
+					
+					
 					//
-					//MainController.setSelectedTabTitle(webEngine.getTitle());
+					// MainController.setSelectedTabTitle(webEngine.getTitle());
 					// Tab tab = MainController.getFirstTab();
 					// tab.setText(webEngine.getTitle());
 					// MainController.setFirstTab(tab);

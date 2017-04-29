@@ -4,11 +4,20 @@ import controllers.MainController;
 
 import org.controlsfx.control.Notifications;
 
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXDialog;
+import com.jfoenix.controls.JFXDialogLayout;
+import com.jfoenix.controls.JFXTextField;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -19,19 +28,54 @@ import javafx.util.Duration;
 public class MainClass extends Application {
 
 	FXMLLoader loader;
-	MainController object;
+	MainController object = new MainController();
 	static Stage stage;
+	
+	public static Scene sceneCopy ;
+	
+
+	private StackPane pane = new StackPane() ;
 
 	@Override
 	public void start(Stage stage) throws Exception {
+		
+		
 		Parent root = FXMLLoader.load(getClass().getResource("/ui/MainFXML.fxml"));
-		Scene scene = new Scene(root);
+		
+		//borderpane.setCenter(button);
+		
+		//the RootBorder is get to show pin dialoge box that will appear on a screen
+		pane.getChildren().add(root);
+		
+		//JFXButton button1 = new JFXButton("Button1");
+		
+		
+		Scene scene = new Scene(pane);
 
 		scene.setOnKeyPressed(event -> {
  
 			if (event.getCode() == KeyCode.P && event.isControlDown()) {
-				Notifications.create().title("Pin").text("Please type your pin!").hideAfter(Duration.seconds(5))
-						.showInformation();
+				
+				JFXButton okBt = new JFXButton("Ok");
+				JFXDialogLayout content = new JFXDialogLayout();
+				content.setHeading(new Text("Hidden Key"));
+				content.setBody(new Text("Please type your key to access Pro-Version. "));
+				JFXDialog dialoge = new JFXDialog(pane,content,JFXDialog.DialogTransition.CENTER);
+				okBt.addEventHandler(MouseEvent.MOUSE_CLICKED, (e6)->{
+					dialoge.close();
+				});
+
+				JFXTextField textfiled = new JFXTextField();
+				content.setActions(textfiled,okBt);
+
+				//To show overlay dialougge box
+				dialoge.show();	
+
+				Notifications.create()
+				.title("Pin Activation")
+				.text("You are going to access Pro-Verion.")
+				.hideAfter(Duration.seconds(3))
+				.showInformation();
 			}
 
 			if (event.getCode() == KeyCode.T && event.isControlDown()) {
@@ -44,18 +88,22 @@ public class MainClass extends Application {
 
 		scene.getStylesheets().add(getClass().getResource("/stylesheet.css").toExternalForm());
 		stage.setScene(scene);
+		stage.show();
 		
 		setStage(stage);
+		setScene(scene);
 		
-		stage.show();
 	}
-/*
-	private void setStage(Stage stage) {
-		// TODO Auto-generated method stub
-		MainClass.stage = stage;
+
+	private void setScene(Scene scene) {
+		sceneCopy = scene;
 	}
-	*/
 	
+	public static Scene getScene(){
+		return sceneCopy;
+	}
+	
+
 	@SuppressWarnings("static-access")
 	private void setStage(Stage stage) {
 		// TODO Auto-generated method stub

@@ -38,6 +38,9 @@ public class BookMarks {
 	private ObservableList<String> folders = BookMarksDataBase.folders();
  	
 	public BookMarks(){
+		
+		table.setEditable(false);
+		
 		for(int i=0 ; i< folders.size();i++){
 			System.out.println(i);
 			parentFolder.getChildren().add(new TreeItem<>(folders.get(i),new ImageView(folderImage)));

@@ -13,7 +13,14 @@ import java.util.EventListener;
 import java.util.MissingFormatArgumentException;
 import java.util.ResourceBundle;
 
+import javax.swing.RootPaneContainer;
+
 import org.controlsfx.control.Notifications;
+
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXDialog;
+import com.jfoenix.controls.JFXDialogLayout;
+import com.jfoenix.controls.JFXTextField;
 
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
@@ -30,10 +37,13 @@ import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.control.Tab;
 
 import javafx.scene.input.KeyCode;
-
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.util.Duration;
+import main.MainClass;
 import userInterface.Hamburger;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TabPane.TabClosingPolicy;
@@ -46,19 +56,21 @@ public class MainController implements Initializable {
 
 	@FXML
 	private BorderPane rootBorderPane;
+	
 	public Hamburger ham = new Hamburger();
 	public VBox drawerPane = new VBox();
 
 	public static TabPane tabPane = new TabPane();
 
-	private static Tab firstTab = new Tab("First Tab");
-
+	private static Tab firstTab = new Tab("New Tab");
+	
+	
 	public static Tab getFirstTab() {
 		return firstTab;
 	}
 
-	public static void setFirstTab(Tab firstTab) {
-		firstTab = firstTab;
+	public void setFirstTab(Tab firstTab) {
+		this.firstTab = firstTab;
 	}
 
 	private static Tab addNewTab = new Tab("+");
@@ -66,6 +78,8 @@ public class MainController implements Initializable {
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 
+		
+		
 		// ------All opens tabs should be closed so below line is for just
 		// closing tabs
 		addNewTab.setClosable(false);
@@ -100,7 +114,6 @@ public class MainController implements Initializable {
 			}
 		};
 		
-
 	}// end intializer method
 
 	// ---set method for TabPane---
