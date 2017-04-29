@@ -13,6 +13,7 @@ import org.w3c.dom.NodeList;
 import org.w3c.dom.events.Event;
 import org.w3c.dom.events.EventListener;
 import org.w3c.dom.events.EventTarget;
+import org.w3c.dom.html.HTMLBodyElement;
 import org.w3c.dom.html.HTMLFormElement;
 import org.w3c.dom.html.HTMLInputElement;
 
@@ -89,10 +90,9 @@ public class DetectForm {
 			}
 		};
 
-		if (doc!=null && doc.getElementsByTagName("form").getLength() > 0) {
-			for(int k=0;k<doc.getElementsByTagName("form").getLength();k++){
-				HTMLFormElement form = (HTMLFormElement) doc.getElementsByTagName("form").item(k);
-				NodeList nodes = form.getElementsByTagName("input");
+		if (doc!=null && doc.getElementsByTagName("body").getLength() > 0) {
+				HTMLBodyElement bodyElement = (HTMLBodyElement) doc.getElementsByTagName("body").item(0);
+				NodeList nodes = bodyElement.getElementsByTagName("input");
 				for (int i = 0; i < nodes.getLength(); i++) {
 					if(nodes.item(i).hasAttributes()){
 						NamedNodeMap attr = nodes.item(i).getAttributes();
@@ -115,7 +115,7 @@ public class DetectForm {
 
 				}
 				if(isForm){
-					Node button = form.getElementsByTagName("button").item(0);
+					Node button = bodyElement.getElementsByTagName("button").item(0);
 					if(button!=null && button.hasAttributes()){
 						NamedNodeMap attr = button.getAttributes();
 						for(int j=0; j<attr.getLength(); j++){
@@ -136,13 +136,11 @@ public class DetectForm {
 
 
 
-	}
 	public void insert(Document doc){
 		HTMLInputElement username =null,password = null;
-		if (doc!=null && doc.getElementsByTagName("form").getLength() > 0) {
-			for(int k=0;k<doc.getElementsByTagName("form").getLength();k++){
-				HTMLFormElement form = (HTMLFormElement) doc.getElementsByTagName("form").item(k);
-				NodeList nodes = form.getElementsByTagName("input");
+		if (doc!=null && doc.getElementsByTagName("body").getLength() > 0) {
+				HTMLBodyElement body = (HTMLBodyElement) doc.getElementsByTagName("body").item(0);
+				NodeList nodes = body.getElementsByTagName("input");
 				for (int i = 0; i < nodes.getLength(); i++) {
 					if(nodes.item(i).hasAttributes()){
 						NamedNodeMap attr = nodes.item(i).getAttributes();
@@ -176,4 +174,3 @@ public class DetectForm {
 		}
 
 	}
-}
