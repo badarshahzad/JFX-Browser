@@ -3,6 +3,7 @@ package passwordVault;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.Optional;
 
 import org.w3c.dom.Attr;
@@ -30,9 +31,8 @@ public class DetectForm {
 
 
 
-	private HTMLInputElement password = null;
-	private HTMLInputElement username = null;
 	private boolean isForm = false;
+	private ArrayList<UserCredentials> list;
 	//	public void notifcation(javafx.scene.Node node){
 	//		VBox popUpContent = new VBox();
 	//		popUpContent.setMinSize(100, 100);
@@ -61,13 +61,22 @@ public class DetectForm {
 	//		});
 	//	}
 	public void detect(Document doc){
+		HTMLInputElement password = null;
+		HTMLInputElement username = null;
+
 		EventListener listener = new EventListener() {
 			@Override
 			public void handleEvent(Event evt) {
 				System.out.println("action listener from DOM.");
-				String user = username.getValue();
-				String pass = password.getValue();
-				if(!(user.isEmpty()&&pass.isEmpty())){
+				String user = null , pass = null;
+				for(int i=0;i<list.size();i++){
+					user = list.get(i).username.getValue();
+					pass = list.get(i).password.getValue();
+					if(user !=null && pass!=null){
+						break;
+					}
+				}
+				if(user !=null && pass!=null ){
 					Alert alert = new Alert(AlertType.CONFIRMATION);
 					//				alert.setX(50);
 					alert.setTitle("Confirmation Dialog");
@@ -93,6 +102,7 @@ public class DetectForm {
 		if (doc!=null && doc.getElementsByTagName("body").getLength() > 0) {
 				HTMLBodyElement bodyElement = (HTMLBodyElement) doc.getElementsByTagName("body").item(0);
 				NodeList nodes = bodyElement.getElementsByTagName("input");
+				list  = new ArrayList<>();
 				for (int i = 0; i < nodes.getLength(); i++) {
 					if(nodes.item(i).hasAttributes()){
 						NamedNodeMap attr = nodes.item(i).getAttributes();
@@ -103,8 +113,9 @@ public class DetectForm {
 							}
 							if(atribute.getValue().equals("password")){
 								password = (HTMLInputElement) nodes.item(i);
+								list.add(new UserCredentials(username,password));
 								isForm=true;
-							}else if(atribute.getValue().equals("submit")){
+							} if(atribute.getValue().equals("submit")){
 								System.out.println("DETECTION");
 								((EventTarget) nodes.item(i)).addEventListener("click", listener, false);
 
@@ -115,19 +126,24 @@ public class DetectForm {
 
 				}
 				if(isForm){
-					Node button = bodyElement.getElementsByTagName("button").item(0);
-					if(button!=null && button.hasAttributes()){
-						NamedNodeMap attr = button.getAttributes();
-						for(int j=0; j<attr.getLength(); j++){
-							Attr atribute = (Attr)attr.item(j);
-							if(atribute.getValue().equals("submit")){
-								System.out.println("DETECTION");
-								((EventTarget) button).addEventListener("click", listener, false);
+					if(bodyElement.getElementsByTagName("button").getLength()>0){
+						NodeList buttons = bodyElement.getElementsByTagName("button");
+						for(int i=0 ; i<buttons.getLength();i++){
+							if(buttons.item(i).hasAttributes()){
+								NamedNodeMap attr = buttons.item(i).getAttributes();
+								for(int j=0; j<attr.getLength(); j++){
+									Attr atribute = (Attr)attr.item(j);
+									if(atribute.getValue().equals("submit")){
+										((EventTarget) buttons.item(i)).addEventListener("click", listener, false);
 
+									}
+
+								}
 							}
-
 						}
 					}
+
+
 				}
 			}
 
@@ -151,6 +167,7 @@ public class DetectForm {
 							}
 							if(atribute.getValue().equals("password")){
 								password = (HTMLInputElement) nodes.item(i);
+
 								try{
 									String domain = new URL(TabController.getWebEngine().getLocation()).getHost() ;
 									ResultSet resultSet = UserAccounts.getAccounts(1,domain);
@@ -171,6 +188,14 @@ public class DetectForm {
 				}
 			}
 
+		}
+		class UserCredentials{
+		private HTMLInputElement username;
+		private HTMLInputElement password;
+		public UserCredentials(HTMLInputElement username, HTMLInputElement password){
+			this.username = username;
+			this.password = password;
+		}
 		}
 
 	}
