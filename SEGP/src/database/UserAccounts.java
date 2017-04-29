@@ -38,16 +38,17 @@ public class UserAccounts {
 			System.err.println( e.getClass().getName() + ": " + e.getMessage() );
 		}
 	}
-	public static ResultSet getAccounts(int userId){
+	public static ResultSet getAccounts(int userId,String domian){
 		
 		ResultSet result = null;
 		c= SqliteConnection.Connector();
 		try
 		{
-			String query="select domain, username,password "
-					+ "from accounts where user_id = ?;";
+			String query="select username,password "
+					+ "from accounts where user_id = ? and domain = ?;";
 			perp=c.prepareStatement(query);
 			perp.setInt(1, userId);
+			perp.setString(2,domian);
 			result=perp.executeQuery();
 		}
 		catch(Exception e)

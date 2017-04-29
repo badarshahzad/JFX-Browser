@@ -6,7 +6,15 @@ import java.sql.SQLException;
 
 import org.controlsfx.control.Notifications;
 
-import db.beans.Users;
+import javafx.geometry.Pos;
+import javafx.scene.control.Alert;
+import javafx.util.Duration;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import org.controlsfx.control.Notifications;
+
 import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.util.Duration;

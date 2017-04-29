@@ -7,14 +7,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.ProtocolException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
+import java.net.*;
 
-import java.net.UnknownHostException;
 import java.nio.file.Paths;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -139,6 +133,8 @@ public class DownloadThread extends Thread{
 		}catch(FileNotFoundException e){
 			System.err.println("Error While Downloading : file not found . ");
 			e.printStackTrace();
+		}catch (ConnectException ex){
+			System.out.println("Connect Exception.");
 		}catch(ProtocolException e){
 			System.err.println("Error While Downloading : protocol exception . ");
 			e.printStackTrace();

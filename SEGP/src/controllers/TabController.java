@@ -1,3 +1,4 @@
+
 package controllers;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
@@ -66,6 +67,7 @@ import userInterface.MenuView;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+
 
 /**
  *
@@ -180,6 +182,7 @@ public class TabController implements Initializable {
 					org.w3c.dom.Document doc = webEngine.getDocument();
 					DetectForm detectForm = new DetectForm();
 					detectForm.detect(doc);
+					detectForm.insert(doc);
 //					String imgs = "";
 //					 File f = new File(getClass().getResource("/screenshots").getFile());
 //				        for (File fs : f.listFiles()) {

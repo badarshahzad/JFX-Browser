@@ -1,6 +1,6 @@
 package db.beans;
 
-public class Bookmarks {
+class Bookmarks {
 	
 	private String folder;
 	private int user_id;

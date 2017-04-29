@@ -2,6 +2,7 @@ package passwordVault;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.sql.ResultSet;
 import java.util.Optional;
 
 import org.w3c.dom.Attr;
@@ -21,6 +22,7 @@ import database.UserAccounts;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
+
 
 public class DetectForm {
 
@@ -136,6 +138,7 @@ public class DetectForm {
 
 	}
 	public void insert(Document doc){
+		HTMLInputElement username =null,password = null;
 		if (doc!=null && doc.getElementsByTagName("form").getLength() > 0) {
 			for(int k=0;k<doc.getElementsByTagName("form").getLength();k++){
 				HTMLFormElement form = (HTMLFormElement) doc.getElementsByTagName("form").item(k);
@@ -146,10 +149,23 @@ public class DetectForm {
 						for (int j=0 ; j<attr.getLength();j++){
 							Attr atribute = (Attr)attr.item(j);
 							if(atribute.getValue().equals("text")){
-								nodes.item(i).setNodeValue("username");;
+								username = (HTMLInputElement) nodes.item(i);
 							}
 							if(atribute.getValue().equals("password")){
-								nodes.item(i).setNodeValue("password");;
+								password = (HTMLInputElement) nodes.item(i);
+								try{
+									String domain = new URL(TabController.getWebEngine().getLocation()).getHost() ;
+									ResultSet resultSet = UserAccounts.getAccounts(1,domain);
+									while(resultSet.next()){
+										username.setValue(resultSet.getString(1));
+										password.setValue(resultSet.getString(2));
+
+									}
+
+								}catch(Exception e){
+									System.out.println("Exception while getting domain name.");
+								}
+
 							}
 						}
 					}

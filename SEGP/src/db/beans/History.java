@@ -1,6 +1,6 @@
 package db.beans;
 
-public class History {
+class History {
 	
 	private String title;
 	private String domain_name;

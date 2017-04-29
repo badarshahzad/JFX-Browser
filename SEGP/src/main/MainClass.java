@@ -81,6 +81,7 @@ public class MainClass extends Application {
 		systemProperties.setProperty("https.proxyPort", "8080");
 		*/
 		launch(args);
+		System.exit(1);
 	}
 
 }

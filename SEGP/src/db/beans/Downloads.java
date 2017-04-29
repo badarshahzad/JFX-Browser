@@ -1,6 +1,6 @@
 package db.beans;
 
-public class Downloads {
+class Downloads {
 
 	private String status;
 	private String filename;
