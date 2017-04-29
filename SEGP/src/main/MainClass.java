@@ -2,8 +2,6 @@ package main;
 
 import controllers.MainController;
 
-import java.util.Properties;
-
 import org.controlsfx.control.Notifications;
 
 import javafx.application.Application;
@@ -40,12 +38,13 @@ public class MainClass extends Application {
 				
 				MainController mainCont = new MainController();
 				mainCont.creatNewTab(mainCont.getTabPane(), mainCont.getAddNewTab());
-
+				
 			}
 		});
 
 		scene.getStylesheets().add(getClass().getResource("/stylesheet.css").toExternalForm());
 		stage.setScene(scene);
+		
 		setStage(stage);
 		
 		stage.show();

@@ -3,9 +3,14 @@ package controllers;
 import java.net.URL;
 import java.util.Properties;
 import java.util.ResourceBundle;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import org.controlsfx.control.Notifications;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXRadioButton;
+import com.sun.javafx.application.LauncherImpl;
 
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -19,8 +24,9 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
-public class ProxyController implements Initializable {
+public class ProxyController extends Application implements Initializable {
 
 	@FXML
 	private AnchorPane proxyPane;
@@ -83,18 +89,45 @@ public class ProxyController implements Initializable {
 		ToggleGroup group = new ToggleGroup();
 
 		noProxy.setToggleGroup(group);
-		
+
+		//current proxy setting
 		useSystemProxy.setSelected(true);
+		
 		useSystemProxy.setToggleGroup(group);
 		manualProxy.setToggleGroup(group);
 
-		// Alert alert = new Alert(AlertType.CONFIRMATION);
-		// alert.setGraphic(root);
-		// alert.setTitle("Proxy Setting");
-		// alert.setHeaderText("Configure Proxy to Access Internet");
+		httpProxyField.setDisable(true);
+		portField.setDisable(true);
 
-		// Optional<ButtonType> result = alert.showAndWait();
+		// disabled other field while that one selected
+		// httpProxyField.setDisable(true);
+		// portField.setDisable(true);
+
 		Properties systemProperties = System.getProperties();
+
+		noProxy.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
+
+			httpProxyField.setDisable(true);
+			portField.setDisable(true);
+
+		});
+
+		useSystemProxy.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
+
+			httpProxyField.setDisable(true);
+			portField.setDisable(true);
+			
+
+		});
+
+		manualProxy.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
+
+			httpProxyField.setDisable(false);
+			portField.setDisable(false);
+
+		});
+
+		okBt.setId("button");
 		okBt.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
 
 			if (group.getSelectedToggle().equals(noProxy)) {
@@ -110,6 +143,7 @@ public class ProxyController implements Initializable {
 			}
 
 			if (group.getSelectedToggle().equals(useSystemProxy)) {
+				
 				// Set Proxy for Http
 				systemProperties.setProperty("http.proxyHost", "172.16.0.2");
 				systemProperties.setProperty("http.proxyPort", "8080");
@@ -117,42 +151,98 @@ public class ProxyController implements Initializable {
 				// Set Proxy for Https
 				systemProperties.setProperty("https.proxyHost", "172.16.0.2");
 				systemProperties.setProperty("https.proxyPort", "8080");
+
 			}
+
+			String message = null;
 
 			if (group.getSelectedToggle().equals(manualProxy)) {
 
-				// Set Proxy for Http
-				systemProperties.setProperty("http.proxyHost", httpProxyField.getText());
-				systemProperties.setProperty("http.proxyPort", portField.getText());
+				if (httpProxyField.getText().equals("") || portField.getText().equals("")) {
 
-				// Set Proxy for Https
-				systemProperties.setProperty("https.proxyHost", httpProxyField.getText());
-				systemProperties.setProperty("https.proxyPort", portField.getText());
+					if (httpProxyField.getText().equals("") && portField.getText().equals("")) {
+
+						message = "Your both field is empty. Please fill both \n fields to set manual proxy.";
+
+					} else {
+
+						message = "Your one field is empty. Please fill one empty \n field to set manual proxy.";
+
+					}
+
+					Notifications.create().title("Proxy Setting").text(message).hideAfter(Duration.seconds(3))
+							.showError();;
+
+				} else {
+/*
+					Pattern ipAddress = Pattern.compile("[0-9]{3}[.]{1}[0-9]{3}[.]{1}[0-9]{3}[.]{1}[0-9]{3}");
+					Matcher m1 = ipAddress.matcher(httpProxyField.getText());
+					boolean b1 = m1.matches();
+
+					Pattern port = Pattern.compile("[0-9]{1}[.]{1}[0-9]{1}[.]{1}[0-9]{1}[.]{1}[0-9]{1}");
+					Matcher m2 = port.matcher(portField.getText());
+					boolean b2 = m2.matches();
+
+					if (b1 == true && b2 == false) {
+
+						Notifications.create()
+						.title("Proxy Setting")
+						.text("Your port is not correct try again")
+						.hideAfter(Duration.seconds(3))
+						.showError();
+
+					} else if (b1 == false && b2 == true) {
+
+						Notifications.create()
+						.title("Proxy Setting")
+						.text("Your IP is not correct try again")
+						.hideAfter(Duration.seconds(3))
+						.showError();
+
+					}
+					*/
+
+						systemProperties.setProperty("http.proxyHost", httpProxyField.getText());
+						systemProperties.setProperty("http.proxyPort", portField.getText());
+
+						// Set Proxy for Https
+						systemProperties.setProperty("https.proxyHost", httpProxyField.getText());
+						systemProperties.setProperty("https.proxyPort", portField.getText());
+
+				}
+
+
 			}
-
 		});
-		cancelBt.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
 
+		cancelBt.setId("button");
+		cancelBt.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
+			Platform.exit();
 		});
 
 	}
 
-	/*
-	 * @Override public void start(Stage primaryStage) throws Exception { //
-	 * TODO Auto-generated method stub
-	 * 
-	 * Parent root =
-	 * FXMLLoader.load(getClass().getResource("/ui/ProxySet.fxml"));
-	 * 
-	 * Scene scene = new Scene(root); primaryStage.setTitle("Connection Setting"
-	 * ); primaryStage.setScene(scene); primaryStage.setResizable(false);
-	 * primaryStage.setMaximized(false); primaryStage.setAlwaysOnTop(true);
-	 * primaryStage.setOpacity(.9);
-	 * 
-	 * primaryStage.setFullScreenExitHint("Close here"); // primaryStage.show();
-	 * setStage(primaryStage);
-	 * 
-	 * }
-	 */
+	@Override
+	public void start(Stage primaryStage) throws Exception {
+
+		Parent root = FXMLLoader.load(getClass().getResource("/ui/ProxySet.fxml"));
+
+		Scene scene = new Scene(root);
+		primaryStage.setTitle("Connection Setting");
+		primaryStage.setScene(scene);
+		primaryStage.setResizable(false);
+		primaryStage.setMaximized(false);
+		primaryStage.setAlwaysOnTop(true);
+		primaryStage.setOpacity(.9);
+
+		primaryStage.setFullScreenExitHint("Close here"); // primaryStage.show();
+		primaryStage.show();
+		setStage(primaryStage);
+
+	}
+
+	public static void main(String args[]) {
+		launch(args);
+	}
 
 }

@@ -180,8 +180,8 @@ public class SettingController implements Initializable {
 			            public void run() {
 			            	
 						 Notifications.create()
-						 .title("Proxy Set")
-						 .text("You have successfully set your system proxy.")
+						 .title("Proxy Setting")
+						 .text("You have successfully set your proxy.")
 						 .hideAfter(Duration.seconds(3))
 						 .showInformation();
 						 

@@ -141,8 +141,10 @@ public class TabController implements Initializable {
 	public void initialize(URL url, ResourceBundle rb) {
 
 		setWebEngine(webEngine);
-
 		searchField.setText("https://www.google.com");
+		
+		//Home Page Link
+		pageRender(searchField.getText());
 
 		back.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/backword1.png"))));
 		back.setStyle("");
@@ -153,14 +155,6 @@ public class TabController implements Initializable {
 		download.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/download.png"))));
 		bookmark.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/bookmark.png"))));
 		htmlAsPdf.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/pdfConverter.png"))));
-
-		
-		back.setId("header");
-		forward.setId("headerMenuLabel");
-		refresh.setId("headerMenuLabel");
-		search.setId("headerMenuLabel");
-		bookmark.setId("headerMenuLabel");
-		htmlAsPdf.setId("headerMenuLabel");
 		
 		// Worker load the page
 		worker = webEngine.getLoadWorker();
@@ -171,10 +165,13 @@ public class TabController implements Initializable {
 				System.out.println("Loading state: " + newValue.toString());
 				if (newValue == Worker.State.SUCCEEDED) {
 					System.out.println("Finish!");
+					
+					tabPane.getSelectionModel().getSelectedItem().setText(webEngine.getTitle());
 
 					org.w3c.dom.Document doc = webEngine.getDocument();
 					DetectForm detectForm = new DetectForm();
 					detectForm.detect(doc);
+					
 					// String imgs = "";
 					// File f = new
 					// File(getClass().getResource("/screenshots").getFile());
@@ -198,16 +195,11 @@ public class TabController implements Initializable {
 					// webEngine.executeScript("if (!window.indexedDB)
 					// window.alert(\"Your browser doesn't support a stable
 					// version of IndexedDB.\")");
+					
 				}
 
 			}
 		});
-		/*
-		 * location property to get the location of the webview.
-		 * 
-		 * 
-		 * 
-		 */
 
 		webEngine.locationProperty().addListener(new ChangeListener<String>() {
 
@@ -226,7 +218,7 @@ public class TabController implements Initializable {
 
 		progressbar.progressProperty().bind(worker.progressProperty());
 
-	//	pageRender("https://www.google.com.pk/webhp?sourceid=chrome-instant&ion=1&espv=2&ie=UTF-8");
+	
 
 		ham.getHamburger(hamburger, borderpane, tabPane);
 
@@ -272,14 +264,19 @@ public class TabController implements Initializable {
 				}
 			}
 			
-			ObservableList<String> domainNames = FXCollections.observableArrayList();
-			domainNames = HistoryManagment.getDomainNames(domainNames);
 		
-			if (event.getCode() == KeyCode.S && event.isControlDown()) {
 				
-				TextFields.bindAutoCompletion(searchField,domainNames);
+				ObservableList<String> domainNames = FXCollections.observableArrayList();
+				domainNames = HistoryManagment.getDomainNames(domainNames);
+				String[]array = new String[domainNames.size()];
 				
-			}
+				for(int a = 0; a< domainNames.size();a++){
+					array[a] = domainNames.get(a);
+					//System.out.println("Ghin Value"+array[a]);
+				}
+				
+				TextFields.bindAutoCompletion(searchField,array);
+				
 			
 		});
 		
@@ -419,6 +416,21 @@ public class TabController implements Initializable {
 	// mehtod to rendere page
 
 	MainDownload dwnlod = new MainDownload();
+/*	
+	String titleOfPage;
+	
+	public String  getTitleOfPage(){
+		webEngine.getLoadWorker().stateProperty().addListener(new ChangeListener<State>() {
+			@Override
+			public void changed(ObservableValue ov, State oldState, State newState) {
+					
+				titleOfPage = webEngine.getTitle();
+			}
+		});
+		
+		return titleOfPage;
+				
+	}*/
 
 	public void pageRender(String url) {
 		webEngine.getLoadWorker().stateProperty().addListener(new ChangeListener<State>() {
@@ -426,8 +438,12 @@ public class TabController implements Initializable {
 			public void changed(ObservableValue ov, State oldState, State newState) {
 
 				if (newState == Worker.State.SUCCEEDED) {
+					
 					searchField.setText(webEngine.getLocation());
 
+					MainClass.getStage().setTitle(webEngine.getTitle());
+					//
+					//MainController.setSelectedTabTitle(webEngine.getTitle());
 					// Tab tab = MainController.getFirstTab();
 					// tab.setText(webEngine.getTitle());
 					// MainController.setFirstTab(tab);

@@ -117,6 +117,7 @@ public class HistoryController implements Initializable {
 		deleteSingle.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
 		
 			StringProperty selectedItem = table.getSelectionModel().getSelectedItem().getValue().link1;
+			
 			System.out.println("Kaka Daikh wat : "+selectedItem);
 			
 			if (selectedItem.equals(null)) {

@@ -144,11 +144,10 @@ public static  ObservableList getDomainNames(ObservableList domainNames)
     	{
     	String link1 =rs.getString(1);
     	
-    	ObservableList<String> domainNamesList = FXCollections.observableArrayList();
-    	domainNamesList.add(link1);
+    	//ObservableList<String> domainNamesList = FXCollections.observableArrayList();
+    	domainNames.add(link1);
     	
-    	System.out.println(domainNamesList);
-    	//System.out.println(link1, time1,date1,domain1,title1);
+    	
     	}
     	rs.close();
     	perp.close();
@@ -160,6 +159,8 @@ public static  ObservableList getDomainNames(ObservableList domainNames)
 	}
 return domainNames;
 }
+
+
 //------------------------------------this method return user specified histories--------------------------------------------------------------------//1
 public static ObservableList getHistory(ObservableList list,int dateRange)
 {
