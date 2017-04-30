@@ -2,6 +2,9 @@ package main;
 
 import controllers.MainController;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import org.controlsfx.control.Notifications;
 
 import com.jfoenix.controls.JFXButton;
@@ -11,6 +14,7 @@ import com.jfoenix.controls.JFXTextField;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
@@ -44,39 +48,55 @@ public class MainClass extends Application {
 		
 		Parent root = FXMLLoader.load(getClass().getResource("/ui/MainFXML.fxml"));
 		
-		//borderpane.setCenter(button);
 		
 		//the RootBorder is get to show pin dialoge box that will appear on a screen
 		pane.getChildren().add(root);
 		
-		//JFXButton button1 = new JFXButton("Button1");
-		
 		
 		Scene scene = new Scene(pane);
-
+		
 		scene.setOnKeyPressed(event -> {
  
 			if (event.getCode() == KeyCode.P && event.isControlDown()) {
 				
 				JFXButton button = new JFXButton("Ok");
-				JFXDialogLayout content = new JFXDialogLayout();
-				content.setHeading(new Text("Hidden Key"));
-				content.setBody(new Text("Please type your key to access Pro-Version. "));
-				JFXDialog dialoge = new JFXDialog(pane,content,JFXDialog.DialogTransition.CENTER);
+				JFXTextField textfield = new JFXTextField();
+				
 				button.addEventHandler(MouseEvent.MOUSE_CLICKED, (e6)->{
-					dialoge.close();
+					System.out.println("Pin is :"+textfield.getText());
+					
+					Pattern ipAddress = Pattern.compile("[0-9]{4}");
+					Matcher m1 = ipAddress.matcher(textfield.getText());
+					boolean b1 = m1.matches();
+					
+					if(b1){
+					System.out.println("ok");	
+					}else{
+
+						Notifications.create()
+						.title("Wronge Pin")
+						.text("Your pin is exceeding limit or your pin is consists\n"
+								+ "of invalid characters")
+						.hideAfter(Duration.seconds(5))
+						.showError();
+					}
 				});
 
-				JFXTextField textfiled = new JFXTextField();
-				content.setActions(textfiled,button);
+				
+				Parent root1 = null;
+				try {
+					root1 = FXMLLoader.load(getClass().getResource("/ui/ProxySet.fxml"));
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 
-				//To show overlay dialougge box
-				dialoge.show();	
+				setDialouge(button, "Pin", "Please type your pin", textfield);
 
 				Notifications.create()
 				.title("Pin Activation")
 				.text("You are going to access Pro-Verion.")
-				.hideAfter(Duration.seconds(5))
+				.hideAfter(Duration.seconds(3))
 				.showInformation();
 			}
 
@@ -122,6 +142,26 @@ public class MainClass extends Application {
 
 	public static Stage getStage() {
 		return stage;
+	}
+	
+	private static JFXDialogLayout content = new JFXDialogLayout();
+	
+	public static void setDialouge(JFXButton applyButton,String heading,String text, Node ob){
+		
+		JFXButton button = applyButton;
+		
+		content.setHeading(new Text(heading));
+		content.setBody(new Text(text));
+		
+		JFXDialog dialoge = new JFXDialog(pane,content,JFXDialog.DialogTransition.CENTER);
+		JFXButton kaka = new JFXButton("Dsfas");
+		button.addEventHandler(MouseEvent.MOUSE_CLICKED, (e6)->{
+			dialoge.close();
+		});
+	
+		content.setActions(ob,button);
+		//To show overlay dialougge box
+		dialoge.show();	
 	}
 
 	/**

@@ -67,7 +67,7 @@ public class HistoryController implements Initializable {
 	private JFXTreeTableView<HistoryStoreView> table;
 	
 	@FXML
-	JFXTextField search;
+	private JFXTextField search;
 
 	@FXML
 	private VBox paneForChart;
@@ -118,6 +118,9 @@ public class HistoryController implements Initializable {
 
 	private boolean check = false;
 	
+	private ArrayList<String> selectedValues ;
+
+	boolean daikh = false;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -126,14 +129,76 @@ public class HistoryController implements Initializable {
 		table.setEditable(false);
 		table.setId("treetable");
 		
+		historyPieChart.setTitle("Most Visited Sites");
+		ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(
+				new PieChart.Data("Facebook", 30)
+				,new PieChart.Data("Google", 60)
+				,new PieChart.Data("Twitter", 20)
+				,new PieChart.Data("Gmail", 30));
+		
+		historyPieChart.setData(pieChartData);
+		
+		table.setOnKeyPressed((event)->{
+			
+			if (event.isControlDown() ) {
+				selectedValues = new ArrayList<>();
+				
+				table.addEventHandler(MouseEvent.MOUSE_CLICKED, (e)->{
+					daikh = true;
+				});
+				
+				table.addEventHandler(MouseEvent.MOUSE_CLICKED, (e)->{
+					if(daikh){
+					try{
+						selectedItem = table.getSelectionModel().getSelectedItem().getValue().link1;
+						
+						boolean entery = true;
+						
+							for (int a = 0; a < selectedValues.size(); a++) {
+								if (selectedValues.get(a).equals(selectedItem.getValue())) {
+									entery = false;
+									break;
+								}
+							}
+							
+							if (entery==true) {
+								selectedValues.add(selectedItem.getValue());
+								entery = false;
+							}
+							
+						
+							
+						}catch (Exception tableEmpty){
+							
+							Notifications.create()
+							.title("History ")
+							.text("No row has been selected or you have selected \n"
+									+ "same row again in history table.")
+							.hideAfter(Duration.seconds(3))
+							.showWarning();
+							return;
+						}
+					}
+				});
+				
+			}
+			
+		});
 		
 		deleteSingle.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
 			
-			// if click any row check true and entry delete successfully otherwise note
-			table.addEventHandler(MouseEvent.MOUSE_CLICKED, (e2)->{
-				check = true;
-			});
+			for(int a = 0; a<selectedValues.size();a++){
+				System.out.println(selectedValues.get(a));
+				SqliteConnection.excuteQuery(selectedValues.get(a));
+
+				// Update the history table
+				ObservableList<HistoryStoreView> fullHistory = FXCollections.observableArrayList();
+				fullHistory = SqliteConnection.getFullHistory(fullHistory);
+				addListInTable(fullHistory);
+				table.refresh();
+			}
 			
+/*			
 			if(check){
 				try{
 				selectedItem = table.getSelectionModel().getSelectedItem().getValue().link1;
@@ -147,7 +212,7 @@ public class HistoryController implements Initializable {
 					return;
 				}
 				
-					System.out.println("Index to be deleted:" + selectedItem.getValue());
+					
 					SqliteConnection.excuteQuery(selectedItem.getValue());
 
 					// Update the history table
@@ -172,7 +237,7 @@ public class HistoryController implements Initializable {
 					.showWarning();
 				return;
 			}
-					
+			*/
 		});
 		
 		

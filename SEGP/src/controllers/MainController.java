@@ -81,6 +81,8 @@ public class MainController implements Initializable {
 		// closing tabs
 		addNewTab.setClosable(false);
 		addNewTab.setId("addNewTab");
+		tabPane.setId("tabadded");
+		
 
 		tabPane.setTabClosingPolicy(TabClosingPolicy.ALL_TABS);
 		// ------tabPane.setFocusTraversable(false);
@@ -176,6 +178,7 @@ public class MainController implements Initializable {
 	public void creatNewTab(TabPane tabpane, Tab addNewTab) {
 
 		Tab tab = new Tab("New tab");
+		
 
 		try {
 			tab.setContent(FXMLLoader.load(getClass().getResource("/ui/Tab.fxml")));

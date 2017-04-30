@@ -30,7 +30,58 @@
  *                                                                             *
  ******************************************************************************/
 
+
+#tabadded .tab {
+	-fx-background-color:derive(#bbbbbb,0.0%);
+}
+#tabadded .tab-header-background{
+	-fx-background-color:derive(#bbbbbb,20.0%);
+}
+#tabadded .tab:hover{
+ -fx-background-color:derive(#bbbbbb,40.0%);
+ 
+}
+
+
+
+.tab-pane{
+	 	-fx-tab-min-width:15.0px;
+	  	-fx-tab-max-width:120.0px;
+	  	-fx-tab-pref-width:120.0px;
+	  	
+	  	-fx-tab-min-height:30.0px;
+	  	-fx-tab-max-height:30.0px;
+}
+
+.tab{
+	
+	-fx-text-fill:white;
+	
+	
+}
+.tab:selected .focus-indicator {	
+    
+    -fx-border-radius: 10 10 0 0 ;
+    -fx-border-insets: -7.0 -8.0 -8.0 -9.0 , -5.0 -8.0 -7.0 -7.0;
+}
+
+.tab-header-area .tab{	 
+	  	
+    	-fx-padding:4.0 10.0 5.0 10.0;
+    	-fx-background-radius: 10.0 10.0 0.0 0.0;
+}
+#addNewTab{
+	
+	-fx-padding:5.0 10.0 5.0 10.0;
+    -fx-background-radius: 12.0 12.0 4.0 4.0;
+	-fx-background-color: derive(#777777,0.0%);
+    -fx-border-radius: 10 10 10 10;
+    
+	
+}
+
 #settingTabPane .tab{
+	-fx-background-color:derive(#2959ea,20.0%);
  	-fx-text-fill-color:white;
  	-fx-border-radius: 10.0;
  	-fx-spacing: 5.0;
@@ -67,62 +118,21 @@
  * ScrollBar 			                                                       *
  *                                                                             *
  ******************************************************************************/
- 
-/*
- 
-.scroll-bar:vertical > .track-background,
-.scroll-bar:horizontal > .track-background{
-    	-fx-background-color:#ffffff;
-    	-fx-margin:4 0 0 10;
-}
-*/
+
 
 .scroll-bar:vertical > .thumb,
 .scroll-bar:horizontal > .thumb {
-	    -fx-background-color: derive(#28323c,5.0%);
+	    -fx-background-color: derive(#bbbbbb,5.0%);
 }
 
 .scroll-bar:hover > .increment-button, 
 .scroll-bar:hover > .decrement-button {
 	
-     	-fx-background-color: derive(#28323c,30.0%);
+     	-fx-background-color: derive(#bbbbbb,30.0%);
      	
 }
 
-.tab-pane{
-	 	-fx-tab-min-width:15.0px;
-	  	-fx-tab-max-width:120.0px;
-	  	-fx-tab-pref-width:120.0px;
-	  	
-	  	-fx-tab-min-height:30.0px;
-	  	-fx-tab-max-height:30.0px;
-}
 
-.tab{
-	
-	-fx-text-fill:white;
-	
-}
-.tab:selected .focus-indicator {	
-    
-    -fx-border-radius: 10.0 10.0 0.0 0.0, 10.0 10.0 0.0 0.0;
-    -fx-border-insets: -6.0 -9.0 -8.0 -8.0, -5.0 -8.0 -7.0 -7.0;
-}
-
-.tab-header-area .tab{	 
-	  	
-    	-fx-padding:4.0 10.0 5.0 10.0;
-    	-fx-background-radius: 10.0 10.0 0.0 0.0;
-}
-#addNewTab{
-
-	-fx-padding:5.0 10.0 5.0 10.0;
-    -fx-background-radius: 12.0 12.0 4.0 4.0;
-	-fx-background-color: derive(#777777,80.0%);
-    -fx-border-radius: 10.0 10.0 0.0 10.0;
-    -fx-border-insets: -1.0 -1.0 -5.0 -5.0, -1.0 -1.0 -5.0 -5.0;
-	
-}
 #righDrawerVbox{
 	-fx-padding: 10.0,10.0,10.0,10.0;
 }

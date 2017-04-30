@@ -174,7 +174,7 @@ public class SettingController implements Initializable {
 			primaryStage.show();
 			
 			proxyObject.getOkBt().addEventHandler(MouseEvent.MOUSE_CLICKED, (e1)->{
-					
+				
 				 Platform.runLater(new Runnable() {
 			            @Override
 			            public void run() {
@@ -191,6 +191,12 @@ public class SettingController implements Initializable {
 			primaryStage.close();
 				
 			});
+			
+			proxyObject.getCancelBt().addEventHandler(MouseEvent.MOUSE_CLICKED, (e2) -> {
+				
+				primaryStage.close();
+			});
+			
 			//ob.getStage().show();
 		});
 		//Start the userTreeView from herre

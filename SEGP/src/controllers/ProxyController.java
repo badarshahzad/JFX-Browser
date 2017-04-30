@@ -72,15 +72,6 @@ public class ProxyController extends Application implements Initializable {
 		this.cancelBt = cancelBt;
 	}
 
-	Stage stage;
-
-	public Stage getStage() {
-		return stage;
-	}
-
-	public void setStage(Stage stage) {
-		this.stage = stage;
-	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -217,7 +208,7 @@ public class ProxyController extends Application implements Initializable {
 
 		cancelBt.setId("button");
 		cancelBt.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
-			Platform.exit();
+			getStage().close();
 		});
 
 	}
@@ -243,6 +234,17 @@ public class ProxyController extends Application implements Initializable {
 
 	public static void main(String args[]) {
 		launch(args);
+	}
+
+	Stage stage = new Stage();
+
+	
+	public void setStage(Stage stage) {
+		this.stage = stage;
+	}
+	
+	public Stage getStage() {
+		return stage;
 	}
 
 }
