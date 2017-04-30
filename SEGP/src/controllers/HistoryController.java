@@ -118,7 +118,7 @@ public class HistoryController implements Initializable {
 
 	private boolean check = false;
 	
-	private ArrayList<String> selectedValues ;
+	private ArrayList<String> selectedValues  = new ArrayList<>();;
 
 	boolean daikh = false;
 
@@ -141,7 +141,7 @@ public class HistoryController implements Initializable {
 		table.setOnKeyPressed((event)->{
 			
 			if (event.isControlDown() ) {
-				selectedValues = new ArrayList<>();
+				
 				
 				table.addEventHandler(MouseEvent.MOUSE_CLICKED, (e)->{
 					daikh = true;
@@ -149,53 +149,93 @@ public class HistoryController implements Initializable {
 				
 				table.addEventHandler(MouseEvent.MOUSE_CLICKED, (e)->{
 					if(daikh){
-					try{
-						selectedItem = table.getSelectionModel().getSelectedItem().getValue().link1;
-						
-						boolean entery = true;
-						
-							for (int a = 0; a < selectedValues.size(); a++) {
-								if (selectedValues.get(a).equals(selectedItem.getValue())) {
-									entery = false;
-									break;
+						try{
+							selectedItem = table.getSelectionModel().getSelectedItem().getValue().link1;
+							
+							boolean entery = true;
+							
+								for (int a = 0; a < selectedValues.size(); a++) {
+									if (selectedValues.get(a).equals(selectedItem.getValue())) {
+										entery = false;
+										
+									}
 								}
+								
+								if (entery==true) {
+									selectedValues.add(selectedItem.getValue());
+									entery = false;
+								}
+								
+							
+								
+							}catch (Exception tableEmpty){
+								
+								Notifications.create()
+								.title("History ")
+								.text("No row has been selected or you have selected \n"
+										+ "same row again in history table.")
+								.hideAfter(Duration.seconds(3))
+								.showWarning();
+								return;
 							}
-							
-							if (entery==true) {
-								selectedValues.add(selectedItem.getValue());
-								entery = false;
-							}
-							
-						
-							
-						}catch (Exception tableEmpty){
-							
-							Notifications.create()
-							.title("History ")
-							.text("No row has been selected or you have selected \n"
-									+ "same row again in history table.")
-							.hideAfter(Duration.seconds(3))
-							.showWarning();
-							return;
 						}
-					}
 				});
 				
 			}
 			
 		});
 		
+		table.addEventHandler(MouseEvent.MOUSE_CLICKED, (e)->{
+			
+				try{
+					selectedItem = table.getSelectionModel().getSelectedItem().getValue().link1;
+					
+					boolean entery = true;
+					
+						for (int a = 0; a < selectedValues.size(); a++) {
+							if (selectedValues.get(a).equals(selectedItem.getValue())) {
+								entery = false;
+								
+							}
+						}
+						
+						if (entery==true) {
+							selectedValues.add(selectedItem.getValue());
+							entery = false;
+						}
+						
+					
+						
+					}catch (Exception tableEmpty){
+						
+						Notifications.create()
+						.title("History ")
+						.text("No row has been selected or you have selected \n"
+								+ "same row again in history table.")
+						.hideAfter(Duration.seconds(3))
+						.showWarning();
+						return;
+					}
+				
+		});
+		
 		deleteSingle.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
 			
-			for(int a = 0; a<selectedValues.size();a++){
-				System.out.println(selectedValues.get(a));
-				SqliteConnection.excuteQuery(selectedValues.get(a));
+			if (selectedValues.size()<=0) {
+				System.out.println("Empty not selected");
+				return;
+			} else {
+				for (int a = 0; a < selectedValues.size(); a++) {
+					System.out.println(selectedValues.get(a));
+					SqliteConnection.excuteQuery(selectedValues.get(a));
+					selectedValues.remove(a);
 
-				// Update the history table
-				ObservableList<HistoryStoreView> fullHistory = FXCollections.observableArrayList();
-				fullHistory = SqliteConnection.getFullHistory(fullHistory);
-				addListInTable(fullHistory);
-				table.refresh();
+					// Update the history table
+					ObservableList<HistoryStoreView> fullHistory = FXCollections.observableArrayList();
+					fullHistory = SqliteConnection.getFullHistory(fullHistory);
+					addListInTable(fullHistory);
+					table.refresh();
+				}
 			}
 			
 /*			

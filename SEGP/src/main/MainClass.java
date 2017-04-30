@@ -40,7 +40,7 @@ public class MainClass extends Application {
 
 	private static StackPane pane = new StackPane() ;
 
-
+ 
 
 	@Override
 	public void start(Stage stage) throws Exception {
