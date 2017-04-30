@@ -114,7 +114,7 @@ public class DownloadThread extends Thread{
 			if (requestinfo == connection.HTTP_OK && isDownloadable(contentType)) {
 				new Notification();
 				System.out.println("Download started on link  "+url);
-				DownloadDatabase.insertDownload(url, title, "downloading", 1);
+				DownloadDatabase.insertDownload(url, title, "Downloaded", 1);
 				BufferedInputStream in = new BufferedInputStream(connection.getInputStream()); // open the input stream on the established tcp connection.
 				FileOutputStream out = new FileOutputStream(createFile(contentType,url)); // create a file and open the output stream to write on file.
 				int size = connection.getContentLength(); // to get the total size of the file being downloaded it will be helpful making the GUI like progress bar.

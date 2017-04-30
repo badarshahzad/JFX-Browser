@@ -56,15 +56,14 @@ public class MainController implements Initializable {
 
 	@FXML
 	private BorderPane rootBorderPane;
-	
+
 	public Hamburger ham = new Hamburger();
 	public VBox drawerPane = new VBox();
 
 	public static TabPane tabPane = new TabPane();
 
 	private static Tab firstTab = new Tab("New Tab");
-	
-	
+
 	public static Tab getFirstTab() {
 		return firstTab;
 	}
@@ -78,13 +77,10 @@ public class MainController implements Initializable {
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 
-		
-		
 		// ------All opens tabs should be closed so below line is for just
 		// closing tabs
 		addNewTab.setClosable(false);
 		addNewTab.setId("addNewTab");
-
 
 		tabPane.setTabClosingPolicy(TabClosingPolicy.ALL_TABS);
 		// ------tabPane.setFocusTraversable(false);
@@ -92,28 +88,20 @@ public class MainController implements Initializable {
 		try {
 			// -----here below adding page title of tab
 			firstTab.setContent(FXMLLoader.load(getClass().getResource("/ui/Tab.fxml")));
-			
+
 			// firstTab.setText("Google");
 
 		} catch (IOException e2) {
 			// TODO Auto-generated catch block
 			e2.printStackTrace();
 		}
+
 		tabPane.getTabs().addAll(firstTab, addNewTab);
 		rootBorderPane.setCenter(tabPane);
 
 		getTabPaneView(tabPane, addNewTab);
 		tabPaneChangeListener(tabPane);
 
-		// -------------------Key codes to for browser----
-		EventListener listener = new EventListener() {
-			public void handleEvent(Event event) {
-				if (event.getEventType().equals(KeyCode.ALT) || event.getEventType().equals(KeyCode.BACK_SPACE)) {
-					System.out.println("yes alt");
-				}
-			}
-		};
-		
 	}// end intializer method
 
 	// ---set method for TabPane---
@@ -124,21 +112,8 @@ public class MainController implements Initializable {
 		getTabPaneView(tabPane, addNewTab);
 		tabPaneChangeListener(tabPane);
 
-		// -------------------Key codes to for browser----
-		/*
-		 * EventListener listener = new EventListener() {
-		 * 
-		 * @SuppressWarnings("unused") public void handleEvent(Event event) { if
-		 * (event.getEventType().equals(KeyCode.ALT) ||
-		 * event.getEventType().equals(KeyCode.BACK_SPACE)) {
-		 * System.out.println("yes alt"); } } };
-		 */
+	}
 
-	}// end intializer method
-
-	// ---set method for TabPane---
-
-	// ---get method for TabPane---
 	public TabPane getTabPane() {
 		return tabPane;
 	}
@@ -150,9 +125,6 @@ public class MainController implements Initializable {
 	public void setAddNewTab(Tab addNewTab) {
 		this.addNewTab = addNewTab;
 	}
-	
-		
-		
 
 	public void tabPaneChangeListener(TabPane tabpane) {
 		tabpane.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Tab>() {
@@ -176,18 +148,25 @@ public class MainController implements Initializable {
 					Platform.exit();
 				}
 
+
+				// The current tab title is set the stage title
+				MainClass.getStage().setTitle(tabPane.getSelectionModel().getSelectedItem().getText());
+				
+				System.out.println("Current tab title: "+tabPane.getSelectionModel().getSelectedItem().getText());
+
 				if (newSelectedTab == addNewTab) {
 					// ---------------New tab is created --------------------
-					// Platform.runLater(new Runnable() {
-					// @Override
-					// public void run() {
+					 Platform.runLater(new Runnable() {
+					 @Override
+					public void run() {
 					creatNewTab(tabpane, addNewTab);
 
-					// }
-					// });
+					 }
+					 });
 				}
 			}
 		});
+
 		return tabpane;
 
 	}
@@ -200,15 +179,16 @@ public class MainController implements Initializable {
 
 		try {
 			tab.setContent(FXMLLoader.load(getClass().getResource("/ui/Tab.fxml")));
-			//tab.setText(TabController.getWebEngine().getTitle());
-			
+			// tab.setText(TabController.getWebEngine().getTitle());
+
 		} catch (IOException e) {
 			System.out.println("Exception: New tab click but not working in TabPaneView Class");
 			e.printStackTrace();
 		}
 
 		tab.getStyleClass().addAll("tab-pane");
-		final ObservableList<Tab> tabs = tabpane.getTabs();
+		
+		ObservableList<Tab> tabs = tabpane.getTabs();
 		tabs.add(tabs.size() - 1, tab);
 
 		SingleSelectionModel<Tab> selectedTab = tabpane.getSelectionModel();

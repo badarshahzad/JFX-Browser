@@ -9,6 +9,8 @@ import com.jfoenix.controls.JFXTabPane;
 
 import bookmarks.BookMarks;
 import controllers.DownloadController;
+import controllers.HistoryController;
+import controllers.MainController;
 import controllers.SettingController;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
@@ -44,7 +46,6 @@ public class MenuView {
 	private BorderPane settingBorderPane = new BorderPane();
 	private JFXDrawersStack drawersStack;
 	private JFXDrawer rightDrawer;
-	// Hamburger object = new Hamburger();
 
 	public void setMenuViewListener(JFXButton history, JFXButton downloads, JFXButton bookmarks, JFXButton setting,
 			TabPane tabPane, JFXDrawersStack drawersStack, JFXDrawer rightDrawer) {
@@ -95,11 +96,12 @@ public class MenuView {
 		// -------------------------------------------------------Historylistener-------------------------------------------------------
 		history.setOnAction((ActionEvent) -> {
 
+			// When the menu click Hamburger and DrawerStack will hide
+			onClickHideHamburger();
+
 			tabs.add(tabs.size() - 1, tab);
 			selectedTab.select(tab);
 
-			// When the menu click Hamburger and DrawerStack will hide
-			onClickHideHamburger();
 			getBookMarkView();
 			
 			tab.setText("History");
@@ -111,11 +113,11 @@ public class MenuView {
 		// listener-----------------------------------------------------
 		downloads.setOnAction((e) -> {
 
+			onClickHideHamburger();
+
 			tabs.add(tabs.size() - 1, tab);
 			selectedTab.select(tab);
-
-			// When the menu click Hamburger and DrawerStack will hide
-			onClickHideHamburger();
+			
 			getBookMarkView();
 			
 			tab.setText("Downloads");
@@ -133,12 +135,16 @@ public class MenuView {
 				onClickHideHamburger();
 
 				tabs.add(tabs.size() - 1, tab);
+				selectedTab.select(tab);
+				
 				getBookMarkView();
 				
 				tab.setText("Bookmarks");
+				
 				// The below is just select the current tab
 				// When the menu click Hamburger and DrawerStack will hide
-				selectedTab.select(tab);
+				//selectedTab.select(tab);
+
 				fxSelectedTab.select(fxTabs.get(2));
 
 			}
@@ -149,17 +155,15 @@ public class MenuView {
 		// listener-------------------------------------------------------
 		setting.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
 
+			onClickHideHamburger();
+			
 			tabs.add(tabs.size() - 1, tab);
 			selectedTab.select(tab);
 
-			// When the menu click Hamburger and DrawerStack will hide
-			onClickHideHamburger();
 			getBookMarkView();
 
 			tab.setText("Setting");
 			fxSelectedTab.select(fxTabs.get(3));
-			
-			
 
 		});
 

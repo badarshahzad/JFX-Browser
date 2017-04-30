@@ -34,7 +34,9 @@ public class MainClass extends Application {
 	public static Scene sceneCopy ;
 	
 
-	private StackPane pane = new StackPane() ;
+	private static StackPane pane = new StackPane() ;
+
+
 
 	@Override
 	public void start(Stage stage) throws Exception {
@@ -56,17 +58,17 @@ public class MainClass extends Application {
  
 			if (event.getCode() == KeyCode.P && event.isControlDown()) {
 				
-				JFXButton okBt = new JFXButton("Ok");
+				JFXButton button = new JFXButton("Ok");
 				JFXDialogLayout content = new JFXDialogLayout();
 				content.setHeading(new Text("Hidden Key"));
 				content.setBody(new Text("Please type your key to access Pro-Version. "));
 				JFXDialog dialoge = new JFXDialog(pane,content,JFXDialog.DialogTransition.CENTER);
-				okBt.addEventHandler(MouseEvent.MOUSE_CLICKED, (e6)->{
+				button.addEventHandler(MouseEvent.MOUSE_CLICKED, (e6)->{
 					dialoge.close();
 				});
 
 				JFXTextField textfiled = new JFXTextField();
-				content.setActions(textfiled,okBt);
+				content.setActions(textfiled,button);
 
 				//To show overlay dialougge box
 				dialoge.show();	
@@ -74,7 +76,7 @@ public class MainClass extends Application {
 				Notifications.create()
 				.title("Pin Activation")
 				.text("You are going to access Pro-Verion.")
-				.hideAfter(Duration.seconds(3))
+				.hideAfter(Duration.seconds(5))
 				.showInformation();
 			}
 
@@ -95,6 +97,14 @@ public class MainClass extends Application {
 		
 	}
 
+	public static StackPane getPane() {
+		return pane;
+	}
+
+	public void setPane(StackPane pane) {
+		this.pane = pane;
+	}
+	
 	private void setScene(Scene scene) {
 		sceneCopy = scene;
 	}

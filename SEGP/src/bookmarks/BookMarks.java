@@ -25,40 +25,48 @@ public class BookMarks {
 
 	private JFXTextField searchBar;
 	private JFXButton searchButton;
-	private TableColumn<URLdetails, String> nameCol =  new TableColumn<>("name");
-	private TableColumn<URLdetails, String> timeCol =  new TableColumn<>("time");
-	private TableColumn<URLdetails, String> dateCol =  new TableColumn<>("date");
-	private TableColumn<URLdetails, String> locationCol =  new TableColumn<>("location");
-	private TableView<URLdetails> table = new TableView<>();	
+
+	private TableColumn<URLdetails, String> nameCol = new TableColumn<>("name");
+	private TableColumn<URLdetails, String> timeCol = new TableColumn<>("time");
+	private TableColumn<URLdetails, String> dateCol = new TableColumn<>("date");
+	private TableColumn<URLdetails, String> locationCol = new TableColumn<>("location");
+
+	private TableView<URLdetails> table = new TableView<>();
+
 	public static ObservableList<URLdetails> list = FXCollections.observableArrayList();
+
 	private Image folderImage = new Image(getClass().getResourceAsStream("folder.png"));
-	private TreeTableView<String> treeView  = new TreeTableView<>();
+
+	private TreeTableView<String> treeView = new TreeTableView<>();
 	private TreeTableColumn<String, String> bookMarkCol = new TreeTableColumn<>("BookMarks");
-	TreeItem parentFolder = new TreeItem<>("All Bookmarks",new ImageView(folderImage));
+
+	private TreeItem parentFolder = new TreeItem<>("All Bookmarks", new ImageView(folderImage));
+
 	private ObservableList<String> folders = BookMarksDataBase.folders();
- 	
-	public BookMarks(){
-		
+
+	public BookMarks() {
+
 		table.setEditable(false);
-		
-		for(int i=0 ; i< folders.size();i++){
+
+		for (int i = 0; i < folders.size(); i++) {
 			System.out.println(i);
-			parentFolder.getChildren().add(new TreeItem<>(folders.get(i),new ImageView(folderImage)));
+			parentFolder.getChildren().add(new TreeItem<>(folders.get(i), new ImageView(folderImage)));
+			parentFolder.setExpanded(true);
 		}
-		bookMarkCol.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<String,String>, ObservableValue<String>>() {
+		bookMarkCol.setCellValueFactory(
+				new Callback<TreeTableColumn.CellDataFeatures<String, String>, ObservableValue<String>>() {
+					@Override
+					public ObservableValue<String> call(CellDataFeatures<String, String> param) {
+						return new SimpleStringProperty(param.getValue().getValue());
+					}
+				});
+		nameCol.setCellValueFactory(new PropertyValueFactory<URLdetails, String>("name"));
+		locationCol.setCellValueFactory(new PropertyValueFactory<URLdetails, String>("location"));
+		dateCol.setCellValueFactory(new PropertyValueFactory<URLdetails, String>("date"));
+		timeCol.setCellValueFactory(new PropertyValueFactory<URLdetails, String>("time"));
+		treeView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
 			@Override
-			public ObservableValue<String> call(CellDataFeatures<String, String> param) {
-				return new SimpleStringProperty(param.getValue().getValue());
-			}
-		});		
-		nameCol.setCellValueFactory(new PropertyValueFactory<URLdetails,String>("name"));
-		locationCol.setCellValueFactory(new PropertyValueFactory<URLdetails,String>("location"));
-		dateCol.setCellValueFactory(new PropertyValueFactory<URLdetails,String>("date"));
-		timeCol.setCellValueFactory(new PropertyValueFactory<URLdetails,String>("time"));
-		treeView.getSelectionModel().selectedItemProperty().addListener( new ChangeListener() {
-			@Override
-			public void changed(ObservableValue observable, Object oldValue,
-					Object newValue) {
+			public void changed(ObservableValue observable, Object oldValue, Object newValue) {
 
 				TreeItem<String> selectedItem = (TreeItem<String>) newValue;
 				System.out.println("Selected Text : " + selectedItem.getValue());
@@ -75,10 +83,12 @@ public class BookMarks {
 
 		treeView.getColumns().add(bookMarkCol);
 		treeView.setRoot(parentFolder);
-		table.getColumns().addAll(nameCol,locationCol,dateCol,timeCol);
+		table.getColumns().addAll(nameCol, locationCol, dateCol, timeCol);
 		table.setItems(list);
 	}
+
 	public Tab getBookmarkView(Tab bookmarkTab) {
+		
 		BorderPane borderPaneBookmark = new BorderPane();
 		treeView.setMinWidth(150);
 		treeView.setMaxWidth(150);
@@ -86,7 +96,7 @@ public class BookMarks {
 		borderPaneBookmark.setCenter(table);
 		bookmarkTab.setContent(borderPaneBookmark);
 		return bookmarkTab;
+		
 	}
-
 
 }

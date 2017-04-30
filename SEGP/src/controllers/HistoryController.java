@@ -8,6 +8,8 @@ import java.util.ResourceBundle;
 import org.controlsfx.control.Notifications;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXDialog;
+import com.jfoenix.controls.JFXDialogLayout;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXTreeTableColumn;
 import com.jfoenix.controls.JFXTreeTableView;
@@ -54,6 +56,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import javafx.util.Duration;
+import main.MainClass;
 import userInterface.HistoryTree;
 
 public class HistoryController implements Initializable {
@@ -84,7 +87,6 @@ public class HistoryController implements Initializable {
 	private JFXButton deleteSingle;
 
 	private ArrayList<TreeItem> storeItems;
-	private HistoryTree hs;
 
 	private TreeItem rootItem;
 
@@ -101,16 +103,21 @@ public class HistoryController implements Initializable {
 	// Tab addTab;
 
 	// Lists for maintaining different Histories
-	ObservableList<HistoryStoreView> fullHistory = FXCollections.observableArrayList();
-	ObservableList<HistoryStoreView> pastHours = FXCollections.observableArrayList();
-	ObservableList<HistoryStoreView> todayHistory = FXCollections.observableArrayList();
-	ObservableList<HistoryStoreView> yesterdayHistory = FXCollections.observableArrayList();
-	ObservableList<HistoryStoreView> pastWeekHistory = FXCollections.observableArrayList();
-	ObservableList<HistoryStoreView> pastMonthHistory = FXCollections.observableArrayList();
+	private static ObservableList<HistoryStoreView> fullHistory = FXCollections.observableArrayList();
+	private ObservableList<HistoryStoreView> pastHours = FXCollections.observableArrayList();
+	private ObservableList<HistoryStoreView> todayHistory = FXCollections.observableArrayList();
+	private ObservableList<HistoryStoreView> yesterdayHistory = FXCollections.observableArrayList();
+	private ObservableList<HistoryStoreView> pastWeekHistory = FXCollections.observableArrayList();
+	private ObservableList<HistoryStoreView> pastMonthHistory = FXCollections.observableArrayList();
 
+	private StringProperty selectedItem ;
+	
 	EventHandler<MouseEvent> mouseEventHandle = (MouseEvent event) -> {
 		handleMouseClicked(event);
 	};
+
+	private boolean check = false;
+	
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -119,36 +126,57 @@ public class HistoryController implements Initializable {
 		table.setEditable(false);
 		table.setId("treetable");
 		
-		deleteSingle.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
 		
-			StringProperty selectedItem = table.getSelectionModel().getSelectedItem().getValue().link1;
+		deleteSingle.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
 			
-			System.out.println("Kaka Daikh wat : "+selectedItem);
+			// if click any row check true and entry delete successfully otherwise note
+			table.addEventHandler(MouseEvent.MOUSE_CLICKED, (e2)->{
+				check = true;
+			});
 			
-			if (selectedItem.equals(null)) {
+			if(check){
+				try{
+				selectedItem = table.getSelectionModel().getSelectedItem().getValue().link1;
+				}catch (Exception tableEmpty){
+					System.out.println("Check table empty");
+					Notifications.create()
+					.title("History ")
+					.text("You do not have data in your history.")
+					.hideAfter(Duration.seconds(3))
+					.showInformation();
+					return;
+				}
 				
-			System.out.println("wa");
-			
-				
-			} else {
-				System.out.println("Index to be deleted:" + selectedItem.getValue());
-				SqliteConnection.excuteQuery(selectedItem.getValue());
+					System.out.println("Index to be deleted:" + selectedItem.getValue());
+					SqliteConnection.excuteQuery(selectedItem.getValue());
 
-				// Update the history table
-				ObservableList<HistoryStoreView> fullHistory = FXCollections.observableArrayList();
-				fullHistory = SqliteConnection.getFullHistory(fullHistory);
-				addListInTable(fullHistory);
-				table.refresh();
-				System.out.println("History updated check!");
-				// addListInTable(fullHistory);
-				// System.out.println("Value of index
-				// "+table.getSelectionModel().getSelectedItem().valueProperty();
+					// Update the history table
+					ObservableList<HistoryStoreView> fullHistory = FXCollections.observableArrayList();
+					fullHistory = SqliteConnection.getFullHistory(fullHistory);
+					addListInTable(fullHistory);
+					table.refresh();
+
+					Notifications.create()
+					.title("Successfull")
+					.text("Your selected entry has been removed from history.")
+					.hideAfter(Duration.seconds(3))
+					.showInformation();
+
+					check = false;
+			}else{
+				
+					Notifications.create()
+					.title("Unsuccessfull")
+					.text("You did not select any row. Please select \n any row  then delete.")
+					.hideAfter(Duration.seconds(3))
+					.showWarning();
 				return;
 			}
-
+					
 		});
 		
-		System.out.println("kakaka");
+		
+		
 		initializingView();
 		initializeListsWithData();
 
@@ -202,28 +230,20 @@ public class HistoryController implements Initializable {
 	public void initializingView() {
 
 		// Border pane left View
-		hs = new HistoryTree();
 		storeItems = HistoryTree.getStoreItems();
 		rootItem = new TreeItem("History");
 		rootItem.getChildren().addAll(storeItems);
+		rootItem.setExpanded(true);
 		treeView.setRoot(rootItem);
-		// treeView.setPrefWidth(200);
-		// borderPaneHistory.setLeft(treeView);
 		treeView.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEventHandle);
+		
 		// Border pane Middle view
 		fullHistory = HistoryManagment.fullHistoryShow(fullHistory);
 		addListInTable(fullHistory);
-		// borderPaneHistory.setCenter(table);
-		// drawersStack.setContent(vBox);
-		// all View in tab
 
-		// tabPane=MainController.tabPane;
-		// addTab= new Tab("pk " + (tabPane.getTabs().size() - 1));
-		// addTab.setContent(borderPaneHistory);
-		// tabPane.getTabs().add(addTab);
-		// tabPane.getSelectionModel().select(addTab);
 	}
 
+	
 	public void addListInTable(ObservableList<HistoryStoreView> list) {
 		dateCol.setPrefWidth(150);
 		dateCol.setCellValueFactory(
@@ -279,21 +299,72 @@ public class HistoryController implements Initializable {
 	void deleteHistory(MouseEvent event) {
 
 		// confirmation dialogue
-		Alert alert = new Alert(AlertType.CONFIRMATION);
+	/*	Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setTitle("Confirmation Dialog");
 		alert.setHeaderText("History");
 		alert.setContentText("Are you want to delete all History ?");
-		Optional<ButtonType> result = alert.showAndWait();
+		Optional<ButtonType> result = alert.showAndWait();*/
+		
+		JFXButton okBt = new JFXButton("Ok");
+		JFXButton cancelBt = new JFXButton("Cancel");
+		
+		okBt.setId("mybutton");
+		cancelBt.setId("mybutton");
+		
+		JFXDialogLayout content = new JFXDialogLayout();
+		content.setHeading(new Text("Clear History"));
+		content.setBody(new Text(" You are going to delete your complete history. After that\n"
+								+ "you will not have any single url in your history. Click Ok \n"
+								+ "to confirm or click cancel to main window."));
+		JFXDialog historyWarn= new JFXDialog(MainClass.getPane(),content,JFXDialog.DialogTransition.CENTER);
+		content.setActions(okBt,cancelBt);
+		historyWarn.show();	
+		
+		okBt.addEventHandler(MouseEvent.MOUSE_CLICKED, (e6) -> {
 
+			historyWarn.close();
+
+			JFXButton yesBt = new JFXButton("Yes");
+			JFXButton noBt = new JFXButton("No");
+
+			JFXDialogLayout confirmContent = new JFXDialogLayout();
+			confirmContent.setHeading(new Text("Clear History"));
+			confirmContent.setBody(new Text("Do you want to delete your complete history?"));
+			JFXDialog historyConfirm = new JFXDialog(MainClass.getPane(), confirmContent, JFXDialog.DialogTransition.CENTER);
+			confirmContent.setActions(yesBt, noBt);
+			historyConfirm.show();
+
+			yesBt.addEventHandler(MouseEvent.MOUSE_CLICKED, (e7) -> {
+				
+				table.setRoot(null);
+				table.refresh();
+				fullHistory.clear();
+				pastHours.clear();
+				pastMonthHistory.clear();
+				pastWeekHistory.clear();
+				yesterdayHistory.clear();
+				todayHistory.clear();
+				historyConfirm.close();
+				
+				HistoryManagment.deleteFromDatabase();
+				
+			});
+			
+			noBt.addEventHandler(MouseEvent.MOUSE_CLICKED, (e7) -> {
+				historyConfirm.close();
+			});
+			
+		});
+		cancelBt.addEventHandler(MouseEvent.MOUSE_CLICKED, (e6) -> {
+			historyWarn.close();
+		});
+		
+
+		//To show overlay dialougge box
+		
+/*
 		if (alert.getResult() == ButtonType.OK) {
-			table.setRoot(null);
-			table.refresh();
-			fullHistory.clear();
-			pastHours.clear();
-			pastMonthHistory.clear();
-			pastWeekHistory.clear();
-			yesterdayHistory.clear();
-			todayHistory.clear();
+			
 
 			// information dialogue
 			alert = new Alert(AlertType.INFORMATION);
@@ -302,8 +373,8 @@ public class HistoryController implements Initializable {
 			String s = "History has been deleted!";
 			alert.setContentText(s);
 			alert.show();
-		}
-		HistoryManagment.deleteFromDatabase();
+		}*/
+		
 
 	}
 

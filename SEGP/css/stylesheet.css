@@ -6,7 +6,7 @@
  * Button   												                   *
  *                                                                             *
  ******************************************************************************/
-#button .button {
+#mybutton .button {
 	-fx-text-fill-color:white;
 	-fx-border-radius: 5.0 5.0 5.0 5.0, 5.0 5.0 5.0 5.0;
     -fx-border-color: #2959ea;
@@ -17,7 +17,7 @@
     -fx-background-color:derive(#2959ea,20.0%);
     
 }
-#button  .button:hover {
+#mybutton  .button:hover {
     -fx-background-color: derive(#2959ea,50.0%);
 }
 #setting .button {
@@ -92,9 +92,10 @@
 .tab-pane{
 	 	-fx-tab-min-width:15.0px;
 	  	-fx-tab-max-width:120.0px;
+	  	-fx-tab-pref-width:120.0px;
 	  	
-	  	-fx-tab-min-height:25.0px;
-	  	-fx-tab-max-height:25.0px;
+	  	-fx-tab-min-height:30.0px;
+	  	-fx-tab-max-height:30.0px;
 }
 
 .tab{

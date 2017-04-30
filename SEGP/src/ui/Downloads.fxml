@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="borderPane" prefHeight="469.0" prefWidth="643.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.DownloadController">
+<BorderPane fx:id="borderPane" prefHeight="450.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.DownloadController">
    <top>
       <GridPane opacity="0.84" style="-fx-background-color: #2959ea;" BorderPane.alignment="CENTER">
         <columnConstraints>
@@ -27,7 +27,7 @@
             <RowConstraints minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label prefHeight="27.0" prefWidth="130.0" text="Downloads" textFill="#f4f4f4" GridPane.rowIndex="1">
+            <Label text="Downloads" textFill="#f4f4f4" GridPane.rowIndex="1">
                <padding>
                   <Insets left="20.0" />
                </padding>
@@ -38,7 +38,7 @@
                   <Insets left="10.0" />
                </GridPane.margin>
             </Label>
-            <JFXTextField fx:id="searchField" alignment="CENTER" focusColor="#b1c0eb" style="-fx-border-radius: 30;" unFocusColor="#97b6e4" GridPane.columnIndex="2" GridPane.rowIndex="1">
+            <JFXTextField fx:id="searchField" alignment="CENTER" focusColor="WHITE" minWidth="200.0" prefWidth="400.0" style="-fx-border-radius: 30;" GridPane.columnIndex="2" GridPane.rowIndex="1">
                <font>
                   <Font size="14.0" />
                </font></JFXTextField>

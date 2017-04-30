@@ -122,15 +122,9 @@ public class TabController implements Initializable {
 	public Worker<Void> worker;
 
 	private TabPane tabPane = mainController.getTabPane();
-	/*
-	 * public TabPane getTabPane() { return tabPane; }
-	 * 
-	 * public void setTabPane(TabPane tabPane) { this.tabPane = tabPane; }
-	 */
 
 	// we made this webgine object to get access the current url of webpage
-
-	// we made this webgine object to get access the current url of webpage
+	
 	static WebEngine engine;
 
 	public void setWebEngine(WebEngine webEngine) {
@@ -177,36 +171,12 @@ public class TabController implements Initializable {
 				if (newValue == Worker.State.SUCCEEDED) {
 					System.out.println("Finish!");
 
+					// The current url title set in current tab
 					tabPane.getSelectionModel().getSelectedItem().setText(webEngine.getTitle());
-
+					
 					org.w3c.dom.Document doc = webEngine.getDocument();
 					DetectForm detectForm = new DetectForm();
 					detectForm.detect(doc);
-
-					// String imgs = "";
-					// File f = new
-					// File(getClass().getResource("/screenshots").getFile());
-					// for (File fs : f.listFiles()) {
-					// imgs += "<img src=\""+fs.toURI()+"\" width='100' height =
-					// '100' />";
-					// }
-					// System.out.println("images:"+imgs);
-					// System.out.println("Hello \"" + imgs + "\"");
-					//// webEngine.loadContent("<div>"+imgs+"</div>");
-					// String div = "var body =
-					// document.getElementsByTagName('body')[0];"
-					// + "var newElement = document.createElement('div');"
-					// + "var center = document.createElement('center');"
-					// + "newElement.append = "
-					// + "newElement.setAttribute('id', 'custom_div');"
-					// + "center.appendChild(newElement);"
-					// +"body.appendChild(center);";
-					//// webEngine.executeScript("document.getElementsByTagName('body')[0].innerHTML
-					// =\"" + imgs + "\"");
-					// webEngine.executeScript("if (!window.indexedDB)
-					// window.alert(\"Your browser doesn't support a stable
-					// version of IndexedDB.\")");
-
 				}
 
 			}
@@ -218,11 +188,6 @@ public class TabController implements Initializable {
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
 				System.out.println("location of engine: " + newValue);
 				dwnlod.startDownload(newValue, webEngine.getTitle());
-
-				// if (!webEngine.getTitle().equals(null)) {
-				// System.out.println("Title: " + webEngine.getTitle());
-
-				// }
 
 			}
 		});
@@ -260,10 +225,7 @@ public class TabController implements Initializable {
 
 		searchField.setOnKeyPressed(event -> {
 
-			Pattern p = Pattern.compile("[a-z]*[ ]*[A-Z]*[ ]*[0-9]*[ ]");// .
-																			// represents
-																			// single
-																			// character
+			Pattern p = Pattern.compile("[a-z]*[ ]*[A-Z]*[ ]*[0-9]*[ ]");
 			Matcher m = p.matcher(searchField.getText());
 			boolean b = m.matches();
 
@@ -290,16 +252,6 @@ public class TabController implements Initializable {
 
 		});
 
-		// System.out.println("Full history index 0: +"+fullHistory.get(0));
-
-		// Tabpane listener for new tab or for security password: @testing phase
-		tabPane.setOnKeyPressed(event -> {
-			/*
-			 * switch (event.getCode() ) { case T : case CONTROL:
-			 * System.out.println(event.getCode()); break; }
-			 */
-		});
-		// This will drop down list suggestion keywords
 
 		back.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
 			try {
@@ -486,7 +438,7 @@ public class TabController implements Initializable {
 					// tab.setText(webEngine.getTitle());
 					// MainController.setFirstTab(tab);
 
-					System.out.println("Sudo title of tab" + webEngine.getTitle());
+					//System.out.println("Sudo title of tab" + webEngine.getTitle());
 
 					URL domain = null;
 					if (!(webEngine.getLocation().equals("about:blank")))
@@ -495,7 +447,9 @@ public class TabController implements Initializable {
 						} catch (MalformedURLException e) {
 							System.err.println("Invalid domain.");
 						}
+					
 					HistoryManagment.insertUrl(webEngine.getLocation(), domain.getHost(), webEngine.getTitle());
+					
 
 				}
 
