@@ -66,7 +66,17 @@
                <padding>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </padding></JFXHamburger>
-            <JFXProgressBar fx:id="progressbar" minHeight="5.0" minWidth="600.0" prefWidth="600.0" progress="0.0" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+            <GridPane GridPane.halignment="CENTER" GridPane.rowIndex="1">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="5.6213202476501465" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <JFXProgressBar fx:id="progressbar" maxWidth="1350.0" minWidth="200.0" prefWidth="1350.0" progress="0.0" />
+               </children>
+            </GridPane>
          </children>
       </GridPane>
    </top>

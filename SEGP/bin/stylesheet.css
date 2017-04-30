@@ -31,9 +31,7 @@
  ******************************************************************************/
 
 
-#tabadded .tab {
-	-fx-background-color:derive(#bbbbbb,0.0%);
-}
+
 #tabadded .tab-header-background{
 	-fx-background-color:derive(#bbbbbb,20.0%);
 }
@@ -74,7 +72,7 @@
 	
 	-fx-padding:5.0 10.0 5.0 10.0;
     -fx-background-radius: 12.0 12.0 4.0 4.0;
-	-fx-background-color: derive(#777777,0.0%);
+	
     -fx-border-radius: 10 10 10 10;
     
 	

@@ -40,6 +40,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ContextMenu;
+import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TreeCell;
@@ -66,6 +67,9 @@ public class HistoryController implements Initializable {
 	@FXML
 	private JFXTreeTableView<HistoryStoreView> table;
 	
+	@FXML
+    private Label selectedDeleteEntries;
+
 	@FXML
 	private JFXTextField search;
 
@@ -129,6 +133,9 @@ public class HistoryController implements Initializable {
 		table.setEditable(false);
 		table.setId("treetable");
 		
+		selectedDeleteEntries.setVisible(false);
+				
+		
 		historyPieChart.setTitle("Most Visited Sites");
 		ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(
 				new PieChart.Data("Facebook", 30)
@@ -162,7 +169,9 @@ public class HistoryController implements Initializable {
 								}
 								
 								if (entery==true) {
+									selectedDeleteEntries.setVisible(true);
 									selectedValues.add(selectedItem.getValue());
+									selectedDeleteEntries.setText("Selected "+selectedValues.size());
 									entery = false;
 								}
 								
@@ -200,7 +209,10 @@ public class HistoryController implements Initializable {
 						}
 						
 						if (entery==true) {
+							selectedDeleteEntries.setVisible(true);
 							selectedValues.add(selectedItem.getValue());
+							selectedDeleteEntries.setText("Selected "+selectedValues.size());
+
 							entery = false;
 						}
 						
@@ -237,6 +249,8 @@ public class HistoryController implements Initializable {
 					table.refresh();
 				}
 			}
+			
+			selectedDeleteEntries.setVisible(false);
 			
 /*			
 			if(check){

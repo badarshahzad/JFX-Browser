@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1">
 
 <top>
       <GridPane opacity="0.84" style="-fx-background-color: #2959ea;" BorderPane.alignment="CENTER">
@@ -44,16 +44,16 @@
    <center>
       <Pane prefHeight="600.0" prefWidth="500.0" BorderPane.alignment="CENTER">
          <children>
-            <JFXButton fx:id="signInBtn" contentDisplay="CENTER" layoutX="733.0" layoutY="180.0" minHeight="32.0" prefWidth="100.0" style="-fx-background-color: #03A9F4;" text="Sign In" textFill="WHITE" />
+            <JFXButton fx:id="signInBtn" buttonType="RAISED" contentDisplay="CENTER" layoutX="733.0" layoutY="180.0" minHeight="32.0" opacity="0.9" prefWidth="100.0" style="-fx-background-color: #3c7cea;" text="Sign In" textFill="WHITE" />
             <JFXCheckBox fx:id="checkPasswordRemember" checkedColor="#23383c" layoutX="217.0" layoutY="269.0" minHeight="50.0" prefHeight="50.0" prefWidth="460.0" text="Offers to save passowrds with Google Smart Lock for Passowrds.  " />
             <Label alignment="CENTER" layoutX="206.0" layoutY="228.0" minHeight="32.0" prefHeight="32.0" prefWidth="229.0" text="Passwords and forms">
                <font>
                   <Font name="System Bold Italic" size="16.0" />
                </font>
             </Label>
-            <JFXButton fx:id="managePasswordBtn" alignment="CENTER" contentDisplay="CENTER" layoutX="704.0" layoutY="339.0" minHeight="32.0" prefWidth="180.0" style="-fx-background-color: #03A9F4;" text="Manage Passwords" textFill="WHITE" />
+            <JFXButton fx:id="managePasswordBtn" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" layoutX="704.0" layoutY="339.0" minHeight="32.0" opacity="0.9" prefWidth="180.0" style="-fx-background-color: #3c7cea;" text="Manage Passwords" textFill="WHITE" />
             <Label layoutX="226.0" layoutY="391.0" maxWidth="500.0" minWidth="580.0" prefHeight="50.0" prefWidth="800.0" text="Chromium is using your computer's system proxy settings to connect to the network." />
-            <JFXButton fx:id="changeProxyBtn" alignment="CENTER" contentDisplay="CENTER" layoutX="704.0" layoutY="454.0" minHeight="32.0" prefWidth="180.0" style="-fx-background-color: #03A9F4;" text="Change Proxy Setting" textFill="WHITE" />
+            <JFXButton fx:id="changeProxyBtn" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" layoutX="704.0" layoutY="454.0" minHeight="32.0" opacity="0.9" prefWidth="180.0" style="-fx-background-color: #3c7cea;" text="Change Proxy Setting" textFill="WHITE" />
             <Label alignment="CENTER" layoutX="189.0" layoutY="359.0" minHeight="32.0" prefHeight="32.0" prefWidth="149.0" text="Network">
                <font>
                   <Font name="System Bold Italic" size="16.0" />

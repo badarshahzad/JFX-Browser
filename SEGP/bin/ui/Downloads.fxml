@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="borderPane" prefHeight="450.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.DownloadController">
+<BorderPane fx:id="borderPane" prefHeight="450.0" prefWidth="650.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.DownloadController">
    <top>
       <GridPane opacity="0.84" style="-fx-background-color: #2959ea;" BorderPane.alignment="CENTER">
         <columnConstraints>
