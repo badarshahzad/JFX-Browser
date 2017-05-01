@@ -2,9 +2,9 @@ package userInterface;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDrawer;
+import com.jfoenix.controls.JFXDrawer.DrawerDirection;
 import com.jfoenix.controls.JFXDrawersStack;
 import com.jfoenix.controls.JFXHamburger;
-import com.jfoenix.controls.JFXDrawer.DrawerDirection;
 
 import javafx.scene.control.TabPane;
 import javafx.scene.control.Tooltip;
@@ -25,25 +25,25 @@ public class Hamburger {
 	JFXButton bookmarks = new JFXButton();
 	//JFXButton saveAsPdf = new JFXButton();
 	JFXButton setting = new JFXButton();
-	
+
 	public  JFXHamburger getHamburger(JFXHamburger hamburger, BorderPane borderpane, TabPane settingTabPane) {
 
 		history.setMinSize(48, 48);
 		history.setGraphic(new ImageView(new Image("/history.png")));
 		history.setTooltip(new Tooltip("History"));
-		
+
 		downloads.setMinSize(48, 48);
 		downloads.setGraphic(new ImageView(new Image("/downloads.png")));
 		downloads.setTooltip(new Tooltip("Downloads"));
-		
+
 		bookmarks.setMinSize(48, 48);
 		bookmarks.setGraphic(new ImageView(new Image("/bookmarks.png")));
 		bookmarks.setTooltip(new Tooltip("Bookmarks"));
-		
+
 		//saveAsPdf.setMinSize(48, 48);
 		//saveAsPdf.setGraphic(new ImageView(new Image("/pdf.png")));
 		//saveAsPdf.setTooltip(new Tooltip("Save As PDF"));
-	
+
 		setting.setMinSize(48, 48);
 		setting.setGraphic(new ImageView(new Image("/setting.png")));
 		setting.setTooltip(new Tooltip("Setting"));
@@ -53,15 +53,15 @@ public class Hamburger {
 		 * Below is the menu view list that will appear from right side when
 		 * clicked the hamburger.
 		 */
-		
-	
+
+
 		VBox vbox = new VBox();
 		vbox.getChildren().addAll(history,downloads,bookmarks,setting);
 		vbox.setSpacing(25);
 		vbox.setId("righDrawerVbox");
-		
-		
-		
+
+
+
 		// ---------Right----DrawerStack----Add Drawer pane-------
 		/*
 		 * Drawerstack is container for drawer. We set the place of drawer is
@@ -74,7 +74,7 @@ public class Hamburger {
 		rightDrawer.setDefaultDrawerSize(80);
 		rightDrawer.setSidePane(vbox);
 		rightDrawer.setOpacity(0.5);
-				
+
 		// -----------Hamburger-----------------
 
 		borderpane.setRight(drawersStack);
@@ -90,7 +90,7 @@ public class Hamburger {
 		 * Class method menuView.
 		 */
 		menuView.setMenuViewListener(history, downloads, bookmarks, setting, settingTabPane,
-				 drawersStack, rightDrawer);
+				drawersStack, rightDrawer);
 		// setting.getStyleClass().addAll("animated-option-button","animated-option-sub-button2");
 		setHistoryBtn(history);
 		return hamburger;

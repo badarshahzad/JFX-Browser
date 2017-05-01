@@ -1,7 +1,5 @@
 package bookmarks;
 
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXTextField;
 import database.BookMarksDataBase;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
@@ -13,18 +11,15 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
+import javafx.scene.control.TreeTableColumn.CellDataFeatures;
 import javafx.scene.control.TreeTableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.control.TreeTableColumn.CellDataFeatures;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 
 public class BookMarks {
-
-	private JFXTextField searchBar;
-	private JFXButton searchButton;
 
 	private TableColumn<URLdetails, String> nameCol = new TableColumn<>("name");
 	private TableColumn<URLdetails, String> timeCol = new TableColumn<>("time");
@@ -35,7 +30,7 @@ public class BookMarks {
 
 	public static ObservableList<URLdetails> list = FXCollections.observableArrayList();
 
-	private Image folderImage = new Image(getClass().getResourceAsStream("folder.png"));
+	private Image folderImage = new Image(getClass().getResourceAsStream("/folder.png"));
 
 	private TreeTableView<String> treeView = new TreeTableView<>();
 	private TreeTableColumn<String, String> bookMarkCol = new TreeTableColumn<>("BookMarks");
@@ -88,7 +83,7 @@ public class BookMarks {
 	}
 
 	public Tab getBookmarkView(Tab bookmarkTab) {
-		
+
 		BorderPane borderPaneBookmark = new BorderPane();
 		treeView.setMinWidth(150);
 		treeView.setMaxWidth(150);
@@ -96,7 +91,7 @@ public class BookMarks {
 		borderPaneBookmark.setCenter(table);
 		bookmarkTab.setContent(borderPaneBookmark);
 		return bookmarkTab;
-		
+
 	}
 
 }

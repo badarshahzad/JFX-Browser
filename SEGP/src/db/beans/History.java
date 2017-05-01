@@ -1,13 +1,13 @@
 package db.beans;
 
 public class History {
-	
+
 	private String title;
 	private String domain_name;
 	private String time;
 	private String date; 
 	private String user_id;
-	
+
 	public String getTitle() {
 		return title;
 	}

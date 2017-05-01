@@ -1,5 +1,21 @@
 package controllers;
 
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.Optional;
+import java.util.ResourceBundle;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import javax.imageio.ImageIO;
+
+import org.controlsfx.control.PopOver;
+import org.controlsfx.control.textfield.TextFields;
+
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXHamburger;
@@ -9,18 +25,7 @@ import com.jfoenix.controls.JFXTextField;
 import database.BookMarksDataBase;
 import database.HistoryManagment;
 import downloader.MainDownload;
-
-import java.util.regex.*;
-
-import javax.swing.RootPaneContainer;
-
-import java.io.File;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.Optional;
-import java.util.ResourceBundle;
-import org.controlsfx.control.PopOver;
-import org.controlsfx.control.textfield.TextFields;
+import htmlToPdf.HTMLtoPDF;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -30,33 +35,27 @@ import javafx.concurrent.Worker.State;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
-
-import javafx.stage.FileChooser;
-
-import htmlToPdf.HTMLtoPDF;
-
+import javafx.scene.Node;
+import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Label;
-import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
+import javafx.scene.control.TextInputDialog;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-
 import javafx.scene.layout.VBox;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebHistory;
 import javafx.scene.web.WebView;
+import javafx.stage.FileChooser;
+import main.MainClass;
 import passwordVault.DetectForm;
 import userInterface.Hamburger;
-import javafx.scene.control.TabPane;
-import javafx.scene.control.TextInputDialog;
-
-import main.MainClass;
 import userInterface.MenuView;
-
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 
 /**
  *
@@ -64,6 +63,12 @@ import javafx.scene.image.ImageView;
  */
 
 public class TabController implements Initializable {
+
+
+	public TabController() {
+		// TODO Auto-generated constructor stub
+	}
+
 
 	@FXML
 	private BorderPane borderpane;
@@ -92,8 +97,28 @@ public class TabController implements Initializable {
 	@FXML
 	private Label bookmark;
 
+	public Label getBookmark() {
+		return bookmark;
+	}
+
+	public void setBookmark(Label bookmark) {
+		this.bookmark = bookmark;
+	}
+
 	@FXML
 	private Label htmlAsPdf;
+
+	public Label getHtmlAsPdf() {
+		return htmlAsPdf;
+	}
+
+	public void setHtmlAsPdf(Label htmlAsPdf) {
+		this.htmlAsPdf = htmlAsPdf;
+	}
+
+	public void setHamburger(JFXHamburger hamburger) {
+		this.hamburger = hamburger;
+	}
 
 	@FXML
 	private JFXHamburger hamburger;
@@ -124,7 +149,7 @@ public class TabController implements Initializable {
 	private TabPane tabPane = mainController.getTabPane();
 
 	// we made this webgine object to get access the current url of webpage
-	
+
 	static WebEngine engine;
 
 	public void setWebEngine(WebEngine webEngine) {
@@ -138,6 +163,23 @@ public class TabController implements Initializable {
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 
+
+		// untill user valid pin these will be disabled 
+		
+		webEngine.setJavaScriptEnabled(true);
+		
+		/* 
+		 * Just try but failed to snapshoot of current scene
+		
+		BufferedImage  bi = new BufferedImage((int)browser.getScene().getWidth(),(int)browser.getScene().getHeight(),BufferedImage.TYPE_INT_ARGB);
+		try {
+			ImageIO.write(bi, "PNG", new File("/home/badar/Desktop"));
+		} catch (IOException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+		*/
+		
 		setWebEngine(webEngine);
 		searchField.setText("https://www.google.com");
 
@@ -146,19 +188,19 @@ public class TabController implements Initializable {
 
 		back.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/backword1.png"))));
 		back.setDisable(true);
-		
+
 		forward.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/forward1.png"))));
 		forward.setDisable(true);
-		
+
 		refresh.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/refresh.png"))));
-		
+
 		search.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/search.png"))));
 		search.setId("search");
-		
+
 		download.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/download.png"))));
-		
+
 		bookmark.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/bookmark.png"))));
-		
+
 		htmlAsPdf.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/pdfConverter.png"))));
 
 		// Worker load the page
@@ -173,7 +215,7 @@ public class TabController implements Initializable {
 
 					// The current url title set in current tab
 					tabPane.getSelectionModel().getSelectedItem().setText(webEngine.getTitle());
-					
+
 					org.w3c.dom.Document doc = webEngine.getDocument();
 					DetectForm detectForm = new DetectForm();
 					detectForm.detect(doc);
@@ -233,7 +275,7 @@ public class TabController implements Initializable {
 
 				if (b) {
 					pageRender("https://www.google.com.pk/search?q=" + searchField.getText()); // method
-																								// call
+					// call
 				} else {
 					pageRender(searchField.getText()); // method call
 				}
@@ -379,25 +421,8 @@ public class TabController implements Initializable {
 
 	}// end intializer method
 
-	// mehtod to rendere page
 
 	MainDownload dwnlod = new MainDownload();
-	/*
-	 * String titleOfPage;
-	 * 
-	 * public String getTitleOfPage(){
-	 * webEngine.getLoadWorker().stateProperty().addListener(new
-	 * ChangeListener<State>() {
-	 * 
-	 * @Override public void changed(ObservableValue ov, State oldState, State
-	 * newState) {
-	 * 
-	 * titleOfPage = webEngine.getTitle(); } });
-	 * 
-	 * return titleOfPage;
-	 * 
-	 * }
-	 */
 
 	public void pageRender(String url) {
 		webEngine.getLoadWorker().stateProperty().addListener(new ChangeListener<State>() {
@@ -411,7 +436,7 @@ public class TabController implements Initializable {
 					// The name of current tab set in Window
 					MainClass.getStage().setTitle(webEngine.getTitle());
 
-					
+
 					// The backword & forward tab disabled and enable when index
 					// 0 disabled and when > 0 then enabled
 					if (history.getCurrentIndex() == 0) {
@@ -430,8 +455,8 @@ public class TabController implements Initializable {
 					if ((history.getCurrentIndex()+1) == history.getEntries().size()) {
 						forward.setDisable(true);
 					}
-					
-					
+
+
 					//
 					// MainController.setSelectedTabTitle(webEngine.getTitle());
 					// Tab tab = MainController.getFirstTab();
@@ -447,9 +472,9 @@ public class TabController implements Initializable {
 						} catch (MalformedURLException e) {
 							System.err.println("Invalid domain.");
 						}
-					
+
 					HistoryManagment.insertUrl(webEngine.getLocation(), domain.getHost(), webEngine.getTitle());
-					
+
 
 				}
 

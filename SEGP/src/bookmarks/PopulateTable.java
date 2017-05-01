@@ -12,7 +12,7 @@ public class PopulateTable {
 	private ObservableList<URLdetails> list = FXCollections.observableArrayList();
 	private BookMarksDataBase db = new BookMarksDataBase();
 	public ObservableList<URLdetails> PopulateTable(String folder){
-				ResultSet bookmarks = BookMarksDataBase.showBookmarks(folder);
+		ResultSet bookmarks = BookMarksDataBase.showBookmarks(folder);
 		try {
 			while(bookmarks.next()){
 				URLdetails bookmark = new URLdetails(bookmarks.getString(1), bookmarks.getString(2), bookmarks.getString(3), bookmarks.getString(4));
@@ -24,8 +24,8 @@ public class PopulateTable {
 		}
 		return null;
 	}
-public ArrayList<String> folderNames(){
-	ArrayList<String> folderNames = new ArrayList<>();
-	return folderNames;
-}
+	public ArrayList<String> folderNames(){
+		ArrayList<String> folderNames = new ArrayList<>();
+		return folderNames;
+	}
 }

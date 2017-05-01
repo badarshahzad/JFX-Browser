@@ -33,7 +33,7 @@
 
 
 #tabadded .tab-header-background{
-	-fx-background-color:derive(#bbbbbb,20.0%);
+	
 }
 #tabadded .tab:hover{
  -fx-background-color:derive(#bbbbbb,40.0%);

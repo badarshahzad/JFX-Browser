@@ -2,19 +2,13 @@ package database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import org.controlsfx.control.Notifications;
-
 import controllers.HistoryController;
 import db.beans.Users;
 import javafx.collections.ObservableList;
-import javafx.geometry.Pos;
-import javafx.scene.control.Alert;
-import javafx.util.Duration;
 
 public class SqliteConnection {
 	public static Connection Connector() {
@@ -93,7 +87,7 @@ public class SqliteConnection {
 			rs = perp.executeQuery();
 
 			while (rs.next()) // loop for data fetching and pass it to GUI table
-								// view
+				// view
 			{
 				String link1 = rs.getString(1);
 				String time1 = rs.getString(2);

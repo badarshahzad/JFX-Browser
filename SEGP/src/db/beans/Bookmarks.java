@@ -1,10 +1,10 @@
 package db.beans;
 
 public class Bookmarks {
-	
+
 	private String folder;
 	private int user_id;
-	
+
 	public String getFolder() {
 		return folder;
 	}

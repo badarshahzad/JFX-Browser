@@ -26,23 +26,23 @@ package pdfcrowd;
 @SuppressWarnings("serial")
 public final class PdfcrowdError extends RuntimeException
 {
-    public int statusCode = 0;
-    
-    public PdfcrowdError() {}
-    public PdfcrowdError(Throwable throwable) { super(throwable); }
-    public PdfcrowdError(String msg) { super(msg); }
-    public PdfcrowdError(String msg, int code) {
-        super(msg);
-        statusCode = code;
-    }
+	public int statusCode = 0;
 
-    @Override
+	public PdfcrowdError() {}
+	public PdfcrowdError(Throwable throwable) { super(throwable); }
+	public PdfcrowdError(String msg) { super(msg); }
+	public PdfcrowdError(String msg, int code) {
+		super(msg);
+		statusCode = code;
+	}
+
+	@Override
 	public String getMessage() {
-        if (statusCode != 0) {
-            return new String(Integer.toString(statusCode) + " - " + super.getMessage());
-        }
-        else {
-            return super.getMessage();
-        }
-    }
+		if (statusCode != 0) {
+			return new String(Integer.toString(statusCode) + " - " + super.getMessage());
+		}
+		else {
+			return super.getMessage();
+		}
+	}
 }

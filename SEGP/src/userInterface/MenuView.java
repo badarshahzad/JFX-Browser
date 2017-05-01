@@ -8,16 +8,10 @@ import com.jfoenix.controls.JFXDrawersStack;
 import com.jfoenix.controls.JFXTabPane;
 
 import bookmarks.BookMarks;
-import controllers.DownloadController;
-import controllers.HistoryController;
-import controllers.MainController;
-import controllers.SettingController;
-import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.SingleSelectionModel;
@@ -103,7 +97,7 @@ public class MenuView {
 			selectedTab.select(tab);
 
 			getBookMarkView();
-			
+
 			tab.setText("History");
 			fxSelectedTab.select(fxTabs.get(0));
 
@@ -117,9 +111,9 @@ public class MenuView {
 
 			tabs.add(tabs.size() - 1, tab);
 			selectedTab.select(tab);
-			
+
 			getBookMarkView();
-			
+
 			tab.setText("Downloads");
 			fxSelectedTab.select(fxTabs.get(1));
 
@@ -136,11 +130,11 @@ public class MenuView {
 
 				tabs.add(tabs.size() - 1, tab);
 				selectedTab.select(tab);
-				
+
 				getBookMarkView();
-				
+
 				tab.setText("Bookmarks");
-				
+
 				// The below is just select the current tab
 				// When the menu click Hamburger and DrawerStack will hide
 				//selectedTab.select(tab);
@@ -156,7 +150,7 @@ public class MenuView {
 		setting.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
 
 			onClickHideHamburger();
-			
+
 			tabs.add(tabs.size() - 1, tab);
 			selectedTab.select(tab);
 
@@ -170,17 +164,17 @@ public class MenuView {
 		//As the bookmarks is not designed in fxml so: When the bookmarks tab 
 		//access to show the view of bookmark 
 		//if(fxTabpane.getSelectionModel().selectedIndexProperty().getName().equals("Bookmarks")){
-			
+
 		//}
-		
+
 		tab.setContent(fxTabpane);
 		fxTabpane.getTabs().addAll(historyTab, downloadsTab, bookmarksTab, settingTab);
-		
+
 		fxTabpane.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Tab>() {
 			@Override
-			
+
 			public void changed(ObservableValue<? extends Tab> ov, Tab t, Tab newSelectedTab) {
-			
+
 				if (newSelectedTab == historyTab) {
 					tab.setText("History");
 				}
@@ -202,7 +196,7 @@ public class MenuView {
 		BookMarks ob = new BookMarks();
 		bookmarksTab = ob.getBookmarkView(bookmarksTab);
 	}
-	
+
 	public void onClickHideHamburger() {
 
 		// TODO Auto-generated method stub

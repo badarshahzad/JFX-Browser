@@ -1,17 +1,12 @@
 package database;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
 import controllers.HistoryController;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class HistoryManagment {
@@ -103,7 +98,7 @@ public class HistoryManagment {
 			rs = perp.executeQuery();
 
 			while (rs.next()) // loop for data fetching and pass it to GUI table
-								// view
+				// view
 			{
 				String link1 = rs.getString(1);
 				String time1 = rs.getString(2);
@@ -132,7 +127,7 @@ public class HistoryManagment {
 			rs = perp.executeQuery();
 
 			while (rs.next()) // loop for data fetching and pass it to GUI table
-								// view
+				// view
 			{
 				String link1 = rs.getString(1);
 
@@ -183,7 +178,7 @@ public class HistoryManagment {
 			}
 
 			while (rs.next())// loop for data fetching and pass it to GUI table
-								// view
+				// view
 			{
 				String link1 = rs.getString(1);
 				String time1 = rs.getString(2);
@@ -233,7 +228,7 @@ public class HistoryManagment {
 			rs = perp.executeQuery();
 			System.out.println(rs.next());
 			while (rs.next()) // loop for data fetching and pass it to GUI table
-								// view
+				// view
 			{
 				String link1 = rs.getString(1);
 				String time1 = rs.getString(2);

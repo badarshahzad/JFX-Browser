@@ -10,20 +10,18 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 
+import database.CRUD;
 import database.SqliteConnection;
+import javafx.application.Application;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
-
-import database.CRUD;
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-
 import javafx.util.Duration;
 
 /**
@@ -72,7 +70,7 @@ public class LoginController extends Application implements Initializable {
 		}
 	}
 
-	
+
 	// As in Sqlite section we are returing null so to handle null value
 	// below we just handle that with system.exit to stop the system.
 
@@ -140,15 +138,15 @@ public class LoginController extends Application implements Initializable {
 						// .graphic(new ImageView(null))
 						.hideAfter(Duration.seconds(5)).position(Pos.TOP_RIGHT);
 				noti.showError();
-				
+
 			}else{
 				if(CRUD.isLogin(getUser().getText(), getPassword().getText())){
 					Notifications noti = Notifications.create()
-						.title("Successfull")
-						.text("Congratulation! You successfully login. ")
-						// .graphic(new ImageView(null))
-						.hideAfter(Duration.seconds(3)).position(Pos.TOP_RIGHT);
-				noti.showInformation();
+							.title("Successfull")
+							.text("Congratulation! You successfully login. ")
+							// .graphic(new ImageView(null))
+							.hideAfter(Duration.seconds(3)).position(Pos.TOP_RIGHT);
+					noti.showInformation();
 				}else{
 					Notifications noti = Notifications.create()
 							.title("Username and Password Incorrect!")
@@ -157,7 +155,7 @@ public class LoginController extends Application implements Initializable {
 							.hideAfter(Duration.seconds(3)).position(Pos.TOP_RIGHT);
 					noti.showError();
 				}
-				
+
 			}
 		});
 
@@ -190,7 +188,7 @@ public class LoginController extends Application implements Initializable {
 	public void setLogin(JFXButton login) {
 		this.login = login;
 	}
-	
+
 	public static void main(String args[]){
 		launch(args);
 	}
@@ -202,7 +200,7 @@ public class LoginController extends Application implements Initializable {
 		Scene scene = new Scene(root);
 		primaryStage.setScene(scene);
 		primaryStage.show();
-		
+
 	}
 
 }

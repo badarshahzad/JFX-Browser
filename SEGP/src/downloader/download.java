@@ -20,7 +20,7 @@ public class download{
 	public String getFileStatus() {
 		return fileStatus.get();
 	}		
-	
+
 	public void setUrl(String url){
 		this.url = new SimpleStringProperty(url);
 	}

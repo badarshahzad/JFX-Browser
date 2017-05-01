@@ -19,8 +19,8 @@ public class Notification {
 				notify.show();
 			}
 		}); 
-		
-		
+
+
 	}
 
 }

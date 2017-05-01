@@ -4,7 +4,7 @@ public class Downloads {
 
 	private String status;
 	private String filename;
-	
+
 	public String getStatus() {
 		return status;
 	}
@@ -24,5 +24,5 @@ public class Downloads {
 		this.user_id = user_id;
 	}
 	private int user_id;
-	
+
 }

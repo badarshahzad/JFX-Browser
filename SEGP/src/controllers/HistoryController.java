@@ -2,7 +2,6 @@ package controllers;
 
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Optional;
 import java.util.ResourceBundle;
 
 import org.controlsfx.control.Notifications;
@@ -18,7 +17,6 @@ import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 
 import database.HistoryManagment;
 import database.SqliteConnection;
-import javafx.application.Application;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.beans.value.ObservableValue;
@@ -26,35 +24,22 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.chart.BarChart;
-import javafx.scene.chart.CategoryAxis;
-import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.PieChart;
-import javafx.scene.chart.XYChart;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
 import javafx.scene.control.TreeCell;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.TreeTableColumn.CellDataFeatures;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.control.TreeView;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
 import javafx.util.Callback;
 import javafx.util.Duration;
 import main.MainClass;
@@ -66,19 +51,19 @@ public class HistoryController implements Initializable {
 	private BorderPane borderPaneHistory;
 	@FXML
 	private JFXTreeTableView<HistoryStoreView> table;
-	
+
 	@FXML
-    private Label selectedDeleteEntries;
+	private Label selectedDeleteEntries;
 
 	@FXML
 	private JFXTextField search;
 
 	@FXML
 	private VBox paneForChart;
-	
-    @FXML
-    private PieChart historyPieChart;
-	
+
+	@FXML
+	private PieChart historyPieChart;
+
 	@FXML
 	private VBox vBox;
 
@@ -113,15 +98,17 @@ public class HistoryController implements Initializable {
 	private ObservableList<HistoryStoreView> yesterdayHistory = FXCollections.observableArrayList();
 	private ObservableList<HistoryStoreView> pastWeekHistory = FXCollections.observableArrayList();
 	private ObservableList<HistoryStoreView> pastMonthHistory = FXCollections.observableArrayList();
+	
+	private Image folderImage = new Image(getClass().getResourceAsStream("/folder.png"));
 
 	private StringProperty selectedItem ;
-	
+
 	EventHandler<MouseEvent> mouseEventHandle = (MouseEvent event) -> {
 		handleMouseClicked(event);
 	};
 
 	private boolean check = false;
-	
+
 	private ArrayList<String> selectedValues  = new ArrayList<>();;
 
 	boolean daikh = false;
@@ -129,110 +116,111 @@ public class HistoryController implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 
-		
+		search.setPromptText("Search History");
+
 		table.setEditable(false);
 		table.setId("treetable");
-		
+
 		selectedDeleteEntries.setVisible(false);
-				
-		
+
+
 		historyPieChart.setTitle("Most Visited Sites");
 		ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(
 				new PieChart.Data("Facebook", 30)
 				,new PieChart.Data("Google", 60)
 				,new PieChart.Data("Twitter", 20)
 				,new PieChart.Data("Gmail", 30));
-		
+
 		historyPieChart.setData(pieChartData);
-		
+
 		table.setOnKeyPressed((event)->{
-			
+
 			if (event.isControlDown() ) {
-				
-				
+
+
 				table.addEventHandler(MouseEvent.MOUSE_CLICKED, (e)->{
 					daikh = true;
 				});
-				
+
 				table.addEventHandler(MouseEvent.MOUSE_CLICKED, (e)->{
 					if(daikh){
 						try{
 							selectedItem = table.getSelectionModel().getSelectedItem().getValue().link1;
-							
-							boolean entery = true;
-							
-								for (int a = 0; a < selectedValues.size(); a++) {
-									if (selectedValues.get(a).equals(selectedItem.getValue())) {
-										entery = false;
-										
-									}
-								}
-								
-								if (entery==true) {
-									selectedDeleteEntries.setVisible(true);
-									selectedValues.add(selectedItem.getValue());
-									selectedDeleteEntries.setText("Selected "+selectedValues.size());
-									entery = false;
-								}
-								
-							
-								
-							}catch (Exception tableEmpty){
-								
-								Notifications.create()
-								.title("History ")
-								.text("No row has been selected or you have selected \n"
-										+ "same row again in history table.")
-								.hideAfter(Duration.seconds(3))
-								.showWarning();
-								return;
-							}
-						}
-				});
-				
-			}
-			
-		});
-		
-		table.addEventHandler(MouseEvent.MOUSE_CLICKED, (e)->{
-			
-				try{
-					selectedItem = table.getSelectionModel().getSelectedItem().getValue().link1;
-					
-					boolean entery = true;
-					
-						for (int a = 0; a < selectedValues.size(); a++) {
-							if (selectedValues.get(a).equals(selectedItem.getValue())) {
-								entery = false;
-								
-							}
-						}
-						
-						if (entery==true) {
-							selectedDeleteEntries.setVisible(true);
-							selectedValues.add(selectedItem.getValue());
-							selectedDeleteEntries.setText("Selected "+selectedValues.size());
 
-							entery = false;
+							boolean entery = true;
+
+							for (int a = 0; a < selectedValues.size(); a++) {
+								if (selectedValues.get(a).equals(selectedItem.getValue())) {
+									entery = false;
+
+								}
+							}
+
+							if (entery==true) {
+								selectedDeleteEntries.setVisible(true);
+								selectedValues.add(selectedItem.getValue());
+								selectedDeleteEntries.setText("Selected "+selectedValues.size());
+								entery = false;
+							}
+
+
+
+						}catch (Exception tableEmpty){
+
+							Notifications.create()
+							.title("History ")
+							.text("No row has been selected or you have selected \n"
+									+ "same row again in history table.")
+							.hideAfter(Duration.seconds(3))
+							.showWarning();
+							return;
 						}
-						
-					
-						
-					}catch (Exception tableEmpty){
-						
-						Notifications.create()
-						.title("History ")
-						.text("No row has been selected or you have selected \n"
-								+ "same row again in history table.")
-						.hideAfter(Duration.seconds(3))
-						.showWarning();
-						return;
 					}
-				
+				});
+
+			}
+
 		});
-		
+
+		table.addEventHandler(MouseEvent.MOUSE_CLICKED, (e)->{
+
+			try{
+				selectedItem = table.getSelectionModel().getSelectedItem().getValue().link1;
+
+				boolean entery = true;
+
+				for (int a = 0; a < selectedValues.size(); a++) {
+					if (selectedValues.get(a).equals(selectedItem.getValue())) {
+						entery = false;
+
+					}
+				}
+
+				if (entery==true) {
+					selectedDeleteEntries.setVisible(true);
+					selectedValues.add(selectedItem.getValue());
+					selectedDeleteEntries.setText("Selected "+selectedValues.size());
+
+					entery = false;
+				}
+
+
+
+			}catch (Exception tableEmpty){
+
+				Notifications.create()
+				.title("History ")
+				.text("No row has been selected or you have selected \n"
+						+ "same row again in history table.")
+				.hideAfter(Duration.seconds(3))
+				.showWarning();
+				return;
+			}
+
+		});
+
 		deleteSingle.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
-			
+
 			if (selectedValues.size()<=0) {
 				System.out.println("Empty not selected");
 				return;
@@ -249,10 +237,10 @@ public class HistoryController implements Initializable {
 					table.refresh();
 				}
 			}
-			
+
 			selectedDeleteEntries.setVisible(false);
-			
-/*			
+
+			/*			
 			if(check){
 				try{
 				selectedItem = table.getSelectionModel().getSelectedItem().getValue().link1;
@@ -265,8 +253,8 @@ public class HistoryController implements Initializable {
 					.showInformation();
 					return;
 				}
-				
-					
+
+
 					SqliteConnection.excuteQuery(selectedItem.getValue());
 
 					// Update the history table
@@ -283,7 +271,7 @@ public class HistoryController implements Initializable {
 
 					check = false;
 			}else{
-				
+
 					Notifications.create()
 					.title("Unsuccessfull")
 					.text("You did not select any row. Please select \n any row  then delete.")
@@ -291,11 +279,11 @@ public class HistoryController implements Initializable {
 					.showWarning();
 				return;
 			}
-			*/
+			 */
 		});
-		
-		
-		
+
+
+
 		initializingView();
 		initializeListsWithData();
 
@@ -350,19 +338,19 @@ public class HistoryController implements Initializable {
 
 		// Border pane left View
 		storeItems = HistoryTree.getStoreItems();
-		rootItem = new TreeItem("History");
+		rootItem = new TreeItem("History",new ImageView(folderImage));
 		rootItem.getChildren().addAll(storeItems);
 		rootItem.setExpanded(true);
 		treeView.setRoot(rootItem);
 		treeView.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEventHandle);
-		
+
 		// Border pane Middle view
 		fullHistory = HistoryManagment.fullHistoryShow(fullHistory);
 		addListInTable(fullHistory);
 
 	}
 
-	
+
 	public void addListInTable(ObservableList<HistoryStoreView> list) {
 		dateCol.setPrefWidth(150);
 		dateCol.setCellValueFactory(
@@ -418,27 +406,27 @@ public class HistoryController implements Initializable {
 	void deleteHistory(MouseEvent event) {
 
 		// confirmation dialogue
-	/*	Alert alert = new Alert(AlertType.CONFIRMATION);
+		/*	Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setTitle("Confirmation Dialog");
 		alert.setHeaderText("History");
 		alert.setContentText("Are you want to delete all History ?");
 		Optional<ButtonType> result = alert.showAndWait();*/
-		
+
 		JFXButton okBt = new JFXButton("Ok");
 		JFXButton cancelBt = new JFXButton("Cancel");
-		
+
 		okBt.setId("mybutton");
 		cancelBt.setId("mybutton");
-		
+
 		JFXDialogLayout content = new JFXDialogLayout();
 		content.setHeading(new Text("Clear History"));
 		content.setBody(new Text(" You are going to delete your complete history. After that\n"
-								+ "you will not have any single url in your history. Click Ok \n"
-								+ "to confirm or click cancel to main window."));
+				+ "you will not have any single url in your history. Click Ok \n"
+				+ "to confirm or click cancel to main window."));
 		JFXDialog historyWarn= new JFXDialog(MainClass.getPane(),content,JFXDialog.DialogTransition.CENTER);
 		content.setActions(okBt,cancelBt);
 		historyWarn.show();	
-		
+
 		okBt.addEventHandler(MouseEvent.MOUSE_CLICKED, (e6) -> {
 
 			historyWarn.close();
@@ -454,7 +442,7 @@ public class HistoryController implements Initializable {
 			historyConfirm.show();
 
 			yesBt.addEventHandler(MouseEvent.MOUSE_CLICKED, (e7) -> {
-				
+
 				table.setRoot(null);
 				table.refresh();
 				fullHistory.clear();
@@ -464,26 +452,26 @@ public class HistoryController implements Initializable {
 				yesterdayHistory.clear();
 				todayHistory.clear();
 				historyConfirm.close();
-				
+
 				HistoryManagment.deleteFromDatabase();
-				
+
 			});
-			
+
 			noBt.addEventHandler(MouseEvent.MOUSE_CLICKED, (e7) -> {
 				historyConfirm.close();
 			});
-			
+
 		});
 		cancelBt.addEventHandler(MouseEvent.MOUSE_CLICKED, (e6) -> {
 			historyWarn.close();
 		});
-		
+
 
 		//To show overlay dialougge box
-		
-/*
+
+		/*
 		if (alert.getResult() == ButtonType.OK) {
-			
+
 
 			// information dialogue
 			alert = new Alert(AlertType.INFORMATION);
@@ -493,7 +481,7 @@ public class HistoryController implements Initializable {
 			alert.setContentText(s);
 			alert.show();
 		}*/
-		
+
 
 	}
 
@@ -508,7 +496,7 @@ public class HistoryController implements Initializable {
 
 	}
 
-	
+
 	public static ObservableList addDataInList(String link, String time, String date, String domain, String title,
 			ObservableList list) {
 		list.add(new HistoryStoreView(date, link, time, domain, title));

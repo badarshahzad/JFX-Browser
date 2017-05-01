@@ -6,7 +6,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
@@ -14,13 +13,11 @@ import java.net.SocketTimeoutException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
-
 import java.net.UnknownHostException;
 import java.nio.file.Paths;
 
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLHandshakeException;
-
 
 import database.DownloadDatabase;
 
@@ -34,9 +31,9 @@ public class DownloadThread extends Thread{
 		this.url = url;
 		this.filePath = path;
 		if(title!=null)
-		this.title = title;
+			this.title = title;
 	}
-	
+
 	/**
 	 * @param contentType  is a string which tells the types of file 
 	 * @param url is a string which refers to the download link of file

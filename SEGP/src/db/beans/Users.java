@@ -17,7 +17,7 @@ public class Users {
 	}
 	private String email;
 	private String password;
-	
+
 	public String getPin() {
 		return pin;
 	}

@@ -5,25 +5,25 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 public class UserAccounts {
-	
+
 	private static Connection c = SqliteConnection.Connector();
 	private static PreparedStatement perp=null;
 	public static void createUserAccountsDataBase(){
-		  try {
+		try {
 			c = SqliteConnection.Connector();
-	      perp=c.prepareStatement("CREATE TABLE if not exists accounts(domain text primary key,username varchar(20),"
-	      		+ "password varchar (30), user_id integer );");
-		      perp.executeUpdate();
-		      System.out.println("table created");
+			perp=c.prepareStatement("CREATE TABLE if not exists accounts(domain text primary key,username varchar(20),"
+					+ "password varchar (30), user_id integer );");
+			perp.executeUpdate();
+			System.out.println("table created");
 		} catch (SQLException e) {
 		}
-	      
+
 	}
 	public static void insertAccount(String domain, String userName,String password ,int userId){
 		c= SqliteConnection.Connector();
 		try
 		{
-			
+
 			String insert="insert or replace into accounts(domain,username,password,user_id)"+"values(?,?,?,?)";
 			perp=c.prepareStatement(insert);
 			perp.setString(1, domain);
@@ -39,7 +39,7 @@ public class UserAccounts {
 		}
 	}
 	public static ResultSet getAccounts(int userId){
-		
+
 		ResultSet result = null;
 		c= SqliteConnection.Connector();
 		try
@@ -57,6 +57,6 @@ public class UserAccounts {
 		}
 		return result;
 	}
-	
+
 
 }

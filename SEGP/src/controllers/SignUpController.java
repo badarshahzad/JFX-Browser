@@ -3,11 +3,6 @@ package controllers;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import java.awt.event.KeyEvent;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-
 import org.controlsfx.control.Notifications;
 
 import com.jfoenix.controls.JFXButton;
@@ -15,8 +10,6 @@ import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 
 import database.CRUD;
-import database.SqliteConnection;
-
 import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -31,71 +24,71 @@ import javafx.util.Duration;
 
 public class SignUpController  extends Application implements Initializable {
 
-    @FXML
-    private Pane signUpPane;
+	@FXML
+	private Pane signUpPane;
 
 	@FXML
-    private JFXTextField firstname;
+	private JFXTextField firstname;
 
-    @FXML
-    private JFXTextField email;
+	@FXML
+	private JFXTextField email;
 
-    @FXML
-    private JFXPasswordField password;
-    
-    @FXML
-    private JFXTextField pin;
+	@FXML
+	private JFXPasswordField password;
 
-    @FXML
-    private JFXButton signUpBt;
+	@FXML
+	private JFXTextField pin;
 
-    @FXML
-    private JFXButton cancel;
+	@FXML
+	private JFXButton signUpBt;
+
+	@FXML
+	private JFXButton cancel;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
-		
-		
+
+
 		//----------Sign up button working
 		signUpBt.addEventHandler(MouseEvent.MOUSE_CLICKED, (e4)->{
-			
-		boolean flag = getFirstname().getText().isEmpty() | getEmail().getText().isEmpty() |
-						getPin().getText().isEmpty() | getPassword().getText().isEmpty();
-			
-		if(flag){
-			
-			Notifications noti= Notifications.create()
-    				.title("Empty Field")
-    				.text("Please fill the empty field!")
-    				//.graphic(new ImageView(null))
-    				.hideAfter(Duration.seconds(5))
-    				.position(Pos.TOP_RIGHT);
-			noti.showError();
 
-		}else{
-			if(CRUD.insertNewAccount(getFirstname().getText(),getEmail().getText(), getPassword().getText(),getPin().getText())){
-			Notifications noti= Notifications.create()
-    				.title("Successfull")
-    				.text("Congratulation! You successfully Create an Account.")
-    				//.graphic(new ImageView(null))
-    				.hideAfter(Duration.seconds(5))
-    				.position(Pos.TOP_RIGHT);
-			noti.showInformation();
+			boolean flag = getFirstname().getText().isEmpty() | getEmail().getText().isEmpty() |
+					getPin().getText().isEmpty() | getPassword().getText().isEmpty();
+
+			if(flag){
+
+				Notifications noti= Notifications.create()
+						.title("Empty Field")
+						.text("Please fill the empty field!")
+						//.graphic(new ImageView(null))
+						.hideAfter(Duration.seconds(5))
+						.position(Pos.TOP_RIGHT);
+				noti.showError();
+
+			}else{
+				if(CRUD.insertNewAccount(getFirstname().getText(),getEmail().getText(), getPassword().getText(),getPin().getText())){
+					Notifications noti= Notifications.create()
+							.title("Successfull")
+							.text("Congratulation! You successfully Create an Account.")
+							//.graphic(new ImageView(null))
+							.hideAfter(Duration.seconds(5))
+							.position(Pos.TOP_RIGHT);
+					noti.showInformation();
+				}
 			}
-		}
-		
+
 		});
-		
+
 		cancel.addEventHandler(MouseEvent.MOUSE_CLICKED, (e5)->{
 			//To close the login pane
 			controllers.SettingController.getLoginSignInStage().close();
 			//System.exit(0);
-			
+
 		});
-		
+
 	}
-	
+
 	public Pane getSignUpPane() {
 		return signUpPane;
 	}
@@ -178,12 +171,12 @@ public class SignUpController  extends Application implements Initializable {
 		this.cancel = cancel;
 	}
 
-	
+
 	public static void main(String args[]){
 		System.out.println("Yes");
 		launch(args);
 	}
-	
+
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		// TODO Auto-generated method stub
@@ -191,7 +184,7 @@ public class SignUpController  extends Application implements Initializable {
 		Scene scene = new Scene(root);
 		primaryStage.setScene(scene);
 		primaryStage.show();
-		
+
 	}
 
 

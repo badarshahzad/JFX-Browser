@@ -5,53 +5,33 @@
  */
 package controllers;
 
-import java.awt.Color;
 import java.io.IOException;
 import java.net.URL;
-
-import java.util.EventListener;
-import java.util.MissingFormatArgumentException;
 import java.util.ResourceBundle;
-
-import javax.swing.RootPaneContainer;
-
-import org.controlsfx.control.Notifications;
-
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXDialog;
-import com.jfoenix.controls.JFXDialogLayout;
-import com.jfoenix.controls.JFXTextField;
 
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
-
-import javafx.event.Event;
-import javafx.event.EventHandler;
-
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.control.Tab;
-
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
-import javafx.util.Duration;
-import main.MainClass;
-import userInterface.Hamburger;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TabPane.TabClosingPolicy;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
+import main.MainClass;
+import userInterface.Hamburger;
 
 /**
  *
  * @author Segp-Group 3
  */
+
 public class MainController implements Initializable {
 
 	@FXML
@@ -64,25 +44,29 @@ public class MainController implements Initializable {
 
 	private static Tab firstTab = new Tab("New Tab");
 
-	public static Tab getFirstTab() {
-		return firstTab;
-	}
+	private static Tab addNewTab = new Tab("+");
 
 	public void setFirstTab(Tab firstTab) {
 		this.firstTab = firstTab;
 	}
 
-	private static Tab addNewTab = new Tab("+");
+	public static Tab getFirstTab() {
+		return firstTab;
+	}
+
 
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 
+
+		//addNewTab.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/newtab.png"))));
+		
 		// ------All opens tabs should be closed so below line is for just
 		// closing tabs
 		addNewTab.setClosable(false);
 		addNewTab.setId("addNewTab");
 		tabPane.setId("tabadded");
-		
+
 
 		tabPane.setTabClosingPolicy(TabClosingPolicy.ALL_TABS);
 		// ------tabPane.setFocusTraversable(false);
@@ -153,18 +137,18 @@ public class MainController implements Initializable {
 
 				// The current tab title is set the stage title
 				MainClass.getStage().setTitle(tabPane.getSelectionModel().getSelectedItem().getText());
-				
+
 				System.out.println("Current tab title: "+tabPane.getSelectionModel().getSelectedItem().getText());
 
 				if (newSelectedTab == addNewTab) {
 					// ---------------New tab is created --------------------
-					 Platform.runLater(new Runnable() {
-					 @Override
-					public void run() {
-					creatNewTab(tabpane, addNewTab);
+					Platform.runLater(new Runnable() {
+						@Override
+						public void run() {
+							creatNewTab(tabpane, addNewTab);
 
-					 }
-					 });
+						}
+					});
 				}
 			}
 		});
@@ -178,7 +162,7 @@ public class MainController implements Initializable {
 	public void creatNewTab(TabPane tabpane, Tab addNewTab) {
 
 		Tab tab = new Tab("New tab");
-		
+
 
 		try {
 			tab.setContent(FXMLLoader.load(getClass().getResource("/ui/Tab.fxml")));
@@ -190,7 +174,7 @@ public class MainController implements Initializable {
 		}
 
 		tab.getStyleClass().addAll("tab-pane");
-		
+
 		ObservableList<Tab> tabs = tabpane.getTabs();
 		tabs.add(tabs.size() - 1, tab);
 

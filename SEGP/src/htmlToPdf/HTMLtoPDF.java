@@ -1,7 +1,5 @@
 package htmlToPdf;
 
-import pdfcrowd.*;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -11,9 +9,8 @@ import org.controlsfx.control.Notifications;
 
 import controllers.TabController;
 import javafx.application.Platform;
-import javafx.stage.FileChooser;
 import javafx.util.Duration;
-import main.MainClass;
+import pdfcrowd.Client;
 
 public class HTMLtoPDF extends Thread {
 	private File file = null;
@@ -76,8 +73,8 @@ public class HTMLtoPDF extends Thread {
 		Platform.runLater(new Runnable() {
 			public void run() {
 				Notifications.create().title("File Downloaded")
-						.text("Your HTML to PDF file Downloaded \n Path: " + file).darkStyle()
-						.hideAfter(Duration.seconds(10)).showInformation();
+				.text("Your HTML to PDF file Downloaded \n Path: " + file).darkStyle()
+				.hideAfter(Duration.seconds(10)).showInformation();
 			}
 		});
 		System.out.println("File Download:check");

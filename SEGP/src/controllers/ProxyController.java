@@ -3,17 +3,13 @@ package controllers;
 import java.net.URL;
 import java.util.Properties;
 import java.util.ResourceBundle;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import org.controlsfx.control.Notifications;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXRadioButton;
-import com.sun.javafx.application.LauncherImpl;
 
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -83,7 +79,7 @@ public class ProxyController extends Application implements Initializable {
 
 		//current proxy setting
 		useSystemProxy.setSelected(true);
-		
+
 		useSystemProxy.setToggleGroup(group);
 		manualProxy.setToggleGroup(group);
 
@@ -107,7 +103,7 @@ public class ProxyController extends Application implements Initializable {
 
 			httpProxyField.setDisable(true);
 			portField.setDisable(true);
-			
+
 
 		});
 
@@ -134,7 +130,7 @@ public class ProxyController extends Application implements Initializable {
 			}
 
 			if (group.getSelectedToggle().equals(useSystemProxy)) {
-				
+
 				// Set Proxy for Http
 				systemProperties.setProperty("http.proxyHost", "172.16.0.2");
 				systemProperties.setProperty("http.proxyPort", "8080");
@@ -162,10 +158,10 @@ public class ProxyController extends Application implements Initializable {
 					}
 
 					Notifications.create().title("Proxy Setting").text(message).hideAfter(Duration.seconds(3))
-							.showError();;
+					.showError();;
 
 				} else {
-/*
+					/*
 					Pattern ipAddress = Pattern.compile("[0-9]{3}[.]{1}[0-9]{3}[.]{1}[0-9]{3}[.]{1}[0-9]{3}");
 					Matcher m1 = ipAddress.matcher(httpProxyField.getText());
 					boolean b1 = m1.matches();
@@ -191,14 +187,14 @@ public class ProxyController extends Application implements Initializable {
 						.showError();
 
 					}
-					*/
+					 */
 
-						systemProperties.setProperty("http.proxyHost", httpProxyField.getText());
-						systemProperties.setProperty("http.proxyPort", portField.getText());
+					systemProperties.setProperty("http.proxyHost", httpProxyField.getText());
+					systemProperties.setProperty("http.proxyPort", portField.getText());
 
-						// Set Proxy for Https
-						systemProperties.setProperty("https.proxyHost", httpProxyField.getText());
-						systemProperties.setProperty("https.proxyPort", portField.getText());
+					// Set Proxy for Https
+					systemProperties.setProperty("https.proxyHost", httpProxyField.getText());
+					systemProperties.setProperty("https.proxyPort", portField.getText());
 
 				}
 
@@ -238,11 +234,11 @@ public class ProxyController extends Application implements Initializable {
 
 	Stage stage = new Stage();
 
-	
+
 	public void setStage(Stage stage) {
 		this.stage = stage;
 	}
-	
+
 	public Stage getStage() {
 		return stage;
 	}
