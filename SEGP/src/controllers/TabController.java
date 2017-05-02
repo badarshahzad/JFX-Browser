@@ -24,6 +24,7 @@ import javafx.concurrent.Worker.State;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDialogLayout;
@@ -363,7 +364,7 @@ public class TabController implements Initializable {
 				popOver.hide();
 			});
 			saveMark.addEventHandler(MouseEvent.MOUSE_CLICKED, (s)->{
-				System.out.println(folder);
+
 				if(folder==null){
 					folder=markFolderList.getItems().get(0);
 				}
@@ -382,17 +383,22 @@ public class TabController implements Initializable {
 				dialog.setContentText("Please enter folder name:");
 				Optional<String> result = dialog.showAndWait();
 				result.ifPresent(name ->{
-					if(name==null){
-						this.folder = name;
-						options.add(folder);
-					}else{
-						
-					}
 					if(title==null){
 						System.out.println("null title");
 						title = webEngine.getTitle();
 					}
-					BookMarksDataBase.insertBookmarks(searchField.getText(), folder,title,1);
+					if(name!=null && !name.isEmpty()){
+						this.folder = name;
+						options.add(folder);
+						BookMarksDataBase.insertBookmarks(searchField.getText(), folder,title,1);
+					}else{
+						Notifications notify = Notifications.create().title("BookMark Folder")
+								.text("No Folder specified.")
+								.hideAfter(javafx.util.Duration.seconds(1))
+								.position(Pos.BOTTOM_RIGHT);
+						notify.darkStyle();
+						notify.showInformation();
+					}
 							});
 				
 				

@@ -13,14 +13,13 @@ import javafx.collections.ObservableList;
 public class BookMarksDataBase {
 	private static Connection c = SqliteConnection.Connector();
 	private static PreparedStatement perp = null;
-	private static java.util.Date dateTime;
-	static SimpleDateFormat formateTime;
-	private static SimpleDateFormat dateFormate;
+	private static java.util.Date dateTime= new java.util.Date();;
+	static SimpleDateFormat formateTime = new SimpleDateFormat("HH:mm:ss");;
+	private static SimpleDateFormat dateFormate = new SimpleDateFormat("yy-MM-dd");
+	
 	public static void createBookMarksDataBase() {
 		try {
-			dateTime = new java.util.Date();
-			formateTime = new SimpleDateFormat("HH:mm:ss");
-			dateFormate = new SimpleDateFormat("yy-MM-dd");
+			
 			Class.forName("org.sqlite.JDBC");
 			c = DriverManager.getConnection("jdbc:sqlite:History.db");
 			perp = c.prepareStatement("CREATE TABLE if not exists bookmark(url text ,folder_name varchar(20),"
@@ -53,7 +52,7 @@ public class BookMarksDataBase {
 			perp.executeUpdate();
 			System.out.println("Bookmark Entry added.");
 		} catch (Exception e) {
-			System.err.println(e.getClass().getName() + ": " + e.getMessage());
+			e.printStackTrace();
 		}
 
 	}
@@ -98,8 +97,5 @@ public class BookMarksDataBase {
 		return list;
 
 	}
-	public static void main(String[] args){
-		createBookMarksDataBase();
-		insertBookmarks("https://www.nama.edu.pk", "dummy", "title", 1);
-	}
+	
 }

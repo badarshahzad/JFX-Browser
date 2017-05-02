@@ -16,7 +16,6 @@ public class Notification {
 						.position(Pos.BOTTOM_RIGHT);
 				notify.darkStyle();
 				notify.showInformation();
-				notify.show();
 			}
 		}); 
 		
