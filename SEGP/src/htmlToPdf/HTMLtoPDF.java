@@ -1,8 +1,6 @@
 
 package htmlToPdf;
-
 import pdfcrowd.*;
-
 import java.io.File;
 import java.io.FileOutputStream;
 
