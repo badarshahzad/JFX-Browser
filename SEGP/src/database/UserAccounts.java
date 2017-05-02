@@ -58,6 +58,29 @@ public class UserAccounts {
 		}
 		return result;
 	}
+	public static boolean isSaved(int userId , String domain){
+		c = SqliteConnection.Connector();
+		ResultSet result;
+		String  query = "select domain from accounts where domain = ? and user_id = ? limit 1";
+		try {
+			perp = c.prepareStatement(query);
+			perp.setString(1, domain);
+			perp.setInt(2, userId);
+			result = perp.executeQuery();
+			if(result.next()){
+				c.close();
+				return true;
+			}else{
+				c.close();
+				return false;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+		return false;
+	}
 	
 
 }

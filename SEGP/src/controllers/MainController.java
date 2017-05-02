@@ -180,7 +180,6 @@ public class MainController implements Initializable {
 			tab.setContent(FXMLLoader.load(getClass().getResource("/ui/Tab.fxml")));
 		} catch (IOException e) {
 			System.out.println("Exception: New tab click but not working in TabPaneView Class");
-			e.printStackTrace();
 		}
 
 		tab.getStyleClass().addAll("tab-pane");

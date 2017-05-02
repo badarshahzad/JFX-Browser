@@ -1,5 +1,7 @@
 package bookmarks;
 
+import java.beans.EventHandler;
+
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import database.BookMarksDataBase;
@@ -16,6 +18,7 @@ import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.TreeTableView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.control.TreeTableColumn.CellDataFeatures;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -34,7 +37,7 @@ public class BookMarks {
 	private Image folderImage = new Image(getClass().getResourceAsStream("folder.png"));
 	private TreeTableView<String> treeView  = new TreeTableView<>();
 	private TreeTableColumn<String, String> bookMarkCol = new TreeTableColumn<>("BookMarks");
-	TreeItem parentFolder = new TreeItem<>("All Bookmarks",new ImageView(folderImage));
+	TreeItem parentFolder = new TreeItem<>("All Bookmarks");
 	private ObservableList<String> folders = BookMarksDataBase.folders(1);
  	
 	public BookMarks(){
@@ -61,15 +64,26 @@ public class BookMarks {
 				System.out.println("Selected Text : " + selectedItem.getValue());
 				ObservableList<URLdetails> list = new PopulateTable().PopulateTable(selectedItem.getValue());
 				table.setItems(list);
+				
 			}
 
 		});
+		table.focusedProperty().addListener(new ChangeListener<Boolean>() {
+
+			@Override
+			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+				String url = table.getSelectionModel().getSelectedItem().getLocation();
+				System.out.println("Url of the selected bookmarks: "+url);
+				
+			}
+		});
+		
 		bookMarkCol.setPrefWidth(150);
 		nameCol.setPrefWidth(200);
 		timeCol.setPrefWidth(150);
 		dateCol.setPrefWidth(150);
 		locationCol.setPrefWidth(300);
-
+		parentFolder.setExpanded(true);
 		treeView.getColumns().add(bookMarkCol);
 		treeView.setRoot(parentFolder);
 		table.getColumns().addAll(nameCol,locationCol,dateCol,timeCol);
