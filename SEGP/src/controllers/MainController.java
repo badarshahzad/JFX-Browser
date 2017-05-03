@@ -34,6 +34,10 @@ import userInterface.Hamburger;
 
 public class MainController implements Initializable {
 
+	public MainController() {
+		// TODO Auto-generated constructor stub
+	}
+	
 	@FXML
 	private BorderPane rootBorderPane;
 
@@ -134,17 +138,19 @@ public class MainController implements Initializable {
 					Platform.exit();
 				}
 
-
 				// The current tab title is set the stage title
 				MainClass.getStage().setTitle(tabPane.getSelectionModel().getSelectedItem().getText());
 
 				System.out.println("Current tab title: "+tabPane.getSelectionModel().getSelectedItem().getText());
 
 				if (newSelectedTab == addNewTab) {
+					
 					// ---------------New tab is created --------------------
+					
 					Platform.runLater(new Runnable() {
 						@Override
 						public void run() {
+							
 							creatNewTab(tabpane, addNewTab);
 
 						}

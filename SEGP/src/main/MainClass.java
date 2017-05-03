@@ -68,7 +68,7 @@ public class MainClass extends Application {
 
 
 					if (b1) {
-						TabController ob  = new TabController();
+						//TabController ob  = new TabController();
 						/*			 
 					 FXMLLoader loader  = new FXMLLoader(getClass().getResource("/ui/Tab.fxml"));
 					 try {

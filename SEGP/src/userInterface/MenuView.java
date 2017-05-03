@@ -8,6 +8,7 @@ import com.jfoenix.controls.JFXDrawersStack;
 import com.jfoenix.controls.JFXTabPane;
 
 import bookmarks.BookMarks;
+import controllers.MainController;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
@@ -37,7 +38,9 @@ public class MenuView {
 	private Tab bookmarksTab = new Tab("Bookmarks");
 	private Tab settingTab = new Tab("Setting");
 
-	private BorderPane settingBorderPane = new BorderPane();
+	private MainController mainCtrl = new MainController();
+	
+	//private BorderPane settingBorderPane = new BorderPane();
 	private JFXDrawersStack drawersStack;
 	private JFXDrawer rightDrawer;
 
@@ -152,6 +155,7 @@ public class MenuView {
 			onClickHideHamburger();
 
 			tabs.add(tabs.size() - 1, tab);
+			
 			selectedTab.select(tab);
 
 			getBookMarkView();
