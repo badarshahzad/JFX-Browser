@@ -10,9 +10,9 @@ import controllers.HistoryController;
 import javafx.collections.ObservableList;
 
 public class HistoryManagment {
-	
+
 	// private static Connection c = SqliteConnection.Connector();
-	
+
 	private static PreparedStatement perp = null;
 	private static java.util.Date dateTime;
 	static SimpleDateFormat formateTime;
@@ -20,7 +20,7 @@ public class HistoryManagment {
 
 	// ------------------------------------------------------Creating SQLITE
 	// DATABASE and TABLE--------------------------------------//
-	
+
 	public static void CreateDataBase() {
 		try {
 
@@ -31,12 +31,12 @@ public class HistoryManagment {
 			System.out.println("table created");
 			perp.close();
 			SqliteConnection.Connector().close();
-			
+
 		} catch (Exception e) {
-			
+
 			e.printStackTrace();
 			System.out.println("issues");
-			
+
 		}
 	}
 	// ------------------------------------ULR INSERTION IN
@@ -64,7 +64,7 @@ public class HistoryManagment {
 			perp.setString(6, title);
 			perp.setInt(7, user);
 			perp.executeUpdate();
-			
+
 			System.out.println("data has been inserted");
 			perp.close();
 			SqliteConnection.Connector().close();
@@ -194,7 +194,7 @@ public class HistoryManagment {
 				String date1 = rs.getString(4);
 				String domain1 = rs.getString(5);
 				String title1 = rs.getString(6);
-				
+
 				list = HistoryController.addDataInList(email1,link1, time1, date1, domain1, title1, list);
 			}
 
@@ -246,7 +246,7 @@ public class HistoryManagment {
 				String date1 = rs.getString(4);
 				String domain1 = rs.getString(5);
 				String title1 = rs.getString(6);
-				
+
 				pastHour = HistoryController.addDataInList(email1,link1, time1, date1, domain1, title1, pastHour);
 			}
 		} catch (Exception e) {

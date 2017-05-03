@@ -415,7 +415,7 @@ public class HistoryController implements Initializable {
 		final TreeItem<HistoryStoreView> root = new RecursiveTreeItem<HistoryStoreView>(list,
 				RecursiveTreeObject::getChildren);
 
-		table.getColumns().setAll(dateCol, linkCol, timeCol, domainCol, titleCol);
+		table.getColumns().setAll(emailCol,dateCol, linkCol, timeCol, domainCol, titleCol);
 		table.setRoot(root);
 		table.setShowRoot(false);
 

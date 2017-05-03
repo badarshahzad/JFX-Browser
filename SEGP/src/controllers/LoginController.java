@@ -118,6 +118,8 @@ public class LoginController  extends Application implements Initializable {
 		//System.out.println("yes");
 		// TODO Auto-generated method stub
 		Parent root = FXMLLoader.load(getClass().getResource("/ui/Login.fxml"));
+		
+		
 		Scene scene = new Scene(root);
 		primaryStage.setScene(scene);
 		primaryStage.show();

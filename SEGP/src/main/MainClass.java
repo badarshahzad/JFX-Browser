@@ -10,7 +10,6 @@ import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDialogLayout;
 import com.jfoenix.controls.JFXTextField;
 
-import controllers.HistoryController;
 import controllers.MainController;
 import controllers.TabController;
 import database.BookMarksDataBase;
@@ -18,12 +17,10 @@ import database.CRUD;
 import database.DownloadDatabase;
 import database.HistoryManagment;
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
@@ -69,10 +66,10 @@ public class MainClass extends Application {
 					Matcher m1 = ipAddress.matcher(textfield.getText());
 					boolean b1 = m1.matches();
 
-					
+
 					if (b1) {
 						TabController ob  = new TabController();
-		/*			 
+						/*			 
 					 FXMLLoader loader  = new FXMLLoader(getClass().getResource("/ui/Tab.fxml"));
 					 try {
 						loader.load();
@@ -81,22 +78,22 @@ public class MainClass extends Application {
 						e.printStackTrace();
 					}
 					 ob = loader.getController();
-					 
+
 					// ob.getHtmlAsPdf().setVisible(true);
 					 ob.getHamburger().setDisable(true);
-					 
+
 					 //ob.getHamburger().setDisable(false);
 					 //ob.getBookmark().setDisable(false);
-					 */
-					 
+						 */
+
 					} else {
 
 						Notifications.create().title("Wronge Pin")
-								.text("Your pin is exceeding limit or your pin is consists\n" + "of invalid characters")
-								.hideAfter(Duration.seconds(5)).showError();
-					
+						.text("Your pin is exceeding limit or your pin is consists\n" + "of invalid characters")
+						.hideAfter(Duration.seconds(5)).showError();
+
 					}
-					
+
 				});
 
 				setDialouge(button, "Pin", "Please type your pin", textfield);
@@ -163,7 +160,7 @@ public class MainClass extends Application {
 		});
 
 		content.setActions(ob, button);
-		
+
 		// To show overlay dialougge box
 		dialoge.show();
 	}
@@ -172,16 +169,16 @@ public class MainClass extends Application {
 	 * @param args
 	 *            the command line arguments
 	 */
-	
+
 	public static void main(String[] args) {
-		
+
 		HistoryManagment.CreateDataBase();
 		BookMarksDataBase.createBookMarksDataBase();
 		DownloadDatabase.createDownloadDataBase();
 		CRUD.createUserDataBase();
-		
+
 		launch(args);
-		
+
 		System.exit(1);
 	}
 

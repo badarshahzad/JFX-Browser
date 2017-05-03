@@ -159,11 +159,10 @@ public class TabController implements Initializable {
 	public void initialize(URL url, ResourceBundle rb) {
 
 
-
-		htmlAsPdf.setDisable(true);
-		bookmark.setDisable(true);
-		hamburger.setDisable(true);
-
+		//htmlAsPdf.setDisable(true);
+		//bookmark.setDisable(true);
+		//hamburger.setDisable(true);
+		
 		browser.setOnKeyPressed(event->{
 
 			if (event.getCode() == KeyCode.X && event.isControlDown()) {
@@ -181,11 +180,11 @@ public class TabController implements Initializable {
 
 					if (b1) {
 
-						getHamburger().setDisable(false);
+					//	getHamburger().setDisable(false);
 
-						getHtmlAsPdf().setDisable(false);
+					//	getHtmlAsPdf().setDisable(false);
 
-						getBookmark().setDisable(false);
+					//	getBookmark().setDisable(false);
 
 					} else {
 

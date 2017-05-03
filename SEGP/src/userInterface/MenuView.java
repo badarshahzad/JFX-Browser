@@ -93,8 +93,7 @@ public class MenuView {
 			// When the menu click Hamburger and DrawerStack will hide
 			onClickHideHamburger();
 
-			//tabs.add(tabs.size() - 1, tab);
-			tabs.add(tabs.size(), tab);
+			tabs.add(tabs.size() - 1, tab);
 			selectedTab.select(tab);
 
 			getBookMarkView();
@@ -110,8 +109,7 @@ public class MenuView {
 
 			onClickHideHamburger();
 
-			//tabs.add(tabs.size() - 1, tab);
-			tabs.add(tabs.size(), tab);
+			tabs.add(tabs.size() - 1, tab);
 			selectedTab.select(tab);
 
 			getBookMarkView();
@@ -130,8 +128,7 @@ public class MenuView {
 
 				onClickHideHamburger();
 
-				//tabs.add(tabs.size() - 1, tab);
-				tabs.add(tabs.size(), tab);
+				tabs.add(tabs.size() - 1, tab);
 				selectedTab.select(tab);
 
 				getBookMarkView();
@@ -154,8 +151,7 @@ public class MenuView {
 
 			onClickHideHamburger();
 
-			//tabs.add(tabs.size() - 1, tab);
-			tabs.add(tabs.size(), tab);
+			tabs.add(tabs.size() - 1, tab);
 			selectedTab.select(tab);
 
 			getBookMarkView();
@@ -181,12 +177,12 @@ public class MenuView {
 
 				if (newSelectedTab == historyTab) {
 					tab.setText("History");
-					
+
 					/*ObservableList<HistoryStoreView> fullHistory = FXCollections.observableArrayList();
 					fullHistory = SqliteConnection.getFullHistory(fullHistory);
 					addListInTable(fullHistory);
 					table.refresh();
-					*/
+					 */
 				}
 				if (newSelectedTab == bookmarksTab) {
 					tab.setText("Bookarks");

@@ -7,6 +7,8 @@ import org.controlsfx.control.Notifications;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
+import com.jfoenix.controls.JFXDialog;
+import com.jfoenix.controls.JFXDialogLayout;
 import com.jfoenix.controls.JFXTextField;
 
 import database.CRUD;
@@ -22,8 +24,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import main.MainClass;
 
 public class SettingController implements Initializable {
 
@@ -52,9 +56,9 @@ public class SettingController implements Initializable {
 	private static Stage loginSignInStage = new Stage();
 	private Scene loginSignInRoot;
 
-	private FXMLLoader loader;
-	private LoginController loginObject;
-	private SignUpController signUpObject;	
+	public FXMLLoader loader;
+	public LoginController loginObject;
+	public SignUpController signUpObject;	
 
 	public static String currentUserName = "Jfx Browser";
 	
@@ -133,6 +137,8 @@ public class SettingController implements Initializable {
 				System.out.println("Login Fxml is not loading");
 				e1.printStackTrace();
 			}
+			
+		
 			// LoginPane login button listenr
 			loginObject.getLogin().addEventHandler(MouseEvent.MOUSE_CLICKED, (e1) -> {
 				
