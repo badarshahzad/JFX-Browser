@@ -177,6 +177,12 @@ public class MenuView {
 
 				if (newSelectedTab == historyTab) {
 					tab.setText("History");
+					
+					/*ObservableList<HistoryStoreView> fullHistory = FXCollections.observableArrayList();
+					fullHistory = SqliteConnection.getFullHistory(fullHistory);
+					addListInTable(fullHistory);
+					table.refresh();
+					*/
 				}
 				if (newSelectedTab == bookmarksTab) {
 					tab.setText("Bookarks");

@@ -10,7 +10,9 @@ import controllers.HistoryController;
 import javafx.collections.ObservableList;
 
 public class HistoryManagment {
+	
 	// private static Connection c = SqliteConnection.Connector();
+	
 	private static PreparedStatement perp = null;
 	private static java.util.Date dateTime;
 	static SimpleDateFormat formateTime;
@@ -18,26 +20,29 @@ public class HistoryManagment {
 
 	// ------------------------------------------------------Creating SQLITE
 	// DATABASE and TABLE--------------------------------------//
+	
 	public static void CreateDataBase() {
 		try {
-			// Class.forName("org.sqlite.JDBC");
-			// c = DriverManager.getConnection("jdbc:sqlite:History.db");
+
 			perp = SqliteConnection.Connector().prepareStatement(
-					"CREATE TABLE if not exists history(url text primary key ,Time varchar(30),Date varchar(30),"
+					"CREATE TABLE if not exists history(email text primary key ,url text ,Time varchar(30),Date varchar(30),"
 							+ "domain varchar(40),title varchar(50), user_id integer );");
 			perp.executeUpdate();
 			System.out.println("table created");
 			perp.close();
 			SqliteConnection.Connector().close();
+			
 		} catch (Exception e) {
+			
 			e.printStackTrace();
 			System.out.println("issues");
+			
 		}
 	}
 	// ------------------------------------ULR INSERTION IN
 	// DATABASE----------------------------------------------------------------//
 
-	public static void insertUrl(String url, String domain, String title) {
+	public static void insertUrl(String email,String url, String domain, String title) {
 		dateTime = new java.util.Date();
 		formateTime = new SimpleDateFormat("HH:mm:ss");
 		dateFormate = new SimpleDateFormat("dd-MM-yyyy");
@@ -45,19 +50,21 @@ public class HistoryManagment {
 		try {
 			// Class.forName("org.sqlite.JDBC");
 			// c = DriverManager.getConnection("jdbc:sqlite:History.db");
-			String insert = "insert or replace into history(url,Time,Date,domain,title,user_id)"
-					+ "values(?,?,?,?,?,?)";
+			String insert = "insert or replace into history(email,url,Time,Date,domain,title,user_id)"
+					+ "values(?,?,?,?,?,?,?)";
 			String time = formateTime.format(dateTime);
 			String date = dateFormate.format(dateTime);
 			int user = 1;
 			perp = SqliteConnection.Connector().prepareStatement(insert);
-			perp.setString(1, url);
-			perp.setString(2, time);
-			perp.setString(3, date);
-			perp.setString(4, domain);
-			perp.setString(5, title);
-			perp.setInt(6, user);
+			perp.setString(1, email);
+			perp.setString(2, url);
+			perp.setString(3, time);
+			perp.setString(4, date);
+			perp.setString(5, domain);
+			perp.setString(6, title);
+			perp.setInt(7, user);
 			perp.executeUpdate();
+			
 			System.out.println("data has been inserted");
 			perp.close();
 			SqliteConnection.Connector().close();
@@ -100,14 +107,15 @@ public class HistoryManagment {
 			while (rs.next()) // loop for data fetching and pass it to GUI table
 				// view
 			{
-				String link1 = rs.getString(1);
-				String time1 = rs.getString(2);
-				String date1 = rs.getString(3);
-				String domain1 = rs.getString(4);
-				String title1 = rs.getString(5);
+				String email1 = rs.getString(1);
+				String link1 = rs.getString(2);
+				String time1 = rs.getString(3);
+				String date1 = rs.getString(4);
+				String domain1 = rs.getString(5);
+				String title1 = rs.getString(6);
 
 				// System.out.println(link1, time1,date1,domain1,title1);
-				fullHistory = HistoryController.addDataInList(link1, time1, date1, domain1, title1, fullHistory);
+				fullHistory = HistoryController.addDataInList(email1,link1, time1, date1, domain1, title1, fullHistory);
 			}
 			rs.close();
 			perp.close();
@@ -180,12 +188,14 @@ public class HistoryManagment {
 			while (rs.next())// loop for data fetching and pass it to GUI table
 				// view
 			{
-				String link1 = rs.getString(1);
-				String time1 = rs.getString(2);
-				String date1 = rs.getString(3);
-				String domain1 = rs.getString(4);
-				String title1 = rs.getString(5);
-				list = HistoryController.addDataInList(link1, time1, date1, domain1, title1, list);
+				String email1 = rs.getString(1);
+				String link1 = rs.getString(2);
+				String time1 = rs.getString(3);
+				String date1 = rs.getString(4);
+				String domain1 = rs.getString(5);
+				String title1 = rs.getString(6);
+				
+				list = HistoryController.addDataInList(email1,link1, time1, date1, domain1, title1, list);
 			}
 
 			rs.close();
@@ -230,12 +240,14 @@ public class HistoryManagment {
 			while (rs.next()) // loop for data fetching and pass it to GUI table
 				// view
 			{
-				String link1 = rs.getString(1);
-				String time1 = rs.getString(2);
-				String date1 = rs.getString(3);
-				String domain1 = rs.getString(4);
-				String title1 = rs.getString(5);
-				pastHour = HistoryController.addDataInList(link1, time1, date1, domain1, title1, pastHour);
+				String email1 = rs.getString(1);
+				String link1 = rs.getString(2);
+				String time1 = rs.getString(3);
+				String date1 = rs.getString(4);
+				String domain1 = rs.getString(5);
+				String title1 = rs.getString(6);
+				
+				pastHour = HistoryController.addDataInList(email1,link1, time1, date1, domain1, title1, pastHour);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

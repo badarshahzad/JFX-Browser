@@ -79,6 +79,9 @@ public class HistoryController implements Initializable {
 
 	private TreeItem rootItem;
 
+	//email col check
+	JFXTreeTableColumn<HistoryStoreView, String> emailCol = new JFXTreeTableColumn<HistoryStoreView, String>("Email");
+	
 	JFXTreeTableColumn<HistoryStoreView, String> dateCol = new JFXTreeTableColumn<HistoryStoreView, String>("Date");
 
 	JFXTreeTableColumn<HistoryStoreView, String> linkCol = new JFXTreeTableColumn<HistoryStoreView, String>("Links");
@@ -113,11 +116,17 @@ public class HistoryController implements Initializable {
 
 	boolean daikh = false;
 
+	public HistoryController() {
+		// TODO Auto-generated constructor stub
+	}
+	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 
+		initializingView();
+		initializeListsWithData();
+		
 		search.setPromptText("Search History");
-
 		table.setEditable(false);
 		table.setId("treetable");
 
@@ -284,9 +293,7 @@ public class HistoryController implements Initializable {
 
 
 
-		initializingView();
-		initializeListsWithData();
-
+		
 	}
 	private void handleMouseClicked(MouseEvent event) {
 		Node node = event.getPickResult().getIntersectedNode();
@@ -352,6 +359,17 @@ public class HistoryController implements Initializable {
 
 
 	public void addListInTable(ObservableList<HistoryStoreView> list) {
+		
+		emailCol.setPrefWidth(150);
+		emailCol.setCellValueFactory(
+				new Callback<TreeTableColumn.CellDataFeatures<HistoryStoreView, String>, ObservableValue<String>>() {
+					@Override
+					public ObservableValue<String> call(CellDataFeatures<HistoryStoreView, String> param) {
+						return param.getValue().getValue().email1;
+					}
+				});
+		
+		
 		dateCol.setPrefWidth(150);
 		dateCol.setCellValueFactory(
 				new Callback<TreeTableColumn.CellDataFeatures<HistoryStoreView, String>, ObservableValue<String>>() {
@@ -360,6 +378,7 @@ public class HistoryController implements Initializable {
 						return param.getValue().getValue().date1;
 					}
 				});
+		
 		linkCol.setPrefWidth(400);
 		linkCol.setCellValueFactory(
 				new Callback<TreeTableColumn.CellDataFeatures<HistoryStoreView, String>, ObservableValue<String>>() {
@@ -497,22 +516,29 @@ public class HistoryController implements Initializable {
 	}
 
 
-	public static ObservableList addDataInList(String link, String time, String date, String domain, String title,
+	public static ObservableList addDataInList(String email, String link, String time, String date, String domain, String title,
 			ObservableList list) {
-		list.add(new HistoryStoreView(date, link, time, domain, title));
+		list.add(new HistoryStoreView(email,date, link, time, domain, title));
 		return list;
 	}
 
 }
 
+
+	
+
 class HistoryStoreView extends RecursiveTreeObject<HistoryStoreView> {
+	
+	StringProperty email1;
 	StringProperty date1;
 	StringProperty link1;
 	StringProperty time1;
 	StringProperty domain1;
 	StringProperty title1;
 
-	public HistoryStoreView(String date, String link, String time, String domain, String title) {
+	public HistoryStoreView(String email,String date, String link, String time, String domain, String title) {
+		
+		this.email1 = new SimpleStringProperty(email);
 		this.date1 = new SimpleStringProperty(date);
 		this.link1 = new SimpleStringProperty(link);
 		this.time1 = new SimpleStringProperty(time);

@@ -3,11 +3,13 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="css"/>
 	<classpathentry kind="src" path="img"/>
+	<classpathentry kind="src" path="browserdb"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
 	<classpathentry kind="src" path="lib"/>
 	<classpathentry kind="lib" path="lib/jfoenix.jar"/>
 	<classpathentry kind="lib" path="lib/sqlite-jdbc-3.16.1.jar"/>
 	<classpathentry kind="lib" path="lib/UndecoratorBis.jar"/>
 	<classpathentry kind="lib" path="lib/controlsfx-8.40.11.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

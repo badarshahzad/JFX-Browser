@@ -24,34 +24,45 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 public class SettingController implements Initializable {
+
 	@FXML
-    private JFXButton signInBtn;
+	private JFXButton signInBtn;
 
-    @FXML
-    private JFXCheckBox checkPasswordRemember;
+	@FXML
+	private JFXCheckBox checkPasswordRemember;
 
-    @FXML
-    private JFXButton managePasswordBtn;
+	@FXML
+	private JFXButton managePasswordBtn;
 
-    @FXML
-    private JFXButton changeProxyBtn;
+	@FXML
+	private JFXButton changeProxyBtn;
 
-    @FXML
-    private ImageView userImage;
+	@FXML
+	private ImageView userImage;
 
-    @FXML
-    private JFXTextField currentUser;
+	@FXML
+	private JFXTextField currentUser;
 
-    @FXML
-    private TableView<?> usersTable;
-    
-    
+	@FXML
+	private TableView<?> usersTable;
+
+
 	private static Stage loginSignInStage = new Stage();
 	private Scene loginSignInRoot;
 
 	private FXMLLoader loader;
 	private LoginController loginObject;
-	private SignUpController signUpObject;
+	private SignUpController signUpObject;	
+
+	public static String currentUserName = "Jfx Browser";
+	
+	public JFXTextField getCurrentUser() {
+		return currentUser;
+	}
+
+	public void setCurrentUser(JFXTextField currentUser) {
+		this.currentUser = currentUser;
+	}
 
 	public Tab getSettingView(Tab settingTab, BorderPane borderpane) {
 
@@ -83,6 +94,9 @@ public class SettingController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		
+		
+		currentUser.setText(currentUserName);
+
 		userImage.setImage(new Image(getClass().getResourceAsStream("/user.png")));
 
 		signInBtn.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
@@ -111,6 +125,8 @@ public class SettingController implements Initializable {
 			}
 			// LoginPane login button listenr
 			loginObject.getLogin().addEventHandler(MouseEvent.MOUSE_CLICKED, (e1) -> {
+				
+				
 				System.out.println("Login click button ");
 			});
 

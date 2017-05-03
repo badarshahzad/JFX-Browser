@@ -1,9 +1,6 @@
 package controllers;
 
-import java.awt.Graphics;
-import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Optional;
@@ -11,8 +8,7 @@ import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.imageio.ImageIO;
-
+import org.controlsfx.control.Notifications;
 import org.controlsfx.control.PopOver;
 import org.controlsfx.control.textfield.TextFields;
 
@@ -23,6 +19,7 @@ import com.jfoenix.controls.JFXProgressBar;
 import com.jfoenix.controls.JFXTextField;
 
 import database.BookMarksDataBase;
+import database.CRUD;
 import database.HistoryManagment;
 import downloader.MainDownload;
 import htmlToPdf.HTMLtoPDF;
@@ -35,8 +32,6 @@ import javafx.concurrent.Worker.State;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
-import javafx.scene.Node;
-import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Label;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextInputDialog;
@@ -52,6 +47,7 @@ import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebHistory;
 import javafx.scene.web.WebView;
 import javafx.stage.FileChooser;
+import javafx.util.Duration;
 import main.MainClass;
 import passwordVault.DetectForm;
 import userInterface.Hamburger;
@@ -97,6 +93,9 @@ public class TabController implements Initializable {
 	@FXML
 	private Label bookmark;
 
+	@FXML
+	private Label htmlAsPdf;
+
 	public Label getBookmark() {
 		return bookmark;
 	}
@@ -105,8 +104,6 @@ public class TabController implements Initializable {
 		this.bookmark = bookmark;
 	}
 
-	@FXML
-	private Label htmlAsPdf;
 
 	public Label getHtmlAsPdf() {
 		return htmlAsPdf;
@@ -127,14 +124,12 @@ public class TabController implements Initializable {
 	private JFXProgressBar progressbar;
 
 	private String folder;
-	String title;
-	ObservableList<String> options;
+	private String title;
+	private ObservableList<String> options;
 
-	MainController mainController = new MainController();
+	private MainController mainController = new MainController();
 
 	// Classes objects to get methods or set methods access
-
-	private MenuView menviewObject = new MenuView();
 
 	private Hamburger ham = new Hamburger();
 	public VBox drawerPane = new VBox();
@@ -164,22 +159,53 @@ public class TabController implements Initializable {
 	public void initialize(URL url, ResourceBundle rb) {
 
 
+
+		htmlAsPdf.setDisable(true);
+		bookmark.setDisable(true);
+		hamburger.setDisable(true);
+
+		browser.setOnKeyPressed(event->{
+
+			if (event.getCode() == KeyCode.X && event.isControlDown()) {
+
+				JFXButton button = new JFXButton("Ok");
+				JFXTextField textfield = new JFXTextField();
+
+				button.addEventHandler(MouseEvent.MOUSE_CLICKED, (e6) -> {
+					System.out.println("Pin is :" + textfield.getText());
+
+					Pattern ipAddress = Pattern.compile("[0-9]{4}");
+					Matcher m1 = ipAddress.matcher(textfield.getText());
+					boolean b1 = m1.matches();
+
+
+					if (b1) {
+
+						getHamburger().setDisable(false);
+
+						getHtmlAsPdf().setDisable(false);
+
+						getBookmark().setDisable(false);
+
+					} else {
+
+						Notifications.create().title("Wronge Pin")
+						.text("Your pin is exceeding limit or your pin is consists\n" + "of invalid characters")
+						.hideAfter(Duration.seconds(5)).showError();
+
+					}
+
+				});
+
+				MainClass.setDialouge(button, "Pin", "Please type your pin", textfield);
+
+				Notifications.create().title("Pin Activation").text("You are going to access Pro-Verion.")
+				.hideAfter(Duration.seconds(3)).showInformation();
+			}
+		});
+
 		// untill user valid pin these will be disabled 
-		
-		webEngine.setJavaScriptEnabled(true);
-		
-		/* 
-		 * Just try but failed to snapshoot of current scene
-		
-		BufferedImage  bi = new BufferedImage((int)browser.getScene().getWidth(),(int)browser.getScene().getHeight(),BufferedImage.TYPE_INT_ARGB);
-		try {
-			ImageIO.write(bi, "PNG", new File("/home/badar/Desktop"));
-		} catch (IOException e2) {
-			// TODO Auto-generated catch block
-			e2.printStackTrace();
-		}
-		*/
-		
+
 		setWebEngine(webEngine);
 		searchField.setText("https://www.google.com");
 
@@ -201,7 +227,12 @@ public class TabController implements Initializable {
 
 		bookmark.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/bookmark.png"))));
 
+
 		htmlAsPdf.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/pdfConverter.png"))));
+
+
+
+
 
 		// Worker load the page
 		worker = webEngine.getLoadWorker();
@@ -249,6 +280,7 @@ public class TabController implements Initializable {
 		htmlAsPdf.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
 
 			FileChooser fileChooser = new FileChooser();
+
 			// Set extension filter
 			FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("PDF File (*.pdf)", "*.pdf");
 			fileChooser.getExtensionFilters().add(extFilter);
@@ -425,7 +457,9 @@ public class TabController implements Initializable {
 	MainDownload dwnlod = new MainDownload();
 
 	public void pageRender(String url) {
+
 		webEngine.getLoadWorker().stateProperty().addListener(new ChangeListener<State>() {
+
 			@Override
 			public void changed(ObservableValue ov, State oldState, State newState) {
 
@@ -439,6 +473,7 @@ public class TabController implements Initializable {
 
 					// The backword & forward tab disabled and enable when index
 					// 0 disabled and when > 0 then enabled
+
 					if (history.getCurrentIndex() == 0) {
 						back.setDisable(true);
 						forward.setDisable(true);
@@ -456,15 +491,6 @@ public class TabController implements Initializable {
 						forward.setDisable(true);
 					}
 
-
-					//
-					// MainController.setSelectedTabTitle(webEngine.getTitle());
-					// Tab tab = MainController.getFirstTab();
-					// tab.setText(webEngine.getTitle());
-					// MainController.setFirstTab(tab);
-
-					//System.out.println("Sudo title of tab" + webEngine.getTitle());
-
 					URL domain = null;
 					if (!(webEngine.getLocation().equals("about:blank")))
 						try {
@@ -473,7 +499,9 @@ public class TabController implements Initializable {
 							System.err.println("Invalid domain.");
 						}
 
-					HistoryManagment.insertUrl(webEngine.getLocation(), domain.getHost(), webEngine.getTitle());
+					String userEmail  = CRUD.getCurrentUserEmail();
+
+					HistoryManagment.insertUrl(userEmail,webEngine.getLocation(), domain.getHost(), webEngine.getTitle());
 
 
 				}
@@ -481,10 +509,12 @@ public class TabController implements Initializable {
 			}
 
 		});
+
 		webEngine.load(url);
 
 		borderpane.setCenter(browser);
 	}
+
 
 	public JFXHamburger getHamburger() {
 		return hamburger;

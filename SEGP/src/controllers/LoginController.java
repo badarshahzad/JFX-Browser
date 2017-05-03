@@ -1,6 +1,7 @@
 package controllers;
 
 import java.net.URL;
+import java.rmi.server.LoaderHandler;
 import java.sql.Connection;
 import java.util.ResourceBundle;
 
@@ -28,7 +29,7 @@ import javafx.util.Duration;
  *
  * @author Segp-Group 3
  */
-public class LoginController extends Application implements Initializable {
+public class LoginController  extends Application implements Initializable {
 
 	@FXML
 	private Pane loginPane;
@@ -71,57 +72,6 @@ public class LoginController extends Application implements Initializable {
 	}
 
 
-	// As in Sqlite section we are returing null so to handle null value
-	// below we just handle that with system.exit to stop the system.
-
-	/*	public boolean isDbConnecited() {
->>>>>>> master
-		try {
-			return !connection.isClosed();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return false;
-<<<<<<< HEAD
-	}
-
-	public boolean isLogin(String username, String password) {
-		PreparedStatement prepareStatment = null;
-		ResultSet resultSet = null;
-		String query = "Select * from login where uName = ? and pass = ?";
-		try {
-			prepareStatment = connection.prepareStatement(query);
-			prepareStatment.setString(1, username);
-			prepareStatment.setString(2, password);
-
-			resultSet = prepareStatment.executeQuery();
-			if (resultSet.next()) {
-				String a = resultSet.getString(1);
-				String b = resultSet.getString(2);
-				System.out.println(a + "\n" + b);
-
-				return true;
-			} else {
-				return false;
-			}
-
-		} catch (Exception e) {
-			System.out.println("Exception in Login:" + e);
-			return false;
-			// TODO: handle exception
-		} finally {
-			try {
-				prepareStatment.close();
-				resultSet.close();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-	}
-=======
-	}*/
 
 	@Override
 	public void initialize(URL url, ResourceBundle res) {
@@ -141,6 +91,22 @@ public class LoginController extends Application implements Initializable {
 
 			}else{
 				if(CRUD.isLogin(getUser().getText(), getPassword().getText())){
+
+					FXMLLoader loader = new FXMLLoader(getClass().getResource("/ui/Setting.fxml"));
+					try {
+						loader.load();
+					} catch (Exception e1) {
+						// TODO Auto-generated catch block
+						//e1.printStackTrace();
+						System.out.println("To give controller in login not successfull. ");
+					}
+					
+					SettingController ob = loader.getController(); 
+					
+					JFXTextField tx = ob.getCurrentUser();
+					tx.setText(getUser().getText());
+					ob.setCurrentUser(tx);
+					
 					Notifications noti = Notifications.create()
 							.title("Successfull")
 							.text("Congratulation! You successfully login. ")
@@ -188,7 +154,8 @@ public class LoginController extends Application implements Initializable {
 	public void setLogin(JFXButton login) {
 		this.login = login;
 	}
-
+	
+	
 	public static void main(String args[]){
 		launch(args);
 	}
@@ -202,5 +169,5 @@ public class LoginController extends Application implements Initializable {
 		primaryStage.show();
 
 	}
-
+	
 }

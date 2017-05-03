@@ -22,7 +22,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-public class ProxyController extends Application implements Initializable {
+public class ProxyController implements Initializable {
 
 	@FXML
 	private AnchorPane proxyPane;
@@ -209,6 +209,7 @@ public class ProxyController extends Application implements Initializable {
 
 	}
 
+	/*
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 
@@ -230,7 +231,7 @@ public class ProxyController extends Application implements Initializable {
 
 	public static void main(String args[]) {
 		launch(args);
-	}
+	}*/
 
 	Stage stage = new Stage();
 

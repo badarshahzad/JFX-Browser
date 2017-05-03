@@ -50,7 +50,7 @@ public class BookMarksDataBase {
 		ResultSet rs = null;
 		try {
 			String query = "select title, time ,date,url "
-					+ "from history where url in (select url from bookmark where folder_name = ?);";
+					+ "from bookmark where url in (select url from bookmark where folder_name = ?);";
 			perp = c.prepareStatement(query);
 			perp.setString(1, folder);
 			rs = perp.executeQuery();

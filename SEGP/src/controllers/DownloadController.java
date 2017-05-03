@@ -12,22 +12,17 @@ import com.jfoenix.controls.JFXTextField;
 import database.DownloadDatabase;
 import database.SqliteConnection;
 import downloader.download;
-import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
-import javafx.stage.Stage;
 
-public class DownloadController  extends Application implements Initializable{
+public class DownloadController   implements Initializable{
 
 	@FXML
 	private BorderPane borderPane;
@@ -143,7 +138,6 @@ public class DownloadController  extends Application implements Initializable{
 
 		return downloadTab;
 	}
-	 */	
 	public static void main(String args[]){
 		launch(args);
 	}
@@ -156,5 +150,6 @@ public class DownloadController  extends Application implements Initializable{
 		stage.show();
 
 	}
+	 */	
 
 }

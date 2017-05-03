@@ -22,7 +22,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-public class SignUpController  extends Application implements Initializable {
+public class SignUpController  implements Initializable {
 
 	@FXML
 	private Pane signUpPane;
@@ -171,7 +171,7 @@ public class SignUpController  extends Application implements Initializable {
 		this.cancel = cancel;
 	}
 
-
+	/*
 	public static void main(String args[]){
 		System.out.println("Yes");
 		launch(args);
@@ -186,6 +186,6 @@ public class SignUpController  extends Application implements Initializable {
 		primaryStage.show();
 
 	}
-
+*/
 
 }

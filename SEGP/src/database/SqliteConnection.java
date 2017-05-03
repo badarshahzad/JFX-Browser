@@ -15,7 +15,7 @@ public class SqliteConnection {
 
 		try {
 			Class.forName("org.sqlite.JDBC");
-			Connection conn = DriverManager.getConnection("jdbc:sqlite:History.db");
+			Connection conn = DriverManager.getConnection("jdbc:sqlite:browserdb/History.db");
 			return conn;
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
@@ -89,13 +89,14 @@ public class SqliteConnection {
 			while (rs.next()) // loop for data fetching and pass it to GUI table
 				// view
 			{
-				String link1 = rs.getString(1);
-				String time1 = rs.getString(2);
-				String date1 = rs.getString(3);
-				String domain1 = rs.getString(4);
-				String title1 = rs.getString(5);
+				String email1 = rs.getString(1);
+				String link1 = rs.getString(2);
+				String time1 = rs.getString(3);
+				String date1 = rs.getString(4);
+				String domain1 = rs.getString(5);
+				String title1 = rs.getString(6);
 
-				fullHistory = HistoryController.addDataInList(link1, time1, date1, domain1, title1, fullHistory);
+				fullHistory = HistoryController.addDataInList(email1,link1, time1, date1, domain1, title1, fullHistory);
 			}
 			rs.close();
 			perp.close();
