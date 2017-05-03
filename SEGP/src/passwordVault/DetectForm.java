@@ -2,6 +2,8 @@ package passwordVault;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.Optional;
 
 import org.w3c.dom.Attr;
@@ -12,6 +14,7 @@ import org.w3c.dom.NodeList;
 import org.w3c.dom.events.Event;
 import org.w3c.dom.events.EventListener;
 import org.w3c.dom.events.EventTarget;
+import org.w3c.dom.html.HTMLBodyElement;
 import org.w3c.dom.html.HTMLFormElement;
 import org.w3c.dom.html.HTMLInputElement;
 
@@ -21,14 +24,14 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 
+
 public class DetectForm {
 
 
 
 
-	private HTMLInputElement password = null;
-	private HTMLInputElement username = null;
 	private boolean isForm = false;
+	private ArrayList<UserCredentials> list;
 	//	public void notifcation(javafx.scene.Node node){
 	//		VBox popUpContent = new VBox();
 	//		popUpContent.setMinSize(100, 100);
@@ -57,13 +60,23 @@ public class DetectForm {
 	//		});
 	//	}
 	public void detect(Document doc){
+
+		HTMLInputElement password = null;
+		HTMLInputElement username = null;
+
 		EventListener listener = new EventListener() {
 			@Override
 			public void handleEvent(Event evt) {
 				System.out.println("action listener from DOM.");
-				String user = username.getValue();
-				String pass = password.getValue();
-				if(!(user.isEmpty()&&pass.isEmpty())){
+				String user = null , pass = null;
+				for(int i=0;i<list.size();i++){
+					user = list.get(i).username.getValue();
+					pass = list.get(i).password.getValue();
+					if(user !=null && pass!=null){
+						break;
+					}
+				}
+				if(user !=null && pass!=null ){
 					Alert alert = new Alert(AlertType.CONFIRMATION);
 					//				alert.setX(50);
 					alert.setTitle("Confirmation Dialog");
@@ -72,6 +85,8 @@ public class DetectForm {
 					Optional<ButtonType> result = alert.showAndWait();
 					if (result.get() == ButtonType.OK){
 						try {
+
+
 							UserAccounts.insertAccount(new URL(TabController.getWebEngine().getLocation()).getHost(), user, pass, 1);
 						} catch (MalformedURLException e) {
 							System.err.println("Url exception in detect form.");
@@ -86,77 +101,111 @@ public class DetectForm {
 			}
 		};
 
-		if (doc!=null && doc.getElementsByTagName("form").getLength() > 0) {
-			for(int k=0;k<doc.getElementsByTagName("form").getLength();k++){
-				HTMLFormElement form = (HTMLFormElement) doc.getElementsByTagName("form").item(k);
-				NodeList nodes = form.getElementsByTagName("input");
-				for (int i = 0; i < nodes.getLength(); i++) {
-					if(nodes.item(i).hasAttributes()){
-						NamedNodeMap attr = nodes.item(i).getAttributes();
-						for (int j=0 ; j<attr.getLength();j++){
-							Attr atribute = (Attr)attr.item(j);
-							if(atribute.getValue().equals("text")){
-								username = (HTMLInputElement) nodes.item(i);
+		if (doc!=null && doc.getElementsByTagName("body").getLength() > 0) {
+			HTMLBodyElement bodyElement = (HTMLBodyElement) doc.getElementsByTagName("body").item(0);
+			NodeList nodes = bodyElement.getElementsByTagName("input");
+			list  = new ArrayList<>();
+			for (int i = 0; i < nodes.getLength(); i++) {
+				if(nodes.item(i).hasAttributes()){
+					NamedNodeMap attr = nodes.item(i).getAttributes();
+					for (int j=0 ; j<attr.getLength();j++){
+						Attr atribute = (Attr)attr.item(j);
+						if(atribute.getValue().equals("text")){
+							username = (HTMLInputElement) nodes.item(i);
+						}
+						if(atribute.getValue().equals("password")){
+							password = (HTMLInputElement) nodes.item(i);
+							try{
+								String domain  = new URL(TabController.getWebEngine().getLocation()).getHost();
+							if(UserAccounts.isSaved(1, domain)){
+								return;
 							}
-							if(atribute.getValue().equals("password")){
-								password = (HTMLInputElement) nodes.item(i);
-								isForm=true;
-							}else if(atribute.getValue().equals("submit")){
-								System.out.println("DETECTION");
-								((EventTarget) nodes.item(i)).addEventListener("click", listener, false);
+							}catch(Exception e){
 
 							}
+							list.add(new UserCredentials(username,password));
+							isForm=true;
+						} if(atribute.getValue().equals("submit")){
+							System.out.println("DETECTION");
+							((EventTarget) nodes.item(i)).addEventListener("click", listener, false);
 
 						}
-					}
 
-				}
-				if(isForm){
-					Node button = form.getElementsByTagName("button").item(0);
-					if(button!=null && button.hasAttributes()){
-						NamedNodeMap attr = button.getAttributes();
-						for(int j=0; j<attr.getLength(); j++){
-							Attr atribute = (Attr)attr.item(j);
-							if(atribute.getValue().equals("submit")){
-								System.out.println("DETECTION");
-								((EventTarget) button).addEventListener("click", listener, false);
-
-							}
-
-						}
 					}
 				}
+
 			}
+			if(isForm){
+				if(bodyElement.getElementsByTagName("button").getLength()>0){
+					NodeList buttons = bodyElement.getElementsByTagName("button");
+					for(int i=0 ; i<buttons.getLength();i++){
+						if(buttons.item(i).hasAttributes()){
+							NamedNodeMap attr = buttons.item(i).getAttributes();
+							for(int j=0; j<attr.getLength(); j++){
+								Attr atribute = (Attr)attr.item(j);
+								if(atribute.getValue().equals("submit")){
+									((EventTarget) buttons.item(i)).addEventListener("click", listener, false);
 
+								}
+
+							}
+						}
+					}
+				}
+
+
+			}
 		}
 
-
-
-
 	}
+
+
+
+
 	public void insert(Document doc){
-		if (doc!=null && doc.getElementsByTagName("form").getLength() > 0) {
-			for(int k=0;k<doc.getElementsByTagName("form").getLength();k++){
-				HTMLFormElement form = (HTMLFormElement) doc.getElementsByTagName("form").item(k);
-				NodeList nodes = form.getElementsByTagName("input");
-				for (int i = 0; i < nodes.getLength(); i++) {
-					if(nodes.item(i).hasAttributes()){
-						NamedNodeMap attr = nodes.item(i).getAttributes();
-						for (int j=0 ; j<attr.getLength();j++){
-							Attr atribute = (Attr)attr.item(j);
-							if(atribute.getValue().equals("text")){
-								nodes.item(i).setNodeValue("username");;
+		HTMLInputElement username =null,password = null;
+		if (doc!=null && doc.getElementsByTagName("body").getLength() > 0) {
+			HTMLBodyElement body = (HTMLBodyElement) doc.getElementsByTagName("body").item(0);
+			NodeList nodes = body.getElementsByTagName("input");
+			for (int i = 0; i < nodes.getLength(); i++) {
+				if(nodes.item(i).hasAttributes()){
+					NamedNodeMap attr = nodes.item(i).getAttributes();
+					for (int j=0 ; j<attr.getLength();j++){
+						Attr atribute = (Attr)attr.item(j);
+						if(atribute.getValue().equals("text")){
+							username = (HTMLInputElement) nodes.item(i);
+						}
+						if(atribute.getValue().equals("password")){
+							password = (HTMLInputElement) nodes.item(i);
+
+							try{
+								String domain = new URL(TabController.getWebEngine().getLocation()).getHost() ;
+								ResultSet resultSet = UserAccounts.getAccounts(1,domain);
+								while(resultSet.next()){
+									username.setValue(resultSet.getString(1));
+									password.setValue(resultSet.getString(2));
+
+								}
+
+							}catch(Exception e){
+								System.out.println("Exception while getting domain name.");
 							}
-							if(atribute.getValue().equals("password")){
-								nodes.item(i).setNodeValue("password");;
-							}
+
 						}
 					}
-
 				}
-			}
 
+			}
 		}
 
 	}
+	class UserCredentials{
+		private HTMLInputElement username;
+		private HTMLInputElement password;
+		public UserCredentials(HTMLInputElement username, HTMLInputElement password){
+			this.username = username;
+			this.password = password;
+		}
+	}
+
 }

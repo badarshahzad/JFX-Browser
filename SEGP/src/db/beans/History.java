@@ -1,7 +1,7 @@
 package db.beans;
 
 public class History {
-
+	
 	private String title;
 	private String domain_name;
 	private String time;

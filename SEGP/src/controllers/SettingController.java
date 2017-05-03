@@ -113,6 +113,8 @@ public class SettingController implements Initializable {
 
 		userImage.setImage(new Image(getClass().getResourceAsStream("/user.png")));
 
+		
+		
 		signInBtn.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
 
 			try {
@@ -133,11 +135,11 @@ public class SettingController implements Initializable {
 				loginSignInStage.centerOnScreen();
 				loginSignInStage.show();
 
+				
 			} catch (Exception e1) {
 				System.out.println("Login Fxml is not loading");
 				e1.printStackTrace();
 			}
-			
 		
 			// LoginPane login button listenr
 			loginObject.getLogin().addEventHandler(MouseEvent.MOUSE_CLICKED, (e1) -> {
@@ -188,6 +190,29 @@ public class SettingController implements Initializable {
 
 					loader.load();
 					signUpObject = loader.getController();
+					
+					signUpObject.getBackLoginView().addEventHandler(MouseEvent.MOUSE_CLICKED, (ex)->{
+
+						try {
+							
+							loader = new FXMLLoader(getClass().getResource("/ui/Login.fxml"));
+							loader.load();
+							loginObject = loader.getController();
+
+							loginSignInRoot = new Scene(loginObject.getLoginPane());
+							loginSignInStage.setScene(loginSignInRoot);
+							loginSignInStage.setMaximized(false);
+							loginSignInStage.setResizable(false);
+							loginSignInStage.centerOnScreen();
+							loginSignInStage.show();
+							
+						} catch (Exception e2) {
+							// TODO Auto-generated catch block
+							e2.printStackTrace();
+						}
+							
+					});
+					
 					loginSignInRoot = new Scene(signUpObject.getSignUpPane());
 					loginSignInStage.setScene(loginSignInRoot);
 					loginSignInStage.show();
@@ -197,6 +222,7 @@ public class SettingController implements Initializable {
 				}
 
 			});
+
 
 		});
 

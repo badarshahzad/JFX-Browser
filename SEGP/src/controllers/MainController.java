@@ -24,7 +24,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
+
 import main.MainClass;
+
+import javafx.scene.web.WebEngine;
 import userInterface.Hamburger;
 
 /**
@@ -176,7 +179,6 @@ public class MainController implements Initializable {
 
 		} catch (IOException e) {
 			System.out.println("Exception: New tab click but not working in TabPaneView Class");
-			e.printStackTrace();
 		}
 
 		tab.getStyleClass().addAll("tab-pane");

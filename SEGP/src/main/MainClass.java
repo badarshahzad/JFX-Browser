@@ -16,6 +16,7 @@ import database.BookMarksDataBase;
 import database.CRUD;
 import database.DownloadDatabase;
 import database.HistoryManagment;
+import database.UserAccounts;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -173,12 +174,12 @@ public class MainClass extends Application {
 	public static void main(String[] args) {
 
 		HistoryManagment.CreateDataBase();
+		UserAccounts.createUserAccountsDataBase();
 		BookMarksDataBase.createBookMarksDataBase();
 		DownloadDatabase.createDownloadDataBase();
 		CRUD.createUserDataBase();
-
+	
 		launch(args);
-
 		System.exit(1);
 	}
 

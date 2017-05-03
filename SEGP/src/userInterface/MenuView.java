@@ -21,6 +21,8 @@ import javafx.scene.control.TabPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 
+
+
 public class MenuView {
 
 	/*
@@ -38,7 +40,7 @@ public class MenuView {
 	private Tab bookmarksTab = new Tab("Bookmarks");
 	private Tab settingTab = new Tab("Setting");
 
-	private MainController mainCtrl = new MainController();
+	//private MainController mainCtrl = new MainController();
 	
 	//private BorderPane settingBorderPane = new BorderPane();
 	private JFXDrawersStack drawersStack;

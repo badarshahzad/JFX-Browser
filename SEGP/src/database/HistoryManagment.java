@@ -54,7 +54,9 @@ public class HistoryManagment {
 					+ "values(?,?,?,?,?,?,?)";
 			String time = formateTime.format(dateTime);
 			String date = dateFormate.format(dateTime);
+			
 			int user = 1;
+			
 			perp = SqliteConnection.Connector().prepareStatement(insert);
 			perp.setString(1, email);
 			perp.setString(2, url);

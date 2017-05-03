@@ -8,6 +8,7 @@ import org.controlsfx.control.Notifications;
 
 import javafx.util.Duration;
 
+
 public class CRUD {
 
 	/*public static void main(String args[]){

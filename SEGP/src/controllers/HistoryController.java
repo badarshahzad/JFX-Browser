@@ -538,6 +538,7 @@ class HistoryStoreView extends RecursiveTreeObject<HistoryStoreView> {
 
 	public HistoryStoreView(String email,String date, String link, String time, String domain, String title) {
 		
+		
 		this.email1 = new SimpleStringProperty(email);
 		this.date1 = new SimpleStringProperty(date);
 		this.link1 = new SimpleStringProperty(link);

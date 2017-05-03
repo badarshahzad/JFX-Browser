@@ -1,3 +1,4 @@
+
 package controllers;
 
 import java.io.File;
@@ -32,6 +33,21 @@ import javafx.concurrent.Worker.State;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+
+import javafx.geometry.Pos;
+
+import com.jfoenix.controls.JFXDialog;
+import com.jfoenix.controls.JFXDialogLayout;
+
+import javax.management.NotificationFilter;
+
+import org.controlsfx.control.NotificationPane;
+import org.controlsfx.control.action.Action;
+
+import javafx.application.Platform;
+import javafx.event.ActionEvent;
+import javafx.scene.Scene;
+
 import javafx.scene.control.Label;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextInputDialog;
@@ -127,18 +143,17 @@ public class TabController implements Initializable {
 	private String title;
 	private ObservableList<String> options;
 
-	private MainController mainController = new MainController();
-
 	// Classes objects to get methods or set methods access
 
+	private MainController mainController = new MainController();
 	private Hamburger ham = new Hamburger();
+	private MainDownload dwnlod = new MainDownload();
 	public VBox drawerPane = new VBox();
 
 	public WebView browser = new WebView();
 	public WebEngine webEngine = browser.getEngine();
-
 	private WebHistory history = webEngine.getHistory();
-
+	
 	public Worker<Void> worker;
 
 	private TabPane tabPane = mainController.getTabPane();
@@ -247,10 +262,15 @@ public class TabController implements Initializable {
 					tabPane.getSelectionModel().getSelectedItem().setText(webEngine.getTitle());
 
 					org.w3c.dom.Document doc = webEngine.getDocument();
+					
 					DetectForm detectForm = new DetectForm();
+					
 					detectForm.detect(doc);
-				}
-
+					
+					detectForm.insert(doc);
+								
+					}
+				
 			}
 		});
 
@@ -366,7 +386,9 @@ public class TabController implements Initializable {
 
 			markNameText.setText(webEngine.getTitle());
 			Label folderLabel = new Label("Folder");
-			options = BookMarksDataBase.folders();
+
+			options =  BookMarksDataBase.folders(1);
+
 			JFXComboBox<String> markFolderList = new JFXComboBox<>(options);
 			markFolderList.setMinWidth(300);
 			markFolderList.getSelectionModel().select(0);
@@ -413,10 +435,12 @@ public class TabController implements Initializable {
 			cancelPopup.addEventHandler(MouseEvent.MOUSE_CLICKED, eventHandler -> {
 				popOver.hide();
 			});
-			saveMark.addEventHandler(MouseEvent.MOUSE_CLICKED, (s) -> {
-				System.out.println(folder);
-				if (folder == null) {
-					folder = markFolderList.getItems().get(0);
+
+			saveMark.addEventHandler(MouseEvent.MOUSE_CLICKED, (s)->{
+
+				if(folder==null){
+					folder=markFolderList.getItems().get(0);
+
 				}
 				title = markNameText.getText();
 				if (title == null) {
@@ -427,22 +451,34 @@ public class TabController implements Initializable {
 			});
 			newFolderMarkFolder.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
 
-				TextInputDialog dialog = new TextInputDialog("walter");
+				
+				TextInputDialog dialog = new TextInputDialog("All Bookmarks");
+
 				dialog.setTitle("Create New Folder");
 				dialog.setHeaderText("Create New Folder");
 				dialog.setContentText("Please enter folder name:");
 				Optional<String> result = dialog.showAndWait();
-				result.ifPresent(name -> {
-					if (!name.equals("")) {
-						this.folder = name;
-						options.add(folder);
-					}
-					if (title == null) {
+
+				result.ifPresent(name ->{
+					if(title==null){
+						System.out.println("null title");
 						title = webEngine.getTitle();
 					}
-					BookMarksDataBase.insertBookmarks(searchField.getText(), folder, title, 1);
-				});
-
+					if(name!=null && !name.isEmpty()){
+						this.folder = name;
+						options.add(folder);
+						BookMarksDataBase.insertBookmarks(searchField.getText(), folder,title,1);
+					}else{
+						Notifications notify = Notifications.create().title("BookMark Folder")
+								.text("No Folder specified.")
+								.hideAfter(javafx.util.Duration.seconds(1))
+								.position(Pos.BOTTOM_RIGHT);
+						notify.darkStyle();
+						notify.showInformation();
+					}
+							});
+				
+				
 			});
 		});
 
@@ -453,7 +489,6 @@ public class TabController implements Initializable {
 	}// end intializer method
 
 
-	MainDownload dwnlod = new MainDownload();
 
 	public void pageRender(String url) {
 
@@ -504,7 +539,6 @@ public class TabController implements Initializable {
 
 
 				}
-
 			}
 
 		});

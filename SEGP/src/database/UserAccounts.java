@@ -8,6 +8,7 @@ public class UserAccounts {
 
 	private static Connection c = SqliteConnection.Connector();
 	private static PreparedStatement perp=null;
+	
 	public static void createUserAccountsDataBase(){
 		try {
 			c = SqliteConnection.Connector();
@@ -38,16 +39,17 @@ public class UserAccounts {
 			System.err.println( e.getClass().getName() + ": " + e.getMessage() );
 		}
 	}
-	public static ResultSet getAccounts(int userId){
-
+	public static ResultSet getAccounts(int userId,String domian){
+		
 		ResultSet result = null;
 		c= SqliteConnection.Connector();
 		try
 		{
-			String query="select domain, username,password "
-					+ "from accounts where user_id = ?;";
+			String query="select username,password "
+					+ "from accounts where user_id = ? and domain = ?;";
 			perp=c.prepareStatement(query);
 			perp.setInt(1, userId);
+			perp.setString(2,domian);
 			result=perp.executeQuery();
 		}
 		catch(Exception e)
@@ -58,5 +60,28 @@ public class UserAccounts {
 		return result;
 	}
 
-
+	public static boolean isSaved(int userId , String domain){
+		c = SqliteConnection.Connector();
+		ResultSet result;
+		String  query = "select domain from accounts where domain = ? and user_id = ? limit 1";
+		try {
+			perp = c.prepareStatement(query);
+			perp.setString(1, domain);
+			perp.setInt(2, userId);
+			result = perp.executeQuery();
+			if(result.next()){
+				c.close();
+				return true;
+			}else{
+				c.close();
+				return false;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+		return false;
+	}
+	
 }
