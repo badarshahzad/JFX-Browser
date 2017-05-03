@@ -93,7 +93,8 @@ public class MenuView {
 			// When the menu click Hamburger and DrawerStack will hide
 			onClickHideHamburger();
 
-			tabs.add(tabs.size() - 1, tab);
+			//tabs.add(tabs.size() - 1, tab);
+			tabs.add(tabs.size(), tab);
 			selectedTab.select(tab);
 
 			getBookMarkView();
@@ -109,7 +110,8 @@ public class MenuView {
 
 			onClickHideHamburger();
 
-			tabs.add(tabs.size() - 1, tab);
+			//tabs.add(tabs.size() - 1, tab);
+			tabs.add(tabs.size(), tab);
 			selectedTab.select(tab);
 
 			getBookMarkView();
@@ -128,7 +130,8 @@ public class MenuView {
 
 				onClickHideHamburger();
 
-				tabs.add(tabs.size() - 1, tab);
+				//tabs.add(tabs.size() - 1, tab);
+				tabs.add(tabs.size(), tab);
 				selectedTab.select(tab);
 
 				getBookMarkView();
@@ -151,7 +154,8 @@ public class MenuView {
 
 			onClickHideHamburger();
 
-			tabs.add(tabs.size() - 1, tab);
+			//tabs.add(tabs.size() - 1, tab);
+			tabs.add(tabs.size(), tab);
 			selectedTab.select(tab);
 
 			getBookMarkView();

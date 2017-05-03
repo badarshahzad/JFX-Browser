@@ -76,54 +76,8 @@ public class LoginController  extends Application implements Initializable {
 	@Override
 	public void initialize(URL url, ResourceBundle res) {
 		// TODO Auto-generated method stub
-		login.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
-
-			boolean flag = getUser().getText().isEmpty() | getPassword().getText().isEmpty();
-
-			if (flag) {
-
-				Notifications noti = Notifications.create()
-						.title("Empty Field")
-						.text("Please fill the empty field!")
-						// .graphic(new ImageView(null))
-						.hideAfter(Duration.seconds(5)).position(Pos.TOP_RIGHT);
-				noti.showError();
-
-			}else{
-				if(CRUD.isLogin(getUser().getText(), getPassword().getText())){
-
-					FXMLLoader loader = new FXMLLoader(getClass().getResource("/ui/Setting.fxml"));
-					try {
-						loader.load();
-					} catch (Exception e1) {
-						// TODO Auto-generated catch block
-						//e1.printStackTrace();
-						System.out.println("To give controller in login not successfull. ");
-					}
-					
-					SettingController ob = loader.getController(); 
-					
-					JFXTextField tx = ob.getCurrentUser();
-					tx.setText(getUser().getText());
-					ob.setCurrentUser(tx);
-					
-					Notifications noti = Notifications.create()
-							.title("Successfull")
-							.text("Congratulation! You successfully login. ")
-							// .graphic(new ImageView(null))
-							.hideAfter(Duration.seconds(3)).position(Pos.TOP_RIGHT);
-					noti.showInformation();
-				}else{
-					Notifications noti = Notifications.create()
-							.title("Username and Password Incorrect!")
-							.text("Please give your valid username or password. ")
-							// .graphic(new ImageView(null))
-							.hideAfter(Duration.seconds(3)).position(Pos.TOP_RIGHT);
-					noti.showError();
-				}
-
-			}
-		});
+		
+	
 
 	}
 

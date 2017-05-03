@@ -9,10 +9,12 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXTextField;
 
+import database.CRUD;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TableView;
@@ -56,6 +58,14 @@ public class SettingController implements Initializable {
 
 	public static String currentUserName = "Jfx Browser";
 	
+	public static String getCurrentUserName() {
+		return currentUserName;
+	}
+
+	public static void setCurrentUserName(String currentUserName) {
+		SettingController.currentUserName = currentUserName;
+	}
+
 	public JFXTextField getCurrentUser() {
 		return currentUser;
 	}
@@ -126,6 +136,40 @@ public class SettingController implements Initializable {
 			// LoginPane login button listenr
 			loginObject.getLogin().addEventHandler(MouseEvent.MOUSE_CLICKED, (e1) -> {
 				
+
+				boolean flag = loginObject.getUser().getText().isEmpty() | loginObject.getPassword().getText().isEmpty();
+
+				if (flag) {
+
+					Notifications noti = Notifications.create()
+							.title("Empty Field")
+							.text("Please fill the empty field!")
+							// .graphic(new ImageView(null))
+							.hideAfter(Duration.seconds(5)).position(Pos.TOP_RIGHT);
+					noti.showError();
+
+				}else{
+					if(CRUD.isLogin(loginObject.getUser().getText(), loginObject.getPassword().getText())){
+
+						//Setting the name of current user
+						currentUser.setText(loginObject.getUser().getText());
+						
+						Notifications noti = Notifications.create()
+								.title("Successfull")
+								.text("Congratulation! You successfully login. ")
+								// .graphic(new ImageView(null))
+								.hideAfter(Duration.seconds(3)).position(Pos.TOP_RIGHT);
+						noti.showInformation();
+					}else{
+						Notifications noti = Notifications.create()
+								.title("Username and Password Incorrect!")
+								.text("Please give your valid username or password. ")
+								// .graphic(new ImageView(null))
+								.hideAfter(Duration.seconds(3)).position(Pos.TOP_RIGHT);
+						noti.showError();
+					}
+
+				}
 				
 				System.out.println("Login click button ");
 			});
