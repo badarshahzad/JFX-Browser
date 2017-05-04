@@ -13,6 +13,7 @@ import com.jfoenix.controls.JFXTextField;
 
 import database.CRUD;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -105,6 +106,113 @@ public class SettingController implements Initializable {
 		return settingTab;
 	}
 
+	private void handleButtonAction(ActionEvent event) {
+	    
+
+		try {
+			System.out.println("Ready for set login");
+			// LoginController object = new LoginController();
+			// loginBorderpane = object.setLoginView(loginBorderpane);
+
+			// Parent fxmlLoader =
+			// FXMLLoader.load(getClass().getResource("Login.fxml"));
+			loader = new FXMLLoader(getClass().getResource("/ui/Login.fxml"));
+			loader.load();
+			loginObject = loader.getController();
+/*
+			loginSignInRoot = new Scene(loginObject.getLoginPane());
+			loginSignInStage.setScene(loginSignInRoot);
+			loginSignInStage.setMaximized(false);
+			loginSignInStage.setResizable(false);
+			loginSignInStage.centerOnScreen();
+			loginSignInStage.show();
+			*/
+			JFXDialogLayout content = new JFXDialogLayout();
+			content.setHeading(new Text(""));
+			content.setBody(new Text(""));
+
+			content.setActions(loginObject.getLoginPane());
+			content.setMinSize(400, 400);
+			
+			JFXDialog dialoge = new JFXDialog(MainClass.getPane(), content, JFXDialog.DialogTransition.CENTER);
+			loginObject.getLogin().addEventHandler(MouseEvent.MOUSE_CLICKED, (e6) -> {
+				dialoge.close();
+			});
+			dialoge.show();
+
+		
+
+			// To show overlay dialougge box
+
+			
+		} catch (Exception e1) {
+			System.out.println("Login Fxml is not loading");
+			e1.printStackTrace();
+		}
+	
+		// LoginPane login button listenr
+		loginObject.getLogin().addEventHandler(MouseEvent.MOUSE_CLICKED, (e1) -> {
+			
+
+			boolean flag = loginObject.getUser().getText().isEmpty() | loginObject.getPassword().getText().isEmpty();
+
+			if (flag) {
+
+				Notifications noti = Notifications.create()
+						.title("Empty Field")
+						.text("Please fill the empty field!")
+						// .graphic(new ImageView(null))
+						.hideAfter(Duration.seconds(5)).position(Pos.TOP_RIGHT);
+				noti.showError();
+
+			}else{
+				if(CRUD.isLogin(loginObject.getUser().getText(), loginObject.getPassword().getText())){
+
+					//Setting the name of current user
+					currentUser.setText(loginObject.getUser().getText());
+					
+					Notifications noti = Notifications.create()
+							.title("Successfull")
+							.text("Congratulation! You successfully login. ")
+							// .graphic(new ImageView(null))
+							.hideAfter(Duration.seconds(3)).position(Pos.TOP_RIGHT);
+					noti.showInformation();
+				}else{
+					Notifications noti = Notifications.create()
+							.title("Username and Password Incorrect!")
+							.text("Please give your valid username or password. ")
+							// .graphic(new ImageView(null))
+							.hideAfter(Duration.seconds(3)).position(Pos.TOP_RIGHT);
+					noti.showError();
+				}
+
+			}
+			
+			System.out.println("Login click button ");
+		});
+
+		// LoinPane sing up butotn listner
+		loginObject.getSingUp().addEventHandler(MouseEvent.MOUSE_CLICKED, (e1) -> {
+
+			loader = new FXMLLoader(getClass().getResource("/ui/SignUp.fxml"));
+			try {
+
+				loader.load();
+				signUpObject = loader.getController();
+				signUpObject.getBackLoginView().setOnAction(this::handleButtonAction);
+				loginSignInRoot = new Scene(signUpObject.getSignUpPane());
+				loginSignInStage.setScene(loginSignInRoot);
+				loginSignInStage.show();
+
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+
+		});
+
+
+	 }
+	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		
@@ -115,116 +223,12 @@ public class SettingController implements Initializable {
 
 		
 		
-		signInBtn.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
-
-			try {
-				System.out.println("Ready for set login");
-				// LoginController object = new LoginController();
-				// loginBorderpane = object.setLoginView(loginBorderpane);
-
-				// Parent fxmlLoader =
-				// FXMLLoader.load(getClass().getResource("Login.fxml"));
-				loader = new FXMLLoader(getClass().getResource("/ui/Login.fxml"));
-				loader.load();
-				loginObject = loader.getController();
-
-				loginSignInRoot = new Scene(loginObject.getLoginPane());
-				loginSignInStage.setScene(loginSignInRoot);
-				loginSignInStage.setMaximized(false);
-				loginSignInStage.setResizable(false);
-				loginSignInStage.centerOnScreen();
-				loginSignInStage.show();
-
-				
-			} catch (Exception e1) {
-				System.out.println("Login Fxml is not loading");
-				e1.printStackTrace();
-			}
-		
-			// LoginPane login button listenr
-			loginObject.getLogin().addEventHandler(MouseEvent.MOUSE_CLICKED, (e1) -> {
-				
-
-				boolean flag = loginObject.getUser().getText().isEmpty() | loginObject.getPassword().getText().isEmpty();
-
-				if (flag) {
-
-					Notifications noti = Notifications.create()
-							.title("Empty Field")
-							.text("Please fill the empty field!")
-							// .graphic(new ImageView(null))
-							.hideAfter(Duration.seconds(5)).position(Pos.TOP_RIGHT);
-					noti.showError();
-
-				}else{
-					if(CRUD.isLogin(loginObject.getUser().getText(), loginObject.getPassword().getText())){
-
-						//Setting the name of current user
-						currentUser.setText(loginObject.getUser().getText());
-						
-						Notifications noti = Notifications.create()
-								.title("Successfull")
-								.text("Congratulation! You successfully login. ")
-								// .graphic(new ImageView(null))
-								.hideAfter(Duration.seconds(3)).position(Pos.TOP_RIGHT);
-						noti.showInformation();
-					}else{
-						Notifications noti = Notifications.create()
-								.title("Username and Password Incorrect!")
-								.text("Please give your valid username or password. ")
-								// .graphic(new ImageView(null))
-								.hideAfter(Duration.seconds(3)).position(Pos.TOP_RIGHT);
-						noti.showError();
-					}
-
-				}
-				
-				System.out.println("Login click button ");
-			});
-
-			// LoinPane sing up butotn listner
-			loginObject.getSingUp().addEventHandler(MouseEvent.MOUSE_CLICKED, (e1) -> {
-
-				loader = new FXMLLoader(getClass().getResource("/ui/SignUp.fxml"));
-				try {
-
-					loader.load();
-					signUpObject = loader.getController();
-					
-					signUpObject.getBackLoginView().addEventHandler(MouseEvent.MOUSE_CLICKED, (ex)->{
-
-						try {
-							
-							loader = new FXMLLoader(getClass().getResource("/ui/Login.fxml"));
-							loader.load();
-							loginObject = loader.getController();
-
-							loginSignInRoot = new Scene(loginObject.getLoginPane());
-							loginSignInStage.setScene(loginSignInRoot);
-							loginSignInStage.setMaximized(false);
-							loginSignInStage.setResizable(false);
-							loginSignInStage.centerOnScreen();
-							loginSignInStage.show();
-							
-						} catch (Exception e2) {
-							// TODO Auto-generated catch block
-							e2.printStackTrace();
-						}
-							
-					});
-					
-					loginSignInRoot = new Scene(signUpObject.getSignUpPane());
-					loginSignInStage.setScene(loginSignInRoot);
-					loginSignInStage.show();
-
-				} catch (Exception e2) {
-					e2.printStackTrace();
-				}
-
-			});
-
+	/*	signInBtn.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
 
 		});
+		*/
+		signInBtn.setOnAction(this::handleButtonAction);
+		
 
 		changeProxyBtn.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
 

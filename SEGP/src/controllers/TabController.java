@@ -36,18 +36,6 @@ import javafx.geometry.Insets;
 
 import javafx.geometry.Pos;
 
-import com.jfoenix.controls.JFXDialog;
-import com.jfoenix.controls.JFXDialogLayout;
-
-import javax.management.NotificationFilter;
-
-import org.controlsfx.control.NotificationPane;
-import org.controlsfx.control.action.Action;
-
-import javafx.application.Platform;
-import javafx.event.ActionEvent;
-import javafx.scene.Scene;
-
 import javafx.scene.control.Label;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextInputDialog;
@@ -112,27 +100,6 @@ public class TabController implements Initializable {
 	@FXML
 	private Label htmlAsPdf;
 
-	public Label getBookmark() {
-		return bookmark;
-	}
-
-	public void setBookmark(Label bookmark) {
-		this.bookmark = bookmark;
-	}
-
-
-	public Label getHtmlAsPdf() {
-		return htmlAsPdf;
-	}
-
-	public void setHtmlAsPdf(Label htmlAsPdf) {
-		this.htmlAsPdf = htmlAsPdf;
-	}
-
-	public void setHamburger(JFXHamburger hamburger) {
-		this.hamburger = hamburger;
-	}
-
 	@FXML
 	private JFXHamburger hamburger;
 
@@ -168,6 +135,28 @@ public class TabController implements Initializable {
 
 	public static WebEngine getWebEngine() {
 		return engine;
+	}
+
+
+	public Label getBookmark() {
+		return bookmark;
+	}
+
+	public void setBookmark(Label bookmark) {
+		this.bookmark = bookmark;
+	}
+
+
+	public Label getHtmlAsPdf() {
+		return htmlAsPdf;
+	}
+
+	public void setHtmlAsPdf(Label htmlAsPdf) {
+		this.htmlAsPdf = htmlAsPdf;
+	}
+
+	public void setHamburger(JFXHamburger hamburger) {
+		this.hamburger = hamburger;
 	}
 
 	@Override

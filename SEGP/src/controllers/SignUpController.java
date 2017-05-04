@@ -17,6 +17,8 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -51,8 +53,10 @@ public class SignUpController implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		// TODO Auto-generated method stub
 
+		backLoginView.setText("");
+		backLoginView.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/backword1.png"))));
+		
 		// ----------Sign up button working
 		signUpBt.addEventHandler(MouseEvent.MOUSE_CLICKED, (e4) -> {
 
@@ -74,6 +78,7 @@ public class SignUpController implements Initializable {
 							// .graphic(new ImageView(null))
 							.hideAfter(Duration.seconds(5)).position(Pos.TOP_RIGHT);
 					noti.showInformation();
+				
 				}
 			}
 
