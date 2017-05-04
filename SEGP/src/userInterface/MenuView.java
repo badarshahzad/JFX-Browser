@@ -201,7 +201,6 @@ public class MenuView {
 					openTabName.equals("Downloads") ||
 					openTabName.equals("Setting"))
 				{
-				System.out.println("Lala aa gai haw mgr chus ni aai");
 					//System.out.println(tabs.get(a));
 					
 					if (openTabName.equals("History")){
