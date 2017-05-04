@@ -56,40 +56,6 @@ public class SignUpController implements Initializable {
 
 		backLoginView.setText("");
 		backLoginView.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/backword1.png"))));
-		
-		// ----------Sign up button working
-		signUpBt.addEventHandler(MouseEvent.MOUSE_CLICKED, (e4) -> {
-
-			boolean flag = getFirstname().getText().isEmpty() | getEmail().getText().isEmpty()
-					| getPin().getText().isEmpty() | getPassword().getText().isEmpty();
-
-			if (flag) {
-
-				Notifications noti = Notifications.create().title("Empty Field").text("Please fill the empty field!")
-						// .graphic(new ImageView(null))
-						.hideAfter(Duration.seconds(5)).position(Pos.TOP_RIGHT);
-				noti.showError();
-
-			} else {
-				if (CRUD.insertNewAccount(getFirstname().getText(), getEmail().getText(), getPassword().getText(),
-						getPin().getText())) {
-					Notifications noti = Notifications.create().title("Successfull")
-							.text("Congratulation! You successfully Create an Account.")
-							// .graphic(new ImageView(null))
-							.hideAfter(Duration.seconds(5)).position(Pos.TOP_RIGHT);
-					noti.showInformation();
-				
-				}
-			}
-
-		});
-
-		cancel.addEventHandler(MouseEvent.MOUSE_CLICKED, (e5) -> {
-			// To close the login pane
-			controllers.SettingController.getLoginSignInStage().close();
-			// System.exit(0);
-
-		});
 
 	}
 

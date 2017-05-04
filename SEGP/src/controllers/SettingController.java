@@ -53,16 +53,15 @@ public class SettingController implements Initializable {
 	@FXML
 	private TableView<?> usersTable;
 
-
 	private static Stage loginSignInStage = new Stage();
 	private Scene loginSignInRoot;
 
 	public FXMLLoader loader;
 	public LoginController loginObject;
-	public SignUpController signUpObject;	
+	public SignUpController signUpObject;
 
 	public static String currentUserName = "Jfx Browser";
-	
+
 	public static String getCurrentUserName() {
 		return currentUserName;
 	}
@@ -106,80 +105,62 @@ public class SettingController implements Initializable {
 		return settingTab;
 	}
 
+	private JFXDialogLayout content = new JFXDialogLayout();
+	private JFXDialog dialoge;
+
 	private void handleButtonAction(ActionEvent event) {
-	    
 
 		try {
-			System.out.println("Ready for set login");
-			// LoginController object = new LoginController();
-			// loginBorderpane = object.setLoginView(loginBorderpane);
 
-			// Parent fxmlLoader =
-			// FXMLLoader.load(getClass().getResource("Login.fxml"));
 			loader = new FXMLLoader(getClass().getResource("/ui/Login.fxml"));
 			loader.load();
 			loginObject = loader.getController();
-/*
-			loginSignInRoot = new Scene(loginObject.getLoginPane());
-			loginSignInStage.setScene(loginSignInRoot);
-			loginSignInStage.setMaximized(false);
-			loginSignInStage.setResizable(false);
-			loginSignInStage.centerOnScreen();
-			loginSignInStage.show();
-			*/
-			JFXDialogLayout content = new JFXDialogLayout();
-			content.setHeading(new Text(""));
-			content.setBody(new Text(""));
 
+			// ---------Dialoge Box view for login--------
+			content.setHeading(new Text("Login"));
+			// content.setBody(new Text(""));
 			content.setActions(loginObject.getLoginPane());
-			content.setMinSize(400, 400);
-			
-			JFXDialog dialoge = new JFXDialog(MainClass.getPane(), content, JFXDialog.DialogTransition.CENTER);
-			loginObject.getLogin().addEventHandler(MouseEvent.MOUSE_CLICKED, (e6) -> {
-				dialoge.close();
-			});
+
+			dialoge = new JFXDialog(MainClass.getPane(), content, JFXDialog.DialogTransition.CENTER);
+			dialoge.autosize();
+
+			// dialouge will close when successfully login
+
 			dialoge.show();
 
-		
-
-			// To show overlay dialougge box
-
-			
 		} catch (Exception e1) {
 			System.out.println("Login Fxml is not loading");
 			e1.printStackTrace();
 		}
-	
+
 		// LoginPane login button listenr
 		loginObject.getLogin().addEventHandler(MouseEvent.MOUSE_CLICKED, (e1) -> {
-			
 
 			boolean flag = loginObject.getUser().getText().isEmpty() | loginObject.getPassword().getText().isEmpty();
 
 			if (flag) {
 
-				Notifications noti = Notifications.create()
-						.title("Empty Field")
-						.text("Please fill the empty field!")
+				Notifications noti = Notifications.create().title("Empty Field").text("Please fill the empty field!")
 						// .graphic(new ImageView(null))
 						.hideAfter(Duration.seconds(5)).position(Pos.TOP_RIGHT);
 				noti.showError();
 
-			}else{
-				if(CRUD.isLogin(loginObject.getUser().getText(), loginObject.getPassword().getText())){
+			} else {
+				if (CRUD.isLogin(loginObject.getUser().getText(), loginObject.getPassword().getText())) {
 
-					//Setting the name of current user
+					// After successfull name
+					dialoge.close();
+
+					// Setting the name of current user
 					currentUser.setText(loginObject.getUser().getText());
-					
-					Notifications noti = Notifications.create()
-							.title("Successfull")
+
+					Notifications noti = Notifications.create().title("Successfull")
 							.text("Congratulation! You successfully login. ")
 							// .graphic(new ImageView(null))
 							.hideAfter(Duration.seconds(3)).position(Pos.TOP_RIGHT);
 					noti.showInformation();
-				}else{
-					Notifications noti = Notifications.create()
-							.title("Username and Password Incorrect!")
+				} else {
+					Notifications noti = Notifications.create().title("Username and Password Incorrect!")
 							.text("Please give your valid username or password. ")
 							// .graphic(new ImageView(null))
 							.hideAfter(Duration.seconds(3)).position(Pos.TOP_RIGHT);
@@ -187,22 +168,67 @@ public class SettingController implements Initializable {
 				}
 
 			}
-			
+
 			System.out.println("Login click button ");
 		});
 
 		// LoinPane sing up butotn listner
 		loginObject.getSingUp().addEventHandler(MouseEvent.MOUSE_CLICKED, (e1) -> {
 
+			dialoge.close();
 			loader = new FXMLLoader(getClass().getResource("/ui/SignUp.fxml"));
 			try {
 
 				loader.load();
 				signUpObject = loader.getController();
 				signUpObject.getBackLoginView().setOnAction(this::handleButtonAction);
-				loginSignInRoot = new Scene(signUpObject.getSignUpPane());
-				loginSignInStage.setScene(loginSignInRoot);
-				loginSignInStage.show();
+
+				// ---------Dialoge Box view for signup
+
+				content.setHeading(new Text("Sign Up"));
+				// content.setBody(new Text(""));
+				content.setActions(signUpObject.getSignUpPane());
+
+				dialoge = new JFXDialog(MainClass.getPane(), content, JFXDialog.DialogTransition.CENTER);
+				dialoge.autosize();
+				dialoge.show();
+
+				
+				// ----------Sign up button working
+				signUpObject.getSignUpBt().addEventHandler(MouseEvent.MOUSE_CLICKED, (e4) -> {
+
+					System.out.println("Not working");
+					boolean flag = signUpObject.getFirstname().getText().isEmpty() | signUpObject.getEmail().getText().isEmpty()
+							| signUpObject.getPin().getText().isEmpty() | signUpObject.getPassword().getText().isEmpty();
+
+					if (flag) {
+
+						Notifications noti = Notifications.create().title("Empty Field").text("Please fill the empty field!")
+								// .graphic(new ImageView(null))
+								.hideAfter(Duration.seconds(5)).position(Pos.TOP_RIGHT);
+						noti.showError();
+
+					} else {
+						if (CRUD.insertNewAccount(signUpObject.getFirstname().getText(), signUpObject.getEmail().getText(), signUpObject.getPassword().getText(),
+								signUpObject.getPin().getText())) {
+							
+							// When signup successfully dialoge close
+							dialoge.close();
+							
+							Notifications noti = Notifications.create().title("Successfull")
+									.text("Congratulation! You successfully Create an Account.")
+									// .graphic(new ImageView(null))
+									.hideAfter(Duration.seconds(5)).position(Pos.TOP_RIGHT);
+							noti.showInformation();
+						
+						}
+					}
+
+				});
+				
+				signUpObject.getCancel().addEventHandler(MouseEvent.MOUSE_CLICKED, (e6) -> {
+					dialoge.close();
+				});
 
 			} catch (Exception e2) {
 				e2.printStackTrace();
@@ -210,25 +236,24 @@ public class SettingController implements Initializable {
 
 		});
 
+		
 
-	 }
+	}
 	
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		
-		
+
 		currentUser.setText(currentUserName);
 
 		userImage.setImage(new Image(getClass().getResourceAsStream("/user.png")));
 
-		
-		
-	/*	signInBtn.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
-
-		});
-		*/
+		/*
+		 * signInBtn.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
+		 * 
+		 * });
+		 */
 		signInBtn.setOnAction(this::handleButtonAction);
-		
 
 		changeProxyBtn.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
 
@@ -264,7 +289,7 @@ public class SettingController implements Initializable {
 					public void run() {
 
 						Notifications.create().title("Proxy Setting").text("You have successfully set your proxy.")
-						.hideAfter(Duration.seconds(3)).showInformation();
+								.hideAfter(Duration.seconds(3)).showInformation();
 
 					}
 				});
