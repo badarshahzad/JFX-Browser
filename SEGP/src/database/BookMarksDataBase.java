@@ -21,16 +21,17 @@ public class BookMarksDataBase {
 	public static void createBookMarksDataBase() {
 		try {
 			
-			Class.forName("org.sqlite.JDBC");
-			c = DriverManager.getConnection("jdbc:sqlite:History.db");
-			perp = c.prepareStatement("CREATE TABLE if not exists bookmark(url text ,folder_name varchar(20),"
+			//Class.forName("org.sqlite.JDBC");
+			///c = DriverManager.getConnection("jdbc:sqlite:History.db");
+			perp = SqliteConnection.Connector().prepareStatement("CREATE TABLE if not exists bookmark(url text ,folder_name varchar(20),"
 					+ "title varchar (30),"
 					+ "time varchar(20),"
 					+ "date varchar(20),"
 					+ " user_id integer );");
 			perp.executeUpdate();
 			System.out.println("table created");
-		} catch (ClassNotFoundException | SQLException e) {
+		} catch (SQLException e) {
+			
 		}
 
 	}

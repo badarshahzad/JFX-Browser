@@ -9,6 +9,7 @@ import com.jfoenix.controls.JFXTabPane;
 
 import bookmarks.BookMarks;
 import controllers.MainController;
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
@@ -98,13 +99,9 @@ public class MenuView {
 			// When the menu click Hamburger and DrawerStack will hide
 			onClickHideHamburger();
 
-			tabs.add(tabs.size() - 1, tab);
-			selectedTab.select(tab);
-
-			getBookMarkView();
-
+			addAndSelectNewTab(tabs,tab,selectedTab,fxSelectedTab);
+			
 			tab.setText("History");
-			fxSelectedTab.select(fxTabs.get(0));
 
 		});
 
@@ -113,14 +110,10 @@ public class MenuView {
 		downloads.setOnAction((e) -> {
 
 			onClickHideHamburger();
-
-			tabs.add(tabs.size() - 1, tab);
-			selectedTab.select(tab);
-
-			getBookMarkView();
-
+			
+			addAndSelectNewTab(tabs,tab,selectedTab,fxSelectedTab);
+			
 			tab.setText("Downloads");
-			fxSelectedTab.select(fxTabs.get(1));
 
 		});
 
@@ -133,18 +126,14 @@ public class MenuView {
 
 				onClickHideHamburger();
 
-				tabs.add(tabs.size() - 1, tab);
-				selectedTab.select(tab);
-
-				getBookMarkView();
-
+				
+				addAndSelectNewTab(tabs,tab,selectedTab,fxSelectedTab);
 				tab.setText("Bookmarks");
 
 				// The below is just select the current tab
 				// When the menu click Hamburger and DrawerStack will hide
 				//selectedTab.select(tab);
 
-				fxSelectedTab.select(fxTabs.get(2));
 
 			}
 
@@ -156,14 +145,9 @@ public class MenuView {
 
 			onClickHideHamburger();
 
-			tabs.add(tabs.size() - 1, tab);
+			addAndSelectNewTab(tabs,tab,selectedTab,fxSelectedTab);
 			
-			selectedTab.select(tab);
-
-			getBookMarkView();
-
 			tab.setText("Setting");
-			fxSelectedTab.select(fxTabs.get(3));
 
 		});
 
@@ -203,6 +187,57 @@ public class MenuView {
 		});
 	}
 
+
+	private void addAndSelectNewTab(ObservableList<Tab> tabs, Tab tab2, SingleSelectionModel<Tab> selectedTab, SingleSelectionModel<Tab> fxSelectedTab) {
+		// TODO Auto-generated method stub
+
+
+		for(int a=0; a<tabs.size();a++){
+			
+			String openTabName = tabs.get(a).getText();
+			
+			if(openTabName.equals("History") 		|| 
+					openTabName.equals("Bookmarks") ||
+					openTabName.equals("Downloads") ||
+					openTabName.equals("Setting"))
+				{
+				System.out.println("Lala aa gai haw mgr chus ni aai");
+					//System.out.println(tabs.get(a));
+					
+					if (openTabName.equals("History")){
+						fxSelectedTab.select(0);
+						System.out.println("hali ni history");
+					}
+							
+					if (openTabName.equals("Downloads")){
+						fxSelectedTab.select(1);
+					}
+					
+					if (openTabName.equals("Bookmarks")){
+						fxSelectedTab.select(2);
+					}
+					
+					if (openTabName.equals("Setting")){
+						fxSelectedTab.select(3);
+					}
+					
+					return;
+				
+				}
+			
+		}
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				
+				
+				tabs.add(tabs.size() - 1, tab);
+				selectedTab.select(tab);
+				getBookMarkView();
+
+			}
+		});	
+	}
 
 	public void getBookMarkView(){
 		BookMarks ob = new BookMarks();

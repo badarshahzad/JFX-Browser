@@ -184,10 +184,18 @@ public class MainController implements Initializable {
 		tab.getStyleClass().addAll("tab-pane");
 
 		ObservableList<Tab> tabs = tabpane.getTabs();
-		tabs.add(tabs.size() - 1, tab);
+		
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				
+				tabs.add(tabs.size() - 1, tab);
+				
+				SingleSelectionModel<Tab> selectedTab = tabpane.getSelectionModel();
+				selectedTab.select(tab);
 
-		SingleSelectionModel<Tab> selectedTab = tabpane.getSelectionModel();
-		selectedTab.select(tab);
+			}
+		});
 
 	}
 
