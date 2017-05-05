@@ -274,6 +274,7 @@ public class TabController implements Initializable {
 		});
 
 		progressbar.progressProperty().bind(worker.progressProperty());
+		
 
 		ham.getHamburger(hamburger, borderpane, tabPane);
 

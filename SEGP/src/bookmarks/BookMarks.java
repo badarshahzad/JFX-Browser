@@ -32,7 +32,8 @@ public class BookMarks {
 	private TableColumn<URLdetails, String> timeCol =  new TableColumn<>("time");
 	private TableColumn<URLdetails, String> dateCol =  new TableColumn<>("date");
 	private TableColumn<URLdetails, String> locationCol =  new TableColumn<>("location");
-	private TableView<URLdetails> table = new TableView<>();	
+	private TableView<URLdetails> table = new TableView<>();
+	
 	public static ObservableList<URLdetails> list = FXCollections.observableArrayList();
 	private Image folderImage = new Image(getClass().getResourceAsStream("/folder.png"));
 	private TreeTableView<String> treeView  = new TreeTableView<>();
@@ -51,6 +52,7 @@ public class BookMarks {
 				return new SimpleStringProperty(param.getValue().getValue());
 			}
 		});		
+		
 		nameCol.setCellValueFactory(new PropertyValueFactory<URLdetails,String>("name"));
 		locationCol.setCellValueFactory(new PropertyValueFactory<URLdetails,String>("location"));
 		dateCol.setCellValueFactory(new PropertyValueFactory<URLdetails,String>("date"));

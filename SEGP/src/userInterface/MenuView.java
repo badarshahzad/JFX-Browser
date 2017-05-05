@@ -46,12 +46,25 @@ public class MenuView {
 	//private BorderPane settingBorderPane = new BorderPane();
 	private JFXDrawersStack drawersStack;
 	private JFXDrawer rightDrawer;
+	
+
+	private ObservableList<Tab> tabs ;
+	private ObservableList<Tab> fxTabs ; 
+
+	SingleSelectionModel<Tab> selectedTab ; 
+	SingleSelectionModel<Tab> fxSelectedTab ;
 
 	public void setMenuViewListener(JFXButton history, JFXButton downloads, JFXButton bookmarks, JFXButton setting,
 			TabPane tabPane, JFXDrawersStack drawersStack, JFXDrawer rightDrawer) {
 
 		// BorderPane settingTabBPane = new BorderPane();
 		// tab.setContent(settingTabBPane);
+		tabs = tabPane.getTabs();
+		selectedTab  = tabPane.getSelectionModel();
+		
+		fxTabs = fxTabpane.getTabs();
+		fxSelectedTab = fxTabpane.getSelectionModel();
+		
 		try {
 			fxTabpane.setTabMinWidth(150);
 			fxTabpane.setTabMinHeight(30);
@@ -76,11 +89,6 @@ public class MenuView {
 		this.drawersStack = drawersStack;
 		this.rightDrawer = rightDrawer;
 
-		final ObservableList<Tab> tabs = tabPane.getTabs();
-		final ObservableList<Tab> fxTabs = fxTabpane.getTabs();
-
-		SingleSelectionModel<Tab> selectedTab = tabPane.getSelectionModel();
-		SingleSelectionModel<Tab> fxSelectedTab = fxTabpane.getSelectionModel();
 
 		/*
 		 * Here we developed a tab and its borderpane for setting we made
@@ -94,19 +102,10 @@ public class MenuView {
 
 		// tab.setText("Settig");
 		// -------------------------------------------------------Historylistener-------------------------------------------------------
-		history.setOnAction((ActionEvent) -> {
-
-			// When the menu click Hamburger and DrawerStack will hide
-			onClickHideHamburger();
-
-			addAndSelectNewTab(tabs,tab,selectedTab,fxSelectedTab);
-			
-			tab.setText("History");
-
-		});
-
+		history.setOnAction(this::historyHandleBt);
 		// ------------------------------------------------------Downloads
 		// listener-----------------------------------------------------
+
 		downloads.setOnAction((e) -> {
 
 			onClickHideHamburger();
@@ -126,14 +125,9 @@ public class MenuView {
 
 				onClickHideHamburger();
 
-				
 				addAndSelectNewTab(tabs,tab,selectedTab,fxSelectedTab);
+
 				tab.setText("Bookmarks");
-
-				// The below is just select the current tab
-				// When the menu click Hamburger and DrawerStack will hide
-				//selectedTab.select(tab);
-
 
 			}
 
@@ -192,50 +186,43 @@ public class MenuView {
 		// TODO Auto-generated method stub
 
 
-		for(int a=0; a<tabs.size();a++){
-			
-			String openTabName = tabs.get(a).getText();
-			
-			if(openTabName.equals("History") 		|| 
-					openTabName.equals("Bookmarks") ||
-					openTabName.equals("Downloads") ||
-					openTabName.equals("Setting"))
-				{
-					//System.out.println(tabs.get(a));
-					
-					if (openTabName.equals("History")){
-						fxSelectedTab.select(0);
-						System.out.println("hali ni history");
-					}
-							
-					if (openTabName.equals("Downloads")){
-						fxSelectedTab.select(1);
-					}
-					
-					if (openTabName.equals("Bookmarks")){
-						fxSelectedTab.select(2);
-					}
-					
-					if (openTabName.equals("Setting")){
-						fxSelectedTab.select(3);
-					}
-					
-					return;
-				
-				}
-			
-		}
 		Platform.runLater(new Runnable() {
 			@Override
 			public void run() {
 				
 				
+
+				for(int a=0; a<tabs.size();a++){
+					
+					String openTabName = tabs.get(a).getText();
+					
+					if(openTabName.equals("History") 		|| 
+							openTabName.equals("Bookmarks") ||
+							openTabName.equals("Downloads") ||
+							openTabName.equals("Setting"))
+						{
+							
+							return;
+						
+						}
+					
+				}
 				tabs.add(tabs.size() - 1, tab);
 				selectedTab.select(tab);
 				getBookMarkView();
 
 			}
 		});	
+	}
+	
+	private void historyHandleBt(ActionEvent event) {
+	
+		// When the menu click Hamburger and DrawerStack will hide
+		onClickHideHamburger();
+
+		addAndSelectNewTab(tabs,tab,selectedTab,fxSelectedTab);
+		
+		tab.setText("History");
 	}
 
 	public void getBookMarkView(){
