@@ -106,10 +106,6 @@ public class HistoryController implements Initializable {
 
 	private StringProperty selectedItem ;
 
-	EventHandler<MouseEvent> mouseEventHandle = (MouseEvent event) -> {
-		handleMouseClicked(event);
-	};
-
 	private boolean check = false;
 
 	private ArrayList<String> selectedValues  = new ArrayList<>();;
@@ -122,7 +118,6 @@ public class HistoryController implements Initializable {
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-
 		initializingView();
 		initializeListsWithData();
 		
@@ -295,42 +290,7 @@ public class HistoryController implements Initializable {
 
 		
 	}
-	private void handleMouseClicked(MouseEvent event) {
-		Node node = event.getPickResult().getIntersectedNode();
-		// Accept clicks only on node cells, and not on empty spaces of the
-		// TreeView
-		if (node instanceof Text || (node instanceof TreeCell && ((TreeCell) node).getText() != null)) {
-			String name = (String) ((TreeItem) treeView.getSelectionModel().getSelectedItem()).getValue();
-			//System.out.println(name);
-			if (name.equals("History")) {
-				addListInTable(fullHistory);
 
-			}
-			if (name.equals("Past hour")) {
-				addListInTable(pastHours);
-			}
-			if (name.equals("Today")) {
-				addListInTable(todayHistory);
-			}
-
-			if (name.equals("Yesterday")) {
-				addListInTable(yesterdayHistory);
-			}
-
-			if (name.equals("Past Week")) {
-				addListInTable(pastWeekHistory);
-			}
-
-			if (name.equals("Past Month")) {
-				addListInTable(pastMonthHistory);
-			}
-
-			// table.setMinWidth(600);
-			// table.setMaxWidth(800);
-			// borderPaneHistory.setCenter(table);
-
-		}
-	}
 
 	public void initializeListsWithData() {
 		pastHours = HistoryManagment.pastHoursHistory(pastHours, -1);
@@ -349,7 +309,42 @@ public class HistoryController implements Initializable {
 		rootItem.getChildren().addAll(storeItems);
 		rootItem.setExpanded(true);
 		treeView.setRoot(rootItem);
-		treeView.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEventHandle);
+		treeView.addEventHandler(MouseEvent.MOUSE_CLICKED, (e)->{
+			Node node = e.getPickResult().getIntersectedNode();
+			// Accept clicks only on node cells, and not on empty spaces of the
+			// TreeView
+			if (node instanceof Text || (node instanceof TreeCell && ((TreeCell) node).getText() != null)) {
+				String name = (String) ((TreeItem) treeView.getSelectionModel().getSelectedItem()).getValue();
+				System.out.println(name);
+				if (name.equals("History")) {
+					addListInTable(fullHistory);
+
+				}
+				if (name.equals("Past hour")) {
+					addListInTable(pastHours);
+				}
+				if (name.equals("Today")) {
+					addListInTable(todayHistory);
+				}
+
+				if (name.equals("Yesterday")) {
+					addListInTable(yesterdayHistory);
+				}
+
+				if (name.equals("Past Week")) {
+					addListInTable(pastWeekHistory);
+				}
+
+				if (name.equals("Past Month")) {
+					addListInTable(pastMonthHistory);
+				}
+
+				// table.setMinWidth(600);
+				// table.setMaxWidth(800);
+				// borderPaneHistory.setCenter(table);
+			}
+
+		});
 
 		// Border pane Middle view
 		fullHistory = HistoryManagment.fullHistoryShow(fullHistory);

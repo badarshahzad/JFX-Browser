@@ -102,7 +102,17 @@ public class MenuView {
 
 		// tab.setText("Settig");
 		// -------------------------------------------------------Historylistener-------------------------------------------------------
-		history.setOnAction(this::historyHandleBt);
+		history.setOnAction((e)->{
+
+			onClickHideHamburger();
+			
+			addAndSelectNewTab(tabs,tab,selectedTab,fxSelectedTab);
+			
+			fxSelectedTab.select(0);
+			
+			tab.setText("History");
+			
+		});
 		// ------------------------------------------------------Downloads
 		// listener-----------------------------------------------------
 
@@ -111,6 +121,8 @@ public class MenuView {
 			onClickHideHamburger();
 			
 			addAndSelectNewTab(tabs,tab,selectedTab,fxSelectedTab);
+			
+			fxSelectedTab.select(1);
 			
 			tab.setText("Downloads");
 
@@ -126,6 +138,8 @@ public class MenuView {
 				onClickHideHamburger();
 
 				addAndSelectNewTab(tabs,tab,selectedTab,fxSelectedTab);
+				
+				fxSelectedTab.select(2);
 
 				tab.setText("Bookmarks");
 
@@ -140,6 +154,8 @@ public class MenuView {
 			onClickHideHamburger();
 
 			addAndSelectNewTab(tabs,tab,selectedTab,fxSelectedTab);
+			
+			fxSelectedTab.select(3);
 			
 			tab.setText("Setting");
 
@@ -201,7 +217,7 @@ public class MenuView {
 							openTabName.equals("Downloads") ||
 							openTabName.equals("Setting"))
 						{
-							
+							//selectedTab.select(a);
 							return;
 						
 						}

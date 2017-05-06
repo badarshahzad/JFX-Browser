@@ -9,6 +9,7 @@
 /controllers/
 /controlsfx-8.40.11.jar
 /database/
+/db/
 /download.png
 /downloader/
 /downloads.png
@@ -37,5 +38,3 @@
 /ui/
 /user.png
 /userInterface/
-/beans/
-/db/
