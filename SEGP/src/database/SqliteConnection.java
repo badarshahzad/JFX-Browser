@@ -15,7 +15,7 @@ public class SqliteConnection {
 
 		try {
 			Class.forName("org.sqlite.JDBC");
-			Connection conn = DriverManager.getConnection("jdbc:sqlite:browserdb/History.db");
+			Connection conn = DriverManager.getConnection("jdbc:sqlite:History.db");
 			return conn;
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();

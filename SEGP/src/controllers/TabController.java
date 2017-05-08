@@ -492,7 +492,10 @@ public class TabController implements Initializable {
 					searchField.setText(webEngine.getLocation());
 
 					// The name of current tab set in Window
-					MainClass.getStage().setTitle(webEngine.getTitle());
+					//MainClass.getStage().setTitle(webEngine.getTitle());
+					
+					//Here According to the client we are setting the name of browse window
+					MainClass.getStage().setTitle("Jfx Browser");
 
 
 					// The backword & forward tab disabled and enable when index

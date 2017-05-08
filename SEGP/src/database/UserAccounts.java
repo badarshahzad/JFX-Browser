@@ -15,7 +15,6 @@ public class UserAccounts {
 			perp=c.prepareStatement("CREATE TABLE if not exists accounts(domain text primary key,username varchar(20),"
 					+ "password varchar (30), user_id integer );");
 			perp.executeUpdate();
-			System.out.println("table created");
 		} catch (SQLException e) {
 		}
 

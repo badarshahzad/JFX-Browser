@@ -18,7 +18,6 @@ public class DownloadDatabase {
 			perp = c.prepareStatement("CREATE TABLE if not exists download(url text ,file_name varchar(20),"
 					+ "status varchar (30), user_id integer );");
 			perp.executeUpdate();
-			System.out.println("table created");
 
 		} catch (SQLException e) {
 		}

@@ -53,7 +53,6 @@ public class CRUD {
 					"CREATE TABLE if not exists users(name text ,email varchar(50) primary key,password varchar(30),"
 							+ "pin integer);");
 			perp.executeUpdate();
-			System.out.println("user table created");
 			perp.close();
 			SqliteConnection.Connector().close();
 		} catch (Exception e) {

@@ -29,7 +29,6 @@ public class BookMarksDataBase {
 					+ "date varchar(20),"
 					+ " user_id integer );");
 			perp.executeUpdate();
-			System.out.println("table created");
 		} catch (SQLException e) {
 			
 		}

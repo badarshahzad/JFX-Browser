@@ -112,6 +112,7 @@ public class MainClass extends Application {
 		});
 
 		scene.getStylesheets().add(getClass().getResource("/stylesheet.css").toExternalForm());
+		stage.setTitle("Jfx Browser");
 		stage.setScene(scene);
 		stage.show();
 

@@ -142,9 +142,10 @@ public class MainController implements Initializable {
 				}
 
 				// The current tab title is set the stage title
-				MainClass.getStage().setTitle(tabPane.getSelectionModel().getSelectedItem().getText());
-
-				System.out.println("Current tab title: "+tabPane.getSelectionModel().getSelectedItem().getText());
+				//MainClass.getStage().setTitle(tabPane.getSelectionModel().getSelectedItem().getText());
+				
+				//The above line was just setting the name of window but according to the requirement we
+				// just set the fixed name of browser Jfx Browser 
 
 				if (newSelectedTab == addNewTab) {
 					

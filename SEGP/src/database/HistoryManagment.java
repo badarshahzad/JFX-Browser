@@ -28,7 +28,6 @@ public class HistoryManagment {
 					"CREATE TABLE if not exists history(email text primary key ,url text ,Time varchar(30),Date varchar(30),"
 							+ "domain varchar(40),title varchar(50), user_id integer );");
 			perp.executeUpdate();
-			System.out.println("table created");
 			perp.close();
 			SqliteConnection.Connector().close();
 
