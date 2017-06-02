@@ -53,7 +53,7 @@ public class MenuView {
 
 	SingleSelectionModel<Tab> selectedTab ; 
 	SingleSelectionModel<Tab> fxSelectedTab ;
-
+	
 	public void setMenuViewListener(JFXButton history, JFXButton downloads, JFXButton bookmarks, JFXButton setting,
 			TabPane tabPane, JFXDrawersStack drawersStack, JFXDrawer rightDrawer) {
 
@@ -106,9 +106,9 @@ public class MenuView {
 
 			onClickHideHamburger();
 			
-			addAndSelectNewTab(tabs,tab,selectedTab,fxSelectedTab);
+			addAndSelectNewTab(tabs,tab,selectedTab,fxSelectedTab, 0);
 			
-			fxSelectedTab.select(0);
+		//	fxSelectedTab.select(0);
 			
 			tab.setText("History");
 			
@@ -120,12 +120,12 @@ public class MenuView {
 
 			onClickHideHamburger();
 			
-			addAndSelectNewTab(tabs,tab,selectedTab,fxSelectedTab);
+			addAndSelectNewTab(tabs,tab,selectedTab,fxSelectedTab , 1);
 			
-			fxSelectedTab.select(1);
+		//	fxSelectedTab.select(1);
 			
 			tab.setText("Downloads");
-
+			
 		});
 
 		// -------------------------------------------------------Bookmarks
@@ -137,12 +137,12 @@ public class MenuView {
 
 				onClickHideHamburger();
 
-				addAndSelectNewTab(tabs,tab,selectedTab,fxSelectedTab);
+				addAndSelectNewTab(tabs,tab,selectedTab,fxSelectedTab, 2);
 				
-				fxSelectedTab.select(2);
+		//		fxSelectedTab.select(2);
 
 				tab.setText("Bookmarks");
-
+				
 			}
 
 		});
@@ -153,12 +153,12 @@ public class MenuView {
 
 			onClickHideHamburger();
 
-			addAndSelectNewTab(tabs,tab,selectedTab,fxSelectedTab);
+			addAndSelectNewTab(tabs,tab,selectedTab,fxSelectedTab, 3);
 			
-			fxSelectedTab.select(3);
+		//	fxSelectedTab.select(3);
 			
 			tab.setText("Setting");
-
+			
 		});
 
 		//As the bookmarks is not designed in fxml so: When the bookmarks tab 
@@ -198,7 +198,8 @@ public class MenuView {
 	}
 
 
-	private void addAndSelectNewTab(ObservableList<Tab> tabs, Tab tab2, SingleSelectionModel<Tab> selectedTab, SingleSelectionModel<Tab> fxSelectedTab) {
+	private void addAndSelectNewTab(ObservableList<Tab> tabs, Tab tab2, SingleSelectionModel<Tab> selectedTab, SingleSelectionModel<Tab> fxSelectedTab
+			,int selectedTabIndex) {
 		// TODO Auto-generated method stub
 
 
@@ -217,12 +218,18 @@ public class MenuView {
 							openTabName.equals("Downloads") ||
 							openTabName.equals("Setting"))
 						{
-							//selectedTab.select(a);
+					
+						//	fxSelectedTab.select(selectedTabIndex);
+							System.out.println("Tab index:"+ selectedTabIndex);
+							
+							selectedTab.select(a);
+							
 							return;
 						
 						}
 					
 				}
+				fxSelectedTab.select(selectedTabIndex);
 				tabs.add(tabs.size() - 1, tab);
 				selectedTab.select(tab);
 				getBookMarkView();
@@ -230,16 +237,7 @@ public class MenuView {
 			}
 		});	
 	}
-	
-	private void historyHandleBt(ActionEvent event) {
-	
-		// When the menu click Hamburger and DrawerStack will hide
-		onClickHideHamburger();
 
-		addAndSelectNewTab(tabs,tab,selectedTab,fxSelectedTab);
-		
-		tab.setText("History");
-	}
 
 	public void getBookMarkView(){
 		BookMarks ob = new BookMarks();
