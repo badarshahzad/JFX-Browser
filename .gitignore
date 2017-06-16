@@ -23,6 +23,7 @@ tomcat
 *.ear
 *.sar
 *.class
+SEGP/bin/*
 
 # Maven 
 target/
@@ -49,7 +50,7 @@ nb-configuration.xml
 
 
 # OS
-.DS_Store
+.DS_StoreOA
 
 # Misc
 *.swp

@@ -11,5 +11,16 @@
 	<classpathentry kind="lib" path="lib/controlsfx-8.40.11.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="lib" path="lib/testFx-3.1.2.jar"/>
+	<classpathentry kind="lib" path="lib/itextpdf-5.5.1-javadoc.jar"/>
+	<classpathentry kind="lib" path="lib/itextpdf-5.5.1.jar"/>
+	<classpathentry kind="lib" path="lib/pdfcrowd.jar"/>
+	<classpathentry kind="lib" path="/home/naeem/workspace/Jfx-Browser/SEGP/lib/controlsfx-8.40.11.jar"/>
+	<classpathentry kind="lib" path="/home/naeem/workspace/Jfx-Browser/SEGP/lib/itextpdf-5.5.1.jar"/>
+	<classpathentry kind="lib" path="/home/naeem/workspace/Jfx-Browser/SEGP/lib/itextpdf-5.5.1-javadoc.jar"/>
+	<classpathentry kind="lib" path="/home/naeem/workspace/Jfx-Browser/SEGP/lib/jfoenix.jar"/>
+	<classpathentry kind="lib" path="/home/naeem/workspace/Jfx-Browser/SEGP/lib/pdfcrowd.jar"/>
+	<classpathentry kind="lib" path="/home/naeem/workspace/Jfx-Browser/SEGP/lib/sqlite-jdbc-3.16.1.jar"/>
+	<classpathentry kind="lib" path="/home/naeem/workspace/Jfx-Browser/SEGP/lib/testFx-3.1.2.jar"/>
+	<classpathentry kind="lib" path="/home/naeem/workspace/Jfx-Browser/SEGP/lib/UndecoratorBis.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
