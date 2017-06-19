@@ -6,7 +6,6 @@ A web browser written in java and love with javaFX front-end.The borwser is base
 
 [Jfx Browser Demo](https://youtu.be/DH_6g4OcfyE?list=PLv2dKKz-juPaCQsqET0BH4pUsJw8pbjxb)
 
-
 ### Features
 
 + Browse the Web.

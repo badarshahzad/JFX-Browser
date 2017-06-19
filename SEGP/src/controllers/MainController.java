@@ -50,8 +50,8 @@ public class MainController implements Initializable {
 	public static TabPane tabPane = new TabPane();
 
 	private static Tab firstTab = new Tab("New Tab");
-
-	private static Tab addNewTab = new Tab("+");
+	
+	private static final Tab addNewTab = new Tab("+");
 
 	public void setFirstTab(Tab firstTab) {
 		this.firstTab = firstTab;
@@ -113,10 +113,6 @@ public class MainController implements Initializable {
 
 	public static Tab getAddNewTab() {
 		return addNewTab;
-	}
-
-	public void setAddNewTab(Tab addNewTab) {
-		this.addNewTab = addNewTab;
 	}
 
 	public void tabPaneChangeListener(TabPane tabpane) {
