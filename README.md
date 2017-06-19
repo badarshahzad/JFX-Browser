@@ -31,21 +31,21 @@ A web browser written in java and love with javaFX front-end.The borwser is base
 + Open the main package and run Main.java class *enjoy !*.
 
 ### Documentations
-Link to Browser's Documentation[click here](#)
-
+Link to Browser's Documentation [click here](#)
+  
 > ### Credits
 >
-> Badar Shahzad Khan [github.com](https://github.com/badarshahzad)
-> Muhammad Shoib Khan[github.com](https://github.com/Shoaibkhan786)
-> Naeem Rashid [github.com](https://github.com/naeemkhan12)
-> Hassan Iqbal Khan[github.com](https://github.com/Hassankhan2015)
-> Ramzan Shahid Khan[github.com](https://github.com/RamzanShahidkhan)
-> SanaUllah Khan[github.com](https://github.com/sanaullahkhan1234)
+> + Badar Shahzad Khan [github.com](https://github.com/badarshahzad)
+> + Muhammad Shoib Khan [github.com](https://github.com/Shoaibkhan786)
+> + Naeem Rashid [github.com](https://github.com/naeemkhan12)
+> + Hassan Iqbal Khan [github.com](https://github.com/Hassankhan2015)
+> + Ramzan Shahid Khan [github.com](https://github.com/RamzanShahidkhan)
+> + SanaUllah Khan [github.com](https://github.com/sanaullahkhan1234)
 
 ### Contact Us
 
-Badar Shahzad Khan [linkedin.com](https://www.linkedin.com/in/badarshahzad/)
-Badar Shahzad Khan [twitter.com](https://twitter.com/badarshahzad54)
++ Badar Shahzad Khan [linkedin.com](https://www.linkedin.com/in/badarshahzad/)
++ Badar Shahzad Khan [twitter.com](https://twitter.com/badarshahzad54)
 
 ### License
 Read the license.[click here](https://raw.githubusercontent.com/badarshahzad/Jfx-Browser/master/LICENSE)
