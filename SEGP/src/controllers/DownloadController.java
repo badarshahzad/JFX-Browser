@@ -127,7 +127,7 @@ public class DownloadController   implements Initializable{
 
 
 		try {
-			borderPaneDownload.setCenter(FXMLLoader.load(getClass().getResource("/ui/Downloads.fxml")));
+			borderPaneDownload.setCenter(FXMLLoader.load(getClass().getResource(Main.FXMLS+"Downloads.fxml")));
 		} catch (Exception e1) {
 			System.out.println("File is not find for setting downloads ! " + " \n " + e1);
 			e1.printStackTrace();
@@ -144,7 +144,7 @@ public class DownloadController   implements Initializable{
 
 	@Override
 	public void start(Stage stage) throws Exception {
-		Parent root = FXMLLoader.load(getClass().getResource("/ui/Downloads.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource(Main.FXMLS+"Downloads.fxml"));
 		Scene scene = new Scene(root);
 		stage.setScene(scene);
 		stage.show();

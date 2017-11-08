@@ -7,6 +7,7 @@ import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXDrawersStack;
 import com.jfoenix.controls.JFXTabPane;
 
+import application.Main;
 import bookmarks.BookMarks;
 import controllers.MainController;
 import javafx.application.Platform;
@@ -71,16 +72,16 @@ public class MenuView {
 			fxTabpane.setId("settingTabPane");
 
 			historyTab.setText("History");
-			historyTab.setContent(FXMLLoader.load(getClass().getResource("/ui/History.fxml")));
+			historyTab.setContent(FXMLLoader.load(getClass().getResource(Main.FXMLS+"History.fxml")));
 
 			downloadsTab.setText("Downloads");
-			downloadsTab.setContent(FXMLLoader.load(getClass().getResource("/ui/Downloads.fxml")));
+			downloadsTab.setContent(FXMLLoader.load(getClass().getResource(Main.FXMLS+"Downloads.fxml")));
 
 			bookmarksTab.setText("Bookmarks");
-			// bookmarksTab.setContent(FXMLLoader.load(getClass().getResource("/ui/bookmarks.fxml")));
+			// bookmarksTab.setContent(FXMLLoader.load(getClass().getResource(Main.FXMLS+"bookmarks.fxml")));
 
 			settingTab.setText("Setting");
-			settingTab.setContent(FXMLLoader.load(getClass().getResource("/ui/Setting.fxml")));
+			settingTab.setContent(FXMLLoader.load(getClass().getResource(Main.FXMLS+"Setting.fxml")));
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			System.out.println("Setting tabs fxml files not loading");

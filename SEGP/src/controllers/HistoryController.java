@@ -102,7 +102,7 @@ public class HistoryController implements Initializable {
 	private ObservableList<HistoryStoreView> pastWeekHistory = FXCollections.observableArrayList();
 	private ObservableList<HistoryStoreView> pastMonthHistory = FXCollections.observableArrayList();
 	
-	private Image folderImage = new Image(getClass().getResourceAsStream("/folder.png"));
+	private Image folderImage = new Image(getClass().getResourceAsStream(Main.IMAGES+"folder.png"));
 
 	private StringProperty selectedItem ;
 

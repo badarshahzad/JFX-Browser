@@ -215,23 +215,23 @@ public class TabController implements Initializable {
 		// Home Page Link
 		pageRender(searchField.getText());
 
-		back.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/backword1.png"))));
+		back.setGraphic(new ImageView(new Image(getClass().getResourceAsStream(Main.IMAGES+"backword1.png"))));
 		back.setDisable(true);
 
-		forward.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/forward1.png"))));
+		forward.setGraphic(new ImageView(new Image(getClass().getResourceAsStream(Main.IMAGES+"forward1.png"))));
 		forward.setDisable(true);
 
-		refresh.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/refresh.png"))));
+		refresh.setGraphic(new ImageView(new Image(getClass().getResourceAsStream(Main.IMAGES+"refresh.png"))));
 
-		search.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/search.png"))));
+		search.setGraphic(new ImageView(new Image(getClass().getResourceAsStream(Main.IMAGES+"search.png"))));
 		search.setId("search");
 
-		download.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/download.png"))));
+		download.setGraphic(new ImageView(new Image(getClass().getResourceAsStream(Main.IMAGES+"download.png"))));
 
-		bookmark.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/bookmark.png"))));
+		bookmark.setGraphic(new ImageView(new Image(getClass().getResourceAsStream(Main.IMAGES+"bookmark.png"))));
 
 
-		htmlAsPdf.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/pdfConverter.png"))));
+		htmlAsPdf.setGraphic(new ImageView(new Image(getClass().getResourceAsStream(Main.IMAGES+"pdfConverter.png"))));
 
 
 

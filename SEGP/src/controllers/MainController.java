@@ -64,7 +64,7 @@ public class MainController implements Initializable {
 	public void initialize(URL url, ResourceBundle rb) {
 
 
-		//addNewTab.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/newtab.png"))));
+		//addNewTab.setGraphic(new ImageView(new Image(getClass().getResourceAsStream(Main.IMAGES+"newtab.png"))));
 		
 		// ------All opens tabs should be closed so below line is for just
 		// closing tabs
@@ -78,7 +78,7 @@ public class MainController implements Initializable {
 
 		try {
 			// -----here below adding page title of tab
-			firstTab.setContent(FXMLLoader.load(getClass().getResource("/ui/Tab.fxml")));
+			firstTab.setContent(FXMLLoader.load(getClass().getResource(Main.FXMLS+"Tab.fxml")));
 
 			// firstTab.setText("Google");
 
@@ -169,7 +169,7 @@ public class MainController implements Initializable {
 
 
 		try {
-			tab.setContent(FXMLLoader.load(getClass().getResource("/ui/Tab.fxml")));
+			tab.setContent(FXMLLoader.load(getClass().getResource(Main.FXMLS+"Tab.fxml")));
 			// tab.setText(TabController.getWebEngine().getTitle());
 
 		} catch (IOException e) {

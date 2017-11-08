@@ -213,7 +213,7 @@ public class ProxyController implements Initializable {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 
-		Parent root = FXMLLoader.load(getClass().getResource("/ui/ProxySet.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource(Main.FXMLS+"ProxySet.fxml"));
 
 		Scene scene = new Scene(root);
 		primaryStage.setTitle("Connection Setting");

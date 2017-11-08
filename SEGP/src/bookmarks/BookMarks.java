@@ -1,9 +1,9 @@
 package bookmarks;
 
-import java.beans.EventHandler;
-
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
+
+import application.Main;
 import database.BookMarksDataBase;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
@@ -15,13 +15,12 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
+import javafx.scene.control.TreeTableColumn.CellDataFeatures;
 import javafx.scene.control.TreeTableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.control.TreeTableColumn.CellDataFeatures;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 
 public class BookMarks {
@@ -35,7 +34,7 @@ public class BookMarks {
 	private TableView<URLdetails> table = new TableView<>();
 	
 	public static ObservableList<URLdetails> list = FXCollections.observableArrayList();
-	private Image folderImage = new Image(getClass().getResourceAsStream("/folder.png"));
+	private Image folderImage = new Image(getClass().getResourceAsStream(Main.FXMLS+"folder.png"));
 	private TreeTableView<String> treeView  = new TreeTableView<>();
 	private TreeTableColumn<String, String> bookMarkCol = new TreeTableColumn<>("BookMarks");
 	TreeItem parentFolder = new TreeItem<>("All Bookmarks");
@@ -57,27 +56,21 @@ public class BookMarks {
 		locationCol.setCellValueFactory(new PropertyValueFactory<URLdetails,String>("location"));
 		dateCol.setCellValueFactory(new PropertyValueFactory<URLdetails,String>("date"));
 		timeCol.setCellValueFactory(new PropertyValueFactory<URLdetails,String>("time"));
-		treeView.getSelectionModel().selectedItemProperty().addListener( new ChangeListener() {
-			@Override
-			public void changed(ObservableValue observable, Object oldValue,
-					Object newValue) {
+		treeView.getSelectionModel().selectedItemProperty().addListener((observable,oldValue,newValue)->{
 
 				TreeItem<String> selectedItem = (TreeItem<String>) newValue;
 				System.out.println("Selected Text : " + selectedItem.getValue());
 				ObservableList<URLdetails> list = new PopulateTable().PopulateTable(selectedItem.getValue());
 				table.setItems(list);
 				
-			}
-
 		});
-		table.focusedProperty().addListener(new ChangeListener<Boolean>() {
+		table.focusedProperty().addListener((observable,oldValue,newValue)->{
 
-			@Override
-			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+
 				String url = table.getSelectionModel().getSelectedItem().getLocation();
 				System.out.println("Url of the selected bookmarks: "+url);
 				
-			}
+			
 		});
 		
 		bookMarkCol.setPrefWidth(150);

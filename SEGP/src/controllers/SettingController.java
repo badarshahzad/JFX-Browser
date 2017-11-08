@@ -92,7 +92,7 @@ public class SettingController implements Initializable {
 		try {
 			// ScrollPane scrollPane = new ScrollPane();
 			System.out.println("Setting fxml is ready to set");
-			borderpane.setCenter(FXMLLoader.load(getClass().getResource("/ui/Setting.fxml")));
+			borderpane.setCenter(FXMLLoader.load(getClass().getResource(Main.FXMLS+"Setting.fxml")));
 		} catch (Exception e1) {
 			System.out.println("Exception: Setting fxml is not set");
 			System.out.println("File is not find for setting! " + " \n " + e1);
@@ -112,7 +112,7 @@ public class SettingController implements Initializable {
 
 		try {
 
-			loader = new FXMLLoader(getClass().getResource("/ui/Login.fxml"));
+			loader = new FXMLLoader(getClass().getResource(Main.FXMLS+"Login.fxml"));
 			loader.load();
 			loginObject = loader.getController();
 
@@ -176,7 +176,7 @@ public class SettingController implements Initializable {
 		loginObject.getSingUp().addEventHandler(MouseEvent.MOUSE_CLICKED, (e1) -> {
 
 			dialoge.close();
-			loader = new FXMLLoader(getClass().getResource("/ui/SignUp.fxml"));
+			loader = new FXMLLoader(getClass().getResource(Main.FXMLS+"SignUp.fxml"));
 			try {
 
 				loader.load();
@@ -246,7 +246,7 @@ public class SettingController implements Initializable {
 
 		currentUser.setText(currentUserName);
 
-		userImage.setImage(new Image(getClass().getResourceAsStream("/user.png")));
+		userImage.setImage(new Image(getClass().getResourceAsStream(Main.IMAGES+"user.png")));
 
 		/*
 		 * signInBtn.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
@@ -255,10 +255,10 @@ public class SettingController implements Initializable {
 		 */
 		signInBtn.setOnAction(this::handleButtonAction);
 
-		changeProxyBtn.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
+		changeProxyBtn.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
 
 			ProxyController proxyObject;
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("/ui/ProxySet.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource(Main.FXMLS+"ProxySet.fxml"));
 
 			try {
 
