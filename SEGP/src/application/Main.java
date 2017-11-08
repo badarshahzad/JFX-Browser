@@ -1,4 +1,4 @@
-package main;
+package application;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -33,7 +33,7 @@ import javafx.util.Duration;
  *
  * @author Segp-Group 3
  */
-public class MainClass extends Application {
+public class Main extends Application {
 
 	MainController object = new MainController();
 	static Stage stage;

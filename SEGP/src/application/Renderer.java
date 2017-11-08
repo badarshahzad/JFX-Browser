@@ -1,4 +1,4 @@
-package main;
+package application;
 
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;

@@ -19,6 +19,7 @@ import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.controls.JFXProgressBar;
 import com.jfoenix.controls.JFXTextField;
 
+import application.Main;
 import database.BookMarksDataBase;
 import database.CRUD;
 import database.HistoryManagment;
@@ -52,7 +53,6 @@ import javafx.scene.web.WebHistory;
 import javafx.scene.web.WebView;
 import javafx.stage.FileChooser;
 import javafx.util.Duration;
-import main.MainClass;
 import passwordVault.DetectForm;
 import userInterface.Hamburger;
 import userInterface.MenuView;
@@ -200,7 +200,7 @@ public class TabController implements Initializable {
 
 				});
 
-				MainClass.setDialouge(button, "Pin", "Please type your pin", textfield);
+				Main.setDialouge(button, "Pin", "Please type your pin", textfield);
 
 				Notifications.create().title("Pin Activation").text("You are going to access Pro-Verion.")
 				.hideAfter(Duration.seconds(3)).showInformation();
@@ -297,7 +297,7 @@ public class TabController implements Initializable {
 			// Show save file dialog
 			// The stage for show dialouge is get from MainClass stage
 
-			File file = fileChooser.showSaveDialog(MainClass.getStage());
+			File file = fileChooser.showSaveDialog(Main.getStage());
 			HTMLtoPDF object = new HTMLtoPDF(file);
 			object.setDaemon(true);
 			object.start();
@@ -495,7 +495,7 @@ public class TabController implements Initializable {
 					//MainClass.getStage().setTitle(webEngine.getTitle());
 					
 					//Here According to the client we are setting the name of browse window
-					MainClass.getStage().setTitle("Jfx Browser");
+					Main.getStage().setTitle("Jfx Browser");
 
 
 					// The backword & forward tab disabled and enable when index

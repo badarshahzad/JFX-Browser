@@ -11,6 +11,7 @@ import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDialogLayout;
 import com.jfoenix.controls.JFXTextField;
 
+import application.Main;
 import database.CRUD;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -28,7 +29,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import main.MainClass;
 
 public class SettingController implements Initializable {
 
@@ -121,7 +121,7 @@ public class SettingController implements Initializable {
 			// content.setBody(new Text(""));
 			content.setActions(loginObject.getLoginPane());
 
-			dialoge = new JFXDialog(MainClass.getPane(), content, JFXDialog.DialogTransition.CENTER);
+			dialoge = new JFXDialog(Main.getPane(), content, JFXDialog.DialogTransition.CENTER);
 			dialoge.autosize();
 
 			// dialouge will close when successfully login
@@ -189,7 +189,7 @@ public class SettingController implements Initializable {
 				// content.setBody(new Text(""));
 				content.setActions(signUpObject.getSignUpPane());
 
-				dialoge = new JFXDialog(MainClass.getPane(), content, JFXDialog.DialogTransition.CENTER);
+				dialoge = new JFXDialog(Main.getPane(), content, JFXDialog.DialogTransition.CENTER);
 				dialoge.autosize();
 				dialoge.show();
 
