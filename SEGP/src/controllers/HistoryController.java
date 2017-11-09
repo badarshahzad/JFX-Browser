@@ -15,6 +15,7 @@ import com.jfoenix.controls.JFXTreeTableView;
 import com.jfoenix.controls.RecursiveTreeItem;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 
+import application.Main;
 import database.HistoryManagment;
 import database.SqliteConnection;
 import javafx.beans.property.SimpleStringProperty;
@@ -42,7 +43,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.util.Callback;
 import javafx.util.Duration;
-import main.MainClass;
 import userInterface.HistoryTree;
 
 public class HistoryController implements Initializable {
@@ -102,7 +102,7 @@ public class HistoryController implements Initializable {
 	private ObservableList<HistoryStoreView> pastWeekHistory = FXCollections.observableArrayList();
 	private ObservableList<HistoryStoreView> pastMonthHistory = FXCollections.observableArrayList();
 	
-	private Image folderImage = new Image(getClass().getResourceAsStream("/folder.png"));
+	private Image folderImage = new Image(getClass().getResourceAsStream(Main.IMAGES+"folder.png"));
 
 	private StringProperty selectedItem ;
 
@@ -437,7 +437,7 @@ public class HistoryController implements Initializable {
 		content.setBody(new Text(" You are going to delete your complete history. After that\n"
 				+ "you will not have any single url in your history. Click Ok \n"
 				+ "to confirm or click cancel to main window."));
-		JFXDialog historyWarn= new JFXDialog(MainClass.getPane(),content,JFXDialog.DialogTransition.CENTER);
+		JFXDialog historyWarn= new JFXDialog(Main.getPane(),content,JFXDialog.DialogTransition.CENTER);
 		content.setActions(okBt,cancelBt);
 		historyWarn.show();	
 
@@ -451,7 +451,7 @@ public class HistoryController implements Initializable {
 			JFXDialogLayout confirmContent = new JFXDialogLayout();
 			confirmContent.setHeading(new Text("Clear History"));
 			confirmContent.setBody(new Text("Do you want to delete your complete history?"));
-			JFXDialog historyConfirm = new JFXDialog(MainClass.getPane(), confirmContent, JFXDialog.DialogTransition.CENTER);
+			JFXDialog historyConfirm = new JFXDialog(Main.getPane(), confirmContent, JFXDialog.DialogTransition.CENTER);
 			confirmContent.setActions(yesBt, noBt);
 			historyConfirm.show();
 

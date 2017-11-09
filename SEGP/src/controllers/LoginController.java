@@ -11,6 +11,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 
+import application.Main;
 import database.CRUD;
 import database.SqliteConnection;
 import javafx.application.Application;
@@ -117,7 +118,7 @@ public class LoginController  extends Application implements Initializable {
 	public void start(Stage primaryStage) throws Exception {
 		//System.out.println("yes");
 		// TODO Auto-generated method stub
-		Parent root = FXMLLoader.load(getClass().getResource("/ui/Login.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource(Main.FXMLS+"Login.fxml"));
 		
 		
 		Scene scene = new Scene(root);

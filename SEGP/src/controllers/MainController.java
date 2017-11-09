@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import application.Main;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -24,9 +25,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
-
-import main.MainClass;
-
 import javafx.scene.web.WebEngine;
 import userInterface.Hamburger;
 
@@ -66,7 +64,7 @@ public class MainController implements Initializable {
 	public void initialize(URL url, ResourceBundle rb) {
 
 
-		//addNewTab.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/newtab.png"))));
+		//addNewTab.setGraphic(new ImageView(new Image(getClass().getResourceAsStream(Main.IMAGES+"newtab.png"))));
 		
 		// ------All opens tabs should be closed so below line is for just
 		// closing tabs
@@ -80,7 +78,7 @@ public class MainController implements Initializable {
 
 		try {
 			// -----here below adding page title of tab
-			firstTab.setContent(FXMLLoader.load(getClass().getResource("/ui/Tab.fxml")));
+			firstTab.setContent(FXMLLoader.load(getClass().getResource(Main.FXMLS+"Tab.fxml")));
 
 			// firstTab.setText("Google");
 
@@ -171,7 +169,7 @@ public class MainController implements Initializable {
 
 
 		try {
-			tab.setContent(FXMLLoader.load(getClass().getResource("/ui/Tab.fxml")));
+			tab.setContent(FXMLLoader.load(getClass().getResource(Main.FXMLS+"Tab.fxml")));
 			// tab.setText(TabController.getWebEngine().getTitle());
 
 		} catch (IOException e) {

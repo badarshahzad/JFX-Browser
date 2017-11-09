@@ -9,6 +9,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 
+import application.Main;
 import database.CRUD;
 import javafx.application.Application;
 import javafx.fxml.FXML;
@@ -55,7 +56,7 @@ public class SignUpController implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 
 		backLoginView.setText("");
-		backLoginView.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/backword1.png"))));
+		backLoginView.setGraphic(new ImageView(new Image(getClass().getResourceAsStream(Main.IMAGES+"backword1.png"))));
 
 	}
 

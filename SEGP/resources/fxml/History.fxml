@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXTreeTableView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TreeView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane fx:id="borderPaneHistory" prefHeight="450.0" prefWidth="650.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.HistoryController">
+   <left>
+      <VBox fx:id="paneForChart" opacity="0.84" prefWidth="250.0" BorderPane.alignment="CENTER">
+         <children>
+            <TreeView fx:id="treeView" minHeight="200.0" minWidth="100.0" opacity="0.8" prefHeight="200.0" prefWidth="100.0">
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
+            </TreeView>
+            <PieChart fx:id="historyPieChart" />
+         </children>
+         <BorderPane.margin>
+            <Insets bottom="5.0" left="5.0" />
+         </BorderPane.margin>
+      </VBox>
+   </left>
+   <top>
+      <GridPane opacity="0.84" style="-fx-background-color: #2959ea;" BorderPane.alignment="CENTER">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="364.0" minWidth="10.0" prefWidth="200.0" />
+            <ColumnConstraints hgrow="SOMETIMES" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="300.0" minWidth="200.0" prefWidth="300.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="150.0" minWidth="150.0" prefWidth="150.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="150.0" prefWidth="150.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Label prefWidth="119.0" text="History" textFill="#f4f4f4">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <padding>
+                  <Insets left="20.0" />
+               </padding>
+            </Label>
+            <Label fx:id="selectedDeleteEntries" text="Selected" textFill="WHITE" GridPane.columnIndex="1" />
+            <JFXTextField fx:id="search" focusColor="WHITE" minWidth="200.0" onMouseClicked="#SearchDataInTable" prefWidth="400.0" GridPane.columnIndex="2">
+               <font>
+                  <Font size="14.0" />
+               </font></JFXTextField>
+            <JFXButton fx:id="btn" buttonType="RAISED" onMouseClicked="#deleteHistory" opacity="0.9" prefHeight="30.0" prefWidth="103.0" ripplerFill="#3c7cea" style="-fx-background-color: #3c7cea;" text="Clear History" textFill="WHITE" GridPane.columnIndex="5">
+               <GridPane.margin>
+                  <Insets bottom="5.0" left="20.0" right="5.0" top="5.0" />
+               </GridPane.margin>
+            </JFXButton>
+            <JFXButton fx:id="deleteSingle" buttonType="RAISED" opacity="0.9" prefHeight="30.0" prefWidth="125.0" ripplerFill="#3c7cea" style="-fx-background-color: #3c7cea;" text="Delete Seleted" textFill="WHITE" GridPane.columnIndex="4">
+               <GridPane.margin>
+                  <Insets bottom="5.0" left="20.0" right="5.0" top="5.0" />
+               </GridPane.margin>
+            </JFXButton>
+            <JFXButton fx:id="search1" text="Search" textFill="#f4f4f4" GridPane.columnIndex="3">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXButton>
+         </children>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+      </GridPane>
+   </top>
+   <center>
+      <JFXTreeTableView fx:id="table" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+   </center>
+</BorderPane>

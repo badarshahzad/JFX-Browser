@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.layout.Pane?>
+
+<Pane fx:id="signUpPane" minHeight="500.0" prefHeight="500.0" prefWidth="400.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.SignUpController">
+   <children>
+      <JFXTextField fx:id="firstname" labelFloat="true" layoutX="50.0" layoutY="55.0" minHeight="50.0" minWidth="300.0" opacity="0.7" promptText="First Name" style="-fx-background-radius: 10; -fx-focus-color: #03A9F4;" />
+      <JFXTextField fx:id="email" labelFloat="true" layoutX="50.0" layoutY="144.0" minHeight="50.0" minWidth="300.0" opacity="0.7" promptText="Email Address" style="-fx-background-radius: 10; -fx-focus-color: #03A9F4;" />
+      <JFXPasswordField fx:id="password" labelFloat="true" layoutX="50.0" layoutY="238.0" minHeight="50.0" minWidth="300.0" opacity="0.7" promptText="Password" style="-fx-background-radius: 10; -fx-focus-color: #03A9F4;" />
+      <JFXTextField fx:id="pin" labelFloat="true" layoutX="50.0" layoutY="333.0" minHeight="50.0" minWidth="300.0" opacity="0.7" promptText="Pin" style="-fx-background-radius: 10; -fx-focus-color: #03A9F4;" />
+      <JFXButton fx:id="signUpBt" buttonType="RAISED" layoutX="62.0" layoutY="412.0" prefHeight="42.0" prefWidth="100.0" ripplerFill="WHITE" style="-fx-background-color: #3c7cea; -fx-background-radius: 25;" text="Sign Up" textFill="WHITE" />
+      <JFXButton fx:id="cancel" buttonType="RAISED" layoutX="243.0" layoutY="414.0" prefHeight="42.0" prefWidth="100.0" style="-fx-background-color: #3c7cea; -fx-background-radius: 25;" text="Cancel" textFill="WHITE" />
+      <JFXButton fx:id="backLoginView" layoutX="6.0" layoutY="5.0" opacity="0.9" prefHeight="34.0" prefWidth="41.0" style="-fx-background-color: #ffffff;" text="Button" />
+   </children>
+</Pane>
