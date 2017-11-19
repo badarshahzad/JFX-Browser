@@ -5,7 +5,7 @@
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.layout.Pane?>
 
-<Pane fx:id="signUpPane" minHeight="500.0" prefHeight="500.0" prefWidth="400.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.SignUpController">
+<Pane fx:id="signUpPane" minHeight="500.0" prefHeight="500.0" prefWidth="400.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.com.github.jfxbrowser.controllers.SignUpController">
    <children>
       <JFXTextField fx:id="firstname" labelFloat="true" layoutX="50.0" layoutY="55.0" minHeight="50.0" minWidth="300.0" opacity="0.7" promptText="First Name" style="-fx-background-radius: 10; -fx-focus-color: #03A9F4;" />
       <JFXTextField fx:id="email" labelFloat="true" layoutX="50.0" layoutY="144.0" minHeight="50.0" minWidth="300.0" opacity="0.7" promptText="Email Address" style="-fx-background-radius: 10; -fx-focus-color: #03A9F4;" />
