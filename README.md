@@ -42,7 +42,7 @@ A web browser written in java and love with javaFX front-end.The browser is base
 
 ### Important Information
 <details>
-  <summary>**Dependencies**</summary>
+  <summary> <b> Dependencies </b></summary>
   <p>
     > JDK 1.8 or later.
     > javaFx library.
@@ -77,9 +77,12 @@ A web browser written in java and love with javaFX front-end.The browser is base
      
   </p>
 </details>
-  
-> ### Credits
->
+ 
+ 
+ 
+ 
+### Credits
+
 > + Badar Shahzad Khan [github.com](https://github.com/badarshahzad)
 > + Muhammad Shoib Khan [github.com](https://github.com/Shoaibkhan786)
 > + Naeem Rashid [github.com](https://github.com/naeemkhan12)
