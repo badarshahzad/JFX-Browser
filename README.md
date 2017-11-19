@@ -44,9 +44,9 @@ A web browser written in java and love with javaFX front-end.The browser is base
 <details>
   <summary> <b> Dependencies </b></summary>
   <p>
-    > JDK 1.8 or later.
-    > javaFx library.
-    > Internet Connection.
+    1) JDK 1.8 or later. <br>
+    2) javaFx library.    <br>
+    3) Internet Connection.
   </p>
 </details>
 <details>
