@@ -1,0 +1,20 @@
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile group: 'org.xerial', name: 'sqlite-jdbc', version: '3.7.2'
+    compile 'com.jfoenix:jfoenix:1.10.0'
+    compile 'de.jensd:fontawesomefx-fontawesome:4.7.0-5'
+    compile 'com.gluonhq:charm-down-desktop:3.0.0-b8'
+    compile 'com.googlecode.json-simple:json-simple:1.1.1'
+    compile 'org.controlsfx:controlsfx:8.40.11'
+    compile 'org.xerial:sqlite-jdbc:3.16.1'
+}

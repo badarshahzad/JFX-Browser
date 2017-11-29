@@ -1,0 +1,5 @@
+<root>
+    <item name='javafx.scene.control.Labeled text'>
+        <annotation name='java.lang.Deprecated'/>
+    </item>
+</root>

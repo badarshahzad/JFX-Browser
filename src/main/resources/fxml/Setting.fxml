@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.SettingController">
+
+      <top>
+      <GridPane opacity="0.84" style="-fx-background-color: #2959ea;" BorderPane.alignment="CENTER">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="364.0" minWidth="10.0" prefWidth="200.0" />
+            <ColumnConstraints hgrow="SOMETIMES" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="300.0" minWidth="200.0" prefWidth="300.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="150.0" minWidth="150.0" prefWidth="150.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="150.0" prefWidth="150.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Label text="Setting" textFill="#f4f4f4">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <padding>
+                  <Insets left="20.0" />
+               </padding>
+            </Label>
+         </children>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+      </GridPane>
+   </top>
+   <center>
+      <Pane prefHeight="600.0" prefWidth="500.0" BorderPane.alignment="CENTER">
+         <children>
+            <JFXButton fx:id="signInBtn" buttonType="RAISED" contentDisplay="CENTER" layoutX="768.0" layoutY="274.0" minHeight="32.0" opacity="0.9" prefWidth="100.0" style="-fx-background-color: #3c7cea;" text="Sign In" textFill="WHITE" />
+            <JFXCheckBox fx:id="checkPasswordRemember" checkedColor="#23383c" layoutX="284.0" layoutY="365.0" minHeight="50.0" prefHeight="50.0" prefWidth="460.0" text="Offers to save passowrds with Google Smart Lock for Passowrds.  " />
+            <Label alignment="CENTER" layoutX="255.0" layoutY="327.0" minHeight="32.0" prefHeight="32.0" prefWidth="229.0" text="Passwords and forms">
+               <font>
+                  <Font name="System Bold Italic" size="16.0" />
+               </font>
+            </Label>
+            <JFXButton fx:id="managePasswordBtn" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" layoutX="739.0" layoutY="423.0" minHeight="32.0" opacity="0.9" prefWidth="180.0" style="-fx-background-color: #3c7cea;" text="Manage Passwords" textFill="WHITE" />
+            <Label layoutX="291.0" layoutY="490.0" maxWidth="500.0" minWidth="580.0" prefHeight="50.0" prefWidth="800.0" text="Chromium is using your computer's system proxy settings to connect to the network." />
+            <JFXButton fx:id="changeProxyBtn" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" layoutX="739.0" layoutY="548.0" minHeight="32.0" opacity="0.9" prefWidth="180.0" style="-fx-background-color: #3c7cea;" text="Change Proxy Setting" textFill="WHITE" />
+            <Label alignment="CENTER" layoutX="238.0" layoutY="458.0" minHeight="32.0" prefHeight="32.0" prefWidth="149.0" text="Network">
+               <font>
+                  <Font name="System Bold Italic" size="16.0" />
+               </font>
+            </Label>
+            <JFXTextField fx:id="currentUser" editable="false" layoutX="407.0" layoutY="57.0" maxWidth="217.0" minWidth="217.0" prefHeight="32.0" prefWidth="217.0" text="Sudo" />
+            <Line endX="550.0" layoutX="385.0" layoutY="136.0" startX="-120.0" />
+            <TableView fx:id="usersTable" layoutX="285.0" layoutY="154.0" prefHeight="150.0" prefWidth="415.0">
+              <columns>
+                <TableColumn prefWidth="109.0" text="C1" />
+                <TableColumn prefWidth="196.0" text="C2" />
+              </columns>
+            </TableView>
+            <ImageView fx:id="userImage" fitHeight="60.0" fitWidth="60.0" layoutX="304.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true" />
+         </children>
+      </Pane>
+   </center>
+</BorderPane>
