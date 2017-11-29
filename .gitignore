@@ -1,60 +1,29 @@
-##### common setting for ides like netbeans, eclipse , intellij.
+# Created by .ignore support plugin (hsz.mobi)
+### Java template
+# Compiled class file
+*.class
 
-#
-# Project specific excludes
-#
+# Log file
+*.log
 
-tomcat
+# BlueJ files
+*.ctxt
 
-#
-# Default excludes
-#
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
 
-# Binaries
-*.7z
-*.dmg
-*.gz
-*.iso
+# Package Files #
 *.jar
-*.rar
-*.tar
-*.zip
 *.war
 *.ear
-*.sar
-*.class
-SEGP/bin/*
+*.zip
+*.tar.gz
+*.rar
 
-# Maven 
-target/
-
-# IntelliJ project files 
-*.iml
-*.iws
-*.ipr
-.idea/
-
-# eclipse project file
-.settings/
-.classpath
-.project
-
-# NetBeans specific
-nbproject/private/
-build/
-nbbuild/
-dist/
-nbdist/
-nbactions.xml
-nb-configuration.xml
-
-
-# OS
-.DS_StoreOA
-
-# Misc
-*.swp
-release.properties
-pom.xml.releaseBackup
-pom.xml.tag
-SEGP/History.db
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
+.gradle
+.idea
+out
+PCBS.db
+PCBS.iml
