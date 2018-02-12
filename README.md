@@ -12,6 +12,8 @@
 
 A web browser written in java and love with javaFX front-end.The browser is based on JavaFx's webview.
 
+![JFX Browser Gif](https://github.com/badarshahzad/JFX-Browser/blob/master/Peek%202018-02-12%2013-09.gif)
+
 ### Youtube Demonstration
 [![First](http://img.youtube.com/vi/DH_6g4OcfyE/0.jpg)](https://www.youtube.com/watch?v=DH_6g4OcfyE)
 
