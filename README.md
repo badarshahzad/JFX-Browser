@@ -10,6 +10,8 @@
 [contributors-url]: https://github.com/badarshahzad/Jfx-Browser/graphs/contributors
 [contributors-image]: https://img.shields.io/github/contributors/badarshahzad/Jfx-Browser.svg
 
+### Hi! :wave: If you like the project don't forget to give us the star :+1:
+
 A web browser written in java and love with javaFX front-end.The browser is based on JavaFx's webview.
 
 ![JFX Browser Gif](https://github.com/badarshahzad/JFX-Browser/blob/master/Peek%202018-02-12%2013-09.gif)
