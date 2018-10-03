@@ -54,8 +54,14 @@ A web browser written in java and love with javaFX front-end.The browser is base
     3) Internet Connection.
   </p>
 </details>
- 
- 
+
+### Download 
+How to execute the application?
+1.  Download this zip file [JFX-Browser V1.0.0.zip](https://github.com/badarshahzad/Jfx-Browser/files/1485201/JFX-Browser.V1.0.0.zip).
+2. Unzip JFX-Browser V1.0.0.zip
+3. `cd JFX-Browser V1.0.0`
+4. `sudo chmod +x  JFX-Browser-1.0.0.jar` 
+5. `java -jar JFX-Browser-1.0.0.jar` :+1: 
  
  
 ### Credits
