@@ -20,7 +20,7 @@ A web browser written in java and love with javaFX front-end.The browser is base
 [![First](http://img.youtube.com/vi/DH_6g4OcfyE/0.jpg)](https://www.youtube.com/watch?v=DH_6g4OcfyE)
 
 ### Documentation
-The ![docs](https://drive.google.com/drive/folders/1Wh669MzW5aWhxuzNXWnG3CLZJ-KyRKyM?usp=sharing) is available in the google drive which can access. :gift: We would be happy if you contribute to write GitHub pages docs for this.
+The [docs](https://drive.google.com/drive/folders/1Wh669MzW5aWhxuzNXWnG3CLZJ-KyRKyM?usp=sharing) is available in the google drive which can access. :gift: We would be happy if you contribute to write GitHub pages docs for this.
 
 
 ### Follow me on Twitter
